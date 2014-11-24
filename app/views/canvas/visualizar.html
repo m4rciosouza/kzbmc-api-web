@@ -1,0 +1,840 @@
+<div class="page-header kz_center">
+	<h1>
+		{{projeto.nome}}<br /> <small>{{projeto.descricao}}</small>
+	</h1>
+</div>
+
+<!-- Big Screens -->
+<div class="hidden-xs">
+	<table class="kz_width_100 kz_border">
+		<tbody>
+			<tr>
+				<td rowspan="2" class="kz_td kz_width_20">
+					<img ng-src="images/parceiros_chave.png" alt="{{ 'PARCEIROS_CHAVE' | translate }}" 
+						title="{{ 'PARCEIROS_CHAVE' | translate }}" class="kz_img_position" />
+					<h5>
+						{{ 'PARCEIROS' | translate }}<br />{{ 'CHAVE_PARCEIROS' | translate }}
+					</h5>
+					<a ng-href="#/cadastrar-item-canvas/{{index}}/pc" class="btn btn-primary hidden-print"
+						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}">
+               			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
+              		</a>
+
+					<a href="" data-toggle="modal" data-target="#parceirosChave" class="btn btn-primary hidden-print"
+						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}">
+						&nbsp;&nbsp;<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;
+					</a>
+					
+					<div ui-sortable="sortableOptions" ng-model="projeto.itens.pc" style="margin-top: 10px;">
+						<div ng-repeat="item in projeto.itens.pc" class="alert alert-{{item.cor}} kz_mouse_cursor">
+							<p style="text-align : right;">
+		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/pc/{{$index}}" class="btn btn-primary hidden-print"
+		      						alt="{{ 'EDITAR_REMOVER_ITEM' | translate }}" title="{{ 'EDITAR_REMOVER_ITEM' | translate }}">
+			               			&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;
+			              		</a>
+		      				</p>
+		      				<strong>{{item.titulo}}</strong><br />{{item.descricao}}
+		    			</div>
+		    		</div>
+				</td>
+				<td class="kz_td kz_width_20 kz_border">
+					<img ng-src="images/atividades_chave.png" alt="{{ 'ATIVIDADES_CHAVE' | translate }}" 
+						title="{{ 'ATIVIDADES_CHAVE' | translate }}" class="kz_img_position" />
+					<h5>
+						{{ 'ATIVIDADES' | translate }}<br />{{ 'CHAVE_ATIVIDADES' | translate }}
+					</h5>
+					<a ng-href="#/cadastrar-item-canvas/{{index}}/ac" class="btn btn-primary hidden-print"
+						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}">
+               			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
+              		</a>
+
+					<a href="" data-toggle="modal" data-target="#atividadesChave" class="btn btn-primary hidden-print"
+						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}"> 
+						&nbsp;&nbsp;<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;
+					</a>
+					
+					<div ui-sortable="sortableOptions" ng-model="projeto.itens.ac" style="margin-top: 10px;">
+						<div ng-repeat="item in projeto.itens.ac" class="alert alert-{{item.cor}} kz_mouse_cursor">
+							<p style="text-align : right;">
+		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/ac/{{$index}}" class="btn btn-primary hidden-print"
+		      						alt="{{ 'EDITAR_REMOVER_ITEM' | translate }}" title="{{ 'EDITAR_REMOVER_ITEM' | translate }}">
+			               			&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;
+			              		</a>
+		      				</p>
+		      				<strong>{{item.titulo}}</strong><br />{{item.descricao}}
+		    			</div>
+		    		</div>
+				</td>
+				<td rowspan="2" class="kz_td kz_width_20 kz_border">
+					<img ng-src="images/propostas_valor.png" alt="{{ 'PROPOSTAS_VALOR' | translate }}" 
+						title="{{ 'PROPOSTAS_VALOR' | translate }}" class="kz_img_position" />
+					<h5>
+						{{ 'PROPOSTAS' | translate }}<br />{{ 'DE_VALOR' | translate }}
+					</h5>
+					<a ng-href="#/cadastrar-item-canvas/{{index}}/pv" class="btn btn-primary hidden-print"
+						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}">
+               			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
+              		</a>
+					<a href="" data-toggle="modal" data-target="#propostasValor" class="btn btn-primary hidden-print"
+						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}"> 
+						&nbsp;&nbsp;<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;
+					</a>
+					<div ui-sortable="sortableOptions" ng-model="projeto.itens.pv" style="margin-top: 10px;">
+						<div ng-repeat="item in projeto.itens.pv" class="alert alert-{{item.cor}} kz_mouse_cursor">
+							<p style="text-align : right;">
+		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/pv/{{$index}}" class="btn btn-primary hidden-print"
+		      						alt="{{ 'EDITAR_REMOVER_ITEM' | translate }}" title="{{ 'EDITAR_REMOVER_ITEM' | translate }}">
+			               			&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;
+			              		</a>
+		      				</p>
+		      				<strong>{{item.titulo}}</strong><br />{{item.descricao}}
+		    			</div>
+		    		</div>
+				</td>
+				<td class="kz_td kz_width_20 kz_border">
+					<img ng-src="images/relacionamento_clientes.png" alt="{{ 'RELACIONAMENTO_CLIENTES' | translate }}" 
+						title="{{ 'RELACIONAMENTO_CLIENTES' | translate }}" class="kz_img_position" />
+					<h5>
+						{{ 'RELACIONAMENTO' | translate }}<br />{{ 'COM_CLIENTES' | translate }}
+					</h5><a ng-href="#/cadastrar-item-canvas/{{index}}/rcl" class="btn btn-primary hidden-print"
+						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}">
+               			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
+              		</a>
+					<a href="" data-toggle="modal" data-target="#relacionamentoClientes" class="btn btn-primary hidden-print"
+						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}"> 
+						&nbsp;&nbsp;<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;
+					</a>
+					<div ui-sortable="sortableOptions" ng-model="projeto.itens.rcl" style="margin-top: 10px;">
+						<div ng-repeat="item in projeto.itens.rcl" class="alert alert-{{item.cor}} kz_mouse_cursor">
+							<p style="text-align : right;">
+		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/rcl/{{$index}}" class="btn btn-primary hidden-print"
+		      						alt="{{ 'EDITAR_REMOVER_ITEM' | translate }}" title="{{ 'EDITAR_REMOVER_ITEM' | translate }}">
+			               			&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;
+			              		</a>
+		      				</p>
+		      				<strong>{{item.titulo}}</strong><br />{{item.descricao}}
+		    			</div>
+    				</div>
+				</td>
+				<td rowspan="2" class="kz_td kz_width_20 kz_border">
+					<img ng-src="images/segmentos_clientes.png" alt="{{ 'SEGMENTOS_CLIENTES' | translate }}" 
+						title="{{ 'SEGMENTOS_CLIENTES' | translate }}" class="kz_img_position" />
+					<h5>
+						{{ 'SEGMENTOS' | translate }}<br />{{ 'DE_CLIENTES' | translate }}
+					</h5>
+					<a ng-href="#/cadastrar-item-canvas/{{index}}/sc" class="btn btn-primary hidden-print"
+						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}">
+               			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
+              		</a>
+
+					<a href="" data-toggle="modal" data-target="#segmentosClientes" class="btn btn-primary hidden-print"
+						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}"> 
+						&nbsp;&nbsp;<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;
+					</a>
+					
+					<div ui-sortable="sortableOptions" ng-model="projeto.itens.sc" style="margin-top: 10px;">
+						<div ng-repeat="item in projeto.itens.sc" class="alert alert-{{item.cor}} kz_mouse_cursor">
+							<p style="text-align : right;">
+		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/sc/{{$index}}" class="btn btn-primary hidden-print"
+		      						alt="{{ 'EDITAR_REMOVER_ITEM' | translate }}" title="{{ 'EDITAR_REMOVER_ITEM' | translate }}">
+			               			&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;
+			              		</a>
+		      				</p>
+		      				<strong>{{item.titulo}}</strong><br />{{item.descricao}}
+		    			</div>
+		    		</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="kz_td kz_width_20 kz_border">
+					<img ng-src="images/recursos_chave.png" alt="{{ 'RECURSOS_CHAVE' | translate }}" 
+						title="{{ 'RECURSOS_CHAVE' | translate }}" class="kz_img_position" />
+					<h5>
+						{{ 'RECURSOS' | translate }}<br />{{ 'CHAVE_RECURSOS' | translate }}
+					</h5>
+					<a ng-href="#/cadastrar-item-canvas/{{index}}/rc" class="btn btn-primary hidden-print"
+						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}">
+               			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
+              		</a>
+
+					<a href="" data-toggle="modal" data-target="#recursosChave" class="btn btn-primary hidden-print"
+						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}"> 
+						&nbsp;&nbsp;<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;
+					</a>
+					
+					<div ui-sortable="sortableOptions" ng-model="projeto.itens.rc" style="margin-top: 10px;">
+						<div ng-repeat="item in projeto.itens.rc" class="alert alert-{{item.cor}} kz_mouse_cursor">
+							<p style="text-align : right;">
+		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/rc/{{$index}}" class="btn btn-primary hidden-print"
+		      						alt="{{ 'EDITAR_REMOVER_ITEM' | translate }}" title="{{ 'EDITAR_REMOVER_ITEM' | translate }}">
+			               			&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;
+			              		</a>
+		      				</p>
+		      				<strong>{{item.titulo}}</strong><br />{{item.descricao}}
+		    			</div>
+		    		</div>
+				</td>
+				<td class="kz_td kz_width_20 kz_border">
+					<img ng-src="images/canais.png" alt="{{ 'CANAIS' | translate }}" 
+						title="{{ 'CANAIS' | translate }}" class="kz_img_position" />
+					<h5>{{ 'CANAIS' | translate }}</h5>
+					<a ng-href="#/cadastrar-item-canvas/{{index}}/ca" class="btn btn-primary hidden-print"
+						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}">
+               			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
+              		</a>
+					<a href="" data-toggle="modal" data-target="#canais" class="btn btn-primary hidden-print"
+						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}"> 
+						&nbsp;&nbsp;<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;
+					</a>
+					<div ui-sortable="sortableOptions" ng-model="projeto.itens.ca" style="margin-top: 10px;">
+						<div ng-repeat="item in projeto.itens.ca" class="alert alert-{{item.cor}} kz_mouse_cursor">
+							<p style="text-align : right;">
+		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/ca/{{$index}}" class="btn btn-primary hidden-print"
+		      						alt="{{ 'EDITAR_REMOVER_ITEM' | translate }}" title="{{ 'EDITAR_REMOVER_ITEM' | translate }}">
+			               			&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;
+			              		</a>
+		      				</p>
+		      				<strong>{{item.titulo}}</strong><br />{{item.descricao}}
+		    			</div>
+		    		</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<table  class="kz_width_100 kz_border_left kz_border_right kz_border_bottom">
+		<tbody>
+			<tr>
+				<td class="kz_td kz_width_50 kz_border_right">
+					<img ng-src="images/estrutura_custo.png" alt="{{ 'ESTRUTURA_CUSTO' | translate }}" 
+						title="{{ 'ESTRUTURA_CUSTO' | translate }}" class="kz_img_position" />
+					<h5>{{ 'ESTRUTURA_CUSTO' | translate }}</h5>
+					<a ng-href="#/cadastrar-item-canvas/{{index}}/ec" class="btn btn-primary hidden-print"
+						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}">
+               			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
+              		</a>
+					<a href="" data-toggle="modal" data-target="#estruturaCusto" class="btn btn-primary hidden-print"
+						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}"> 
+						&nbsp;&nbsp;<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;
+					</a>
+					<div ui-sortable="sortableOptions" ng-model="projeto.itens.ec" style="margin-top: 10px;">
+						<div ng-repeat="item in projeto.itens.ec" class="alert alert-{{item.cor}} kz_mouse_cursor">
+							<p style="text-align : right;">
+		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/ec/{{$index}}" class="btn btn-primary hidden-print"
+		      						alt="{{ 'EDITAR_REMOVER_ITEM' | translate }}" title="{{ 'EDITAR_REMOVER_ITEM' | translate }}">
+			               			&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;
+			              		</a>
+		      				</p>
+		      				<strong>{{item.titulo}}</strong><br />{{item.descricao}}
+		    			</div>
+		    		</div>
+				</td>
+				<td class="kz_td kz_width_50">
+					<img ng-src="images/fluxo_receita.png" alt="{{ 'FLUXO_RECEITA' | translate }}" 
+						title="{{ 'FLUXO_RECEITA' | translate }}" class="kz_img_position" />
+					<h5>{{ 'FLUXO_RECEITA' | translate }}</h5>
+					<a ng-href="#/cadastrar-item-canvas/{{index}}/fr" class="btn btn-primary hidden-print"
+						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}">
+               			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
+              		</a>
+					<a href="" data-toggle="modal" data-target="#fluxoReceita" class="btn btn-primary hidden-print"
+						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}"> 
+						&nbsp;&nbsp;<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;
+					</a>
+					<div ui-sortable="sortableOptions" ng-model="projeto.itens.fr" style="margin-top: 10px;">
+						<div ng-repeat="item in projeto.itens.fr" class="alert alert-{{item.cor}} kz_mouse_cursor">
+							<p style="text-align : right;">
+		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/fr/{{$index}}" class="btn btn-primary hidden-print"
+		      						alt="{{ 'EDITAR_REMOVER_ITEM' | translate }}" title="{{ 'EDITAR_REMOVER_ITEM' | translate }}">
+			               			&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;
+			              		</a>
+		      				</p>
+		      				<strong>{{item.titulo}}</strong><br />{{item.descricao}}
+		    			</div>
+		    		</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<!-- Small Screens -->
+<div class="visible-xs">
+	<div class="row">
+		<!-- Parceiros Chave -->
+		<div class="col-xs-12 kz_border_top">
+			<img ng-src="images/parceiros_chave.png" alt="{{ 'PARCEIROS_CHAVE' | translate }}" 
+				title="{{ 'PARCEIROS_CHAVE' | translate }}" class="kz_img_position" />
+			<h5>
+				{{ 'PARCEIROS' | translate }}<br />{{ 'CHAVE_PARCEIROS' | translate }}
+			</h5>
+			<a ng-href="#/cadastrar-item-canvas/{{index}}/pc" class="btn btn-primary hidden-print">
+               	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
+            </a>
+			<div ui-sortable="sortableOptions" ng-model="projeto.itens.pc" style="margin-top: 10px;">
+				<div ng-repeat="item in projeto.itens.pc" class="alert alert-{{item.cor}} kz_mouse_cursor">
+					<p style="text-align : right;">
+      					<a ng-href="#/editar-remover-item-canvas/{{index}}/pc/{{$index}}" class="btn btn-primary hidden-print">
+			               	<span class="glyphicon glyphicon-pencil"></span> {{ 'EDITAR' | translate }} | 
+			               	<span class="glyphicon glyphicon-trash"></span> {{ 'REMOVER' | translate }}
+			            </a>
+      				</p>
+      				<strong>{{item.titulo}}</strong><br />{{item.descricao}}
+    			</div>
+    		</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<!-- Atividades Chave -->
+		<div class="col-xs-12 kz_border_top">
+			<img ng-src="images/atividades_chave.png" alt="{{ 'ATIVIDADES_CHAVE' | translate }}" 
+				title="{{ 'ATIVIDADES_CHAVE' | translate }}" class="kz_img_position" />
+			<h5>
+				{{ 'ATIVIDADES' | translate }}<br />{{ 'CHAVE_ATIVIDADES' | translate }}
+			</h5>
+			<a ng-href="#/cadastrar-item-canvas/{{index}}/ac" class="btn btn-primary hidden-print">
+               	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
+            </a>
+			<div ui-sortable="sortableOptions" ng-model="projeto.itens.ac" style="margin-top: 10px;">
+				<div ng-repeat="item in projeto.itens.ac" class="alert alert-{{item.cor}} kz_mouse_cursor">
+					<p style="text-align : right;">
+      					<a ng-href="#/editar-remover-item-canvas/{{index}}/ac/{{$index}}" class="btn btn-primary hidden-print">
+			               	<span class="glyphicon glyphicon-pencil"></span> {{ 'EDITAR' | translate }} | 
+			               	<span class="glyphicon glyphicon-trash"></span> {{ 'REMOVER' | translate }}
+			            </a>
+      				</p>
+      				<strong>{{item.titulo}}</strong><br />{{item.descricao}}
+    			</div>
+    		</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<!-- Recursos Chave -->
+		<div class="col-xs-12 kz_border_top">
+			<img ng-src="images/recursos_chave.png" alt="{{ 'RECURSOS_CHAVE' | translate }}" 
+				title="{{ 'RECURSOS_CHAVE' | translate }}" class="kz_img_position" />
+			<h5>
+				{{ 'RECURSOS' | translate }}<br />{{ 'CHAVE_RECURSOS' | translate }}
+			</h5>
+			<a ng-href="#/cadastrar-item-canvas/{{index}}/rc" class="btn btn-primary hidden-print">
+               	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
+            </a>
+			<div ui-sortable="sortableOptions" ng-model="projeto.itens.rc" style="margin-top: 10px;">
+				<div ng-repeat="item in projeto.itens.rc" class="alert alert-{{item.cor}} kz_mouse_cursor">
+					<p style="text-align : right;">
+      					<a ng-href="#/editar-remover-item-canvas/{{index}}/rc/{{$index}}" class="btn btn-primary hidden-print">
+			               	<span class="glyphicon glyphicon-pencil"></span> {{ 'EDITAR' | translate }} | 
+			               	<span class="glyphicon glyphicon-trash"></span> {{ 'REMOVER' | translate }}
+			            </a>
+      				</p>
+      				<strong>{{item.titulo}}</strong><br />{{item.descricao}}
+    			</div>
+    		</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<!-- Propostas de Valor -->
+		<div class="col-xs-12 kz_border_top">
+			<img ng-src="images/propostas_valor.png" alt="{{ 'PROPOSTAS_VALOR' | translate }}" 
+				title="{{ 'PROPOSTAS_VALOR' | translate }}" class="kz_img_position" />
+			<h5>
+				{{ 'PROPOSTAS' | translate }}<br />{{ 'DE_VALOR' | translate }}
+			</h5>
+			<a ng-href="#/cadastrar-item-canvas/{{index}}/pv" class="btn btn-primary hidden-print">
+               	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
+            </a>
+			<div ui-sortable="sortableOptions" ng-model="projeto.itens.pv" style="margin-top: 10px;">
+				<div ng-repeat="item in projeto.itens.pv" class="alert alert-{{item.cor}} kz_mouse_cursor">
+					<p style="text-align : right;">
+      					<a ng-href="#/editar-remover-item-canvas/{{index}}/pv/{{$index}}" class="btn btn-primary hidden-print">
+			               	<span class="glyphicon glyphicon-pencil"></span> {{ 'EDITAR' | translate }} | 
+			               	<span class="glyphicon glyphicon-trash"></span> {{ 'REMOVER' | translate }}
+			            </a>
+      				</p>
+      				<strong>{{item.titulo}}</strong><br />{{item.descricao}}
+    			</div>
+    		</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<!-- Relacionamento com os Clientes -->
+		<div class="col-xs-12 kz_border_top">
+			<img ng-src="images/relacionamento_clientes.png" alt="{{ 'RELACIONAMENTO_CLIENTES' | translate }}" 
+				title="{{ 'RELACIONAMENTO_CLIENTES' | translate }}" class="kz_img_position" />
+			<h5>
+				{{ 'RELACIONAMENTO' | translate }}<br />{{ 'COM_CLIENTES' | translate }}
+			</h5>
+			<a ng-href="#/cadastrar-item-canvas/{{index}}/rcl" class="btn btn-primary hidden-print">
+               	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
+            </a>
+			<div ui-sortable="sortableOptions" ng-model="projeto.itens.rcl" style="margin-top: 10px;">
+				<div ng-repeat="item in projeto.itens.rcl" class="alert alert-{{item.cor}} kz_mouse_cursor">
+					<p style="text-align : right;">
+      					<a ng-href="#/editar-remover-item-canvas/{{index}}/rcl/{{$index}}" class="btn btn-primary hidden-print">
+			               	<span class="glyphicon glyphicon-pencil"></span> {{ 'EDITAR' | translate }} | 
+			               	<span class="glyphicon glyphicon-trash"></span> {{ 'REMOVER' | translate }}
+			            </a>
+      				</p>
+      				<strong>{{item.titulo}}</strong><br />{{item.descricao}}
+    			</div>
+  			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<!-- Canais -->
+		<div class="col-xs-12 kz_border_top">
+			<img ng-src="images/canais.png" alt="{{ 'CANAIS' | translate }}" 
+				title="{{ 'CANAIS' | translate }}" class="kz_img_position" />
+			<h5>{{ 'CANAIS' | translate }}</h5>
+			<a ng-href="#/cadastrar-item-canvas/{{index}}/ca" class="btn btn-primary hidden-print">
+               	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
+            </a>
+			<div ui-sortable="sortableOptions" ng-model="projeto.itens.ca" style="margin-top: 10px;">
+				<div ng-repeat="item in projeto.itens.ca" class="alert alert-{{item.cor}} kz_mouse_cursor">
+					<p style="text-align : right;">
+      					<a ng-href="#/editar-remover-item-canvas/{{index}}/ca/{{$index}}" class="btn btn-primary hidden-print">
+			               	<span class="glyphicon glyphicon-pencil"></span> {{ 'EDITAR' | translate }} | 
+			               	<span class="glyphicon glyphicon-trash"></span> {{ 'REMOVER' | translate }}
+			            </a>
+      				</p>
+      				<strong>{{item.titulo}}</strong><br />{{item.descricao}}
+    			</div>
+    		</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<!-- Segmentos de Clientes -->
+		<div class="col-xs-12 kz_border_top">
+			<img ng-src="images/segmentos_clientes.png" alt="{{ 'SEGMENTOS_CLIENTES' | translate }}" 
+				title="{{ 'SEGMENTOS_CLIENTES' | translate }}" class="kz_img_position" />
+			<h5>
+				{{ 'SEGMENTOS' | translate }}<br />{{ 'DE_CLIENTES' | translate }}
+			</h5>
+			<a ng-href="#/cadastrar-item-canvas/{{index}}/sc" class="btn btn-primary hidden-print">
+               	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
+            </a>
+			<div ui-sortable="sortableOptions" ng-model="projeto.itens.sc" style="margin-top: 10px;">
+				<div ng-repeat="item in projeto.itens.sc" class="alert alert-{{item.cor}} kz_mouse_cursor">
+					<p style="text-align : right;">
+      					<a ng-href="#/editar-remover-item-canvas/{{index}}/sc/{{$index}}" class="btn btn-primary hidden-print">
+			               	<span class="glyphicon glyphicon-pencil"></span> {{ 'EDITAR' | translate }} | 
+			               	<span class="glyphicon glyphicon-trash"></span> {{ 'REMOVER' | translate }}
+			            </a>
+      				</p>
+      				<strong>{{item.titulo}}</strong><br />{{item.descricao}}
+    			</div>
+    		</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<!-- Estrutura de Custo -->
+		<div class="col-xs-12 kz_border_top">
+			<img ng-src="images/estrutura_custo.png" alt="{{ 'ESTRUTURA_CUSTO' | translate }}" 
+				title="{{ 'ESTRUTURA_CUSTO' | translate }}" class="kz_img_position" />
+			<h5>{{ 'ESTRUTURA_CUSTO' | translate }}</h5>
+			<a ng-href="#/cadastrar-item-canvas/{{index}}/ec" class="btn btn-primary hidden-print">
+               	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
+            </a>
+			<div ui-sortable="sortableOptions" ng-model="projeto.itens.ec" style="margin-top: 10px;">
+				<div ng-repeat="item in projeto.itens.ec" class="alert alert-{{item.cor}} kz_mouse_cursor">
+					<p style="text-align : right;">
+      					<a ng-href="#/editar-remover-item-canvas/{{index}}/ec/{{$index}}" class="btn btn-primary hidden-print">
+			               	<span class="glyphicon glyphicon-pencil"></span> {{ 'EDITAR' | translate }} | 
+			               	<span class="glyphicon glyphicon-trash"></span> {{ 'REMOVER' | translate }}
+			            </a>
+      				</p>
+      				<strong>{{item.titulo}}</strong><br />{{item.descricao}}
+    			</div>
+    		</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<!-- Fluxo de Receita -->
+		<div class="col-xs-12 kz_border_top">
+			<img ng-src="images/fluxo_receita.png" alt="{{ 'FLUXO_RECEITA' | translate }}" 
+				title="{{ 'FLUXO_RECEITA' | translate }}" class="kz_img_position" />
+			<h5>{{ 'FLUXO_RECEITA' | translate }}</h5>
+			<a ng-href="#/cadastrar-item-canvas/{{index}}/fr" class="btn btn-primary hidden-print">
+               	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
+            </a>
+			<div ui-sortable="sortableOptions" ng-model="projeto.itens.fr" style="margin-top: 10px;">
+				<div ng-repeat="item in projeto.itens.fr" class="alert alert-{{item.cor}} kz_mouse_cursor">
+					<p style="text-align : right;">
+      					<a ng-href="#/editar-remover-item-canvas/{{index}}/fr/{{$index}}" class="btn btn-primary hidden-print">
+			               	<span class="glyphicon glyphicon-pencil"></span> {{ 'EDITAR' | translate }} | 
+			               	<span class="glyphicon glyphicon-trash"></span> {{ 'REMOVER' | translate }}
+			            </a>
+      				</p>
+      				<strong>{{item.titulo}}</strong><br />{{item.descricao}}
+    			</div>
+    		</div>
+		</div>
+	</div>
+</div>
+
+<!-- Parceiros Chave Modal -->
+<div class="modal fade" id="parceirosChave" tabindex="-1" role="dialog"
+	aria-labelledby="parceirosChaveLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="parceirosChaveLabel">
+					<img src="images/parceiros_chave.png" alt="Parceiros Chave"
+						class="kz_img_position" /> {{ 'PARCEIROS_CHAVE' | translate }}
+				</h4>
+			</div>
+			<div class="modal-body">
+				<h5>{{ 'PC_1' | translate }}</h5>  
+				<h5>{{ 'PC_2' | translate }}</h5>  
+				<h5>{{ 'PC_3' | translate }}</h5>  
+				<h5>{{ 'PC_4' | translate }}</h5>  
+				<hr />  
+				<strong>{{ 'PC_5' | translate }}</strong>   
+				<ul class="list-unstyled">
+					<li>
+						<span class="glyphicon glyphicon-star-empty"></span>
+						&nbsp;{{ 'PC_6' | translate }}
+					</li>
+					<li>
+						<span class="glyphicon glyphicon-star-empty"></span>
+						&nbsp;{{ 'PC_7' | translate }}
+					</li>
+					<li>
+						<span class="glyphicon glyphicon-star-empty"></span>
+						&nbsp;{{ 'PC_8' | translate }}
+					</li>
+				</ul>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Atividades Chave Modal -->
+<div class="modal fade" id="atividadesChave" tabindex="-1" role="dialog"
+	aria-labelledby="atividadesChaveLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="atividadesChaveLabel">
+					<img src="images/atividades_chave.png" alt="Atividades Chave"
+						class="kz_img_position" /> {{ 'ATIVIDADES_CHAVE' | translate }}
+				</h4>
+			</div>
+			<div class="modal-body">
+				<h5>{{ 'AC_1' | translate }}</h5>
+				<h5>{{ 'AC_2' | translate }}</h5>
+				<h5>{{ 'AC_3' | translate }}</h5>
+				<h5>{{ 'AC_4' | translate }}</h5>
+				<hr />
+				<strong>{{ 'AC_5' | translate }}</strong> 
+				<ul class="list-unstyled">
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'AC_6' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'AC_7' | translate }}</li> 
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'AC_8' | translate }}</li>
+				</ul>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Recursos Chave Modal -->
+<div class="modal fade" id="recursosChave" tabindex="-1" role="dialog"
+	aria-labelledby="recursosChaveLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="recursosChaveLabel">
+					<img src="images/recursos_chave.png" alt="Recursos Chave"
+						class="kz_img_position" /> {{ 'RECURSOS_CHAVE' | translate }}
+				</h4>
+			</div>
+			<div class="modal-body">
+				<h5>{{ 'RC_1' | translate }}</h5>
+				<h5>{{ 'RC_2' | translate }}</h5>
+				<h5>{{ 'RC_3' | translate }}</h5>
+				<h5>{{ 'RC_4' | translate }}</h5>
+				<hr />
+				<strong>{{ 'RC_5' | translate }}</strong> 
+				<ul class="list-unstyled">
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'RC_6' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'RC_7' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'RC_8' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'RC_9' | translate }}</li>
+				</ul>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Propostas de Valor Modal -->
+<div class="modal fade" id="propostasValor" tabindex="-1" role="dialog"
+	aria-labelledby="propostasValorLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="propostasValorLabel">
+					<img src="images/propostas_valor.png" alt="Propostas de Valor"
+						class="kz_img_position" /> {{ 'PROPOSTAS_VALOR' | translate }}
+				</h4>
+			</div>
+			<div class="modal-body">
+				<h5>{{ 'PV_1' | translate }}</h5>
+				<h5>{{ 'PV_2' | translate }}</h5>
+				<h5>{{ 'PV_3' | translate }}</h5>
+				<h5>{{ 'PV_4' | translate }}</h5>
+				<hr />
+				<strong>{{ 'PV_5' | translate }}</strong>
+				<ul class="list-unstyled">
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'PV_6' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'PV_7' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'PV_8' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'PV_9' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'PV_10' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'PV_11' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'PV_12' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'PV_13' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'PV_14' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'PV_15' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'PV_16' | translate }}</li>
+				</ul>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Relacionamento com os Clientes Modal -->
+<div class="modal fade" id="relacionamentoClientes" tabindex="-1"
+	role="dialog" aria-labelledby="relacionamentoClientesLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="relacionamentoClientesLabel">
+					<img src="images/relacionamento_clientes.png"
+						alt="Relacionamento com os Clientes" class="kz_img_position" />
+					{{ 'RELACIONAMENTO_CLIENTES' | translate }}
+				</h4>
+			</div>
+			<div class="modal-body">
+				<h5>{{ 'RCL_1' | translate }}</h5>
+				<h5>{{ 'RCL_2' | translate }}</h5>
+				<h5>{{ 'RCL_3' | translate }}</h5>
+				<h5>{{ 'RCL_4' | translate }}</h5>
+				<h5>{{ 'RCL_5' | translate }}</h5>
+				<hr />
+				<strong>{{ 'RCL_6' | translate }}</strong> 
+				<ul class="list-unstyled">
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'RCL_7' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'RCL_8' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'RCL_9' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'RCL_10' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'RCL_11' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'RCL_12' | translate }}</li>
+				</ul>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Canais Modal -->
+<div class="modal fade" id="canais" tabindex="-1" role="dialog"
+	aria-labelledby="canaisLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="canaisLabel">
+					<img src="images/canais.png" alt="Canais" class="kz_img_position" />
+					{{ 'CANAIS' | translate }}
+				</h4>
+			</div>
+			<div class="modal-body">
+				<h5>{{ 'CA_1' | translate }}</h5>
+				<h5>{{ 'CA_2' | translate }}</h5>
+				<h5>{{ 'CA_3' | translate }}</h5>
+				<h5>{{ 'CA_4' | translate }}</h5>
+				<h5>{{ 'CA_5' | translate }}</h5>
+				<h5>{{ 'CA_6' | translate }}</h5>
+				<hr />
+				<strong>{{ 'CA_7' | translate }}</strong>
+				<ul class="list-unstyled">
+					<li>{{ 'CA_8' | translate }}</li>
+					<ul class="list-unstyled">
+						<li><small>{{ 'CA_9' | translate }}</small></li>
+					</ul>		
+					<li>{{ 'CA_10' | translate }}</li>
+					<ul class="list-unstyled">
+						<li><small>{{ 'CA_11' | translate }}</small></li>
+					</ul>
+					<li>{{ 'CA_12' | translate }}</li>
+					<ul class="list-unstyled">
+						<li><small>{{ 'CA_13' | translate }}</small></li>
+					</ul>
+					<li>{{ 'CA_14' | translate }}</li>
+					<ul class="list-unstyled">
+						<li><small>{{ 'CA_15' | translate }}</small></li>
+					</ul>
+					<li>{{ 'CA_16' | translate }}</li>
+					<ul class="list-unstyled">
+						<li><small>{{ 'CA_17' | translate }}</small></li>
+					</ul>
+				</ul>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Segmento de Clientes Modal -->
+<div class="modal fade" id="segmentosClientes" tabindex="-1"
+	role="dialog" aria-labelledby="segmentosClientesLabel"
+	aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="segmentosClientesLabel">
+					<img src="images/segmentos_clientes.png" alt="Segmentos de Clientes" 
+						class="kz_img_position" /> 
+					{{ 'SEGMENTOS_CLIENTES' | translate }}
+				</h4>
+			</div>
+			<div class="modal-body">
+				<h5>{{ 'SC_1' | translate }}</h5>
+				<h5>{{ 'SC_2' | translate }}</h5>
+				<ul class="list-unstyled">
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'SC_3' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'SC_4' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'SC_5' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'SC_6' | translate }}</li>
+				</ul>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Estrutura de Custo Modal -->
+<div class="modal fade" id="estruturaCusto" tabindex="-1" role="dialog"
+	aria-labelledby="estruturaCustoLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="estruturaCustoLabel">
+					<img src="images/estrutura_custo.png" alt="Estrutura de Custo"
+						class="kz_img_position" /> 
+					{{ 'ESTRUTURA_CUSTO' | translate }}
+				</h4>
+			</div>
+			<div class="modal-body">
+				<h5>{{ 'EC_1' | translate }}</h5>
+				<h5>{{ 'EC_2' | translate }}</h5>
+				<h5>{{ 'EC_3' | translate }}</h5>
+				<hr />
+				<strong>{{ 'EC_4' | translate }}</strong> 
+				<ul class="list-unstyled">
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'EC_5' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'EC_6' | translate }}</li>
+				</ul>
+				<hr />
+				<strong>{{ 'EC_7' | translate }}</strong>
+				<ul class="list-unstyled">
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'EC_8' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'EC_9' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'EC_10' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'EC_11' | translate }}</li>
+				</ul>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Fluxo de Receita Modal -->
+<div class="modal fade" id="fluxoReceita" tabindex="-1" role="dialog"
+	aria-labelledby="fluxoReceitaLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="fluxoReceitaLabel">
+					<img src="images/fluxo_receita.png" alt="Fluxo de Receita"
+						class="kz_img_position" /> 
+					{{ 'FLUXO_RECEITA' | translate }}
+				</h4>
+			</div>
+			<div class="modal-body">
+				<h5>{{ 'FR_1' | translate }}</h5>
+				<h5>{{ 'FR_2' | translate }}</h5>
+				<h5>{{ 'FR_3' | translate }}</h5>
+				<h5>{{ 'FR_4' | translate }}</h5>
+				<h5>{{ 'FR_5' | translate }}</h5>
+				<hr />
+				<strong>{{ 'FR_6' | translate }}</strong> 
+				<ul class="list-unstyled">
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'FR_7' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'FR_8' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'FR_9' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'FR_10' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'FR_11' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'FR_12' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'FR_13' | translate }}</li>
+				</ul>
+				<hr />
+				<strong>{{ 'FR_14' | translate }}</strong> 
+				<ul class="list-unstyled">
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'FR_15' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'FR_16' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'FR_17' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'FR_18' | translate }}</li>
+				</ul>
+				<hr />
+				<strong>{{ 'FR_19' | translate }}</strong>
+				<ul class="list-unstyled">
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'FR_20' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'FR_21' | translate }}</li>
+					<li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;{{ 'FR_22' | translate }}</li>
+				</ul>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row hidden-print">
+	<div class="col-xs-12 kz_center">
+		<br />
+		<a ng-href="#/" class="btn btn-default">
+    		<span class="glyphicon glyphicon-chevron-left"></span> {{ 'VOLTAR' | translate }}
+    	</a>
+    </div>
+</div>
