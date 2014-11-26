@@ -5,7 +5,8 @@ var kzbmcMobileApp = angular.module('kzbmcMobileApp', [
       'ngRoute',
       'LocalStorageModule',
       'ui.sortable',
-      'pascalprecht.translate'
+      'pascalprecht.translate',
+      'ngResource'
     ]);
 
 kzbmcMobileApp.config( function( $routeProvider ) {
@@ -283,7 +284,10 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     FR_19 : 'PRECIFICA\u00c7\u00c3O DIN\u00c2MICA:',
     FR_20 : 'Negocia\u00e7\u00e3o (barganha)',
     FR_21 : 'Gest\u00e3o de Rendimentos',
-    FR_22 : 'Mercado em Tempo Real'
+    FR_22 : 'Mercado em Tempo Real',
+
+    ERRO_OBTENDO_DADOS : 'Erro obtendo dados. Tente novamente',
+    ERRO_CADASTRANDO_CANVAS : 'Erro cadastrando Canvas. Tente novamente'
   })
   .translations( 'en', {
     // topicos da ajuda
@@ -698,5 +702,6 @@ kzbmcMobileApp.config( function( $translateProvider ) {
 
 kzbmcMobileApp.run( function( $rootScope, localStorageService, $translate ) {
   $rootScope.liteVersion = false;
+  $rootScope.urlProjetoCanvas = 'http://localhost:8888/kzbmc-api/web/index.php/v1/projeto-canvas';
   $translate.use( localStorageService.get( 'lingua' ) || 'pt' );
 });

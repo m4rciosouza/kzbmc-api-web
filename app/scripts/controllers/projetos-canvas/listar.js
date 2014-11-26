@@ -6,15 +6,21 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$scope', 'projetoCanvasService', 
-	function( $scope, projetoCanvasService ) {
+angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$scope', '$resource', '$rootScope',
+	function( $scope, $resource, $rootScope ) {
 	  
 	  	/**
 		 * Carrega uma lista de projetos canvas.
 		 * @method ProjetosCanvasListarCtrl::carregarProjetos
 		 */
 	    $scope.carregarProjetos = function() {
-	    	$scope.projetos = projetoCanvasService.obterProjetosJson();
+	    	var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas );
+		    var projetosCanvas = projetosCanvasResource.get( {}, function() {
+		     	$scope.projetos = projetosCanvas.items || [];
+		     },
+		     function() {
+		     	$scope.erro = true;
+		     });
 	    };
 		  
 		$scope.carregarProjetos();

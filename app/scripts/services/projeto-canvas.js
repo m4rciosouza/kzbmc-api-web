@@ -6,7 +6,7 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ 'localStorageService', function( localStorageService ) {
+angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ 'localStorageService', '$resource', function( localStorageService, $resource ) {
 
   var canvas = {};
 
@@ -96,7 +96,15 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ 'localStor
    * @return Array
    */
   canvas.obterProjetos = function() {
-  		return localStorageService.get( 'projetos' ) || [];
+  		//return localStorageService.get( 'projetos' ) || [];
+      var projetosCanvasResource = $resource('http://localhost:8888/kzbmc-api/web/index.php/v1/projeto-canvas');
+      var projetosCanvas = projetosCanvasResource.get({}, function() {
+          //angular.forEach(projetosCanvas.items, function(value, key) {
+          //  console.log(key + ' : ' + value.id);
+          //});
+
+      });
+      return projetosCanvas;
   };
 
   /**

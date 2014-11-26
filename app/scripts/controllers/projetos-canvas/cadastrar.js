@@ -6,22 +6,27 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasCadastrarCtrl', [ '$scope', '$location', 'projetoCanvasService', '$rootScope', 
-		function( $scope, $location, projetoCanvasService, $rootScope ) {
+angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasCadastrarCtrl', [ '$scope', '$location', '$resource', '$rootScope', 
+		function( $scope, $location, $resource, $rootScope ) {
 	  
 	$scope.liteVersion = $rootScope.liteVersion;
-	$scope.qtdProjetos = projetoCanvasService.obterProjetos().length;
+	$scope.qtdProjetos = 1; //TODO tornar dinamico
 
 	/**
 	 * Cadastra um novo projeto canvas.
 	 * @method ProjetosCanvasCadastrarCtrl::cadastrar
-	 * @param {object} canvas
+	 * @param {object} projeto canvas
 	 */
 	$scope.cadastrar = function( canvas ) {
 		if( $scope.form.$valid ) {
-			var canvasObj = { 'nome' : canvas.nome, 'descricao' : canvas.descricao };
-			projetoCanvasService.cadastrar( canvasObj );
-			$location.path( '/' );
+			var projetoCanvasObj = { 'nome' : canvas.nome, 'descricao' : canvas.descricao, 'email' : 'marcio@kazale.com' }; //TODO email dinamico
+			var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas );
+		    projetosCanvasResource.save( {}, projetoCanvasObj, function() {
+		    		$location.path( '/' );
+		    	},
+		    	function() {
+		     		$scope.erro = true;
+		    	});
 		}
 	};
 }]);
