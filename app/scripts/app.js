@@ -703,5 +703,6 @@ kzbmcMobileApp.config( function( $translateProvider ) {
 kzbmcMobileApp.run( function( $rootScope, localStorageService, $translate ) {
   $rootScope.liteVersion = false;
   $rootScope.urlProjetoCanvas = 'http://localhost:8888/kzbmc-api/web/index.php/v1/projeto-canvas';
+  $rootScope.urlItemCanvas = 'http://localhost:8888/kzbmc-api/web/index.php/v1/item-canvas';
   $translate.use( localStorageService.get( 'lingua' ) || 'pt' );
 });

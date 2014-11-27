@@ -6,19 +6,23 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller( 'CanvasVisualizarCtrl', [ '$scope', '$routeParams', '$location', 'projetoCanvasService',
-	function( $scope, $routeParams, $location, projetoCanvasService ) {
+angular.module( 'kzbmcMobileApp' ).controller( 'CanvasVisualizarCtrl', [ '$scope', '$routeParams', '$location', '$resource', '$rootScope',
+	function( $scope, $routeParams, $location, $resource, $rootScope ) {
 	  
 	/**
 	 * Carrega um projeto canvas para visualização do canvas.
 	 * @method CanvasVisualizarCtrl::carregarProjeto
 	 */
 	$scope.carregarProjeto = function() {
-		$scope.index = parseInt( $routeParams.index, 10 );
-		$scope.projeto = projetoCanvasService.obterProjetoJson( $scope.index );
-		if( $scope.projeto === false ) {
-			$location.path( '/' );
-		}	
+		$scope.index = $routeParams.index;
+	    var itensCanvasResource = $resource( $rootScope.urlItemCanvas + '/projeto-canvas/:id' );
+		var itensCanvas = itensCanvasResource.get( { id : $routeParams.index }, function() {
+				$scope.projeto = itensCanvas.projeto || [];
+				$scope.projeto.itens = itensCanvas.itens || [];
+			},
+			function() {
+			  	$location.path( '/' );
+			});
 	};
 
 	/**
@@ -26,7 +30,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'CanvasVisualizarCtrl', [ '$scope
 	 */
 	$scope.sortableOptions = {
         stop : function() {
-                projetoCanvasService.atualizar( $scope.projeto, $scope.index );
+                console.log( 'projeto : ' + angular.toJson($scope.projeto) + ' :: index : ' + $scope.index  );
               },
         axis : 'y',
       };
