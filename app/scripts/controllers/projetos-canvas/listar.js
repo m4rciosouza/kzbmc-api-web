@@ -14,8 +14,8 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 		 * @method ProjetosCanvasListarCtrl::carregarProjetos
 		 */
 	    $scope.carregarProjetos = function() {
-	    	var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas );
-		    var projetosCanvas = projetosCanvasResource.get( {}, function() {
+	    	var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas + '?email=:email' );
+		    var projetosCanvas = projetosCanvasResource.get( { email : 'marcio@kazale.com' }, function() { //TODO remover email
 		     	$scope.projetos = projetosCanvas.items || [];
 		     },
 		     function() {

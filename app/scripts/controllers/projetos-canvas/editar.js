@@ -6,19 +6,21 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller('ProjetosCanvasEditarCtrl', [ '$scope', '$location', '$routeParams', 'projetoCanvasService', 
-		function( $scope, $location, $routeParams, projetoCanvasService ) {
+angular.module( 'kzbmcMobileApp' ).controller('ProjetosCanvasEditarCtrl', [ '$scope', '$location', '$routeParams', '$resource', '$rootScope', 
+		function( $scope, $location, $routeParams, $resource, $rootScope ) {
 	  
 	/**
 	 * Carrega um projeto canvas para edição.
 	 * @method ProjetosCanvasEditarCtrl::carregarProjeto
 	 */
 	$scope.carregarProjeto = function() {
-		$scope.index = parseInt( $routeParams.index, 10 );
-		$scope.canvasEditar = projetoCanvasService.obterProjetoJson( $scope.index );
-		if( $scope.canvasEditar === false ) {
-			$location.path( '/' );
-		}	
+		var projetoCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id' );
+	    var projetoCanvas = projetoCanvasResource.get( { id : $routeParams.index }, function() {
+	     	$scope.canvasEditar = projetoCanvas || [];
+		     },
+		     function() {
+		     	$location.path( '/' );
+		     });
 	};	 
 	  
     /**
@@ -27,11 +29,15 @@ angular.module( 'kzbmcMobileApp' ).controller('ProjetosCanvasEditarCtrl', [ '$sc
 	 * @param {object} canvas
 	 */
     $scope.atualizar = function( canvas ) {
-		  if( $scope.form.$valid ) {
-			  var canvasObj = { 'nome' : canvas.nome, 'descricao' : canvas.descricao };
-			  projetoCanvasService.atualizar( canvasObj, $scope.index );
-			  $location.path( '/' );
-		  }
+    	var canvasObj = { 'nome' : canvas.nome, 'descricao' : canvas.descricao, 'email' : 'marcio@kazale.com' }; //TODO remover email
+    	var projetoCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id', null,
+    			{ 'update' : { method : 'PUT' } });
+    	projetoCanvasResource.update( { id : $routeParams.index }, canvasObj, function() {
+	     		$location.path( '/' );
+		     },
+		     function() {
+		     	$location.path( '/' );
+		     });
 	  };
 	  
 	  $scope.carregarProjeto();

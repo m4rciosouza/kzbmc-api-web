@@ -6,19 +6,21 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller('ProjetosCanvasRemoverCtrl', [ '$scope', '$location', '$routeParams', 'projetoCanvasService', 
-		function( $scope, $location, $routeParams, projetoCanvasService ) {
+angular.module( 'kzbmcMobileApp' ).controller('ProjetosCanvasRemoverCtrl', [ '$scope', '$location', '$routeParams', '$resource', '$rootScope', 
+		function( $scope, $location, $routeParams, $resource, $rootScope ) {
 	  
 	/**
 	 * Carrega um projeto canvas para remoção.
 	 * @method ProjetosCanvasRemoverCtrl::carregarProjeto
 	 */
 	$scope.carregarProjeto = function() {
-		$scope.index = parseInt( $routeParams.index, 10 );
-		$scope.canvasRemover = projetoCanvasService.obterProjetoJson( $scope.index );
-		if( $scope.canvasRemover === false ) {
-			$location.path( '/' );
-		}	
+		var projetoCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id' );
+	    var projetoCanvas = projetoCanvasResource.get( { id : $routeParams.index }, function() {
+	     	$scope.canvasRemover = projetoCanvas || [];
+		     },
+		     function() {
+		     	$location.path( '/' );
+		     });
 	};	
       
     /**
@@ -27,8 +29,13 @@ angular.module( 'kzbmcMobileApp' ).controller('ProjetosCanvasRemoverCtrl', [ '$s
 	 * @param {object} canvas
 	 */
     $scope.remover = function() {
-        projetoCanvasService.remover( $scope.index );
-        $location.path( '/' );
+			var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id' );
+		    projetosCanvasResource.remove( { id : $routeParams.index }, function() {
+		    		$location.path( '/' );
+		    	},
+		    	function() {
+		     		$scope.erro = true;
+		    	});
     };
 	  
 	$scope.carregarProjeto();
