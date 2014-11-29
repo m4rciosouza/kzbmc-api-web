@@ -33,8 +33,8 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$scope', '$location', '$routeParams', 'canvasService', 'projetoCanvasService', 
-		function( $scope, $location, $routeParams, canvasService, projetoCanvasService ) {
+angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$scope', '$location', '$routeParams', 'canvasService', '$resource', '$rootScope',
+		function( $scope, $location, $routeParams, canvasService, $resource, $rootScope ) {
 	   
     /**
 	 * Atualiza os dados de um item canvas.
@@ -42,8 +42,23 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$sco
 	 * @param {object} item
 	 */
     $scope.atualizar = function( item ) {
-		canvasService.atualizar( item, $scope.itemId, $scope.tipo, $scope.projetoId );
-		$location.path( '/canvas/' + $scope.projetoId );
+		if( $scope.form.$valid ) {
+			var itemCanvasObj = { 
+					'id_projeto_canvas' : $scope.projetoId, 
+					'tipo' : $scope.tipo, 
+					'titulo' : item.titulo,
+					'descricao' : item.descricao, 
+					'cor' : item.cor 
+				};
+			var itemCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id', null, 
+				{ 'update' : { method : 'PUT' } });
+		    itemCanvasResource.update( { 'id' : $scope.itemId }, itemCanvasObj, function() {
+		    		$location.path( '/canvas/' + $scope.projetoId );
+		    	},
+		    	function() {
+		     		$scope.erro = true;
+		    	});
+		}
 	};
 
 	/**
@@ -51,8 +66,13 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$sco
 	 * @method CanvasEditarRemoverCtrl::remover
 	 */
     $scope.remover = function() {
-		canvasService.remover( $scope.itemId, $scope.tipo, $scope.projetoId );
-		$location.path( '/canvas/' + $scope.projetoId );
+		var itemCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id' );
+		itemCanvasResource.remove( { 'id' : $scope.itemId }, function() {
+		    		$location.path( '/canvas/' + $scope.projetoId );
+		    	},
+		    	function() {
+		     		$scope.erro = true;
+		    	});
 	};
 
 	  /**
@@ -60,12 +80,18 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$sco
 	 * @method CanvasEditarRemoverCtrl::carregarProjeto
 	 */
 	$scope.carregarProjeto = function() {
-		$scope.projetoId = parseInt( $routeParams.projetoId, 10 );
-		$scope.itemId = parseInt( $routeParams.itemId, 10 );
+		$scope.projetoId = $routeParams.projetoId;
+		$scope.itemId = $routeParams.itemId;
 		$scope.tipo = $routeParams.tipo;
-		$scope.projeto = projetoCanvasService.obterProjetoJson( $scope.projetoId );
-		this.validarParametros();
-		$scope.item = $scope.projeto.itens[ $scope.tipo ][ $scope.itemId ];
+	    var itemCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id' );
+		var itemCanvas = itemCanvasResource.get( { id : $scope.itemId }, function() {
+				$scope.item = itemCanvas || [];
+				$scope.projeto = itemCanvas.projetoCanvas || [];
+				$scope.validarParametros();
+			},
+			function() {
+			  	$location.path( '/' );
+			});
 	};
 
 	/**
@@ -74,7 +100,7 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$sco
 	 */
 	$scope.validarParametros = function() {
 		var tipos = [ 'pc', 'ac', 'rc', 'pv', 'rcl', 'ca', 'sc', 'ec', 'fr' ];
-		if( $scope.projeto === false || ! this.ehItemIdValido() || 
+		if( $scope.projeto === false || ! $scope.ehItemIdValido() || 
 			tipos.indexOf( $scope.tipo ) === -1 ) {
 			$location.path( '/' );
 		}
@@ -86,8 +112,7 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$sco
 	 * @return boolean
 	 */
 	$scope.ehItemIdValido = function() {
-		if( isNaN( $scope.itemId ) || $scope.itemId &lt; 0 || 
-			$scope.itemId >= $scope.projeto.itens[ $scope.tipo ].length ) {
+		if( isNaN( $scope.itemId ) || $scope.itemId &lt; 0 ) {
 			return false;
 		}
 		return true;
@@ -112,13 +137,13 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$sco
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#CanvasCadastrarCtrl::cadastrar">CanvasCadastrarCtrl::cadastrar</a></li><li><a href="global.html#CanvasCadastrarCtrl::carregarProjeto">CanvasCadastrarCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasCadastrarCtrl::obterNomeItemPorTipo">CanvasCadastrarCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasCadastrarCtrl::validarParametros">CanvasCadastrarCtrl::validarParametros</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::atualizar">CanvasEditarRemoverCtrl::atualizar</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::carregarProjeto">CanvasEditarRemoverCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::ehItemIdValido">CanvasEditarRemoverCtrl::ehItemIdValido</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::obterNomeItemPorTipo">CanvasEditarRemoverCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::remover">CanvasEditarRemoverCtrl::remover</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::validarParametros">CanvasEditarRemoverCtrl::validarParametros</a></li><li><a href="global.html#CanvasService::atualizar">CanvasService::atualizar</a></li><li><a href="global.html#CanvasService::cadastrar">CanvasService::cadastrar</a></li><li><a href="global.html#CanvasService::obterNomeItemPorTipo">CanvasService::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasService::remover">CanvasService::remover</a></li><li><a href="global.html#CanvasVisualizarCtrl::carregarProjeto">CanvasVisualizarCtrl::carregarProjeto</a></li><li><a href="global.html#EnviarPorEmailCtrl::carregarEmail">EnviarPorEmailCtrl::carregarEmail</a></li><li><a href="global.html#EnviarPorEmailCtrl::gravarEmail">EnviarPorEmailCtrl::gravarEmail</a></li><li><a href="global.html#EnviarPorEmailCtrl::reset">EnviarPorEmailCtrl::reset</a></li><li><a href="global.html#I18nCtrl::selecionarLingua">I18nCtrl::selecionarLingua</a></li><li><a href="global.html#ProjetoCanvasService::atualizar">ProjetoCanvasService::atualizar</a></li><li><a href="global.html#ProjetoCanvasService::cadastrar">ProjetoCanvasService::cadastrar</a></li><li><a href="global.html#ProjetoCanvasService::definirProjetos">ProjetoCanvasService::definirProjetos</a></li><li><a href="global.html#ProjetoCanvasService::obterProjeto">ProjetoCanvasService::obterProjeto</a></li><li><a href="global.html#ProjetoCanvasService::obterProjetoJson">ProjetoCanvasService::obterProjetoJson</a></li><li><a href="global.html#ProjetoCanvasService::obterProjetos">ProjetoCanvasService::obterProjetos</a></li><li><a href="global.html#ProjetoCanvasService::obterProjetosJson">ProjetoCanvasService::obterProjetosJson</a></li><li><a href="global.html#ProjetoCanvasService::remover">ProjetoCanvasService::remover</a></li><li><a href="global.html#ProjetoCanvasService::removerTodosProjetos">ProjetoCanvasService::removerTodosProjetos</a></li><li><a href="global.html#ProjetosCanvasCadastrarCtrl::cadastrar">ProjetosCanvasCadastrarCtrl::cadastrar</a></li><li><a href="global.html#ProjetosCanvasEditarCtrl::atualizar">ProjetosCanvasEditarCtrl::atualizar</a></li><li><a href="global.html#ProjetosCanvasEditarCtrl::carregarProjeto">ProjetosCanvasEditarCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::carregarProjetos">ProjetosCanvasListarCtrl::carregarProjetos</a></li><li><a href="global.html#ProjetosCanvasRemoverCtrl::carregarProjeto">ProjetosCanvasRemoverCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasRemoverCtrl::remover">ProjetosCanvasRemoverCtrl::remover</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#CanvasCadastrarCtrl::cadastrar">CanvasCadastrarCtrl::cadastrar</a></li><li><a href="global.html#CanvasCadastrarCtrl::carregarProjeto">CanvasCadastrarCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasCadastrarCtrl::obterNomeItemPorTipo">CanvasCadastrarCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasCadastrarCtrl::validarParametros">CanvasCadastrarCtrl::validarParametros</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::atualizar">CanvasEditarRemoverCtrl::atualizar</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::carregarProjeto">CanvasEditarRemoverCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::ehItemIdValido">CanvasEditarRemoverCtrl::ehItemIdValido</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::obterNomeItemPorTipo">CanvasEditarRemoverCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::remover">CanvasEditarRemoverCtrl::remover</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::validarParametros">CanvasEditarRemoverCtrl::validarParametros</a></li><li><a href="global.html#CanvasService::obterNomeItemPorTipo">CanvasService::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasVisualizarCtrl::carregarProjeto">CanvasVisualizarCtrl::carregarProjeto</a></li><li><a href="global.html#EnviarPorEmailCtrl::carregarEmail">EnviarPorEmailCtrl::carregarEmail</a></li><li><a href="global.html#EnviarPorEmailCtrl::gravarEmail">EnviarPorEmailCtrl::gravarEmail</a></li><li><a href="global.html#EnviarPorEmailCtrl::reset">EnviarPorEmailCtrl::reset</a></li><li><a href="global.html#I18nCtrl::selecionarLingua">I18nCtrl::selecionarLingua</a></li><li><a href="global.html#ProjetosCanvasCadastrarCtrl::cadastrar">ProjetosCanvasCadastrarCtrl::cadastrar</a></li><li><a href="global.html#ProjetosCanvasEditarCtrl::atualizar">ProjetosCanvasEditarCtrl::atualizar</a></li><li><a href="global.html#ProjetosCanvasEditarCtrl::carregarProjeto">ProjetosCanvasEditarCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::carregarProjetos">ProjetosCanvasListarCtrl::carregarProjetos</a></li><li><a href="global.html#ProjetosCanvasRemoverCtrl::carregarProjeto">ProjetosCanvasRemoverCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasRemoverCtrl::remover">ProjetosCanvasRemoverCtrl::remover</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sun Nov 23 2014 22:05:41 GMT-0200 (BRST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Fri Nov 28 2014 22:06:20 GMT-0200 (BRST)
 </footer>
 
 <script> prettyPrint(); </script>

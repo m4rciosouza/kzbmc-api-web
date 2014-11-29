@@ -6,52 +6,9 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', [ 'localStorageService', 'projetoCanvasService', 
-  function( localStorageService, projetoCanvasService ) {
+angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', function() {
 
   var canvas = {};
-
-  /**
-   * Cadastra um novo item no canvas.
-   * @method CanvasService::cadastrar
-   * @param {object} obj
-   * @param {string} tipo
-   * @param {integer} projetoId
-   */
-  canvas.cadastrar = function( obj, tipo, projetoId ) {
-		var novoItem = { 'titulo' : obj.titulo, 'descricao' : obj.descricao, 'cor' : obj.cor };
-    var projeto = projetoCanvasService.obterProjetoJson( projetoId );
-    projeto.itens[ tipo ].push( novoItem );
-    projetoCanvasService.atualizar( projeto, projetoId );
-  };
-
-  /**
-   * Atualiza os dados de um item do canvas.
-   * @method CanvasService::atualizar
-   * @param {object} obj
-   * @param {integer} objIndex
-   * @param {string} tipo
-   * @param {integer} projetoId
-   */
-  canvas.atualizar = function( obj, objIndex, tipo, projetoId ) {
-    var novoItem = { 'titulo' : obj.titulo, 'descricao' : obj.descricao, 'cor' : obj.cor };
-    var projeto = projetoCanvasService.obterProjetoJson( projetoId );
-    projeto.itens[ tipo ][ objIndex ] = novoItem;
-    projetoCanvasService.atualizar( projeto, projetoId );
-  };
-
-  /**
-   * Remove um item do canvas.
-   * @method CanvasService::remover
-   * @param {integer} objIndex
-   * @param {string} tipo
-   * @param {integer} projetoId
-   */
-  canvas.remover = function( objIndex, tipo, projetoId ) {
-     var projeto = projetoCanvasService.obterProjetoJson( projetoId );
-     projeto.itens[ tipo ].splice( objIndex, 1 );
-     projetoCanvasService.atualizar( projeto, projetoId );
-  };
 
   /**
    * Retorna o nome completo de um tipo de item canvas dado sua abreviação.
@@ -74,4 +31,4 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', [ 'localStorageServ
   };
 
   return canvas;
-}]);
+});

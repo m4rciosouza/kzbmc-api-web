@@ -6,8 +6,8 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$scope', '$location', '$routeParams', 'canvasService', 'projetoCanvasService', 
-		function( $scope, $location, $routeParams, canvasService, projetoCanvasService ) {
+angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$scope', '$location', '$routeParams', 'canvasService', '$resource', '$rootScope',
+		function( $scope, $location, $routeParams, canvasService, $resource, $rootScope ) {
 	   
     /**
 	 * Atualiza os dados de um item canvas.
@@ -15,8 +15,23 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$sco
 	 * @param {object} item
 	 */
     $scope.atualizar = function( item ) {
-		canvasService.atualizar( item, $scope.itemId, $scope.tipo, $scope.projetoId );
-		$location.path( '/canvas/' + $scope.projetoId );
+		if( $scope.form.$valid ) {
+			var itemCanvasObj = { 
+					'id_projeto_canvas' : $scope.projetoId, 
+					'tipo' : $scope.tipo, 
+					'titulo' : item.titulo,
+					'descricao' : item.descricao, 
+					'cor' : item.cor 
+				};
+			var itemCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id', null, 
+				{ 'update' : { method : 'PUT' } });
+		    itemCanvasResource.update( { 'id' : $scope.itemId }, itemCanvasObj, function() {
+		    		$location.path( '/canvas/' + $scope.projetoId );
+		    	},
+		    	function() {
+		     		$scope.erro = true;
+		    	});
+		}
 	};
 
 	/**
@@ -24,8 +39,13 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$sco
 	 * @method CanvasEditarRemoverCtrl::remover
 	 */
     $scope.remover = function() {
-		canvasService.remover( $scope.itemId, $scope.tipo, $scope.projetoId );
-		$location.path( '/canvas/' + $scope.projetoId );
+		var itemCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id' );
+		itemCanvasResource.remove( { 'id' : $scope.itemId }, function() {
+		    		$location.path( '/canvas/' + $scope.projetoId );
+		    	},
+		    	function() {
+		     		$scope.erro = true;
+		    	});
 	};
 
 	  /**
@@ -33,12 +53,18 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$sco
 	 * @method CanvasEditarRemoverCtrl::carregarProjeto
 	 */
 	$scope.carregarProjeto = function() {
-		$scope.projetoId = parseInt( $routeParams.projetoId, 10 );
-		$scope.itemId = parseInt( $routeParams.itemId, 10 );
+		$scope.projetoId = $routeParams.projetoId;
+		$scope.itemId = $routeParams.itemId;
 		$scope.tipo = $routeParams.tipo;
-		$scope.projeto = projetoCanvasService.obterProjetoJson( $scope.projetoId );
-		this.validarParametros();
-		$scope.item = $scope.projeto.itens[ $scope.tipo ][ $scope.itemId ];
+	    var itemCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id' );
+		var itemCanvas = itemCanvasResource.get( { id : $scope.itemId }, function() {
+				$scope.item = itemCanvas || [];
+				$scope.projeto = itemCanvas.projetoCanvas || [];
+				$scope.validarParametros();
+			},
+			function() {
+			  	$location.path( '/' );
+			});
 	};
 
 	/**
@@ -47,7 +73,7 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$sco
 	 */
 	$scope.validarParametros = function() {
 		var tipos = [ 'pc', 'ac', 'rc', 'pv', 'rcl', 'ca', 'sc', 'ec', 'fr' ];
-		if( $scope.projeto === false || ! this.ehItemIdValido() || 
+		if( $scope.projeto === false || ! $scope.ehItemIdValido() || 
 			tipos.indexOf( $scope.tipo ) === -1 ) {
 			$location.path( '/' );
 		}
@@ -59,8 +85,7 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$sco
 	 * @return boolean
 	 */
 	$scope.ehItemIdValido = function() {
-		if( isNaN( $scope.itemId ) || $scope.itemId < 0 || 
-			$scope.itemId >= $scope.projeto.itens[ $scope.tipo ].length ) {
+		if( isNaN( $scope.itemId ) || $scope.itemId < 0 ) {
 			return false;
 		}
 		return true;
