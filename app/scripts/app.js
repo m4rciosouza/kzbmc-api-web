@@ -73,6 +73,10 @@ kzbmcMobileApp.config( function( $routeProvider ) {
         templateUrl: 'views/enviar-por-email.html',
         controller: 'EnviarPorEmailCtrl'
       })
+      .when('/login', {
+        templateUrl: 'views/login/login.html',
+        controller: 'LoginCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -287,7 +291,14 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     FR_22 : 'Mercado em Tempo Real',
 
     ERRO_OBTENDO_DADOS : 'Erro obtendo dados. Tente novamente',
-    ERRO_CADASTRANDO_CANVAS : 'Erro cadastrando Canvas. Tente novamente'
+    ERRO_CADASTRANDO_CANVAS : 'Erro cadastrando Canvas. Tente novamente',
+    LOGIN : 'Login',
+    ERRO_AUTENTICANDO : 'Erro autenticando usuário',
+    EMAIL : 'Email',
+    DIGITE_EMAIL : 'Digite o seu email...',
+    SENHA : 'Senha',
+    DIGITE_SENHA : 'Digite a sua senha...',
+    LOGAR : 'Logar'
   })
   .translations( 'en', {
     // topicos da ajuda
@@ -704,5 +715,6 @@ kzbmcMobileApp.run( function( $rootScope, localStorageService, $translate ) {
   $rootScope.liteVersion = false;
   $rootScope.urlProjetoCanvas = 'http://localhost:8888/kzbmc-api/web/index.php/v1/projeto-canvas';
   $rootScope.urlItemCanvas = 'http://localhost:8888/kzbmc-api/web/index.php/v1/item-canvas';
+  $rootScope.urlUsuario = 'http://localhost:8888/kzbmc-api/web/index.php/v1/tokens';
   $translate.use( localStorageService.get( 'lingua' ) || 'pt' );
 });
