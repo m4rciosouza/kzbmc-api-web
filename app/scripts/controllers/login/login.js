@@ -6,8 +6,8 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller( 'LoginCtrl', [ '$scope', '$location', '$resource', '$rootScope',
-	function( $scope, $location, $resource, $rootScope ) {
+angular.module( 'kzbmcMobileApp' ).controller( 'LoginCtrl', [ '$scope', '$location', '$resource', '$rootScope', '$window',
+	function( $scope, $location, $resource, $rootScope, $window ) {
 	  
 	  	/**
 		 * Efetua o login no sistema.
@@ -18,10 +18,11 @@ angular.module( 'kzbmcMobileApp' ).controller( 'LoginCtrl', [ '$scope', '$locati
 	    	var usuarioObj = { 'email' : usuario.email, 'senha' : usuario.senha };
 			var usuariosResource = $resource( $rootScope.urlUsuario );
 		    usuariosResource.get( usuarioObj, function( data ) {
-		    		sessionStorage.token = data.token;
+		    		$window.sessionStorage.token = data.token;
 					$location.path( '/' );
 		    	},
 		    	function() {
+		    		delete $window.sessionStorage.token;
 		     		$scope.erro = true;
 		    	});
 	    };

@@ -77,10 +77,46 @@ kzbmcMobileApp.config( function( $routeProvider ) {
         templateUrl: 'views/login/login.html',
         controller: 'LoginCtrl'
       })
+      .when('/logout', {
+        templateUrl: 'views/login/login.html',
+        controller: 'LogoutCtrl'
+      })
+      .when('/esqueci-senha', {
+        templateUrl: 'views/login/esqueci-senha.html',
+        controller: 'EsqueciSenhaCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
   });
+
+kzbmcMobileApp.factory( 'authInterceptor', [ '$rootScope', '$q', '$window', '$location',
+    function( $rootScope, $q, $window, $location ) {
+      return {
+        request : function( config ) {
+            console.log('AAAAAAAAAAAAA');
+          config.headers = config.headers || {};
+          if( $window.sessionStorage.token ) {
+            config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+            console.log('config.headers.Authorization = ' + config.headers.Authorization);
+          }
+          return config;
+        },
+        response: function( response ) {
+            console.log('BBBBBBBBBBBBBBB ' + response.status);
+          if( response.status === 401 ) {
+            delete $window.sessionStorage.token;
+            console.log('CCCCCCCCCC');
+            $location.path( '/login' );
+          }
+          return response || $q.when( response );
+        }
+      };
+    }]);
+
+kzbmcMobileApp.config( function( $httpProvider ) {
+  $httpProvider.interceptors.push( 'authInterceptor' );
+});
 
 /*
  * Translation
@@ -293,12 +329,18 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     ERRO_OBTENDO_DADOS : 'Erro obtendo dados. Tente novamente',
     ERRO_CADASTRANDO_CANVAS : 'Erro cadastrando Canvas. Tente novamente',
     LOGIN : 'Login',
-    ERRO_AUTENTICANDO : 'Erro autenticando usuário',
+    ERRO_AUTENTICANDO : 'Usuário/senha inválido(s)',
     EMAIL : 'Email',
     DIGITE_EMAIL : 'Digite o seu email...',
     SENHA : 'Senha',
     DIGITE_SENHA : 'Digite a sua senha...',
-    LOGAR : 'Logar'
+    LOGAR : 'Logar',
+    SAIR : 'Sair',
+    ESQUECEU_SENHA : 'Esqueceu a senha?',
+    ERRO_RECUPERANDO_SENHA : 'Erro recuperando senha. Tente novamente.',
+    SUCESSO_RECUPERANDO_SENHA : 'Um email contendo as instruções de recuperação da senha foi enviado ao email informado.',
+    RECUPERAR_SENHA : 'Recuperar senha',
+    INFO_RECUPERANDO_SENHA : 'Digite o seu email abaixo para receber um link contendo as instruções de como recuperar sua senha.'
   })
   .translations( 'en', {
     // topicos da ajuda
@@ -715,6 +757,7 @@ kzbmcMobileApp.run( function( $rootScope, localStorageService, $translate ) {
   $rootScope.liteVersion = false;
   $rootScope.urlProjetoCanvas = 'http://localhost:8888/kzbmc-api/web/index.php/v1/projeto-canvas';
   $rootScope.urlItemCanvas = 'http://localhost:8888/kzbmc-api/web/index.php/v1/item-canvas';
-  $rootScope.urlUsuario = 'http://localhost:8888/kzbmc-api/web/index.php/v1/tokens';
+  $rootScope.urlUsuario = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios/auth';
+  $rootScope.urlEsqueciSenha = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios/esqueci-senha';
   $translate.use( localStorageService.get( 'lingua' ) || 'pt' );
 });
