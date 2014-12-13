@@ -17,7 +17,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'LoginCtrl', [ '$scope', '$locati
 	    $scope.login = function( usuario ) {
 	    	var usuarioObj = { 'email' : usuario.email, 'senha' : usuario.senha };
 			var usuariosResource = $resource( $rootScope.urlUsuario );
-		    usuariosResource.get( usuarioObj, function( data ) {
+		    usuariosResource.save( {}, usuarioObj, function( data ) {
 		    		$window.sessionStorage.token = data.token;
 					$location.path( '/' );
 		    	},

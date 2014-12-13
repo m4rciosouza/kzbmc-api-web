@@ -94,19 +94,16 @@ kzbmcMobileApp.factory( 'authInterceptor', [ '$rootScope', '$q', '$window', '$lo
     function( $rootScope, $q, $window, $location ) {
       return {
         request : function( config ) {
-            console.log('AAAAAAAAAAAAA');
           config.headers = config.headers || {};
           if( $window.sessionStorage.token ) {
             config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
-            console.log('config.headers.Authorization = ' + config.headers.Authorization);
           }
           return config;
         },
+        // responseError para tratar erro do resource
         response: function( response ) {
-            console.log('BBBBBBBBBBBBBBB ' + response.status);
           if( response.status === 401 ) {
             delete $window.sessionStorage.token;
-            console.log('CCCCCCCCCC');
             $location.path( '/login' );
           }
           return response || $q.when( response );

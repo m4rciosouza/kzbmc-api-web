@@ -18,7 +18,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'EsqueciSenhaCtrl', [ '$scope', '
 	    	$scope.sucesso = false;
 		    $scope.erro = false;
 			var esqueciSenhaResource = $resource( $rootScope.urlEsqueciSenha );
-		    esqueciSenhaResource.get( { 'email' : usuario.email }, function() {
+		    esqueciSenhaResource.save( {}, { 'email' : usuario.email }, function() {
 		    		$scope.sucesso = true;
 		    	},
 		    	function() {

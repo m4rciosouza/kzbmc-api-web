@@ -33,7 +33,10 @@ angular.module( 'kzbmcMobileApp' ).controller('ProjetosCanvasRemoverCtrl', [ '$s
 		    projetosCanvasResource.remove( { id : $routeParams.index }, function() {
 		    		$location.path( '/' );
 		    	},
-		    	function() {
+		    	function( response ) {
+			     	if( response.status === 401 ) {
+			     		$location.path( '/login' );
+			     	}
 		     		$scope.erro = true;
 		    	});
     };

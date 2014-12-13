@@ -28,7 +28,10 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$sco
 		    itemCanvasResource.update( { 'id' : $scope.itemId }, itemCanvasObj, function() {
 		    		$location.path( '/canvas/' + $scope.projetoId );
 		    	},
-		    	function() {
+		    	function( response ) {
+			     	if( response.status === 401 ) {
+			     		$location.path( '/login' );
+			     	}
 		     		$scope.erro = true;
 		    	});
 		}
@@ -43,7 +46,10 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$sco
 		itemCanvasResource.remove( { 'id' : $scope.itemId }, function() {
 		    		$location.path( '/canvas/' + $scope.projetoId );
 		    	},
-		    	function() {
+		    	function( response ) {
+			     	if( response.status === 401 ) {
+			     		$location.path( '/login' );
+			     	}
 		     		$scope.erro = true;
 		    	});
 	};

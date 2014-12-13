@@ -24,7 +24,10 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasCadastrarCtrl', [ 
 		    projetosCanvasResource.save( {}, projetoCanvasObj, function() {
 		    		$location.path( '/' );
 		    	},
-		    	function() {
+		    	function( response ) {
+			     	if( response.status === 401 ) {
+			     		$location.path( '/login' );
+			     	}
 		     		$scope.erro = true;
 		    	});
 		}
