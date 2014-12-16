@@ -6,8 +6,8 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasCadastrarCtrl', [ '$scope', '$location', '$resource', '$rootScope', 
-		function( $scope, $location, $resource, $rootScope ) {
+angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasCadastrarCtrl', [ '$scope', '$location', '$resource', '$rootScope', '$window', 
+		function( $scope, $location, $resource, $rootScope, $window ) {
 	  
 	$scope.liteVersion = $rootScope.liteVersion;
 	$scope.qtdProjetos = 1; //TODO tornar dinamico
@@ -19,7 +19,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasCadastrarCtrl', [ 
 	 */
 	$scope.cadastrar = function( canvas ) {
 		if( $scope.form.$valid ) {
-			var projetoCanvasObj = { 'nome' : canvas.nome, 'descricao' : canvas.descricao, 'email' : 'marcio@kazale.com' }; //TODO email dinamico
+			var projetoCanvasObj = { 'nome' : canvas.nome, 'descricao' : canvas.descricao, 'email' : $window.sessionStorage.email };
 			var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas );
 		    projetosCanvasResource.save( {}, projetoCanvasObj, function() {
 		    		$location.path( '/' );

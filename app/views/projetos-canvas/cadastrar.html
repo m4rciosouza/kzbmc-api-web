@@ -24,7 +24,7 @@
 
 	<div class="row" ng-show="!liteVersion || qtdProjetos < 1">
 		<div class="col-xs-12 kz_center">
-      		<form role="form" name="form" novalidate>
+      		<form role="form" name="form" ng-submit="cadastrar(canvas)" novalidate>
         		<div class="form-group">
     				<label for="nome" class="control-label">{{ 'NOME_DO_PROJETO' | translate }}</label>
     				<input type="text" class="form-control" id="nome" name="nome" 
@@ -38,8 +38,7 @@
     					placeholder="{{ 'DIGITE_BREVE_DESCRICAO_PROJETO' | translate }}" required />
   				</div>
   				<div class="form-group">
-  					<button type="button" class="btn btn-primary" data-dismiss="modal" 
-      					ng-click="cadastrar(canvas)" ng-disabled="form.$invalid">
+  					<button type="submit" class="btn btn-primary" data-dismiss="modal" ng-disabled="form.$invalid">
       					{{ 'CRIAR' | translate }}
       			</button>
   					<a ng-href="#/" class="btn btn-default">

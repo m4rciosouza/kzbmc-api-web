@@ -6,8 +6,8 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller('ProjetosCanvasEditarCtrl', [ '$scope', '$location', '$routeParams', '$resource', '$rootScope', 
-		function( $scope, $location, $routeParams, $resource, $rootScope ) {
+angular.module( 'kzbmcMobileApp' ).controller('ProjetosCanvasEditarCtrl', [ '$scope', '$location', '$routeParams', '$resource', '$rootScope', '$window', 
+		function( $scope, $location, $routeParams, $resource, $rootScope, $window ) {
 	  
 	/**
 	 * Carrega um projeto canvas para edição.
@@ -29,7 +29,7 @@ angular.module( 'kzbmcMobileApp' ).controller('ProjetosCanvasEditarCtrl', [ '$sc
 	 * @param {object} canvas
 	 */
     $scope.atualizar = function( canvas ) {
-    	var canvasObj = { 'nome' : canvas.nome, 'descricao' : canvas.descricao, 'email' : 'marcio@kazale.com' }; //TODO remover email
+    	var canvasObj = { 'nome' : canvas.nome, 'descricao' : canvas.descricao, 'email' : $window.sessionStorage.email };
     	var projetoCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id', null,
     			{ 'update' : { method : 'PUT' } });
     	projetoCanvasResource.update( { id : $routeParams.index }, canvasObj, function() {

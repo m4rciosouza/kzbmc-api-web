@@ -16,8 +16,8 @@
   </div>
 
 	<div class="row">
-		<div class="col-xs-12 kz_center">
-      		<form role="form" name="form" novalidate>
+		<div class="col-xs-12 col-md-4 col-md-offset-4 kz_center">
+      		<form role="form" name="form" ng-submit="recuperarSenha(usuario)" novalidate>
         		<div class="form-group">
     				<label for="email" class="control-label">{{ 'EMAIL' | translate }}</label>
     				<input type="email" class="form-control" id="email" name="email" 
@@ -25,12 +25,14 @@
     					placeholder="{{ 'DIGITE_EMAIL' | translate }}" required />
   				</div>
   				<div class="form-group">
-  					<button type="button" class="btn btn-primary"
-      					ng-click="recuperarSenha(usuario)" ng-disabled="form.$invalid">
-      					{{ 'RECUPERAR_SENHA' | translate }}
-      				</button>
+  					<button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">
+      				{{ 'RECUPERAR_SENHA' | translate }}
+      			</button>
+            <a ng-href="#/login" class="btn btn-default">
+              <span class="glyphicon glyphicon-chevron-left"></span> {{ 'VOLTAR' | translate }}
+            </a>
   				</div>
-        	</form>
+        </form>
 		</div>
 	</div>
 </div>

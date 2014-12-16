@@ -2,7 +2,7 @@
 	<h1>{{projeto.nome}}</h1>
 	<h2>{{ 'ADICIONAR_EM' | translate }} : {{ obterNomeItemPorTipo() | translate }}</h2>
 
-	<form role="form" name="form" novalidate>
+	<form role="form" name="form" ng-submit="cadastrar(item)" novalidate>
 		<div class="form-group">
 			<label for="titulo">{{ 'TITULO' | translate }}</label>
 			<input type="text" class="form-control" id="titulo" name="titulo" 
@@ -37,7 +37,7 @@
 		</div>
 		<div class="form-group">
 			<br />
-			<button type="button" class="btn btn-primary" ng-click="cadastrar(item)" ng-disabled="form.$invalid">
+			<button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">
       				{{ 'ADICIONAR' | translate }}
       		</button>
      		<a ng-href="#/canvas/{{projetoId}}" class="btn btn-default">

@@ -6,8 +6,8 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller( 'EnviarPorEmailCtrl', [ '$scope', '$http', 'localStorageService', 'projetoCanvasService', '$rootScope', 
-	function( $scope, $http, localStorageService, projetoCanvasService, $rootScope ) {
+angular.module( 'kzbmcMobileApp' ).controller( 'EnviarPorEmailCtrl', [ '$scope', '$http', '$rootScope', '$window', '$resource', '$location',
+	function( $scope, $http, $rootScope, $window, $resource, $location ) {
 	  
 	/**
 	 * Modifica o estado dos controles de mensagens e botões da tela.
@@ -27,7 +27,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'EnviarPorEmailCtrl', [ '$scope',
 	 * @method EnviarPorEmailCtrl::gravarEmail
 	 */
 	$scope.gravarEmail = function() {
-		localStorageService.add( 'email', $scope.email );
+		//localStorageService.add( 'email', $scope.email );
 	};
 
 	/**
@@ -35,7 +35,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'EnviarPorEmailCtrl', [ '$scope',
 	 * @method EnviarPorEmailCtrl::carregarEmail
 	 */
 	$scope.carregarEmail = function() {
-		return localStorageService.get( 'email' ) || '';
+		return $window.sessionStorage.email || '';
 	};
 
 	/**
@@ -45,29 +45,53 @@ angular.module( 'kzbmcMobileApp' ).controller( 'EnviarPorEmailCtrl', [ '$scope',
 	$scope.enviarEmail = function( $canvasId ) {
 		$scope.reset( false, false );
 		$canvasId = parseInt( $canvasId, 10 );
-		var projeto = projetoCanvasService.obterProjeto( $canvasId );
-		if( projeto !== false && $scope.email !== '' ) {
-			$scope.btnHabilitado = false;
-			$scope.processando = true;
-			var lingua = localStorageService.get( 'lingua' ) || 'pt';
-			$http.post( 'http://kazale.com/kzbmcmail/email.php', 
-				{ 'projeto' : projeto, 'id' : $canvasId, 'lingua' : lingua, 'email' : $scope.email  } ).
-				success( function( data ) {
-			    	var sucesso = ( data === 'OK' );
-			    	$scope.reset( sucesso, ! sucesso );
-			    }).
-			    error( function() {
-			    	$scope.reset( false, true );
-			    });
 
-		} else {
-			$scope.reset( false, true );
-		}
-	}; 
+		var projeto = false;
+		var projetoCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id' );
+	    var projetoCanvas = projetoCanvasResource.get( { id : $canvasId }, 
+	    	function() {
+	     		projeto = projetoCanvas || [];
+	     		if( projeto !== false && $scope.email !== '' ) {
+					$scope.btnHabilitado = false;
+					$scope.processando = true;
+					$http.post( 'http://kazale.com/kzbmcmail/email.php', 
+						{ 'projeto' : projeto, 'id' : $canvasId, 'lingua' : $window.localStorage.lingua, 'email' : $scope.email  } ).
+						success( function( data ) {
+					    	var sucesso = ( data === 'OK' );
+					    	$scope.reset( sucesso, ! sucesso );
+					    }).
+					    error( function() {
+					    	$scope.reset( false, true );
+					    });
 
-	$scope.liteVersion = $rootScope.liteVersion;
+				} else {
+					$scope.reset( false, true );
+				}
+		    });
+
+		
+	};
+
+	/**
+	 * Carrega uma lista de projetos canvas.
+	 * @method ProjetosCanvasListarCtrl::carregarProjetos
+	 */
+    $scope.carregarProjetos = function() {
+    	var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas + '?email=:email' );
+	    var projetosCanvas = projetosCanvasResource.get( { email : $window.sessionStorage.email }, 
+	    	function() {
+		     	$scope.projetos = projetosCanvas.items || [];
+		     },
+		     function( response ) {
+		     	if( response.status === 401 ) {
+		     		$location.path( '/login' );
+		     	}
+		     	$scope.erro = true;
+		     });
+    };
+
 	$scope.reset( false, false );
 
 	$scope.email = $scope.carregarEmail();
-	$scope.projetos = projetoCanvasService.obterProjetosJson();
+	$scope.projetos = $scope.carregarProjetos();
 }]);

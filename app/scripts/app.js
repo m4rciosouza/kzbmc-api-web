@@ -85,6 +85,10 @@ kzbmcMobileApp.config( function( $routeProvider ) {
         templateUrl: 'views/login/esqueci-senha.html',
         controller: 'EsqueciSenhaCtrl'
       })
+      .when('/criar-usuario', {
+        templateUrl: 'views/login/criar-usuario.html',
+        controller: 'CriarUsuarioCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -334,10 +338,14 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     LOGAR : 'Logar',
     SAIR : 'Sair',
     ESQUECEU_SENHA : 'Esqueceu a senha?',
+    CRIAR_NOVO_USUARIO : 'Criar novo usuário',
     ERRO_RECUPERANDO_SENHA : 'Erro recuperando senha. Tente novamente.',
     SUCESSO_RECUPERANDO_SENHA : 'Um email contendo as instruções de recuperação da senha foi enviado ao email informado.',
     RECUPERAR_SENHA : 'Recuperar senha',
-    INFO_RECUPERANDO_SENHA : 'Digite o seu email abaixo para receber um link contendo as instruções de como recuperar sua senha.'
+    INFO_RECUPERANDO_SENHA : 'Digite o seu email abaixo para receber um link contendo as instruções de como recuperar sua senha.',
+    ERRO_CRIANDO_USUARIO : 'Erro criando usuário. Tente novamente.',
+    USUARIO_CRIANDO_SUCESSO : 'Usuário cadastrado com sucesso! Acesse o link abaixo para entrar no sistema:',
+    ENTRAR_NO_SISTEMA : 'Entrar no sistema'
   })
   .translations( 'en', {
     // topicos da ajuda
@@ -756,5 +764,6 @@ kzbmcMobileApp.run( function( $rootScope, localStorageService, $translate ) {
   $rootScope.urlItemCanvas = 'http://localhost:8888/kzbmc-api/web/index.php/v1/item-canvas';
   $rootScope.urlUsuario = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios/auth';
   $rootScope.urlEsqueciSenha = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios/esqueci-senha';
+  $rootScope.urlUsuarios = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios';
   $translate.use( localStorageService.get( 'lingua' ) || 'pt' );
 });

@@ -15,6 +15,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'LogoutCtrl', [ '$scope', '$locat
 		 */
 	    $scope.logout = function() {
 	    	delete $window.sessionStorage.token;
+	    	delete $window.sessionStorage.email;
 			$location.path( '/login' );
 	    };
 

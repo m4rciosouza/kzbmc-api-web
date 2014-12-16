@@ -19,11 +19,16 @@ angular.module( 'kzbmcMobileApp' ).controller( 'LoginCtrl', [ '$scope', '$locati
 			var usuariosResource = $resource( $rootScope.urlUsuario );
 		    usuariosResource.save( {}, usuarioObj, function( data ) {
 		    		$window.sessionStorage.token = data.token;
+		    		$window.sessionStorage.email = usuario.email;
 					$location.path( '/' );
 		    	},
 		    	function() {
 		    		delete $window.sessionStorage.token;
+		    		delete $window.sessionStorage.email;
 		     		$scope.erro = true;
 		    	});
 	    };
+
+	    delete $window.sessionStorage.token;
+	    delete $window.sessionStorage.email;
 }]);
