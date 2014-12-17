@@ -46,21 +46,38 @@
           <li><a ng-href="#/ajuda" title="{{ 'AJUDA' | translate }}">{{ 'AJUDA' | translate }}</a></li>
           <li><a ng-href="#/logout">{{ 'SAIR' | translate }}</a></li>
       	</ul>
+        <ul class="nav navbar-nav navbar-right" ng-controller="I18nCtrl">
+          <li class="dropdown">
+            <a ng-href="" class="dropdown-toggle kz_mouse_cursor" data-toggle="dropdown" role="button" aria-expanded="false">
+              {{ 'LINGUA' | translate }} <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a ng-href="" ng-click="selecionarLingua('pt')" class="kz_mouse_cursor">
+                  <img ng-src="images/flag_brasil.png" alt="{{ 'PORTUGUES' | translate }}" width="25" /> 
+                  {{ 'PORTUGUES' | translate }} 
+                  <span class="glyphicon glyphicon-ok" aria-hidden="true" ng-show="portugues()"></span>
+                </a>
+              </li>
+              <li>
+                <a ng-href="" ng-click="selecionarLingua('es')" class="kz_mouse_cursor">
+                  <img ng-src="images/flag_spain.png" alt="{{ 'ESPANHOL' | translate }}" width="25" /> 
+                  {{ 'ESPANHOL' | translate }} 
+                  <span class="glyphicon glyphicon-ok" aria-hidden="true" ng-show="espanhol()"></span>
+                </a>
+              </li>
+              <li>
+                <a ng-href="" ng-click="selecionarLingua('en')" class="kz_mouse_cursor">
+                  <img ng-src="images/flag_united_kingdom.png" alt="{{ 'INGLES' | translate }}" width="25" /> 
+                  {{ 'INGLES' | translate }} 
+                  <span class="glyphicon glyphicon-ok" aria-hidden="true" ng-show="ingles()"></span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </div><!-- /.navbar-collapse -->
   	</nav>
-
-  <!-- Language selection -->
-  <div class="container kz_right" ng-controller="I18nCtrl">
-    <a ng-href="" ng-click="selecionarLingua('pt')" class="kz_mouse_cursor">
-      <img ng-src="images/flag_brasil.png" alt="{{ 'PORTUGUES' | translate }}" width="36" />
-    </a>
-    <a ng-href="" ng-click="selecionarLingua('es')" class="kz_mouse_cursor">
-      <img ng-src="images/flag_spain.png" alt="{{ 'ESPANHOL' | translate }}" width="36" />
-    </a>
-    <a ng-href="" ng-click="selecionarLingua('en')" class="kz_mouse_cursor">
-      <img ng-src="images/flag_united_kingdom.png" alt="{{ 'INGLES' | translate }}" width="36" />
-    </a>
-  </div>
 
 	<!-- Add your site or application content here -->
     <div class="container" ng-view=""></div>	

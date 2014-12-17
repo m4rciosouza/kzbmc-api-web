@@ -6,8 +6,8 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller( 'I18nCtrl', [ '$scope', '$translate', 'localStorageService', 
-	function( $scope, $translate, localStorageService ) {
+angular.module( 'kzbmcMobileApp' ).controller( 'I18nCtrl', [ '$scope', '$translate', '$window', 
+	function( $scope, $translate, $window ) {
 
 	/**
 	 * Define a língua a ser utilizada na aplicação.
@@ -15,7 +15,39 @@ angular.module( 'kzbmcMobileApp' ).controller( 'I18nCtrl', [ '$scope', '$transla
 	 * @param {string} lingua código da língua a ser definida ( pt, en ou es )
 	 */
 	$scope.selecionarLingua = function( lingua ) {
-		localStorageService.add( 'lingua', lingua );
+		$window.localStorage.lingua = lingua;
     	$translate.use( lingua );
+  	};
+
+  	/**
+	 * Retorna se a língua utilizada é português.
+	 * @method I18nCtrl::portugues
+	 */
+  	$scope.portugues = function() {
+  		return $window.localStorage.lingua === 'pt';
+  	};
+
+  	/**
+	 * Retorna se a língua utilizada é espanhol.
+	 * @method I18nCtrl::espanhol
+	 */
+  	$scope.espanhol = function() {
+  		return $window.localStorage.lingua === 'es';
+  	};
+
+  	/**
+	 * Retorna se a língua utilizada é inglês.
+	 * @method I18nCtrl::inglês
+	 */
+  	$scope.ingles = function() {
+  		return $window.localStorage.lingua === 'en';
+  	};
+
+  	/**
+	 * Retorna a língua selecionada.
+	 * @method I18nCtrl::lingua
+	 */
+  	$scope.lingua = function() {
+  		return $window.localStorage.lingua;
   	};
 }]);

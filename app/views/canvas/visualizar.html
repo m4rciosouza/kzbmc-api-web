@@ -1,4 +1,15 @@
-<div class="page-header kz_center">
+<div class="container kz_right hidden-print">
+    <button type="button" class="btn btn-primary" alt="{{ 'IMPRIMIR' | translate }}" 
+        title="{{ 'IMPRIMIR' | translate }}" onclick="window.print();">
+      &nbsp;&nbsp;<span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;&nbsp;
+    </button>
+    <button type="button" class="btn btn-primary" alt="{{ 'COMPARTILHAR_AMIGO' | translate }}" 
+        title="{{ 'COMPARTILHAR_AMIGO' | translate }}">
+      &nbsp;&nbsp;<span class="glyphicon glyphicon-share" aria-hidden="true"></span>&nbsp;&nbsp;
+    </button>
+</div>
+
+<div class="page-header kz_center hidden-print">
 	<h1>
 		{{projeto.nome}}<br /> <small>{{projeto.descricao}}</small>
 	</h1>
