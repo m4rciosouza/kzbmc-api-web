@@ -39,6 +39,26 @@
     		</tbody>
   		</table>
 	</div>
+
+  <nav class="kz_center">
+    <ul class="pagination">
+      <li>
+        <a ng-href="" ng-click="carregarProjetos(1)" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li ng-repeat="page in pages" ng-class="{'active' : page==currentPage}">
+        <a ng-href="" ng-click="carregarProjetos(page)" class="kz_mouse_cursor">
+          {{page}}
+        </a>
+      </li>
+      <li>
+        <a ng-href="" ng-click="carregarProjetos(pageCount)" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 			
 	<br />
   	<div class="row" ng-show="projetos.length<1">

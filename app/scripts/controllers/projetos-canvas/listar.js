@@ -12,12 +12,21 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 	  	/**
 		 * Carrega uma lista de projetos canvas.
 		 * @method ProjetosCanvasListarCtrl::carregarProjetos
+		 * @param {integer} pagina utilizada na paginação dos dados
 		 */
-	    $scope.carregarProjetos = function() {
-	    	var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas + '?email=:email' );
-		    var projetosCanvas = projetosCanvasResource.get( { email : $window.sessionStorage.email }, 
+	    $scope.carregarProjetos = function( pagina ) {
+	    	var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas + '?email=:email&page=:pagina' );
+		    var projetosCanvas = projetosCanvasResource.get( { email : $window.sessionStorage.email, page : pagina }, 
 		    	function() {
 			     	$scope.projetos = projetosCanvas.items || [];
+			     	$scope.totalCount = projetosCanvas._meta.totalCount;
+			     	$scope.pageCount = projetosCanvas._meta.pageCount;
+			     	$scope.currentPage = projetosCanvas._meta.currentPage + 1;
+			     	$scope.perPage = projetosCanvas._meta.perPage;
+					$scope.pages = [];
+					for(var i = 1; i <= $scope.pageCount; i ++ ) {
+						$scope.pages.push( i );
+					}
 			     },
 			     function( response ) {
 			     	if( response.status === 401 ) {
@@ -27,5 +36,5 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 			     });
 	    };
 		  
-		$scope.carregarProjetos();
+		$scope.carregarProjetos( 1 );
 }]);
