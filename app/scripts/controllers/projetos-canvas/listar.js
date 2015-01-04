@@ -35,6 +35,35 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 			     	$scope.erro = true;
 			     });
 	    };
+
+	    /**
+		 * Carrega uma lista de projetos canvas.
+		 * @method ProjetosCanvasListarCtrl::carregarProjetosCompartilhados
+		 * @param {integer} pagina utilizada na paginação dos dados
+		 */
+	    $scope.carregarProjetosCompartilhados = function( pagina ) {
+	    	var projetosCanvasCompResource = $resource( $rootScope.urlProjetoCanvasListarComp + '?email=:email&page=:pagina' );
+		    var projetosCanvasComp = projetosCanvasCompResource.get( { email : $window.sessionStorage.email, page : pagina }, 
+		    	function() {
+			     	$scope.projetosComp = projetosCanvasComp.items || [];
+			     	$scope.totalCountComp = projetosCanvasComp._meta.totalCount;
+			     	$scope.pageCountComp = projetosCanvasComp._meta.pageCount;
+			     	$scope.currentPageComp = projetosCanvasComp._meta.currentPage + 1;
+			     	$scope.perPageComp = projetosCanvasComp._meta.perPage;
+					$scope.pagesComp = [];
+					for(var i = 1; i <= $scope.pageCountComp; i ++ ) {
+						$scope.pagesComp.push( i );
+					}
+			     },
+			     function( response ) {
+			     	if( response.status === 401 ) {
+			     		$location.path( '/login' );
+			     	}
+			     	$scope.erro = true;
+			     });
+	    };
 		  
 		$scope.carregarProjetos( 1 );
+
+		$scope.carregarProjetosCompartilhados( 1 );
 }]);

@@ -3,10 +3,10 @@
         title="{{ 'IMPRIMIR' | translate }}" onclick="window.print();">
       &nbsp;&nbsp;<span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;&nbsp;
     </button>
-    <button type="button" class="btn btn-primary" alt="{{ 'COMPARTILHAR_AMIGO' | translate }}" 
+    <a ng-href="#/compartilhar/{{projeto.id}}" class="btn btn-primary" alt="{{ 'COMPARTILHAR_AMIGO' | translate }}" 
         title="{{ 'COMPARTILHAR_AMIGO' | translate }}">
-      &nbsp;&nbsp;<span class="glyphicon glyphicon-share" aria-hidden="true"></span>&nbsp;&nbsp;
-    </button>
+      	&nbsp;&nbsp;<span class="glyphicon glyphicon-share" aria-hidden="true"></span>&nbsp;&nbsp;
+    </a>
 </div>
 
 <div class="page-header kz_center hidden-print">

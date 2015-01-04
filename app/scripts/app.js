@@ -27,6 +27,10 @@ kzbmcMobileApp.config( function( $routeProvider ) {
         templateUrl: 'views/projetos-canvas/remover.html',
         controller: 'ProjetosCanvasRemoverCtrl'
       })
+      .when('/compartilhar/:index', {
+        templateUrl: 'views/projetos-canvas/compartilhar.html',
+        controller: 'ProjetosCanvasCompartilharCtrl'
+      })
       .when('/canvas/:index', {
         templateUrl: 'views/canvas/visualizar.html',
         controller: 'CanvasVisualizarCtrl'
@@ -348,7 +352,13 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     ENTRAR_NO_SISTEMA : 'Entrar no sistema',
     LINGUA : 'Língua',
     IMPRIMIR : 'Imprimir',
-    COMPARTILHAR_AMIGO : 'Compartilhar com um amigo'
+    COMPARTILHAR_AMIGO : 'Compartilhar com um amigo',
+    ERRO_COMPARTILHANDO_CANVAS : 'Erro compartilhando projeto canvas. Tente novamente mais tarde.',
+    SUCESSO_COMPARTILHANDO_CANVAS : 'Projeto canvas compartilhado com sucesso. Seu amigo receberá um email com as instruções de acesso ao modelo.',
+    DIGITE_EMAIL_COMPARTILHAR : 'Digite o email a ser compartilhado o modelo...',
+    COMPARTILHAR : 'Compartilhar',
+    PROJETO : 'Projeto',
+    MEUS_CANVAS_COMPARTILHADOS : 'Canvas de Modelo de Negócios compartilhados comigo'
   })
   .translations( 'en', {
     // topicos da ajuda
@@ -758,7 +768,7 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     FR_21 : 'Gesti\u00f3n de Ingresos',
     FR_22 : 'Mercado en Tiempo Real',
   });
-  $translateProvider.preferredLanguage( 'pt' );
+  $translateProvider.preferredLanguage( 'en' );
 });
 
 kzbmcMobileApp.run([ '$rootScope', '$window', '$translate', function( $rootScope, $window, $translate ) {
@@ -768,5 +778,7 @@ kzbmcMobileApp.run([ '$rootScope', '$window', '$translate', function( $rootScope
   $rootScope.urlUsuario = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios/auth';
   $rootScope.urlEsqueciSenha = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios/esqueci-senha';
   $rootScope.urlUsuarios = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios';
-  $translate.use( $window.localStorage.lingua || 'pt' );
+  $rootScope.urlProjetoCanvasComp = 'http://localhost:8888/kzbmc-api/web/index.php/v1/compartilhados/compartilhar';
+  $rootScope.urlProjetoCanvasListarComp = 'http://localhost:8888/kzbmc-api/web/index.php/v1/compartilhados';
+  $translate.use( $window.localStorage.lingua || 'en' );
 }]);
