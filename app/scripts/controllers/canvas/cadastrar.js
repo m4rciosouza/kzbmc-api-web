@@ -6,8 +6,8 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller( 'CanvasCadastrarCtrl', [ '$scope', '$routeParams', '$location', 'canvasService', '$resource', '$rootScope',
-		function( $scope, $routeParams, $location, canvasService, $resource, $rootScope  ) {
+angular.module( 'kzbmcMobileApp' ).controller( 'CanvasCadastrarCtrl', [ '$scope', '$window', '$routeParams', '$location', 'canvasService', '$resource', '$rootScope',
+		function( $scope, $window, $routeParams, $location, canvasService, $resource, $rootScope  ) {
 	  
 	/**
 	 * Cadastra um novo item no canvas.
@@ -43,8 +43,8 @@ angular.module( 'kzbmcMobileApp' ).controller( 'CanvasCadastrarCtrl', [ '$scope'
 	$scope.carregarProjeto = function() {
 		$scope.projetoId = $routeParams.projetoId;
 		$scope.tipo = $routeParams.tipo;
-	    var itensCanvasResource = $resource( $rootScope.urlItemCanvas + '/projeto-canvas/:id' );
-		var itensCanvas = itensCanvasResource.get( { id : $scope.projetoId }, function() {
+	    var itensCanvasResource = $resource( $rootScope.urlItemCanvas + '/projeto-canvas/:id?email=:email' );
+		var itensCanvas = itensCanvasResource.get( { id : $scope.projetoId, email : $window.sessionStorage.email }, function() {
 				$scope.projeto = itensCanvas.projeto || [];
 				$scope.validarParametros();
 			},
