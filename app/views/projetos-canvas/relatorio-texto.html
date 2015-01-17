@@ -1,0 +1,152 @@
+<div class="container kz_right hidden-print">
+    <button type="button" class="btn btn-primary" alt="{{ 'IMPRIMIR' | translate }}" 
+        title="{{ 'IMPRIMIR' | translate }}" onclick="window.print();">
+      &nbsp;<span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;{{ 'IMPRIMIR' | translate }}
+    </button>
+</div>
+
+<div class="page-header kz_center">
+  	<h1>{{projeto.nome}}</h1>
+    <h3>{{projeto.descricao}}</h3>
+</div>
+<div class="kz_content">
+
+  	<div class="row">
+    	<div class="col-xs-12">
+          <h4>1. {{ 'WHAT' | translate }}</h4>
+          <br />
+
+          <h5>1.1. {{ 'PROPOSTAS_VALOR' | translate }}</h5>
+          <p><i><sub>* {{ 'PV_1' | translate }}</sub></i></p>
+          <p><i><sup>* {{ 'PV_2' | translate }}</sup></i></p>
+          <h6 ng-repeat="item in projeto.itens.pv">
+            <br />
+            1.1.{{$index + 1}}. {{item.titulo}}
+            <br /><br />
+            {{item.descricao}}
+          </h6>
+    	</div>
+  	</div>
+
+    <hr />
+
+    <div class="row">
+      <div class="col-xs-12">
+          <h4>2. {{ 'WHO' | translate }}</h4>
+          <br />
+
+          <h5>2.1. {{ 'SEGMENTOS_CLIENTES' | translate }}</h5>
+          <p><i><sub>* {{ 'SC_1' | translate }}</sub></i></p>
+          <p><i><sup>* {{ 'SC_2' | translate }}</sup></i></p>
+          <h6 ng-repeat="item in projeto.itens.sc">
+            <br />
+            2.1.{{$index + 1}}. {{item.titulo}}
+            <br /><br />
+            {{item.descricao}}
+          </h6>
+          <br />
+
+          <h5>2.2. {{ 'RELACIONAMENTO_CLIENTES' | translate }}</h5>
+          <p><i><sub>* {{ 'RCL_1' | translate }}</sub></i></p>
+          <p><i><sup>* {{ 'RCL_2' | translate }}</sup></i></p>
+          <h6 ng-repeat="item in projeto.itens.rcl">
+            <br />
+            2.2.{{$index + 1}}. {{item.titulo}}
+            <br /><br />
+            {{item.descricao}}
+          </h6>
+          <br />
+
+          <h5>2.3. {{ 'CANAIS' | translate }}</h5>
+          <p><i><sub>* {{ 'CA_1' | translate }}</sub></i></p>
+          <p><i><sup>* {{ 'CA_2' | translate }}</sup></i></p>
+          <h6 ng-repeat="item in projeto.itens.ca">
+            <br />
+            2.3.{{$index + 1}}. {{item.titulo}}
+            <br /><br />
+            {{item.descricao}}
+          </h6>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+      <div class="col-xs-12">
+          <h4>3. {{ 'HOW' | translate }}</h4>
+          <br />
+
+          <h5>3.1. {{ 'PARCEIROS_CHAVE' | translate }}</h5>
+          <p><i><sub>* {{ 'PC_1' | translate }}</sub></i></p>
+          <p><i><sup>* {{ 'PC_2' | translate }}</sup></i></p>
+          <h6 ng-repeat="item in projeto.itens.pc">
+            <br />
+            3.1.{{$index + 1}}. {{item.titulo}}
+            <br /><br />
+            {{item.descricao}}
+          </h6>
+          <br />
+
+          <h5>3.2. {{ 'ATIVIDADES_CHAVE' | translate }}</h5>
+          <p><i><sub>* {{ 'AC_1' | translate }}</sub></i></p>
+          <p><i><sup>* {{ 'AC_2' | translate }}</sup></i></p>
+          <h6 ng-repeat="item in projeto.itens.ac">
+            <br />
+            3.2.{{$index + 1}}. {{item.titulo}}
+            <br /><br />
+            {{item.descricao}}
+          </h6>
+          <br />
+
+          <h5>3.3. {{ 'RECURSOS_CHAVE' | translate }}</h5>
+          <p><i><sub>* {{ 'RC_1' | translate }}</sub></i></p>
+          <p><i><sup>* {{ 'RC_2' | translate }}</sup></i></p>
+          <h6 ng-repeat="item in projeto.itens.rc">
+            <br />
+            3.3.{{$index + 1}}. {{item.titulo}}
+            <br /><br />
+            {{item.descricao}}
+          </h6>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+      <div class="col-xs-12">
+          <h4>4. {{ 'HOW_MUCH' | translate }}</h4>
+          <br />
+
+          <h5>4.1. {{ 'FLUXO_RECEITA' | translate }}</h5>
+          <p><i><sub>* {{ 'FR_1' | translate }}</sub></i></p>
+          <p><i><sup>* {{ 'FR_2' | translate }}</sup></i></p>
+          <h6 ng-repeat="item in projeto.itens.fr">
+            <br />
+            4.1.{{$index + 1}}. {{item.titulo}}
+            <br /><br />
+            {{item.descricao}}
+          </h6>
+          <br />
+
+          <h5>4.2. {{ 'ESTRUTURA_CUSTO' | translate }}</h5>
+          <p><i><sub>* {{ 'EC_1' | translate }}</sub></i></p>
+          <p><i><sup>* {{ 'EC_2' | translate }}</sup></i></p>
+          <h6 ng-repeat="item in projeto.itens.ec">
+            <br />
+            4.2.{{$index + 1}}. {{item.titulo}}
+            <br /><br />
+            {{item.descricao}}
+          </h6>
+      </div>
+    </div>
+  	
+	</div>
+
+  <div class="row hidden-print">
+    <div class="col-xs-12 kz_center">
+      <a ng-href="#/canvas/{{projeto.id}}" class="btn btn-default">
+        <span class="glyphicon glyphicon-chevron-left"></span> {{ 'VOLTAR' | translate }}
+      </a>
+    </div>
+  </div>
+</div>

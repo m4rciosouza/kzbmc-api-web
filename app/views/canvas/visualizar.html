@@ -1,11 +1,15 @@
 <div class="container kz_right hidden-print">
     <button type="button" class="btn btn-primary" alt="{{ 'IMPRIMIR' | translate }}" 
         title="{{ 'IMPRIMIR' | translate }}" onclick="window.print();">
-      &nbsp;&nbsp;<span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;&nbsp;
+      &nbsp;<span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;{{ 'IMPRIMIR' | translate }}
     </button>
     <a ng-href="#/compartilhar/{{projeto.id}}" class="btn btn-primary" alt="{{ 'COMPARTILHAR_AMIGO' | translate }}" 
         title="{{ 'COMPARTILHAR_AMIGO' | translate }}" ng-show="modoLeitura==false">
-      	&nbsp;&nbsp;<span class="glyphicon glyphicon-share" aria-hidden="true"></span>&nbsp;&nbsp;
+      	&nbsp;<span class="glyphicon glyphicon-share" aria-hidden="true"></span>&nbsp;{{ 'COMPARTILHAR_AMIGO' | translate }}
+    </a>
+    <a ng-href="#/relatorio-texto/{{projeto.id}}" class="btn btn-primary" alt="{{ 'GERAR_RELATORIO' | translate }}" 
+        title="{{ 'GERAR_RELATORIO' | translate }}" ng-show="modoLeitura==false">
+      	&nbsp;<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;{{ 'GERAR_RELATORIO' | translate }}
     </a>
 </div>
 
