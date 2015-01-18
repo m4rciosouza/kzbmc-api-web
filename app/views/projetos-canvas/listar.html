@@ -29,15 +29,19 @@
     				<td class="kz_mouse_cursor">
               <a ng-href="#/editar-canvas/{{projeto.id}}" class="btn btn-primary"
                 alt="{{ 'EDITAR_CANVAS' | translate }}" title="{{ 'EDITAR_CANVAS' | translate }}">
-                &nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;
+                &nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;
               </a>
               <a ng-href="#/remover-canvas/{{projeto.id}}" class="btn btn-primary"
                 alt="{{ 'REMOVER_CANVAS' | translate }}" title="{{ 'REMOVER_CANVAS' | translate }}">
-                &nbsp;&nbsp;<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;
+                &nbsp;<span class="glyphicon glyphicon-trash"></span>&nbsp;
               </a>
               <a ng-href="#/canvas/{{projeto.id}}" class="btn btn-primary"
                 alt="{{ 'VISUALIZAR_CANVAS' | translate }}" title="{{ 'VISUALIZAR_CANVAS' | translate }}">
-                &nbsp;&nbsp;<span class="glyphicon glyphicon-picture"></span>&nbsp;&nbsp;
+                &nbsp;<span class="glyphicon glyphicon-picture"></span>&nbsp;
+              </a>
+              <a ng-href="#/wizard-canvas/{{projeto.id}}" class="btn btn-primary"
+                alt="{{ 'WIZARD' | translate }}" title="{{ 'WIZARD' | translate }}">
+                &nbsp;<span class="glyphicon glyphicon-cog"></span>&nbsp;
               </a>
     					<a ng-href="#/canvas/{{projeto.id}}">
     						{{projeto.nome}}<br />

@@ -47,6 +47,10 @@ kzbmcMobileApp.config( function( $routeProvider ) {
         templateUrl: 'views/canvas/editar-remover.html',
         controller: 'CanvasEditarRemoverCtrl'
       })
+      .when('/wizard-canvas/:index', {
+        templateUrl: 'views/canvas/wizard.html',
+        controller: 'CanvasWizardCtrl'
+      })
       .when('/ajuda', {
         templateUrl: 'views/ajuda/index.html'
       })
@@ -369,7 +373,11 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     WHAT : 'O QUE',
     WHO : 'QUEM',
     HOW : 'COMO',
-    HOW_MUCH : 'QUANTO'
+    HOW_MUCH : 'QUANTO',
+    WIZARD : 'Assistente de criação de Canvas',
+    ANTERIOR : 'Anterior',
+    AVANCAR : 'Próximo',
+    FINALIZAR : 'Finalizar'
   })
   .translations( 'en', {
     // topicos da ajuda
@@ -609,7 +617,11 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     WHAT : 'WHAT',
     WHO : 'WHO',
     HOW : 'HOW',
-    HOW_MUCH : 'HOW MUCH'
+    HOW_MUCH : 'HOW MUCH',
+    WIZARD : 'Canvas creation wizard',
+    ANTERIOR : 'Previous',
+    AVANCAR : 'Next',
+    FINALIZAR : 'Finish'
   })
   .translations( 'es', {
     // topicos da ajuda
@@ -849,7 +861,11 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     WHAT : 'QUÉ',
     WHO : 'ACERCA',
     HOW : 'CÓMO',
-    HOW_MUCH : 'CUÁNTO'
+    HOW_MUCH : 'CUÁNTO',
+    WIZARD : 'Asistente de creación de Lienzo',
+    ANTERIOR : 'Anterior',
+    AVANCAR : 'Cerca',
+    FINALIZAR : 'Fin'
   });
   $translateProvider.preferredLanguage( 'en' );
 });
