@@ -17,6 +17,39 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasWizardCtrl', [ '$scope', '$
 	$scope.porcentagem = 11;
 
 	/**
+	 * Cadastra um novo item no canvas.
+	 * @method CanvasWizardCtrl::cadastrar
+	 * @param {object} item
+	 */
+	$scope.cadastrar = function( item ) {
+		if( $scope.form.$valid ) {
+			var itemCanvasObj = { 
+					'id_projeto_canvas' : $scope.projeto.id, 
+					'tipo' : $scope.tab, 
+					'titulo' : item.titulo,
+					'descricao' : item.descricao, 
+					'cor' : item.cor 
+				};
+			var itemCanvasResource = $resource( $rootScope.urlItemCanvas );
+		    itemCanvasResource.save( {}, itemCanvasObj, function( response ) {
+		    		item.titulo = '';
+		    		item.descricao = '';
+		    		item.cor = '';
+		    		console.log( response );
+		    		var newItem = { 'id' : response.id, 'titulo' : response.titulo, 
+		    						'descricao' : response.descricao, 'cor' : response.cor };
+		    		$scope.projeto.itens[$scope.tab].push( newItem );
+		    	},
+		    	function( response ) {
+			     	if( response.status === 401 ) {
+			     		$location.path( '/login' );
+			     	}
+		     		$scope.erro = true;
+		    	});
+		}
+	};
+
+	/**
 	 * Avança uma aba.
 	 * @method CanvasWizardCtrl::avancar
 	 */

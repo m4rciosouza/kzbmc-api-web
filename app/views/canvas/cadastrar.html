@@ -2,6 +2,10 @@
 	<h1>{{projeto.nome}}</h1>
 	<h2>{{ 'ADICIONAR_EM' | translate }} : {{ obterNomeItemPorTipo() | translate }}</h2>
 
+	<div class="alert alert-danger" role="alert" ng-show="erro">
+	    {{ 'ERRO_CADASTRANDO_ITEM_CANVAS' | translate }}
+	</div>
+
 	<form role="form" name="form" ng-submit="cadastrar(item)" novalidate>
 		<div class="form-group">
 			<label for="titulo">{{ 'TITULO' | translate }}</label>
