@@ -191,6 +191,7 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     // canvas/visualizar.html
     ADICIONAR_ITEM : 'Adicionar Item',
     EDITAR_REMOVER_ITEM : 'Editar | Remover Item',
+    REMOVER_ITEM : 'Remover Item',
     PARCEIROS : 'Parceiros',
     CHAVE_PARCEIROS : 'Chave',
     CHAVE_ATIVIDADES : 'Chave',
@@ -378,7 +379,9 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     WIZARD : 'Assistente de criação de Canvas',
     ANTERIOR : 'Anterior',
     AVANCAR : 'Próximo',
-    FINALIZAR : 'Finalizar'
+    FINALIZAR : 'Finalizar',
+    ERRO_REMOVENDO_ITEM_CANVAS : 'Erro removendo item. Tente novamente',
+    EXECUTAR_WIZARD : 'Executar assistente de criação de Canvas'
   })
   .translations( 'en', {
     // topicos da ajuda
@@ -436,6 +439,7 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     // canvas/visualizar.html
     ADICIONAR_ITEM : 'Add Item',
     EDITAR_REMOVER_ITEM : 'Edit | Remove Item',
+    REMOVER_ITEM : 'Remove Item',
     PARCEIROS : 'Key',
     CHAVE_PARCEIROS : 'Partners',
     CHAVE_ATIVIDADES : 'Activities',
@@ -623,7 +627,9 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     WIZARD : 'Canvas creation wizard',
     ANTERIOR : 'Previous',
     AVANCAR : 'Next',
-    FINALIZAR : 'Finish'
+    FINALIZAR : 'Finish',
+    ERRO_REMOVENDO_ITEM_CANVAS : 'Error removing item. Try again later',
+    EXECUTAR_WIZARD : 'Run Canvas creation wizard'
   })
   .translations( 'es', {
     // topicos da ajuda
@@ -681,6 +687,7 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     // canvas/visualizar.html
     ADICIONAR_ITEM : 'A\u00f1adir Elemento',
     EDITAR_REMOVER_ITEM : 'Editar | Eliminar Elemento',
+    REMOVER_ITEM : 'Eliminar Elemento',
     PARCEIROS : 'Socios',
     CHAVE_PARCEIROS : 'Clave',
     CHAVE_ATIVIDADES : 'Clave',
@@ -868,7 +875,9 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     WIZARD : 'Asistente de creación de Lienzo',
     ANTERIOR : 'Anterior',
     AVANCAR : 'Cerca',
-    FINALIZAR : 'Fin'
+    FINALIZAR : 'Fin',
+    ERRO_REMOVENDO_ITEM_CANVAS : 'Error al eliminar lo item. Inténtalo de nuevo',
+    EXECUTAR_WIZARD : 'Ejecutar asistente de creación de Lienzo'
   });
   $translateProvider.preferredLanguage( 'en' );
 });

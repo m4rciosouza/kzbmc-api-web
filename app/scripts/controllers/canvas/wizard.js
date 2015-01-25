@@ -50,6 +50,28 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasWizardCtrl', [ '$scope', '$
 	};
 
 	/**
+	 * Remove um item canvas.
+	 * @method CanvasWizardCtrl::remover
+	 * @param {integer} itemId
+	 * @param {integer} index
+	 */
+    $scope.remover = function( itemId, index ) {
+    	console.log('itemId='+itemId);
+    	console.log('index='+index);
+    	
+		var itemCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id' );
+		itemCanvasResource.remove( { 'id' : itemId }, function() {
+		    		$scope.projeto.itens[$scope.tab].splice( index, 1 );
+		    	},
+		    	function( response ) {
+			     	if( response.status === 401 ) {
+			     		$location.path( '/login' );
+			     	}
+		     		$scope.erroRemover = true;
+		    	});
+	};
+
+	/**
 	 * Avança uma aba.
 	 * @method CanvasWizardCtrl::avancar
 	 */

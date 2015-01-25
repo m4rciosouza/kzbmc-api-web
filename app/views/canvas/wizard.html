@@ -69,6 +69,10 @@
     		</div>
 			<div class="panel panel-default">
   				<div class="panel-body">
+  				<div class="alert alert-danger" role="alert" ng-show="erroRemover">
+					    {{ 'ERRO_REMOVENDO_ITEM_CANVAS' | translate }}
+					</div>
+
 					<h4>
 						{{ obterNomeItemPorTipo() | translate }} 
 						<a href="" data-toggle="modal" data-target="#{{tab}}"
@@ -79,6 +83,12 @@
 					<br />
 
 					<div class="alert alert-{{item.cor}}" role="alert" ng-repeat="item in projeto.itens[tab]">
+						<p style="text-align : right;">
+		              		<a ng-href="" class="btn btn-primary" ng-click="remover(item.id, $index)"
+	      						alt="{{ 'REMOVER_ITEM' | translate }}" title="{{ 'REMOVER_ITEM' | translate }}">
+		               			&nbsp;&nbsp;<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;
+		              		</a>
+	      				</p>
       					<strong>{{ item.titulo }}</strong>
       					<br />
       					{{ item.descricao }}
@@ -143,14 +153,13 @@
 					</a>
 				</div>
 			</div>
+			<div class="form-group kz_center">
+				<a ng-href="/#" class="btn btn-default">
+					{{ 'SAIR' | translate }}
+				</a>
+		 	</div>
 		</div>
 	</div>
-
- 	<div class="form-group kz_center">
-		<a ng-href="/#" class="btn btn-default">
-			<span class="glyphicon glyphicon-chevron-left"></span> {{ 'SAIR' | translate }}
-		</a>
- 	</div>
 
 </div>
 
