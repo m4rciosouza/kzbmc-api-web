@@ -6,7 +6,8 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller( 'CanvasVisualizarCtrl', [ '$scope', '$routeParams', '$location', '$resource', '$window', '$rootScope',
+angular.module( 'kzbmcMobileApp' ).controller( 'CanvasVisualizarCtrl', [ '$scope', '$routeParams', '$location', '$resource', 
+		'$window', '$rootScope',
 	function( $scope, $routeParams, $location, $resource, $window, $rootScope ) {
 	  
 	/**
@@ -16,7 +17,8 @@ angular.module( 'kzbmcMobileApp' ).controller( 'CanvasVisualizarCtrl', [ '$scope
 	$scope.carregarProjeto = function() {
 		$scope.index = $routeParams.index;
 	    var itensCanvasResource = $resource( $rootScope.urlItemCanvas + '/projeto-canvas/:id?email=:email' );
-		var itensCanvas = itensCanvasResource.get( { id : $routeParams.index, email : $window.sessionStorage.email }, function() {
+		var itensCanvas = itensCanvasResource.get( { id : $routeParams.index, email : $window.sessionStorage.email }, 
+			function() {
 				$scope.projeto = itensCanvas.projeto || [];
 				$scope.projeto.itens = itensCanvas.itens || [];
 				$scope.modoLeitura = itensCanvas.modoLeitura;
