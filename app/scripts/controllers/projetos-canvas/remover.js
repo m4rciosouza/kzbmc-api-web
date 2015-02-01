@@ -6,40 +6,41 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller('ProjetosCanvasRemoverCtrl', [ '$scope', '$location', '$routeParams', '$resource', '$rootScope', 
-		function( $scope, $location, $routeParams, $resource, $rootScope ) {
+angular.module( 'kzbmcMobileApp' ).controller('ProjetosCanvasRemoverCtrl', [ '$scope', '$location', '$routeParams', 
+		'$resource', '$rootScope', '$window', 
+	function( $scope, $location, $routeParams, $resource, $rootScope, $window ) {
 	  
-	/**
-	 * Carrega um projeto canvas para remoção.
-	 * @method ProjetosCanvasRemoverCtrl::carregarProjeto
-	 */
-	$scope.carregarProjeto = function() {
-		var projetoCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id' );
-	    var projetoCanvas = projetoCanvasResource.get( { id : $routeParams.index }, function() {
-	     	$scope.canvasRemover = projetoCanvas || [];
-		     },
-		     function() {
-		     	$location.path( '/' );
-		     });
-	};	
-      
-    /**
-	 * Remove um projeto canvas.
-	 * @method ProjetosCanvasRemoverCtrl::remover
-	 * @param {object} canvas
-	 */
-    $scope.remover = function() {
-			var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id' );
-		    projetosCanvasResource.remove( { id : $routeParams.index }, function() {
-		    		$location.path( '/' );
-		    	},
-		    	function( response ) {
-			     	if( response.status === 401 ) {
-			     		$location.path( '/login' );
-			     	}
-		     		$scope.erro = true;
-		    	});
-    };
-	  
-	$scope.carregarProjeto();
-}]);
+		/**
+		 * Carrega um projeto canvas para remoção.
+		 * @method ProjetosCanvasRemoverCtrl::carregarProjeto
+		 */
+		$scope.carregarProjeto = function() {
+			var projetoCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id?email=:email' );
+		    var projetoCanvas = projetoCanvasResource.get( { id : $routeParams.index, email : $window.sessionStorage.email }, 
+		    	function() {
+		     		$scope.canvasRemover = projetoCanvas || [];
+			    },
+			    function() {
+			    	$location.path( '/' );
+			    });
+		};	
+	      
+	    /**
+		 * Remove um projeto canvas.
+		 * @method ProjetosCanvasRemoverCtrl::remover
+		 * @param {object} canvas
+		 */
+	    $scope.remover = function() {
+				var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id?email=:email' );
+			    projetosCanvasResource.remove( { id : $routeParams.index, email : $window.sessionStorage.email }, 
+			    	function() {
+			    		$location.path( '/' );
+			    	},
+			    	function() {
+			     		$scope.erro = true;
+			    	});
+	    };
+		  
+		$scope.carregarProjeto();
+	}
+]);

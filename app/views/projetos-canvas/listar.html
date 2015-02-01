@@ -27,6 +27,10 @@
     		<tbody>
     			<tr ng-repeat="projeto in projetos">
     				<td class="kz_mouse_cursor">
+              <a ng-href="#/wizard-canvas/{{projeto.id}}" class="btn btn-primary"
+                alt="{{ 'WIZARD' | translate }}" title="{{ 'WIZARD' | translate }}">
+                &nbsp;<span class="glyphicon glyphicon-cog"></span>&nbsp;
+              </a>
               <a ng-href="#/editar-canvas/{{projeto.id}}" class="btn btn-primary"
                 alt="{{ 'EDITAR_CANVAS' | translate }}" title="{{ 'EDITAR_CANVAS' | translate }}">
                 &nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;
@@ -38,10 +42,6 @@
               <a ng-href="#/canvas/{{projeto.id}}" class="btn btn-primary"
                 alt="{{ 'VISUALIZAR_CANVAS' | translate }}" title="{{ 'VISUALIZAR_CANVAS' | translate }}">
                 &nbsp;<span class="glyphicon glyphicon-picture"></span>&nbsp;
-              </a>
-              <a ng-href="#/wizard-canvas/{{projeto.id}}" class="btn btn-primary"
-                alt="{{ 'WIZARD' | translate }}" title="{{ 'WIZARD' | translate }}">
-                &nbsp;<span class="glyphicon glyphicon-cog"></span>&nbsp;
               </a>
     					<a ng-href="#/canvas/{{projeto.id}}">
     						{{projeto.nome}}<br />

@@ -6,7 +6,8 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$scope', '$resource', '$rootScope', '$location', '$window',
+angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$scope', '$resource', 
+		'$rootScope', '$location', '$window', 
 	function( $scope, $resource, $rootScope, $location, $window ) {
 	  
 		$scope.mostrarCompartilhados = false;
@@ -32,7 +33,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 		 * @param {integer} pagina utilizada na paginação dos dados
 		 */
 	    $scope.carregarProjetos = function( pagina ) {
-	    	if( $scope.mostrarCompartilhados === false ) {
+	    	if( ! $scope.mostrarCompartilhados ) {
 		    	var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas + '?email=:email&page=:pagina' );
 			    var projetosCanvas = projetosCanvasResource.get( { email : $window.sessionStorage.email, page : pagina }, 
 			    	function() {
@@ -46,10 +47,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 							$scope.pages.push( i );
 						}
 				     },
-				     function( response ) {
-				     	if( response.status === 401 ) {
-				     		$location.path( '/login' );
-				     	}
+				     function() {
 				     	$scope.erro = true;
 				     });
 			}
@@ -61,7 +59,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 		 * @param {integer} pagina utilizada na paginação dos dados
 		 */
 	    $scope.carregarProjetosCompartilhados = function( pagina ) {
-	    	if( $scope.mostrarCompartilhados === true ) {
+	    	if( $scope.mostrarCompartilhados ) {
 		    	var projetosCanvasCompResource = $resource( $rootScope.urlProjetoCanvasListarComp + '?email=:email&page=:pagina' );
 			    var projetosCanvasComp = projetosCanvasCompResource.get( { email : $window.sessionStorage.email, page : pagina }, 
 			    	function() {
@@ -75,16 +73,13 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 							$scope.pagesComp.push( i );
 						}
 				     },
-				     function( response ) {
-				     	if( response.status === 401 ) {
-				     		$location.path( '/login' );
-				     	}
+				     function() {
 				     	$scope.erro = true;
 				     });
 			}
 	    };
 		  
 		$scope.carregarProjetos( 1 );
-
 		$scope.carregarProjetosCompartilhados( 1 );
-}]);
+	}
+]);

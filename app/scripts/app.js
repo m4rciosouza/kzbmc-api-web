@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module( 'LocalStorageModule' ).value( 'prefix', 'kzbmc' );
+//TODO remover angular.module( 'LocalStorageModule' ).value( 'prefix', 'kzbmc' );
 var kzbmcMobileApp = angular.module('kzbmcMobileApp', [
       'ngRoute',
-      'LocalStorageModule',
-      'ui.sortable',
+      //TODO remover 'LocalStorageModule',
+      //'ui.sortable',
       'pascalprecht.translate',
       'ngResource'
     ]);
@@ -116,13 +116,18 @@ kzbmcMobileApp.factory( 'authInterceptor', [ '$rootScope', '$q', '$window', '$lo
           }
           return config;
         },
-        // responseError para tratar erro do resource
         response: function( response ) {
-          if( response.status === 401 ) {
+            if( response.headers( 'X-Token' ) ) {
+                $window.sessionStorage.token = response.headers( 'X-Token' );
+            }
+            return response || $q.when( response );
+        },
+        responseError: function( rejection ) {
+          if( rejection.status === 401 ) {
             delete $window.sessionStorage.token;
             $location.path( '/login' );
           }
-          return response || $q.when( response );
+          return $q.reject( rejection );
         }
       };
     }]);
@@ -131,9 +136,7 @@ kzbmcMobileApp.config( function( $httpProvider ) {
   $httpProvider.interceptors.push( 'authInterceptor' );
 });
 
-/*
- * Translation
- */
+//Translation
 kzbmcMobileApp.config( function( $translateProvider ) {
   $translateProvider.translations( 'pt', {
     // topicos da ajuda
