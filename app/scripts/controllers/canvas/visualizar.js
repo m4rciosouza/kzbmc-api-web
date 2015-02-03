@@ -16,6 +16,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'CanvasVisualizarCtrl', [ '$scope
 	 */
 	$scope.carregarProjeto = function() {
 		$scope.index = $routeParams.index;
+		$scope.urlSlideshow = $rootScope.urlSlideshow + '?id=' + $scope.index + '&email=' + $window.sessionStorage.email;
 	    var itensCanvasResource = $resource( $rootScope.urlItemCanvas + '/projeto-canvas/:id?email=:email' );
 		var itensCanvas = itensCanvasResource.get( { id : $routeParams.index, email : $window.sessionStorage.email }, 
 			function() {

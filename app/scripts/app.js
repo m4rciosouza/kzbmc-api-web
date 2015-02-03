@@ -384,7 +384,8 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     AVANCAR : 'Próximo',
     FINALIZAR : 'Finalizar',
     ERRO_REMOVENDO_ITEM_CANVAS : 'Erro removendo item. Tente novamente',
-    EXECUTAR_WIZARD : 'Executar assistente de criação de Canvas'
+    EXECUTAR_WIZARD : 'Executar assistente de criação de Canvas',
+    SLIDESHOW : 'Slideshow'
   })
   .translations( 'en', {
     // topicos da ajuda
@@ -632,7 +633,8 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     AVANCAR : 'Next',
     FINALIZAR : 'Finish',
     ERRO_REMOVENDO_ITEM_CANVAS : 'Error removing item. Try again later',
-    EXECUTAR_WIZARD : 'Run Canvas creation wizard'
+    EXECUTAR_WIZARD : 'Run Canvas creation wizard',
+    SLIDESHOW : 'Slideshow'
   })
   .translations( 'es', {
     // topicos da ajuda
@@ -880,7 +882,8 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     AVANCAR : 'Cerca',
     FINALIZAR : 'Fin',
     ERRO_REMOVENDO_ITEM_CANVAS : 'Error al eliminar lo item. Inténtalo de nuevo',
-    EXECUTAR_WIZARD : 'Ejecutar asistente de creación de Lienzo'
+    EXECUTAR_WIZARD : 'Ejecutar asistente de creación de Lienzo',
+    SLIDESHOW : 'Slideshow'
   });
   $translateProvider.preferredLanguage( 'en' );
 });
@@ -894,5 +897,6 @@ kzbmcMobileApp.run([ '$rootScope', '$window', '$translate', function( $rootScope
   $rootScope.urlUsuarios = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios';
   $rootScope.urlProjetoCanvasComp = 'http://localhost:8888/kzbmc-api/web/index.php/v1/compartilhados/compartilhar';
   $rootScope.urlProjetoCanvasListarComp = 'http://localhost:8888/kzbmc-api/web/index.php/v1/compartilhados';
+  $rootScope.urlSlideshow = 'http://localhost:8888/kzbmc-api/web/index.php/v1/slideshow';
   $translate.use( $window.localStorage.lingua || 'en' );
 }]);
