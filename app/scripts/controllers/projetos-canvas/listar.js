@@ -7,8 +7,8 @@
 'use strict';
 
 angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$scope', '$resource', 
-		'$rootScope', '$location', '$window', 
-	function( $scope, $resource, $rootScope, $location, $window ) {
+		'$rootScope', '$location', '$window', 'projetoCanvasService',
+	function( $scope, $resource, $rootScope, $location, $window, projetoCanvasService ) {
 	  
 		$scope.mostrarCompartilhados = false;
 
@@ -34,22 +34,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 		 */
 	    $scope.carregarProjetos = function( pagina ) {
 	    	if( ! $scope.mostrarCompartilhados ) {
-		    	var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas + '?email=:email&page=:pagina' );
-			    var projetosCanvas = projetosCanvasResource.get( { email : $window.sessionStorage.email, page : pagina }, 
-			    	function() {
-				     	$scope.projetos = projetosCanvas.items || [];
-				     	$scope.totalCount = projetosCanvas._meta.totalCount;
-				     	$scope.pageCount = projetosCanvas._meta.pageCount;
-				     	$scope.currentPage = projetosCanvas._meta.currentPage + 1;
-				     	$scope.perPage = projetosCanvas._meta.perPage;
-						$scope.pages = [];
-						for(var i = 1; i <= $scope.pageCount; i ++ ) {
-							$scope.pages.push( i );
-						}
-				     },
-				     function() {
-				     	$scope.erro = true;
-				     });
+	    		projetoCanvasService.carregarProjetos( $scope, pagina );
 			}
 	    };
 
@@ -60,22 +45,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 		 */
 	    $scope.carregarProjetosCompartilhados = function( pagina ) {
 	    	if( $scope.mostrarCompartilhados ) {
-		    	var projetosCanvasCompResource = $resource( $rootScope.urlProjetoCanvasListarComp + '?email=:email&page=:pagina' );
-			    var projetosCanvasComp = projetosCanvasCompResource.get( { email : $window.sessionStorage.email, page : pagina }, 
-			    	function() {
-				     	$scope.projetosComp = projetosCanvasComp.items || [];
-				     	$scope.totalCountComp = projetosCanvasComp._meta.totalCount;
-				     	$scope.pageCountComp = projetosCanvasComp._meta.pageCount;
-				     	$scope.currentPageComp = projetosCanvasComp._meta.currentPage + 1;
-				     	$scope.perPageComp = projetosCanvasComp._meta.perPage;
-						$scope.pagesComp = [];
-						for(var i = 1; i <= $scope.pageCountComp; i ++ ) {
-							$scope.pagesComp.push( i );
-						}
-				     },
-				     function() {
-				     	$scope.erro = true;
-				     });
+		    	projetoCanvasService.carregarProjetosCompartilhados( $scope, pagina );
 			}
 	    };
 		  
