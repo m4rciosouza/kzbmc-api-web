@@ -7,8 +7,8 @@
 'use strict';
 
 angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasCompartilharCtrl', [ '$scope', '$location', '$routeParams', 
-		'$resource', '$rootScope', '$window', 
-	function( $scope, $location, $routeParams, $resource, $rootScope, $window ) {
+		'$resource', '$rootScope', '$window', 'projetoCanvasService',
+	function( $scope, $location, $routeParams, $resource, $rootScope, $window, projetoCanvasService ) {
 
 		/**
 		 * Compartilha um projeto canvas.
@@ -22,17 +22,22 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasCompartilharCtrl',
 					$scope.erro = true;
 					return;
 				}
-				var projetoCanvasCompObj = { 'idProjetoCanvas' : $scope.projetoCanvas.id, 'emailCompartilhar' : data.email, 
-							'lingua' : $window.localStorage.lingua, 'email' : $window.sessionStorage.email };
-				var projetosCanvasCompResource = $resource( $rootScope.urlProjetoCanvasComp );
-			    projetosCanvasCompResource.save( {}, projetoCanvasCompObj, function() {
+				var projetoCanvasCompObj = { 
+					idProjetoCanvas : $scope.projetoCanvas.id, 
+					emailCompartilhar : data.email, 
+					lingua : $window.localStorage.lingua, 
+					email : $window.sessionStorage.email 
+				};
+			    projetoCanvasService.compartilhar( projetoCanvasCompObj,
+			    	function() {
 			    		$scope.erro = false;
 			    		$scope.sucesso = true;
 			    		data.email = '';
 			    	},
 			    	function() {
 			     		$scope.erro = true;
-			    	});
+			    	}
+			    );
 			}
 		};
 
@@ -41,15 +46,14 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasCompartilharCtrl',
 		 * @method ProjetosCanvasCompartilharCtrl::carregarProjeto
 		 */
 		$scope.carregarProjeto = function() {
-			var projetoCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id?email=:email' );
-		    var projetoCanvas = projetoCanvasResource.get( { id : $routeParams.index, 'email' : $window.sessionStorage.email }, 
-		    	function() {
-		     		$scope.projetoCanvas = projetoCanvas || [];
-			    },
-			    function() {
-			    	$location.path( '/' );
-			    });
-		};
+		    projetoCanvasService.carregarProjeto( $routeParams.index,
+		    	function( response ) {
+			     	$scope.projetoCanvas = response || [];
+				},
+				function() {
+					$location.path( '/' );
+				});
+			};
 
 		$scope.carregarProjeto();
 	}

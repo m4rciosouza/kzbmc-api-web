@@ -34,7 +34,22 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 		 */
 	    $scope.carregarProjetos = function( pagina ) {
 	    	if( ! $scope.mostrarCompartilhados ) {
-	    		projetoCanvasService.carregarProjetos( $scope, pagina );
+	    		projetoCanvasService.carregarProjetos( pagina, 
+	    			function( response ) { 
+	    				$scope.projetos = response.items || [];
+			            $scope.totalCount = response._meta.totalCount;
+			            $scope.pageCount = response._meta.pageCount;
+			            $scope.currentPage = response._meta.currentPage + 1;
+			            $scope.perPage = response._meta.perPage;
+			            $scope.pages = [];
+			            for(var i = 1; i <= $scope.pageCount; i ++ ) {
+			            	$scope.pages.push( i );
+			            }
+	    			},
+	    			function() {
+	    				$scope.erro = true;
+	    			}
+	    		);
 			}
 	    };
 
@@ -45,7 +60,22 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 		 */
 	    $scope.carregarProjetosCompartilhados = function( pagina ) {
 	    	if( $scope.mostrarCompartilhados ) {
-		    	projetoCanvasService.carregarProjetosCompartilhados( $scope, pagina );
+		    	projetoCanvasService.carregarProjetosCompartilhados( pagina,
+		    		function( response ) {
+		    			$scope.projetosComp = response.items || [];
+			            $scope.totalCountComp = response._meta.totalCount;
+			            $scope.pageCountComp = response._meta.pageCount;
+			            $scope.currentPageComp = response._meta.currentPage + 1;
+			            $scope.perPageComp = response._meta.perPage;
+			            $scope.pagesComp = [];
+			            for(var i = 1; i <= $scope.pageCountComp; i ++ ) {
+			              $scope.pagesComp.push( i );
+			            }
+		    		},
+		    		function() {
+		    			$scope.erro = true;
+		    		}
+		    	);
 			}
 	    };
 		  

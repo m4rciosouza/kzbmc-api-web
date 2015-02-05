@@ -7,18 +7,17 @@
 'use strict';
 
 angular.module( 'kzbmcMobileApp' ).controller('ProjetosCanvasEditarCtrl', [ '$scope', '$location', 
-		'$routeParams', '$resource', '$rootScope', '$window', 
-	function( $scope, $location, $routeParams, $resource, $rootScope, $window ) {
+		'$routeParams', '$resource', '$rootScope', '$window', 'projetoCanvasService',
+	function( $scope, $location, $routeParams, $resource, $rootScope, $window, projetoCanvasService ) {
 	  
 		/**
 		 * Carrega um projeto canvas para edição.
 		 * @method ProjetosCanvasEditarCtrl::carregarProjeto
 		 */
 		$scope.carregarProjeto = function() {
-			var projetoCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id?email=:email' );
-		    var projetoCanvas = projetoCanvasResource.get( { id : $routeParams.index, email : $window.sessionStorage.email }, 
-		    	function() {
-			     	$scope.canvasEditar = projetoCanvas || [];
+		    projetoCanvasService.carregarProjeto( $routeParams.index,
+		    	function( response ) {
+			     	$scope.canvasEditar = response || [];
 				},
 				function() {
 					$location.path( '/' );
@@ -31,17 +30,21 @@ angular.module( 'kzbmcMobileApp' ).controller('ProjetosCanvasEditarCtrl', [ '$sc
 		 * @param {object} canvas
 		 */
 	    $scope.atualizar = function( canvas ) {
-	    	var canvasObj = { 'nome' : canvas.nome, 'descricao' : canvas.descricao, 'email' : $window.sessionStorage.email };
-	    	var projetoCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id', null,
-	    			{ 'update' : { method : 'PUT' } });
-	    	projetoCanvasResource.update( { id : $routeParams.index }, canvasObj, function() {
+	    	var projetoCanvasObj = { 
+	    		nome : canvas.nome, 
+	    		descricao : canvas.descricao, 
+	    		email : $window.sessionStorage.email 
+	    	};
+	    	projetoCanvasService.atualizar( $routeParams.index, projetoCanvasObj,
+	    		function() {
 		     		$location.path( '/' );
-			     },
-			     function() {
+			    },
+			    function() {
 			     	$location.path( '/' );
-			     });
-		  };
+			    }
+			);
+		};
 		  
-		  $scope.carregarProjeto();
+		$scope.carregarProjeto();
   	}
 ]);

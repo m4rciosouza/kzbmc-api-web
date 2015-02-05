@@ -26,132 +26,167 @@
     <section>
         <article>
             <pre class="prettyprint source"><code>/**
- * Serviço de cadastro e manutenção de um projeto canvas.
+ * Serviço de gerenciamento de um projeto canvas.
  * @author Marcio C. de Souza &lt;marcio@kazale.com>
  * @version 0.2.0
  * @since 0.2.0
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ 'localStorageService', function( localStorageService ) {
+angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window', '$resource', '$rootScope',
+  function( $window, $resource, $rootScope ) {
 
-  var canvas = {};
+    var projetoCanvas = {};
 
-  /**
-   * Cadastra um novo projeto canvas.
-   * @method ProjetoCanvasService::cadastrar
-   * @param {object} obj objeto contendo nome e descrição do projeto a ser cadastrado
-   */
-  canvas.cadastrar = function( obj ) {
-		var canvasObj = { 'nome' : obj.nome, 'descricao' : obj.descricao, 'itens' : { 'pc' : [], 'ac' : [], 
-				'rc' : [], 'pv' : [], 'rcl' : [], 'ca' : [], 'sc' : [], 'ec' : [], 'fr' : [] } };
-    var projetos = this.obterProjetos();
-		projetos.push( angular.toJson( canvasObj ) );
-		this.definirProjetos( projetos );
-  };
+    /**
+     * Carrega uma listagem paginada de projetos canvas e 
+     * popula o escopo.
+     * @method projetoCanvasService::carregarProjetos
+     * @param {integer} pagina
+     * @param {function} sucesso
+     * @param {function} erro
+     */
+    projetoCanvas.carregarProjetos = function( pagina, sucesso, erro ) {
+      var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas + '?email=:email&page=:pagina' );
+      projetosCanvasResource.get( { email : $window.sessionStorage.email, page : pagina }, 
+            function( response ) {
+              sucesso( response );
+            },
+            function( response ) {
+              erro( response );
+            }
+      );
+    };
 
-  /**
-   * Atualiza os dados de um projeto canvas.
-   * @method ProjetoCanvasService::atualizar
-   * @param {object} obj objeto contendo os dados do projeto a ser atualizado
-   * @param {integer} index id do projeto a ser atualizado
-   */
-  canvas.atualizar = function( obj, index ) {
-    var projeto = this.obterProjetoJson( index );
-    if( projeto !== false ) {
-      projeto.nome = obj.nome;
-      projeto.descricao = obj.descricao;
-      if( obj.itens ) {
-        projeto.itens = obj.itens;
-      }
-      var projetos = this.obterProjetos();
-      projetos[ index ] = angular.toJson( projeto );
-      this.definirProjetos( projetos );
-    }
-  };
+    /**
+     * Carrega uma listagem paginada de projetos canvas  
+     * compartilhados e popula o escopo.
+     * @method projetoCanvasService::carregarProjetosCompartilhados
+     * @param {integer} pagina
+     * @param {function} sucesso
+     * @param {function} erro
+     */
+    projetoCanvas.carregarProjetosCompartilhados = function( pagina, sucesso, erro ) {
+      var projetosCanvasCompResource = $resource( $rootScope.urlProjetoCanvasListarComp + '?email=:email&page=:pagina' );
+      projetosCanvasCompResource.get( { email : $window.sessionStorage.email, page : pagina }, 
+          function( response ) {
+            sucesso( response );
+          },
+          function( response ) {
+            erro( response );
+          }
+      );
+    };
 
-  /**
-   * Remove um projeto canvas.
-   * @method ProjetoCanvasService::remover
-   * @param {integer} index id do projeto a ser removido
-   */
-  canvas.remover = function( index ) {
-    var projetos = this.obterProjetos();
-    projetos.splice( index, 1 );
-    this.definirProjetos( projetos );
-  };
+    /**
+     * Carrega um projeto canvas por id.
+     * @method projetoCanvasService::carregarProjeto
+     * @param {integer} projetoId
+     * @param {function} sucesso
+     * @param {function} erro
+     */
+    projetoCanvas.carregarProjeto = function( projetoId, sucesso, erro ) {
+      var params = { 
+        id : projetoId, 
+        email : $window.sessionStorage.email 
+      };
+      var projetoCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id?email=:email' );
+      projetoCanvasResource.get( params, 
+        function( response ) {
+          sucesso( response );
+        },
+        function( response ) {
+          erro( response );
+        }
+      );
+    };   
 
-  /**
-   * Remove todos os projetos canvas cadastrados.
-   * @method ProjetoCanvasService::removerTodosProjetos
-   */
-  canvas.removerTodosProjetos = function() {
-      localStorageService.add( 'projetos', [] );
-  };
+    /**
+     * Cadastra um novo projeto canvas.
+     * @method projetoCanvasService::cadastrar
+     * @param {object} projetoCanvasObj { nome, descricao, email }
+     * @param {function} sucesso
+     * @param {function} erro
+     */
+    projetoCanvas.cadastrar = function( projetoCanvasObj, sucesso, erro ) {
+      var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas );
+      projetosCanvasResource.save( {}, projetoCanvasObj, 
+        function( response ) {
+          sucesso( response );
+        },
+        function( response ) {
+          erro( response );
+        }
+      );
+    };
 
-  /**
-   * Retorna um projeto com base no índice indicado.
-   * @method ProjetoCanvasService::obterProjeto
-   * @param {integer} index id do projeto a ser carregado
-   * @return Literal
-   */
-  canvas.obterProjeto = function( index ) {
-      var projetos = this.obterProjetos();
-      if( index &lt; projetos.length ) {
-        return projetos[ index ];
-      }
-      return false;
-  };
+    /**
+     * Atualiza os dados de um projeto canvas.
+     * @method projetoCanvasService::atualizar
+     * @param {integer} projetoId
+     * @param {object} projetoCanvasObj { nome, descricao, email }
+     * @param {function} sucesso
+     * @param {function} erro
+     */
+    projetoCanvas.atualizar = function( projetoId, projetoCanvasObj, sucesso, erro ) {
+      var projetoCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id', null,
+          { 
+            'update' : { method : 'PUT' } 
+          }
+        );
+      projetoCanvasResource.update( { id : projetoId }, projetoCanvasObj, 
+        function( response ) {
+          sucesso( response );
+        },
+        function( response ) {
+          erro( response );
+        }
+      );
+    };
 
-  /**
-   * Retorna um projeto com base no índice indicado no formato json.
-   * @method ProjetoCanvasService::obterProjetoJson
-   * @param {integer} index id do projeto a ser carregado
-   * @return object
-   */
-  canvas.obterProjetoJson = function( index ) {
-      var projeto = this.obterProjeto( index );
-      if( projeto !== false ) {
-        return angular.fromJson( projeto );
-      }
-      return false;
-  };
+    /**
+     * Remove um projeto canvas.
+     * @method projetoCanvasService::remover
+     * @param {integer} projetoId
+     * @param {function} sucesso
+     * @param {function} erro
+     */
+    projetoCanvas.remover = function( projetoId, sucesso, erro ) {
+      var params = { 
+        id : projetoId, 
+        email : $window.sessionStorage.email 
+      };
+      var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id?email=:email' );
+      projetosCanvasResource.remove( params, 
+        function( response ) {
+          sucesso( response );
+        },
+        function( response ) {
+          erro( response );
+        }
+      );
+    };
 
-  /**
-   * Retorna todos os projetos canvas cadastrados.
-   * @method ProjetoCanvasService::obterProjetos
-   * @return Array
-   */
-  canvas.obterProjetos = function() {
-  		return localStorageService.get( 'projetos' ) || [];
-  };
+    /**
+     * Compartilha um projeto canvas com outro usuário.
+     * @method projetoCanvasService::compartilhar
+     * @param {object} projetoCanvasCompObj { idProjetoCanvas, emailCompartilhar, lingua, email }
+     * @param {function} sucesso
+     * @param {function} erro
+     */
+    projetoCanvas.compartilhar = function( projetoCanvasCompObj, sucesso, erro ) {
+      var projetosCanvasCompResource = $resource( $rootScope.urlProjetoCanvasComp );
+      projetosCanvasCompResource.save( {}, projetoCanvasCompObj, 
+        function( response ) {
+          sucesso( response );
+        },
+        function( response ) {
+          erro( response );
+        }
+      );
+    };
 
-  /**
-   * Retorna todos os projetos canvas cadastrados no formato json.
-   * @method ProjetoCanvasService::obterProjetosJson
-   * @return Array de objetos json
-   */
-  canvas.obterProjetosJson = function() {
-    var projetosJson = [];
-    var projetos = this.obterProjetos();
-    if( projetos !== false ) {
-      for( var i = 0; i &lt; projetos.length; i ++ ) {
-        projetosJson.push( angular.fromJson( projetos[ i ] ) );
-      }
-    }
-    return projetosJson;
-  };
-
-  /**
-   * Persiste os projetos canvas.
-   * @method ProjetoCanvasService::definirProjetos
-   * @param {Array} projetos
-   */
-  canvas.definirProjetos = function( projetos ) {
-    localStorageService.add( 'projetos', projetos );
-  };
-
-  return canvas;
+    return projetoCanvas;
 }]);</code></pre>
         </article>
     </section>
@@ -162,13 +197,13 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ 'localStor
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#CanvasCadastrarCtrl::cadastrar">CanvasCadastrarCtrl::cadastrar</a></li><li><a href="global.html#CanvasCadastrarCtrl::carregarProjeto">CanvasCadastrarCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasCadastrarCtrl::obterNomeItemPorTipo">CanvasCadastrarCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasCadastrarCtrl::validarParametros">CanvasCadastrarCtrl::validarParametros</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::atualizar">CanvasEditarRemoverCtrl::atualizar</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::carregarProjeto">CanvasEditarRemoverCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::ehItemIdValido">CanvasEditarRemoverCtrl::ehItemIdValido</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::obterNomeItemPorTipo">CanvasEditarRemoverCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::remover">CanvasEditarRemoverCtrl::remover</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::validarParametros">CanvasEditarRemoverCtrl::validarParametros</a></li><li><a href="global.html#CanvasService::atualizar">CanvasService::atualizar</a></li><li><a href="global.html#CanvasService::cadastrar">CanvasService::cadastrar</a></li><li><a href="global.html#CanvasService::obterNomeItemPorTipo">CanvasService::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasService::remover">CanvasService::remover</a></li><li><a href="global.html#CanvasVisualizarCtrl::carregarProjeto">CanvasVisualizarCtrl::carregarProjeto</a></li><li><a href="global.html#EnviarPorEmailCtrl::carregarEmail">EnviarPorEmailCtrl::carregarEmail</a></li><li><a href="global.html#EnviarPorEmailCtrl::gravarEmail">EnviarPorEmailCtrl::gravarEmail</a></li><li><a href="global.html#EnviarPorEmailCtrl::reset">EnviarPorEmailCtrl::reset</a></li><li><a href="global.html#I18nCtrl::selecionarLingua">I18nCtrl::selecionarLingua</a></li><li><a href="global.html#ProjetoCanvasService::atualizar">ProjetoCanvasService::atualizar</a></li><li><a href="global.html#ProjetoCanvasService::cadastrar">ProjetoCanvasService::cadastrar</a></li><li><a href="global.html#ProjetoCanvasService::definirProjetos">ProjetoCanvasService::definirProjetos</a></li><li><a href="global.html#ProjetoCanvasService::obterProjeto">ProjetoCanvasService::obterProjeto</a></li><li><a href="global.html#ProjetoCanvasService::obterProjetoJson">ProjetoCanvasService::obterProjetoJson</a></li><li><a href="global.html#ProjetoCanvasService::obterProjetos">ProjetoCanvasService::obterProjetos</a></li><li><a href="global.html#ProjetoCanvasService::obterProjetosJson">ProjetoCanvasService::obterProjetosJson</a></li><li><a href="global.html#ProjetoCanvasService::remover">ProjetoCanvasService::remover</a></li><li><a href="global.html#ProjetoCanvasService::removerTodosProjetos">ProjetoCanvasService::removerTodosProjetos</a></li><li><a href="global.html#ProjetosCanvasCadastrarCtrl::cadastrar">ProjetosCanvasCadastrarCtrl::cadastrar</a></li><li><a href="global.html#ProjetosCanvasEditarCtrl::atualizar">ProjetosCanvasEditarCtrl::atualizar</a></li><li><a href="global.html#ProjetosCanvasEditarCtrl::carregarProjeto">ProjetosCanvasEditarCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::carregarProjetos">ProjetosCanvasListarCtrl::carregarProjetos</a></li><li><a href="global.html#ProjetosCanvasRemoverCtrl::carregarProjeto">ProjetosCanvasRemoverCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasRemoverCtrl::remover">ProjetosCanvasRemoverCtrl::remover</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#CanvasCadastrarCtrl::cadastrar">CanvasCadastrarCtrl::cadastrar</a></li><li><a href="global.html#CanvasCadastrarCtrl::carregarProjeto">CanvasCadastrarCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasCadastrarCtrl::obterNomeItemPorTipo">CanvasCadastrarCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasCadastrarCtrl::validarParametros">CanvasCadastrarCtrl::validarParametros</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::atualizar">CanvasEditarRemoverCtrl::atualizar</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::carregarProjeto">CanvasEditarRemoverCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::ehItemIdValido">CanvasEditarRemoverCtrl::ehItemIdValido</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::obterNomeItemPorTipo">CanvasEditarRemoverCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::remover">CanvasEditarRemoverCtrl::remover</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::validarParametros">CanvasEditarRemoverCtrl::validarParametros</a></li><li><a href="global.html#CanvasService::obterNomeItemPorTipo">CanvasService::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasVisualizarCtrl::carregarProjeto">CanvasVisualizarCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasWizardCtrl::anterior">CanvasWizardCtrl::anterior</a></li><li><a href="global.html#CanvasWizardCtrl::avancar">CanvasWizardCtrl::avancar</a></li><li><a href="global.html#CanvasWizardCtrl::cadastrar">CanvasWizardCtrl::cadastrar</a></li><li><a href="global.html#CanvasWizardCtrl::carregarProjeto">CanvasWizardCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasWizardCtrl::mudarAba">CanvasWizardCtrl::mudarAba</a></li><li><a href="global.html#CanvasWizardCtrl::obterNomeItemPorTipo">CanvasWizardCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasWizardCtrl::obterPorcentagem">CanvasWizardCtrl::obterPorcentagem</a></li><li><a href="global.html#CanvasWizardCtrl::remover">CanvasWizardCtrl::remover</a></li><li><a href="global.html#CriarUsuarioCtrl::cadastrar">CriarUsuarioCtrl::cadastrar</a></li><li><a href="global.html#EnviarPorEmailCtrl::carregarEmail">EnviarPorEmailCtrl::carregarEmail</a></li><li><a href="global.html#EnviarPorEmailCtrl::gravarEmail">EnviarPorEmailCtrl::gravarEmail</a></li><li><a href="global.html#EnviarPorEmailCtrl::reset">EnviarPorEmailCtrl::reset</a></li><li><a href="global.html#EsqueciSenhaCtrl::recuperarSenha">EsqueciSenhaCtrl::recuperarSenha</a></li><li><a href="global.html#I18nCtrl::espanhol">I18nCtrl::espanhol</a></li><li><a href="global.html#I18nCtrl::inglês">I18nCtrl::inglês</a></li><li><a href="global.html#I18nCtrl::lingua">I18nCtrl::lingua</a></li><li><a href="global.html#I18nCtrl::portugues">I18nCtrl::portugues</a></li><li><a href="global.html#I18nCtrl::selecionarLingua">I18nCtrl::selecionarLingua</a></li><li><a href="global.html#LoginCtrl::login">LoginCtrl::login</a></li><li><a href="global.html#LogoutCtrl::logout">LogoutCtrl::logout</a></li><li><a href="global.html#projetoCanvasService::atualizar">projetoCanvasService::atualizar</a></li><li><a href="global.html#projetoCanvasService::cadastrar">projetoCanvasService::cadastrar</a></li><li><a href="global.html#projetoCanvasService::carregarProjeto">projetoCanvasService::carregarProjeto</a></li><li><a href="global.html#projetoCanvasService::carregarProjetos">projetoCanvasService::carregarProjetos</a></li><li><a href="global.html#projetoCanvasService::carregarProjetosCompartilhados">projetoCanvasService::carregarProjetosCompartilhados</a></li><li><a href="global.html#projetoCanvasService::compartilhar">projetoCanvasService::compartilhar</a></li><li><a href="global.html#projetoCanvasService::remover">projetoCanvasService::remover</a></li><li><a href="global.html#ProjetosCanvasCadastrarCtrl::cadastrar">ProjetosCanvasCadastrarCtrl::cadastrar</a></li><li><a href="global.html#ProjetosCanvasCompartilharCtrl::carregarProjeto">ProjetosCanvasCompartilharCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasCompartilharCtrl::compartilhar">ProjetosCanvasCompartilharCtrl::compartilhar</a></li><li><a href="global.html#ProjetosCanvasEditarCtrl::atualizar">ProjetosCanvasEditarCtrl::atualizar</a></li><li><a href="global.html#ProjetosCanvasEditarCtrl::carregarProjeto">ProjetosCanvasEditarCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::alternarVisualizacao">ProjetosCanvasListarCtrl::alternarVisualizacao</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::carregarProjetos">ProjetosCanvasListarCtrl::carregarProjetos</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::carregarProjetosCompartilhados">ProjetosCanvasListarCtrl::carregarProjetosCompartilhados</a></li><li><a href="global.html#ProjetosCanvasRelatorioTextoCtrl::carregarProjeto">ProjetosCanvasRelatorioTextoCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasRemoverCtrl::carregarProjeto">ProjetosCanvasRemoverCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasRemoverCtrl::remover">ProjetosCanvasRemoverCtrl::remover</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sun Nov 23 2014 22:05:41 GMT-0200 (BRST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Wed Feb 04 2015 23:06:53 GMT-0200 (BRST)
 </footer>
 
 <script> prettyPrint(); </script>

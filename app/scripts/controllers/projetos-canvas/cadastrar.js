@@ -25,7 +25,18 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasCadastrarCtrl', [ 
 					descricao : canvas.descricao, 
 					email : $window.sessionStorage.email 
 				};
-				projetoCanvasService.cadastrar( $scope, projetoCanvasObj );
+				projetoCanvasService.cadastrar( projetoCanvasObj, 
+					function( response ) {
+						if( $scope.wizard ) {
+				            $location.path( '/wizard-canvas/' + response.id );
+				            return;
+				          }
+				          $location.path( '/' );
+					},
+					function() {
+						$scope.erro = true;
+					}
+				);
 			}
 		};
 	}

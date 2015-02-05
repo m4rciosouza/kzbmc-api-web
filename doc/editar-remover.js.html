@@ -33,101 +33,105 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$scope', '$location', '$routeParams', 'canvasService', '$resource', '$rootScope',
-		function( $scope, $location, $routeParams, canvasService, $resource, $rootScope ) {
+angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$scope', '$location', '$routeParams', 
+		'canvasService', '$resource', '$rootScope', '$window',
+	function( $scope, $location, $routeParams, canvasService, $resource, $rootScope, $window ) {
 	   
-    /**
-	 * Atualiza os dados de um item canvas.
-	 * @method CanvasEditarRemoverCtrl::atualizar
-	 * @param {object} item
-	 */
-    $scope.atualizar = function( item ) {
-		if( $scope.form.$valid ) {
-			var itemCanvasObj = { 
-					'id_projeto_canvas' : $scope.projetoId, 
-					'tipo' : $scope.tipo, 
-					'titulo' : item.titulo,
-					'descricao' : item.descricao, 
-					'cor' : item.cor 
-				};
-			var itemCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id', null, 
-				{ 'update' : { method : 'PUT' } });
-		    itemCanvasResource.update( { 'id' : $scope.itemId }, itemCanvasObj, function() {
-		    		$location.path( '/canvas/' + $scope.projetoId );
-		    	},
-		    	function() {
-		     		$scope.erro = true;
-		    	});
-		}
-	};
+	    /**
+		 * Atualiza os dados de um item canvas.
+		 * @method CanvasEditarRemoverCtrl::atualizar
+		 * @param {object} item
+		 */
+	    $scope.atualizar = function( item ) {
+			if( $scope.form.$valid ) {
+				var itemCanvasObj = { 
+						'id_projeto_canvas' : $scope.projetoId, 
+						'tipo' : $scope.tipo, 
+						'titulo' : item.titulo,
+						'descricao' : item.descricao, 
+						'cor' : item.cor,
+						'email' : $window.sessionStorage.email
+					};
+				var itemCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id', null, 
+					{ 'update' : { method : 'PUT' } });
+			    itemCanvasResource.update( { 'id' : $scope.itemId }, itemCanvasObj, function() {
+			    		$location.path( '/canvas/' + $scope.projetoId );
+			    	},
+			    	function() {
+			     		$scope.erro = true;
+			    	});
+			}
+		};
 
-	/**
-	 * Remove um item canvas.
-	 * @method CanvasEditarRemoverCtrl::remover
-	 */
-    $scope.remover = function() {
-		var itemCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id' );
-		itemCanvasResource.remove( { 'id' : $scope.itemId }, function() {
-		    		$location.path( '/canvas/' + $scope.projetoId );
-		    	},
-		    	function() {
-		     		$scope.erro = true;
-		    	});
-	};
+		/**
+		 * Remove um item canvas.
+		 * @method CanvasEditarRemoverCtrl::remover
+		 */
+	    $scope.remover = function() {
+			var itemCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id?email=:email' );
+			itemCanvasResource.remove( { id : $scope.itemId, email : $window.sessionStorage.email }, function() {
+			    		$location.path( '/canvas/' + $scope.projetoId );
+			    	},
+			    	function() {
+			     		$scope.erro = true;
+			    	});
+		};
 
-	  /**
-	 * Carrega um projeto canvas para cadastro de um novo item de canvas.
-	 * @method CanvasEditarRemoverCtrl::carregarProjeto
-	 */
-	$scope.carregarProjeto = function() {
-		$scope.projetoId = $routeParams.projetoId;
-		$scope.itemId = $routeParams.itemId;
-		$scope.tipo = $routeParams.tipo;
-	    var itemCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id' );
-		var itemCanvas = itemCanvasResource.get( { id : $scope.itemId }, function() {
-				$scope.item = itemCanvas || [];
-				$scope.projeto = itemCanvas.projetoCanvas || [];
-				$scope.validarParametros();
-			},
-			function() {
-			  	$location.path( '/' );
-			});
-	};
+		  /**
+		 * Carrega um projeto canvas para cadastro de um novo item de canvas.
+		 * @method CanvasEditarRemoverCtrl::carregarProjeto
+		 */
+		$scope.carregarProjeto = function() {
+			$scope.projetoId = $routeParams.projetoId;
+			$scope.itemId = $routeParams.itemId;
+			$scope.tipo = $routeParams.tipo;
+		    var itemCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id?email=:email' );
+			var itemCanvas = itemCanvasResource.get( { id : $scope.itemId, email : $window.sessionStorage.email }, 
+				function() {
+					$scope.item = itemCanvas || [];
+					$scope.projeto = itemCanvas.projetoCanvas || [];
+					$scope.validarParametros();
+				},
+				function() {
+				  	$location.path( '/' );
+				});
+		};
 
-	/**
-	 * Valida os parâmetros de entrada de uma requisição de edição/remoção de um item.
-	 * @method CanvasEditarRemoverCtrl::validarParametros
-	 */
-	$scope.validarParametros = function() {
-		var tipos = [ 'pc', 'ac', 'rc', 'pv', 'rcl', 'ca', 'sc', 'ec', 'fr' ];
-		if( $scope.projeto === false || ! $scope.ehItemIdValido() || 
-			tipos.indexOf( $scope.tipo ) === -1 ) {
-			$location.path( '/' );
-		}
-	};
+		/**
+		 * Valida os parâmetros de entrada de uma requisição de edição/remoção de um item.
+		 * @method CanvasEditarRemoverCtrl::validarParametros
+		 */
+		$scope.validarParametros = function() {
+			var tipos = [ 'pc', 'ac', 'rc', 'pv', 'rcl', 'ca', 'sc', 'ec', 'fr' ];
+			if( $scope.projeto === false || ! $scope.ehItemIdValido() || 
+				tipos.indexOf( $scope.tipo ) === -1 ) {
+				$location.path( '/' );
+			}
+		};
 
-	/**
-	 * Valida o valor do item de uma requisição de edição/remoção de um item.
-	 * @method CanvasEditarRemoverCtrl::ehItemIdValido
-	 * @return boolean
-	 */
-	$scope.ehItemIdValido = function() {
-		if( isNaN( $scope.itemId ) || $scope.itemId &lt; 0 ) {
-			return false;
-		}
-		return true;
-	};
+		/**
+		 * Valida o valor do item de uma requisição de edição/remoção de um item.
+		 * @method CanvasEditarRemoverCtrl::ehItemIdValido
+		 * @return boolean
+		 */
+		$scope.ehItemIdValido = function() {
+			if( isNaN( $scope.itemId ) || $scope.itemId &lt; 0 ) {
+				return false;
+			}
+			return true;
+		};
 
-	/**
-	  * Retorna o nome completo de um tipo de item canvas dado sua abreviação.
-	  * @method CanvasEditarRemoverCtrl::obterNomeItemPorTipo
-	  */
-	$scope.obterNomeItemPorTipo = function() {
-		return canvasService.obterNomeItemPorTipo( $scope.tipo );
-	};
+		/**
+		  * Retorna o nome completo de um tipo de item canvas dado sua abreviação.
+		  * @method CanvasEditarRemoverCtrl::obterNomeItemPorTipo
+		  */
+		$scope.obterNomeItemPorTipo = function() {
+			return canvasService.obterNomeItemPorTipo( $scope.tipo );
+		};
 
-	$scope.carregarProjeto();
-  }]);</code></pre>
+		$scope.carregarProjeto();
+  	}
+]);</code></pre>
         </article>
     </section>
 
@@ -137,13 +141,13 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$sco
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#CanvasCadastrarCtrl::cadastrar">CanvasCadastrarCtrl::cadastrar</a></li><li><a href="global.html#CanvasCadastrarCtrl::carregarProjeto">CanvasCadastrarCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasCadastrarCtrl::obterNomeItemPorTipo">CanvasCadastrarCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasCadastrarCtrl::validarParametros">CanvasCadastrarCtrl::validarParametros</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::atualizar">CanvasEditarRemoverCtrl::atualizar</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::carregarProjeto">CanvasEditarRemoverCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::ehItemIdValido">CanvasEditarRemoverCtrl::ehItemIdValido</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::obterNomeItemPorTipo">CanvasEditarRemoverCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::remover">CanvasEditarRemoverCtrl::remover</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::validarParametros">CanvasEditarRemoverCtrl::validarParametros</a></li><li><a href="global.html#CanvasService::obterNomeItemPorTipo">CanvasService::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasVisualizarCtrl::carregarProjeto">CanvasVisualizarCtrl::carregarProjeto</a></li><li><a href="global.html#EnviarPorEmailCtrl::carregarEmail">EnviarPorEmailCtrl::carregarEmail</a></li><li><a href="global.html#EnviarPorEmailCtrl::gravarEmail">EnviarPorEmailCtrl::gravarEmail</a></li><li><a href="global.html#EnviarPorEmailCtrl::reset">EnviarPorEmailCtrl::reset</a></li><li><a href="global.html#I18nCtrl::selecionarLingua">I18nCtrl::selecionarLingua</a></li><li><a href="global.html#ProjetosCanvasCadastrarCtrl::cadastrar">ProjetosCanvasCadastrarCtrl::cadastrar</a></li><li><a href="global.html#ProjetosCanvasEditarCtrl::atualizar">ProjetosCanvasEditarCtrl::atualizar</a></li><li><a href="global.html#ProjetosCanvasEditarCtrl::carregarProjeto">ProjetosCanvasEditarCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::carregarProjetos">ProjetosCanvasListarCtrl::carregarProjetos</a></li><li><a href="global.html#ProjetosCanvasRemoverCtrl::carregarProjeto">ProjetosCanvasRemoverCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasRemoverCtrl::remover">ProjetosCanvasRemoverCtrl::remover</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#CanvasCadastrarCtrl::cadastrar">CanvasCadastrarCtrl::cadastrar</a></li><li><a href="global.html#CanvasCadastrarCtrl::carregarProjeto">CanvasCadastrarCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasCadastrarCtrl::obterNomeItemPorTipo">CanvasCadastrarCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasCadastrarCtrl::validarParametros">CanvasCadastrarCtrl::validarParametros</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::atualizar">CanvasEditarRemoverCtrl::atualizar</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::carregarProjeto">CanvasEditarRemoverCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::ehItemIdValido">CanvasEditarRemoverCtrl::ehItemIdValido</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::obterNomeItemPorTipo">CanvasEditarRemoverCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::remover">CanvasEditarRemoverCtrl::remover</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::validarParametros">CanvasEditarRemoverCtrl::validarParametros</a></li><li><a href="global.html#CanvasService::obterNomeItemPorTipo">CanvasService::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasVisualizarCtrl::carregarProjeto">CanvasVisualizarCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasWizardCtrl::anterior">CanvasWizardCtrl::anterior</a></li><li><a href="global.html#CanvasWizardCtrl::avancar">CanvasWizardCtrl::avancar</a></li><li><a href="global.html#CanvasWizardCtrl::cadastrar">CanvasWizardCtrl::cadastrar</a></li><li><a href="global.html#CanvasWizardCtrl::carregarProjeto">CanvasWizardCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasWizardCtrl::mudarAba">CanvasWizardCtrl::mudarAba</a></li><li><a href="global.html#CanvasWizardCtrl::obterNomeItemPorTipo">CanvasWizardCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasWizardCtrl::obterPorcentagem">CanvasWizardCtrl::obterPorcentagem</a></li><li><a href="global.html#CanvasWizardCtrl::remover">CanvasWizardCtrl::remover</a></li><li><a href="global.html#CriarUsuarioCtrl::cadastrar">CriarUsuarioCtrl::cadastrar</a></li><li><a href="global.html#EnviarPorEmailCtrl::carregarEmail">EnviarPorEmailCtrl::carregarEmail</a></li><li><a href="global.html#EnviarPorEmailCtrl::gravarEmail">EnviarPorEmailCtrl::gravarEmail</a></li><li><a href="global.html#EnviarPorEmailCtrl::reset">EnviarPorEmailCtrl::reset</a></li><li><a href="global.html#EsqueciSenhaCtrl::recuperarSenha">EsqueciSenhaCtrl::recuperarSenha</a></li><li><a href="global.html#I18nCtrl::espanhol">I18nCtrl::espanhol</a></li><li><a href="global.html#I18nCtrl::inglês">I18nCtrl::inglês</a></li><li><a href="global.html#I18nCtrl::lingua">I18nCtrl::lingua</a></li><li><a href="global.html#I18nCtrl::portugues">I18nCtrl::portugues</a></li><li><a href="global.html#I18nCtrl::selecionarLingua">I18nCtrl::selecionarLingua</a></li><li><a href="global.html#LoginCtrl::login">LoginCtrl::login</a></li><li><a href="global.html#LogoutCtrl::logout">LogoutCtrl::logout</a></li><li><a href="global.html#projetoCanvasService::atualizar">projetoCanvasService::atualizar</a></li><li><a href="global.html#projetoCanvasService::cadastrar">projetoCanvasService::cadastrar</a></li><li><a href="global.html#projetoCanvasService::carregarProjeto">projetoCanvasService::carregarProjeto</a></li><li><a href="global.html#projetoCanvasService::carregarProjetos">projetoCanvasService::carregarProjetos</a></li><li><a href="global.html#projetoCanvasService::carregarProjetosCompartilhados">projetoCanvasService::carregarProjetosCompartilhados</a></li><li><a href="global.html#projetoCanvasService::compartilhar">projetoCanvasService::compartilhar</a></li><li><a href="global.html#projetoCanvasService::remover">projetoCanvasService::remover</a></li><li><a href="global.html#ProjetosCanvasCadastrarCtrl::cadastrar">ProjetosCanvasCadastrarCtrl::cadastrar</a></li><li><a href="global.html#ProjetosCanvasCompartilharCtrl::carregarProjeto">ProjetosCanvasCompartilharCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasCompartilharCtrl::compartilhar">ProjetosCanvasCompartilharCtrl::compartilhar</a></li><li><a href="global.html#ProjetosCanvasEditarCtrl::atualizar">ProjetosCanvasEditarCtrl::atualizar</a></li><li><a href="global.html#ProjetosCanvasEditarCtrl::carregarProjeto">ProjetosCanvasEditarCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::alternarVisualizacao">ProjetosCanvasListarCtrl::alternarVisualizacao</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::carregarProjetos">ProjetosCanvasListarCtrl::carregarProjetos</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::carregarProjetosCompartilhados">ProjetosCanvasListarCtrl::carregarProjetosCompartilhados</a></li><li><a href="global.html#ProjetosCanvasRelatorioTextoCtrl::carregarProjeto">ProjetosCanvasRelatorioTextoCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasRemoverCtrl::carregarProjeto">ProjetosCanvasRemoverCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasRemoverCtrl::remover">ProjetosCanvasRemoverCtrl::remover</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Fri Nov 28 2014 22:06:20 GMT-0200 (BRST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Wed Feb 04 2015 23:06:53 GMT-0200 (BRST)
 </footer>
 
 <script> prettyPrint(); </script>

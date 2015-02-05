@@ -7,8 +7,8 @@
 'use strict';
 
 angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasRelatorioTextoCtrl', [ '$scope', '$location', '$routeParams', 
-		'$resource', '$rootScope', '$window', 
-	function( $scope, $location, $routeParams, $resource, $rootScope, $window ) {
+		'$resource', '$rootScope', '$window', 'projetoCanvasService',
+	function( $scope, $location, $routeParams, $resource, $rootScope, $window, projetoCanvasService ) {
 
 		/**
 		 * Carrega um projeto canvas.
@@ -16,15 +16,15 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasRelatorioTextoCtrl
 		 */
 		$scope.carregarProjeto = function() {
 			$scope.index = $routeParams.index;
-		    var itensCanvasResource = $resource( $rootScope.urlItemCanvas + '/projeto-canvas/:id?email=:email' );
-			var itensCanvas = itensCanvasResource.get( { id : $routeParams.index, email : $window.sessionStorage.email }, 
-				function() {
-					$scope.projeto = itensCanvas.projeto || [];
-					$scope.projeto.itens = itensCanvas.itens || [];
+			projetoCanvasService.carregarProjeto( $scope.index,
+				function( response ) {
+					$scope.projeto = response.projeto || [];
+					$scope.projeto.itens = response.itens || [];
 				},
 				function() {
 				  	$location.path( '/' );
-				});
+				}
+			);
 		};
 
 		$scope.carregarProjeto();

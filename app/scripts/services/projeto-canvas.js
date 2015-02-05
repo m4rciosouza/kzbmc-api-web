@@ -6,8 +6,8 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window', '$resource', '$rootScope', '$location',
-  function( $window, $resource, $rootScope, $location ) {
+angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window', '$resource', '$rootScope',
+  function( $window, $resource, $rootScope ) {
 
     var projetoCanvas = {};
 
@@ -15,25 +15,18 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window',
      * Carrega uma listagem paginada de projetos canvas e 
      * popula o escopo.
      * @method projetoCanvasService::carregarProjetos
-     * @param {object} scope
      * @param {integer} pagina
+     * @param {function} sucesso
+     * @param {function} erro
      */
-    projetoCanvas.carregarProjetos = function( scope, pagina ) {
+    projetoCanvas.carregarProjetos = function( pagina, sucesso, erro ) {
       var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas + '?email=:email&page=:pagina' );
       projetosCanvasResource.get( { email : $window.sessionStorage.email, page : pagina }, 
             function( response ) {
-              scope.projetos = response.items || [];
-              scope.totalCount = response._meta.totalCount;
-              scope.pageCount = response._meta.pageCount;
-              scope.currentPage = response._meta.currentPage + 1;
-              scope.perPage = response._meta.perPage;
-              scope.pages = [];
-              for(var i = 1; i <= scope.pageCount; i ++ ) {
-                scope.pages.push( i );
-              }
+              sucesso( response );
             },
-            function() {
-              scope.erro = true;
+            function( response ) {
+              erro( response );
             }
       );
     };
@@ -42,47 +35,126 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window',
      * Carrega uma listagem paginada de projetos canvas  
      * compartilhados e popula o escopo.
      * @method projetoCanvasService::carregarProjetosCompartilhados
-     * @param {object} scope
      * @param {integer} pagina
+     * @param {function} sucesso
+     * @param {function} erro
      */
-    projetoCanvas.carregarProjetosCompartilhados = function( scope, pagina ) {
+    projetoCanvas.carregarProjetosCompartilhados = function( pagina, sucesso, erro ) {
       var projetosCanvasCompResource = $resource( $rootScope.urlProjetoCanvasListarComp + '?email=:email&page=:pagina' );
       projetosCanvasCompResource.get( { email : $window.sessionStorage.email, page : pagina }, 
           function( response ) {
-            scope.projetosComp = response.items || [];
-            scope.totalCountComp = response._meta.totalCount;
-            scope.pageCountComp = response._meta.pageCount;
-            scope.currentPageComp = response._meta.currentPage + 1;
-            scope.perPageComp = response._meta.perPage;
-            scope.pagesComp = [];
-            for(var i = 1; i <= scope.pageCountComp; i ++ ) {
-              scope.pagesComp.push( i );
-            }
+            sucesso( response );
           },
-          function() {
-            scope.erro = true;
+          function( response ) {
+            erro( response );
           }
       );
     };
 
     /**
-     * Cadastra um novo projetos canvas.
-     * @method projetoCanvasService::cadastrar
-     * @param {object} scope
-     * @param {object} projetoCanvasObj { nome, descricao, email }
+     * Carrega um projeto canvas por id.
+     * @method projetoCanvasService::carregarProjeto
+     * @param {integer} projetoId
+     * @param {function} sucesso
+     * @param {function} erro
      */
-    projetoCanvas.cadastrar = function( scope, projetoCanvasObj ) {
+    projetoCanvas.carregarProjeto = function( projetoId, sucesso, erro ) {
+      var params = { 
+        id : projetoId, 
+        email : $window.sessionStorage.email 
+      };
+      var projetoCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id?email=:email' );
+      projetoCanvasResource.get( params, 
+        function( response ) {
+          sucesso( response );
+        },
+        function( response ) {
+          erro( response );
+        }
+      );
+    };   
+
+    /**
+     * Cadastra um novo projeto canvas.
+     * @method projetoCanvasService::cadastrar
+     * @param {object} projetoCanvasObj { nome, descricao, email }
+     * @param {function} sucesso
+     * @param {function} erro
+     */
+    projetoCanvas.cadastrar = function( projetoCanvasObj, sucesso, erro ) {
       var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas );
       projetosCanvasResource.save( {}, projetoCanvasObj, 
         function( response ) {
-          if( scope.wizard ) {
-            $location.path( '/wizard-canvas/' + response.id );
-            return;
-          }
-          $location.path( '/' );
+          sucesso( response );
         },
-        function() {
-          scope.erro = true;
+        function( response ) {
+          erro( response );
+        }
+      );
+    };
+
+    /**
+     * Atualiza os dados de um projeto canvas.
+     * @method projetoCanvasService::atualizar
+     * @param {integer} projetoId
+     * @param {object} projetoCanvasObj { nome, descricao, email }
+     * @param {function} sucesso
+     * @param {function} erro
+     */
+    projetoCanvas.atualizar = function( projetoId, projetoCanvasObj, sucesso, erro ) {
+      var projetoCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id', null,
+          { 
+            'update' : { method : 'PUT' } 
+          }
+        );
+      projetoCanvasResource.update( { id : projetoId }, projetoCanvasObj, 
+        function( response ) {
+          sucesso( response );
+        },
+        function( response ) {
+          erro( response );
+        }
+      );
+    };
+
+    /**
+     * Remove um projeto canvas.
+     * @method projetoCanvasService::remover
+     * @param {integer} projetoId
+     * @param {function} sucesso
+     * @param {function} erro
+     */
+    projetoCanvas.remover = function( projetoId, sucesso, erro ) {
+      var params = { 
+        id : projetoId, 
+        email : $window.sessionStorage.email 
+      };
+      var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id?email=:email' );
+      projetosCanvasResource.remove( params, 
+        function( response ) {
+          sucesso( response );
+        },
+        function( response ) {
+          erro( response );
+        }
+      );
+    };
+
+    /**
+     * Compartilha um projeto canvas com outro usuário.
+     * @method projetoCanvasService::compartilhar
+     * @param {object} projetoCanvasCompObj { idProjetoCanvas, emailCompartilhar, lingua, email }
+     * @param {function} sucesso
+     * @param {function} erro
+     */
+    projetoCanvas.compartilhar = function( projetoCanvasCompObj, sucesso, erro ) {
+      var projetosCanvasCompResource = $resource( $rootScope.urlProjetoCanvasComp );
+      projetosCanvasCompResource.save( {}, projetoCanvasCompObj, 
+        function( response ) {
+          sucesso( response );
+        },
+        function( response ) {
+          erro( response );
         }
       );
     };

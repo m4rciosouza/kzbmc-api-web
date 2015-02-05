@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: controllers/projetos-canvas/listar.js</title>
+    <title>JSDoc: Source: controllers/canvas/wizard.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Source: controllers/projetos-canvas/listar.js</h1>
+    <h1 class="page-title">Source: controllers/canvas/wizard.js</h1>
     
     
 
@@ -26,88 +26,146 @@
     <section>
         <article>
             <pre class="prettyprint source"><code>/**
- * Controller de listagem de projetos canvas.
+ * Controller de assistente de criação de um canvas.
  * @author Marcio C. de Souza &lt;marcio@kazale.com>
  * @version 0.2.0
  * @since 0.2.0
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$scope', '$resource', 
-		'$rootScope', '$location', '$window', 'projetoCanvasService',
-	function( $scope, $resource, $rootScope, $location, $window, projetoCanvasService ) {
+angular.module( 'kzbmcMobileApp' ).controller('CanvasWizardCtrl', [ '$scope', '$location', '$routeParams', 
+		'canvasService', '$resource', '$rootScope', '$window',
+	function( $scope, $location, $routeParams, canvasService, $resource, $rootScope, $window ) {
 	  
-		$scope.mostrarCompartilhados = false;
+		$scope.tipos = [ 'sc', 'pv', 'ca', 'rcl', 'rc', 'ac', 'pc', 'ec', 'fr' ];
+		$scope.tab = $scope.tipos[ 0 ];
+		$scope.labelTipo = '';
+		$scope.selAtual = 0;
+		$scope.porcentagem = 11;
 
 		/**
-		 * Define qual listagem de modelos canvas deve ser exibida,
-		 * entre as do usuário e as compartilhadas.
-		 * @method ProjetosCanvasListarCtrl::alternarVisualizacao
-		 * @param {boolean} compartilhado se deve exibir os compartilhados ou do usuário
+		 * Cadastra um novo item no canvas.
+		 * @method CanvasWizardCtrl::cadastrar
+		 * @param {object} item
 		 */
-		$scope.alternarVisualizacao = function( compartilhado ) {
-			$scope.mostrarCompartilhados = compartilhado;
-			if( compartilhado === true ) {
-				$scope.carregarProjetosCompartilhados( 1 );
-			} else {
-				$scope.carregarProjetos( 1 );
+		$scope.cadastrar = function( item ) {
+			if( $scope.form.$valid ) {
+				var itemCanvasObj = { 
+						'id_projeto_canvas' : $scope.projeto.id, 
+						'tipo' : $scope.tab, 
+						'titulo' : item.titulo,
+						'descricao' : item.descricao, 
+						'cor' : item.cor,
+						'email' : $window.sessionStorage.email
+					};
+				var itemCanvasResource = $resource( $rootScope.urlItemCanvas );
+			    itemCanvasResource.save( {}, itemCanvasObj, function( response ) {
+			    		item.titulo = '';
+			    		item.descricao = '';
+			    		item.cor = '';
+			    		var newItem = { 'id' : response.id, 'titulo' : response.titulo, 
+			    						'descricao' : response.descricao, 'cor' : response.cor };
+			    		$scope.projeto.itens[$scope.tab].push( newItem );
+			    	},
+			    	function() {
+			     		$scope.erro = true;
+			    	});
 			}
 		};
 
-	  	/**
-		 * Carrega uma lista de projetos canvas.
-		 * @method ProjetosCanvasListarCtrl::carregarProjetos
-		 * @param {integer} pagina utilizada na paginação dos dados
+		/**
+		 * Remove um item canvas.
+		 * @method CanvasWizardCtrl::remover
+		 * @param {integer} itemId
+		 * @param {integer} index
 		 */
-	    $scope.carregarProjetos = function( pagina ) {
-	    	if( ! $scope.mostrarCompartilhados ) {
-	    		projetoCanvasService.carregarProjetos( pagina, 
-	    			function( response ) { 
-	    				$scope.projetos = response.items || [];
-			            $scope.totalCount = response._meta.totalCount;
-			            $scope.pageCount = response._meta.pageCount;
-			            $scope.currentPage = response._meta.currentPage + 1;
-			            $scope.perPage = response._meta.perPage;
-			            $scope.pages = [];
-			            for(var i = 1; i &lt;= $scope.pageCount; i ++ ) {
-			            	$scope.pages.push( i );
-			            }
-	    			},
-	    			function() {
-	    				$scope.erro = true;
-	    			}
-	    		);
-			}
-	    };
+	    $scope.remover = function( itemId, index ) {
+	    	console.log('itemId='+itemId);
+	    	console.log('index='+index);
+	    	
+			var itemCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id?email=:email' );
+			itemCanvasResource.remove( { id : itemId, email : $window.sessionStorage.email }, function() {
+			    		$scope.projeto.itens[$scope.tab].splice( index, 1 );
+			    	},
+			    	function() {
+			     		$scope.erroRemover = true;
+			    	});
+		};
 
-	    /**
-		 * Carrega uma lista de projetos canvas.
-		 * @method ProjetosCanvasListarCtrl::carregarProjetosCompartilhados
-		 * @param {integer} pagina utilizada na paginação dos dados
+		/**
+		 * Avança uma aba.
+		 * @method CanvasWizardCtrl::avancar
 		 */
-	    $scope.carregarProjetosCompartilhados = function( pagina ) {
-	    	if( $scope.mostrarCompartilhados ) {
-		    	projetoCanvasService.carregarProjetosCompartilhados( pagina,
-		    		function( response ) {
-		    			$scope.projetosComp = response.items || [];
-			            $scope.totalCountComp = response._meta.totalCount;
-			            $scope.pageCountComp = response._meta.pageCount;
-			            $scope.currentPageComp = response._meta.currentPage + 1;
-			            $scope.perPageComp = response._meta.perPage;
-			            $scope.pagesComp = [];
-			            for(var i = 1; i &lt;= $scope.pageCountComp; i ++ ) {
-			              $scope.pagesComp.push( i );
-			            }
-		    		},
-		    		function() {
-		    			$scope.erro = true;
-		    		}
-		    	);
+		$scope.avancar = function() {
+			if( $scope.selAtual === 8 ) {
+				return;
 			}
-	    };
-		  
-		$scope.carregarProjetos( 1 );
-		$scope.carregarProjetosCompartilhados( 1 );
+			$scope.mudarAba( $scope.selAtual + 1 );
+		};
+
+		/**
+		 * Volta uma aba.
+		 * @method CanvasWizardCtrl::anterior
+		 */
+		$scope.anterior = function() {
+			if( $scope.selAtual === 0 ) {
+				return;
+			}
+			$scope.mudarAba( $scope.selAtual - 1 );
+		};
+
+		/**
+		 * Retorna a porcentagem corrente.
+		 * @method CanvasWizardCtrl::obterPorcentagem
+		 */
+		$scope.obterPorcentagem = function() {
+			if( $scope.selAtual === 8 ) {
+				$scope.porcentagem = 100;
+				return;
+			}
+			$scope.porcentagem = ( $scope.selAtual + 1 ) * 11;
+		};
+
+		/**
+		 * Carrega a aba dado um tipo.
+		 * @method CanvasWizardCtrl::mudarAba
+		 * @param {integer} index
+		 */
+		$scope.mudarAba = function( index ) {
+			$scope.selAtual = index;
+			$scope.tab = $scope.tipos[ index ];
+			$scope.labelTipo = $scope.obterNomeItemPorTipo();
+			$scope.obterPorcentagem();
+		};
+
+	   	/**
+		 * Carrega um projeto canvas.
+		 * @method CanvasWizardCtrl::carregarProjeto
+		 */
+		$scope.carregarProjeto = function() {
+			$scope.index = $routeParams.index;
+		    var itensCanvasResource = $resource( $rootScope.urlItemCanvas + '/projeto-canvas/:id?email=:email' );
+			var itensCanvas = itensCanvasResource.get( { id : $routeParams.index, email : $window.sessionStorage.email }, 
+				function() {
+					$scope.projeto = itensCanvas.projeto || [];
+					$scope.projeto.itens = itensCanvas.itens || [];
+					$scope.modoLeitura = itensCanvas.modoLeitura;
+					$scope.labelTipo = $scope.obterNomeItemPorTipo();
+				},
+				function() {
+				  	$location.path( '/' );
+				});
+		};
+
+		/**
+		  * Retorna o nome completo de um tipo de item canvas dado sua abreviação.
+		  * @method CanvasWizardCtrl::obterNomeItemPorTipo
+		  */
+		$scope.obterNomeItemPorTipo = function() {
+			return canvasService.obterNomeItemPorTipo( $scope.tab );
+		};
+
+		$scope.carregarProjeto();
 	}
 ]);</code></pre>
         </article>

@@ -7,38 +7,36 @@
 'use strict';
 
 angular.module( 'kzbmcMobileApp' ).controller('ProjetosCanvasRemoverCtrl', [ '$scope', '$location', '$routeParams', 
-		'$resource', '$rootScope', '$window', 
-	function( $scope, $location, $routeParams, $resource, $rootScope, $window ) {
+		'$resource', '$rootScope', '$window', 'projetoCanvasService',
+	function( $scope, $location, $routeParams, $resource, $rootScope, $window, projetoCanvasService ) {
 	  
 		/**
 		 * Carrega um projeto canvas para remoção.
 		 * @method ProjetosCanvasRemoverCtrl::carregarProjeto
 		 */
 		$scope.carregarProjeto = function() {
-			var projetoCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id?email=:email' );
-		    var projetoCanvas = projetoCanvasResource.get( { id : $routeParams.index, email : $window.sessionStorage.email }, 
-		    	function() {
-		     		$scope.canvasRemover = projetoCanvas || [];
-			    },
-			    function() {
-			    	$location.path( '/' );
-			    });
-		};	
+		    projetoCanvasService.carregarProjeto( $routeParams.index,
+		    	function( response ) {
+			     	$scope.canvasRemover = response || [];
+				},
+				function() {
+					$location.path( '/' );
+				});
+			};
 	      
 	    /**
 		 * Remove um projeto canvas.
 		 * @method ProjetosCanvasRemoverCtrl::remover
-		 * @param {object} canvas
 		 */
 	    $scope.remover = function() {
-				var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id?email=:email' );
-			    projetosCanvasResource.remove( { id : $routeParams.index, email : $window.sessionStorage.email }, 
-			    	function() {
-			    		$location.path( '/' );
-			    	},
-			    	function() {
-			     		$scope.erro = true;
-			    	});
+			projetoCanvasService.remover( $routeParams.index,
+			   	function() {
+			   		$location.path( '/' );
+			   	},
+			   	function() {
+			   		$scope.erro = true;
+			   	}
+			);
 	    };
 		  
 		$scope.carregarProjeto();

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: controllers/projetos-canvas/listar.js</title>
+    <title>JSDoc: Source: controllers/login/criar-usuario.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Source: controllers/projetos-canvas/listar.js</h1>
+    <h1 class="page-title">Source: controllers/login/criar-usuario.js</h1>
     
     
 
@@ -26,90 +26,34 @@
     <section>
         <article>
             <pre class="prettyprint source"><code>/**
- * Controller de listagem de projetos canvas.
+ * Controller de cadastro de um novo usuario.
  * @author Marcio C. de Souza &lt;marcio@kazale.com>
  * @version 0.2.0
  * @since 0.2.0
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$scope', '$resource', 
-		'$rootScope', '$location', '$window', 'projetoCanvasService',
-	function( $scope, $resource, $rootScope, $location, $window, projetoCanvasService ) {
-	  
-		$scope.mostrarCompartilhados = false;
+angular.module( 'kzbmcMobileApp' ).controller( 'CriarUsuarioCtrl', [ '$scope', '$resource', '$rootScope', '$window',
+		function( $scope, $resource, $rootScope, $window ) {
 
-		/**
-		 * Define qual listagem de modelos canvas deve ser exibida,
-		 * entre as do usuário e as compartilhadas.
-		 * @method ProjetosCanvasListarCtrl::alternarVisualizacao
-		 * @param {boolean} compartilhado se deve exibir os compartilhados ou do usuário
-		 */
-		$scope.alternarVisualizacao = function( compartilhado ) {
-			$scope.mostrarCompartilhados = compartilhado;
-			if( compartilhado === true ) {
-				$scope.carregarProjetosCompartilhados( 1 );
-			} else {
-				$scope.carregarProjetos( 1 );
-			}
-		};
-
-	  	/**
-		 * Carrega uma lista de projetos canvas.
-		 * @method ProjetosCanvasListarCtrl::carregarProjetos
-		 * @param {integer} pagina utilizada na paginação dos dados
-		 */
-	    $scope.carregarProjetos = function( pagina ) {
-	    	if( ! $scope.mostrarCompartilhados ) {
-	    		projetoCanvasService.carregarProjetos( pagina, 
-	    			function( response ) { 
-	    				$scope.projetos = response.items || [];
-			            $scope.totalCount = response._meta.totalCount;
-			            $scope.pageCount = response._meta.pageCount;
-			            $scope.currentPage = response._meta.currentPage + 1;
-			            $scope.perPage = response._meta.perPage;
-			            $scope.pages = [];
-			            for(var i = 1; i &lt;= $scope.pageCount; i ++ ) {
-			            	$scope.pages.push( i );
-			            }
-	    			},
-	    			function() {
-	    				$scope.erro = true;
-	    			}
-	    		);
-			}
-	    };
-
-	    /**
-		 * Carrega uma lista de projetos canvas.
-		 * @method ProjetosCanvasListarCtrl::carregarProjetosCompartilhados
-		 * @param {integer} pagina utilizada na paginação dos dados
-		 */
-	    $scope.carregarProjetosCompartilhados = function( pagina ) {
-	    	if( $scope.mostrarCompartilhados ) {
-		    	projetoCanvasService.carregarProjetosCompartilhados( pagina,
-		    		function( response ) {
-		    			$scope.projetosComp = response.items || [];
-			            $scope.totalCountComp = response._meta.totalCount;
-			            $scope.pageCountComp = response._meta.pageCount;
-			            $scope.currentPageComp = response._meta.currentPage + 1;
-			            $scope.perPageComp = response._meta.perPage;
-			            $scope.pagesComp = [];
-			            for(var i = 1; i &lt;= $scope.pageCountComp; i ++ ) {
-			              $scope.pagesComp.push( i );
-			            }
-		    		},
-		    		function() {
-		    			$scope.erro = true;
-		    		}
-		    	);
-			}
-	    };
-		  
-		$scope.carregarProjetos( 1 );
-		$scope.carregarProjetosCompartilhados( 1 );
-	}
-]);</code></pre>
+	/**
+	 * Cadastra um novo usuario.
+	 * @method CriarUsuarioCtrl::cadastrar
+	 * @param {object} usuario
+	 */
+	$scope.cadastrar = function( usuario ) {
+		if( $scope.form.$valid ) {
+			var usuarioObj = { 'email' : usuario.email, 'senha' : usuario.senha, 'lingua' : $window.localStorage.lingua };
+			var usuariosResource = $resource( $rootScope.urlUsuarios );
+		    usuariosResource.save( {}, usuarioObj, function() {
+		    		$scope.sucesso = true;
+		    	},
+		    	function() {
+		     		$scope.erro = true;
+		    	});
+		}
+	};
+}]);</code></pre>
         </article>
     </section>
 
