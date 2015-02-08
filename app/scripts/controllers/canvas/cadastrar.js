@@ -7,8 +7,8 @@
 'use strict';
 
 angular.module( 'kzbmcMobileApp' ).controller( 'CanvasCadastrarCtrl', [ '$scope', '$window', '$routeParams', '$location', 
-		'canvasService', '$resource', '$rootScope',
-	function( $scope, $window, $routeParams, $location, canvasService, $resource, $rootScope  ) {
+		'canvasService', 
+	function( $scope, $window, $routeParams, $location, canvasService  ) {
 	  
 		/**
 		 * Cadastra um novo item no canvas.
@@ -18,20 +18,21 @@ angular.module( 'kzbmcMobileApp' ).controller( 'CanvasCadastrarCtrl', [ '$scope'
 		$scope.cadastrar = function( item ) {
 			if( $scope.form.$valid ) {
 				var itemCanvasObj = { 
-						'id_projeto_canvas' : $scope.projetoId, 
-						'tipo' : $scope.tipo, 
-						'titulo' : item.titulo,
-						'descricao' : item.descricao, 
-						'cor' : item.cor,
-						'email' : $window.sessionStorage.email
-					};
-				var itemCanvasResource = $resource( $rootScope.urlItemCanvas );
-			    itemCanvasResource.save( {}, itemCanvasObj, function() {
+					'id_projeto_canvas' : $scope.projetoId, 
+					'tipo' : $scope.tipo, 
+					'titulo' : item.titulo,
+					'descricao' : item.descricao, 
+					'cor' : item.cor,
+					'email' : $window.sessionStorage.email
+				};
+				canvasService.cadastrar( itemCanvasObj, 
+					function() {
 			    		$location.path( '/canvas/' + $scope.projetoId );
 			    	},
 			    	function() {
 			     		$scope.erro = true;
-			    	});
+			    	}
+			    );
 			}
 		};
 
@@ -42,15 +43,16 @@ angular.module( 'kzbmcMobileApp' ).controller( 'CanvasCadastrarCtrl', [ '$scope'
 		$scope.carregarProjeto = function() {
 			$scope.projetoId = $routeParams.projetoId;
 			$scope.tipo = $routeParams.tipo;
-		    var itensCanvasResource = $resource( $rootScope.urlItemCanvas + '/projeto-canvas/:id?email=:email' );
-			var itensCanvas = itensCanvasResource.get( { id : $scope.projetoId, email : $window.sessionStorage.email }, 
-				function() {
-					$scope.projeto = itensCanvas.projeto || [];
+
+			canvasService.carregarProjeto( $scope.projetoId, 
+				function( response ) {
+					$scope.projeto = response.projeto || [];
 					$scope.validarParametros();
 				},
 				function() {
-				  	$location.path( '/' );
-				});
+					$location.path( '/' );
+				}
+			);
 		};
 
 		/**

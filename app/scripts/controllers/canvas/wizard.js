@@ -7,8 +7,8 @@
 'use strict';
 
 angular.module( 'kzbmcMobileApp' ).controller('CanvasWizardCtrl', [ '$scope', '$location', '$routeParams', 
-		'canvasService', '$resource', '$rootScope', '$window',
-	function( $scope, $location, $routeParams, canvasService, $resource, $rootScope, $window ) {
+		'canvasService', '$window',
+	function( $scope, $location, $routeParams, canvasService, $window ) {
 	  
 		$scope.tipos = [ 'sc', 'pv', 'ca', 'rcl', 'rc', 'ac', 'pc', 'ec', 'fr' ];
 		$scope.tab = $scope.tipos[ 0 ];
@@ -24,25 +24,30 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasWizardCtrl', [ '$scope', '$
 		$scope.cadastrar = function( item ) {
 			if( $scope.form.$valid ) {
 				var itemCanvasObj = { 
-						'id_projeto_canvas' : $scope.projeto.id, 
-						'tipo' : $scope.tab, 
-						'titulo' : item.titulo,
-						'descricao' : item.descricao, 
-						'cor' : item.cor,
-						'email' : $window.sessionStorage.email
-					};
-				var itemCanvasResource = $resource( $rootScope.urlItemCanvas );
-			    itemCanvasResource.save( {}, itemCanvasObj, function( response ) {
+					'id_projeto_canvas' : $scope.projeto.id, 
+					'tipo' : $scope.tab, 
+					'titulo' : item.titulo,
+					'descricao' : item.descricao, 
+					'cor' : item.cor,
+					'email' : $window.sessionStorage.email
+				};
+			    canvasService.cadastrar( itemCanvasObj, 
+			    	function( response ) {
 			    		item.titulo = '';
 			    		item.descricao = '';
 			    		item.cor = '';
-			    		var newItem = { 'id' : response.id, 'titulo' : response.titulo, 
-			    						'descricao' : response.descricao, 'cor' : response.cor };
-			    		$scope.projeto.itens[$scope.tab].push( newItem );
+			    		var newItem = { 
+			    			'id' : response.id, 
+			    			'titulo' : response.titulo, 
+			    			'descricao' : response.descricao, 
+			    			'cor' : response.cor 
+			    		};
+			    		$scope.projeto.itens[ $scope.tab ].push( newItem );
 			    	},
 			    	function() {
 			     		$scope.erro = true;
-			    	});
+			    	}
+			    );
 			}
 		};
 
@@ -53,16 +58,14 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasWizardCtrl', [ '$scope', '$
 		 * @param {integer} index
 		 */
 	    $scope.remover = function( itemId, index ) {
-	    	console.log('itemId='+itemId);
-	    	console.log('index='+index);
-	    	
-			var itemCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id?email=:email' );
-			itemCanvasResource.remove( { id : itemId, email : $window.sessionStorage.email }, function() {
-			    		$scope.projeto.itens[$scope.tab].splice( index, 1 );
-			    	},
-			    	function() {
-			     		$scope.erroRemover = true;
-			    	});
+			canvasService.remover( itemId,
+				function() {
+			    	$scope.projeto.itens[ $scope.tab ].splice( index, 1 );
+			    },
+			    function() {
+			    	$scope.erroRemover = true;
+			    }
+			);
 		};
 
 		/**
@@ -117,17 +120,17 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasWizardCtrl', [ '$scope', '$
 		 */
 		$scope.carregarProjeto = function() {
 			$scope.index = $routeParams.index;
-		    var itensCanvasResource = $resource( $rootScope.urlItemCanvas + '/projeto-canvas/:id?email=:email' );
-			var itensCanvas = itensCanvasResource.get( { id : $routeParams.index, email : $window.sessionStorage.email }, 
-				function() {
-					$scope.projeto = itensCanvas.projeto || [];
-					$scope.projeto.itens = itensCanvas.itens || [];
-					$scope.modoLeitura = itensCanvas.modoLeitura;
+			canvasService.carregarProjeto( $scope.index, 
+				function( response ) {
+					$scope.projeto = response.projeto || [];
+					$scope.projeto.itens = response.itens || [];
+					$scope.modoLeitura = response.modoLeitura;
 					$scope.labelTipo = $scope.obterNomeItemPorTipo();
 				},
 				function() {
 				  	$location.path( '/' );
-				});
+				}
+			);
 		};
 
 		/**

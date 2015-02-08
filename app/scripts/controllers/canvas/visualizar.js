@@ -7,8 +7,8 @@
 'use strict';
 
 angular.module( 'kzbmcMobileApp' ).controller( 'CanvasVisualizarCtrl', [ '$scope', '$routeParams', '$location', '$resource', 
-		'$window', '$rootScope',
-	function( $scope, $routeParams, $location, $resource, $window, $rootScope ) {
+		'$window', '$rootScope', 'canvasService',
+	function( $scope, $routeParams, $location, $resource, $window, $rootScope, canvasService ) {
 	  
 	/**
 	 * Carrega um projeto canvas para visualização do canvas.
@@ -17,16 +17,16 @@ angular.module( 'kzbmcMobileApp' ).controller( 'CanvasVisualizarCtrl', [ '$scope
 	$scope.carregarProjeto = function() {
 		$scope.index = $routeParams.index;
 		$scope.urlSlideshow = $rootScope.urlSlideshow + '?id=' + $scope.index + '&email=' + $window.sessionStorage.email;
-	    var itensCanvasResource = $resource( $rootScope.urlItemCanvas + '/projeto-canvas/:id?email=:email' );
-		var itensCanvas = itensCanvasResource.get( { id : $routeParams.index, email : $window.sessionStorage.email }, 
-			function() {
-				$scope.projeto = itensCanvas.projeto || [];
-				$scope.projeto.itens = itensCanvas.itens || [];
-				$scope.modoLeitura = itensCanvas.modoLeitura;
+		canvasService.carregarProjeto( $scope.index, 
+			function( response ) {
+				$scope.projeto = response.projeto || [];
+				$scope.projeto.itens = response.itens || [];
+				$scope.modoLeitura = response.modoLeitura;
 			},
 			function() {
-			  	$location.path( '/' );
-			});
+				$location.path( '/' );
+			}
+		);
 	};
 
 	/**

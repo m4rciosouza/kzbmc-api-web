@@ -6,8 +6,8 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller( 'CriarUsuarioCtrl', [ '$scope', '$resource', '$rootScope', '$window',
-		function( $scope, $resource, $rootScope, $window ) {
+angular.module( 'kzbmcMobileApp' ).controller( 'CriarUsuarioCtrl', [ '$scope', 'loginService',
+		function( $scope, loginService ) {
 
 	/**
 	 * Cadastra um novo usuario.
@@ -16,14 +16,14 @@ angular.module( 'kzbmcMobileApp' ).controller( 'CriarUsuarioCtrl', [ '$scope', '
 	 */
 	$scope.cadastrar = function( usuario ) {
 		if( $scope.form.$valid ) {
-			var usuarioObj = { 'email' : usuario.email, 'senha' : usuario.senha, 'lingua' : $window.localStorage.lingua };
-			var usuariosResource = $resource( $rootScope.urlUsuarios );
-		    usuariosResource.save( {}, usuarioObj, function() {
+		    loginService.cadastrarUsuario( usuario, 
+		    	function() {
 		    		$scope.sucesso = true;
 		    	},
 		    	function() {
 		     		$scope.erro = true;
-		    	});
+		    	}
+		    );
 		}
 	};
 }]);

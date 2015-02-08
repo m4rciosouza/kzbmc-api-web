@@ -18,21 +18,21 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$sco
 	    $scope.atualizar = function( item ) {
 			if( $scope.form.$valid ) {
 				var itemCanvasObj = { 
-						'id_projeto_canvas' : $scope.projetoId, 
-						'tipo' : $scope.tipo, 
-						'titulo' : item.titulo,
-						'descricao' : item.descricao, 
-						'cor' : item.cor,
-						'email' : $window.sessionStorage.email
-					};
-				var itemCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id', null, 
-					{ 'update' : { method : 'PUT' } });
-			    itemCanvasResource.update( { 'id' : $scope.itemId }, itemCanvasObj, function() {
+					'id_projeto_canvas' : $scope.projetoId, 
+					'tipo' : $scope.tipo, 
+					'titulo' : item.titulo,
+					'descricao' : item.descricao, 
+					'cor' : item.cor,
+					'email' : $window.sessionStorage.email
+				};
+			    canvasService.atualizar( $scope.itemId, itemCanvasObj, 
+			    	function() {
 			    		$location.path( '/canvas/' + $scope.projetoId );
 			    	},
 			    	function() {
 			     		$scope.erro = true;
-			    	});
+			    	}
+			    );
 			}
 		};
 
@@ -41,13 +41,14 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$sco
 		 * @method CanvasEditarRemoverCtrl::remover
 		 */
 	    $scope.remover = function() {
-			var itemCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id?email=:email' );
-			itemCanvasResource.remove( { id : $scope.itemId, email : $window.sessionStorage.email }, function() {
-			    		$location.path( '/canvas/' + $scope.projetoId );
-			    	},
-			    	function() {
-			     		$scope.erro = true;
-			    	});
+			canvasService.remover( $scope.itemId,
+				function() {
+		    		$location.path( '/canvas/' + $scope.projetoId );
+		    	},
+		    	function() {
+		     		$scope.erro = true;
+		    	}
+		    );
 		};
 
 		  /**
@@ -58,16 +59,16 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$sco
 			$scope.projetoId = $routeParams.projetoId;
 			$scope.itemId = $routeParams.itemId;
 			$scope.tipo = $routeParams.tipo;
-		    var itemCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id?email=:email' );
-			var itemCanvas = itemCanvasResource.get( { id : $scope.itemId, email : $window.sessionStorage.email }, 
-				function() {
-					$scope.item = itemCanvas || [];
-					$scope.projeto = itemCanvas.projetoCanvas || [];
+			canvasService.carregarItem( $scope.itemId, 
+				function( response ) {
+					$scope.item = response || [];
+					$scope.projeto = response.projetoCanvas || [];
 					$scope.validarParametros();
 				},
 				function() {
 				  	$location.path( '/' );
-				});
+				}
+			);
 		};
 
 		/**
