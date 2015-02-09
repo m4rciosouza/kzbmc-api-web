@@ -110,6 +110,7 @@ kzbmcMobileApp.factory( 'authInterceptor', [ '$rootScope', '$q', '$window', '$lo
     function( $rootScope, $q, $window, $location ) {
       return {
         request : function( config ) {
+          $rootScope.loading = true;
           config.headers = config.headers || {};
           if( $window.sessionStorage.token ) {
             config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
@@ -117,12 +118,14 @@ kzbmcMobileApp.factory( 'authInterceptor', [ '$rootScope', '$q', '$window', '$lo
           return config;
         },
         response: function( response ) {
+            $rootScope.loading = false;
             if( response.headers( 'X-Token' ) ) {
                 $window.sessionStorage.token = response.headers( 'X-Token' );
             }
             return response || $q.when( response );
         },
         responseError: function( rejection ) {
+          $rootScope.loading = false;
           if( rejection.status === 401 ) {
             delete $window.sessionStorage.token;
             $location.path( '/login' );
