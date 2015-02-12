@@ -38,6 +38,7 @@
   		<div class="collapse navbar-collapse" id="kz-navbar-collapse">
     		<ul class="nav navbar-nav mainmenu">
     			<li><a ng-href="#/">{{ 'INICIAL' | translate }}</a></li>
+          <li ng-show="$root.loggedIn"><a ng-href="#/trocar-senha">{{ 'TROCAR_SENHA' | translate }}</a></li>
           <li><a ng-href="#/ajuda" title="{{ 'AJUDA' | translate }}">{{ 'AJUDA' | translate }}</a></li>
           <li><a ng-href="#/logout">{{ 'SAIR' | translate }}</a></li>
       	</ul>
@@ -132,6 +133,8 @@
     <script src="scripts/controllers/login/login.js"></script>
     <script src="scripts/controllers/login/logout.js"></script>
     <script src="scripts/controllers/login/esqueci-senha.js"></script>
+    <script src="scripts/controllers/login/nova-senha.js"></script>
+    <script src="scripts/controllers/login/trocar-senha.js"></script>
     <script src="scripts/controllers/login/criar-usuario.js"></script>
     <!-- endbuild -->
 </body>

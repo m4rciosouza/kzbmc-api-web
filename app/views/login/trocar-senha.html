@@ -1,0 +1,40 @@
+<div class="page-header kz_center">
+  	<h1>{{ 'TROCAR_SENHA' | translate }}</h1>
+</div>
+<div class="kz_content">
+  <div class="alert alert-danger" role="alert" ng-show="erro">
+   	{{ 'ERRO_TROCANDO_SENHA' | translate }}
+  </div>
+  <div class="alert alert-success" role="alert" ng-show="sucesso">
+    {{ 'SUCESSO_TROCANDO_SENHA' | translate }}
+  </div>
+
+	<div class="row" ng-hide="sucesso || erro">
+		<div class="col-xs-12 col-md-4 col-md-offset-4 kz_center">
+      		<form role="form" name="form" ng-submit="trocarSenha(usuario)" novalidate>
+        		<div class="form-group">
+    				<label for="email" class="control-label">{{ 'EMAIL' | translate }}</label>
+    				<input type="email" class="form-control" id="email" name="email" 
+    					ng-model="usuario.email" ng-disabled="true" />
+    				</div>
+            <div class="form-group">
+              <label for="senhaAtual" class="control-label">{{ 'SENHA_ATUAL' | translate }}</label>
+              <input type="password" class="form-control" id="senhaAtual" name="senhaAtual" 
+                maxlength="30" ng-model="usuario.senhaAtual" 
+                placeholder="{{ 'DIGITE_SENHA_ATUAL' | translate }}" required />
+            </div>
+    				<div class="form-group">
+      				<label for="novaSenha" class="control-label">{{ 'NOVA_SENHA' | translate }}</label>
+      				<input type="password" class="form-control" id="novaSenha" name="novaSenha" 
+      					maxlength="30" ng-model="usuario.novaSenha" 
+      					placeholder="{{ 'DIGITE_NOVA_SENHA' | translate }}" required />
+    				</div>
+    				<div class="form-group">
+    					<button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">
+        					{{ 'TROCAR_SENHA' | translate }}
+        				</button>
+    				</div>
+        	</form>
+		</div>
+	</div>
+</div>

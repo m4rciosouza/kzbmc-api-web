@@ -1,0 +1,34 @@
+<div class="page-header kz_center">
+  	<h1>{{ 'DEFINIR_NOVA_SENHA' | translate }}</h1>
+</div>
+<div class="kz_content">
+  <div class="alert alert-danger" role="alert" ng-show="erro">
+   	{{ 'ERRO_DEFININDO_SENHA' | translate }}
+  </div>
+  <div class="alert alert-success" role="alert" ng-show="sucesso">
+    {{ 'SUCESSO_DEFININDO_SENHA' | translate }}
+  </div>
+
+	<div class="row" ng-hide="sucesso || erro">
+		<div class="col-xs-12 col-md-4 col-md-offset-4 kz_center">
+      		<form role="form" name="form" ng-submit="definirNovaSenha(usuario)" novalidate>
+        		<div class="form-group">
+    				<label for="email" class="control-label">{{ 'EMAIL' | translate }}</label>
+    				<input type="email" class="form-control" id="email" name="email" 
+    					ng-model="usuario.email" ng-disabled="true" />
+    				</div>
+    				<div class="form-group">
+      				<label for="senha" class="control-label">{{ 'SENHA' | translate }}</label>
+      				<input type="password" class="form-control" id="senha" name="senha" 
+      					maxlength="30" ng-model="usuario.senha" 
+      					placeholder="{{ 'DIGITE_NOVA_SENHA' | translate }}" required />
+    				</div>
+    				<div class="form-group">
+    					<button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">
+        					{{ 'DEFINIR_NOVA_SENHA' | translate }}
+        				</button>
+    				</div>
+        	</form>
+		</div>
+	</div>
+</div>

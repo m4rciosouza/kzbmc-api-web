@@ -97,6 +97,14 @@ kzbmcMobileApp.config( function( $routeProvider ) {
         templateUrl: 'views/login/esqueci-senha.html',
         controller: 'EsqueciSenhaCtrl'
       })
+      .when('/nova-senha/usuario/:usuario/token/:token', {
+        templateUrl: 'views/login/nova-senha.html',
+        controller: 'NovaSenhaCtrl'
+      })
+      .when('/trocar-senha', {
+        templateUrl: 'views/login/trocar-senha.html',
+        controller: 'TrocarSenhaCtrl'
+      })
       .when('/criar-usuario', {
         templateUrl: 'views/login/criar-usuario.html',
         controller: 'CriarUsuarioCtrl'
@@ -388,7 +396,17 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     FINALIZAR : 'Finalizar',
     ERRO_REMOVENDO_ITEM_CANVAS : 'Erro removendo item. Tente novamente',
     EXECUTAR_WIZARD : 'Executar assistente de criação de Canvas',
-    SLIDESHOW : 'Slideshow'
+    SLIDESHOW : 'Slideshow',
+    DEFINIR_NOVA_SENHA : 'Definir nova senha',
+    DIGITE_NOVA_SENHA : 'Digite a sua nova senha...',
+    SUCESSO_DEFININDO_SENHA : 'Senha trocada com sucesso!',
+    ERRO_DEFININDO_SENHA : 'Erro trocando senha. Tente novamente em instantes.',
+    TROCAR_SENHA : 'Trocar senha',
+    ERRO_TROCANDO_SENHA : 'Erro trocando senha. Verifique se os dados foram inseridos corretamente e tente novamente em instantes.',
+    SUCESSO_TROCANDO_SENHA : 'Senha alterada com sucesso!',
+    SENHA_ATUAL : 'Senha atual',
+    DIGITE_SENHA_ATUAL : 'Digite a sua senha atual...',
+    NOVA_SENHA : 'Nova senha'
   })
   .translations( 'en', {
     // topicos da ajuda
@@ -637,7 +655,17 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     FINALIZAR : 'Finish',
     ERRO_REMOVENDO_ITEM_CANVAS : 'Error removing item. Try again later',
     EXECUTAR_WIZARD : 'Run Canvas creation wizard',
-    SLIDESHOW : 'Slideshow'
+    SLIDESHOW : 'Slideshow',
+    DEFINIR_NOVA_SENHA : 'Define a new password',
+    DIGITE_NOVA_SENHA : 'Enter your new password...',
+    SUCESSO_DEFININDO_SENHA : 'Password changed successfully!',
+    ERRO_DEFININDO_SENHA : 'Error changing password. Try again later.',
+    TROCAR_SENHA : 'Change password',
+    ERRO_TROCANDO_SENHA : 'Error changing password. Check if you entered the passwords correctly and try again.',
+    SUCESSO_TROCANDO_SENHA : 'Password changed successfully!',
+    SENHA_ATUAL : 'Current password',
+    DIGITE_SENHA_ATUAL : 'Enter your current password...',
+    NOVA_SENHA : 'New password'
   })
   .translations( 'es', {
     // topicos da ajuda
@@ -886,7 +914,17 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     FINALIZAR : 'Fin',
     ERRO_REMOVENDO_ITEM_CANVAS : 'Error al eliminar lo item. Inténtalo de nuevo',
     EXECUTAR_WIZARD : 'Ejecutar asistente de creación de Lienzo',
-    SLIDESHOW : 'Slideshow'
+    SLIDESHOW : 'Slideshow',
+    DEFINIR_NOVA_SENHA : 'Establecer nueva contraseña',
+    DIGITE_NOVA_SENHA : 'Ingrese su nueva contraseña...',
+    SUCESSO_DEFININDO_SENHA : 'Contraseña cambiada con éxito!',
+    ERRO_DEFININDO_SENHA : 'Error al cambiar la contraseña. Inténtalo de nuevo más tarde.',
+    TROCAR_SENHA : 'Cambiar la contraseña',
+    ERRO_TROCANDO_SENHA : 'Error al cambiar la contraseña. Asegúrese de que los datos se introducen correctamente y vuelve a intentarlo dentro de unos momentos.',
+    SUCESSO_TROCANDO_SENHA : 'Contraseña cambiada con éxito!',
+    SENHA_ATUAL : 'Contraseña actual',
+    DIGITE_SENHA_ATUAL : 'Ingrese su nueva contraseña...',
+    NOVA_SENHA : 'Nueva contraseña'
   });
   $translateProvider.preferredLanguage( 'en' );
 });
@@ -897,6 +935,8 @@ kzbmcMobileApp.run([ '$rootScope', '$window', '$translate', function( $rootScope
   $rootScope.urlItemCanvas = 'http://localhost:8888/kzbmc-api/web/index.php/v1/item-canvas';
   $rootScope.urlUsuario = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios/auth';
   $rootScope.urlEsqueciSenha = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios/esqueci-senha';
+  $rootScope.urlNovaSenha = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios/nova-senha';
+  $rootScope.urlTrocarSenha = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios/trocar-senha';
   $rootScope.urlUsuarios = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios';
   $rootScope.urlProjetoCanvasComp = 'http://localhost:8888/kzbmc-api/web/index.php/v1/compartilhados/compartilhar';
   $rootScope.urlProjetoCanvasListarComp = 'http://localhost:8888/kzbmc-api/web/index.php/v1/compartilhados';

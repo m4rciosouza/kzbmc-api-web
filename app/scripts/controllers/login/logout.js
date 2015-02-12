@@ -6,8 +6,8 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller( 'LogoutCtrl', [ '$scope', '$location', '$window',
-	function( $scope, $location, $window ) {
+angular.module( 'kzbmcMobileApp' ).controller( 'LogoutCtrl', [ '$scope', '$location', '$window', '$rootScope',
+	function( $scope, $location, $window, $rootScope ) {
 	  
 	  	/**
 		 * Efetua o logout no sistema.
@@ -16,6 +16,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'LogoutCtrl', [ '$scope', '$locat
 	    $scope.logout = function() {
 	    	delete $window.sessionStorage.token;
 	    	delete $window.sessionStorage.email;
+	    	$rootScope.loggedIn = false;
 			$location.path( '/login' );
 	    };
 
