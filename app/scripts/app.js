@@ -406,7 +406,9 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     SUCESSO_TROCANDO_SENHA : 'Senha alterada com sucesso!',
     SENHA_ATUAL : 'Senha atual',
     DIGITE_SENHA_ATUAL : 'Digite a sua senha atual...',
-    NOVA_SENHA : 'Nova senha'
+    NOVA_SENHA : 'Nova senha',
+    ERRO_LIMITACAO_PLANO : 'Para criar mais de um Canvas é necessário ser assinante do plano Premium.',
+    ASSINAR_PLANO : 'Assinar agora'
   })
   .translations( 'en', {
     // topicos da ajuda
@@ -665,7 +667,9 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     SUCESSO_TROCANDO_SENHA : 'Password changed successfully!',
     SENHA_ATUAL : 'Current password',
     DIGITE_SENHA_ATUAL : 'Enter your current password...',
-    NOVA_SENHA : 'New password'
+    NOVA_SENHA : 'New password',
+    ERRO_LIMITACAO_PLANO : 'To create more than one Canvas you need to be a Premium user.',
+    ASSINAR_PLANO : 'Subscribe now'
   })
   .translations( 'es', {
     // topicos da ajuda
@@ -924,7 +928,9 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     SUCESSO_TROCANDO_SENHA : 'Contraseña cambiada con éxito!',
     SENHA_ATUAL : 'Contraseña actual',
     DIGITE_SENHA_ATUAL : 'Ingrese su nueva contraseña...',
-    NOVA_SENHA : 'Nueva contraseña'
+    NOVA_SENHA : 'Nueva contraseña',
+    ERRO_LIMITACAO_PLANO : 'Para crear más de un Lienzo usted debe ser un suscriptor Premium.',
+    ASSINAR_PLANO : 'Suscríbete ahora'
   });
   $translateProvider.preferredLanguage( 'en' );
 });
@@ -941,5 +947,6 @@ kzbmcMobileApp.run([ '$rootScope', '$window', '$translate', function( $rootScope
   $rootScope.urlProjetoCanvasComp = 'http://localhost:8888/kzbmc-api/web/index.php/v1/compartilhados/compartilhar';
   $rootScope.urlProjetoCanvasListarComp = 'http://localhost:8888/kzbmc-api/web/index.php/v1/compartilhados';
   $rootScope.urlSlideshow = 'http://localhost:8888/kzbmc-api/web/index.php/v1/slideshow';
+  $rootScope.urlAssinarPlano = 'http://kazale.com';
   $translate.use( $window.localStorage.lingua || 'en' );
 }]);

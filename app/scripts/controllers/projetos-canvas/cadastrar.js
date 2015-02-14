@@ -33,8 +33,13 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasCadastrarCtrl', [ 
 				          }
 				          $location.path( '/' );
 					},
-					function() {
-						$scope.erro = true;
+					function( response ) {
+						if( response.status === 403 ) {
+							$scope.erroLimitacaoPlano = true;
+						} 
+						else {
+							$scope.erro = true;
+						}
 					}
 				);
 			}

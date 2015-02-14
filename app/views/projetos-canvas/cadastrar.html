@@ -22,6 +22,12 @@
     {{ 'ERRO_CADASTRANDO_CANVAS' | translate }}
   </div>
 
+  <div class="alert alert-warning kz_center" role="alert" ng-show="erroLimitacaoPlano">
+    {{ 'ERRO_LIMITACAO_PLANO' | translate }}
+    <br /><br />
+    <a ng-href="{{$root.urlAssinarPlano}}" class="btn btn-success">{{ 'ASSINAR_PLANO' | translate }}</a>
+  </div>
+
 	<div class="row" ng-show="!liteVersion || qtdProjetos < 1">
 		<div class="col-xs-12 kz_center">
       		<form role="form" name="form" ng-submit="cadastrar(canvas)" novalidate>

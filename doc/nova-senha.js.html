@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: controllers/projetos-canvas/relatorio-texto.js</title>
+    <title>JSDoc: Source: controllers/login/nova-senha.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Source: controllers/projetos-canvas/relatorio-texto.js</h1>
+    <h1 class="page-title">Source: controllers/login/nova-senha.js</h1>
     
     
 
@@ -26,37 +26,44 @@
     <section>
         <article>
             <pre class="prettyprint source"><code>/**
- * Controller de geração de relatórios em modo texto de um projeto canvas.
+ * Controller de recuperação de senha.
  * @author Marcio C. de Souza &lt;marcio@kazale.com>
- * @version 0.2.0
+ * @version 0.1.0
  * @since 0.2.0
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasRelatorioTextoCtrl', [ '$scope', '$location', '$routeParams', 
-		'$resource', '$rootScope', '$window', 'projetoCanvasService',
-	function( $scope, $location, $routeParams, $resource, $rootScope, $window, projetoCanvasService ) {
+angular.module( 'kzbmcMobileApp' ).controller( 'NovaSenhaCtrl', [ '$scope', '$resource', '$rootScope', '$routeParams',
+	function( $scope, $resource, $rootScope, $routeParams ) {
+	  
+		$scope.token = $routeParams.token;
+		$scope.usuario = {};
+		$scope.usuario.email = $routeParams.usuario;
 
-		/**
-		 * Carrega um projeto canvas.
-		 * @method ProjetosCanvasRelatorioTextoCtrl::carregarProjeto
+	  	/**
+		 * Define uma nova senha para o usuário.
+		 * @method NovaSenhaCtrl::definirNovaSenha
+		 * @param {object} usuario
 		 */
-		$scope.carregarProjeto = function() {
-			$scope.index = $routeParams.index;
-			projetoCanvasService.carregarProjeto( $scope.index,
-				function( response ) {
-					$scope.projeto = response.projeto || [];
-					$scope.projeto.itens = response.itens || [];
-				},
-				function() {
-				  	$location.path( '/' );
-				}
-			);
-		};
-
-		$scope.carregarProjeto();
-	}
-]);</code></pre>
+	    $scope.definirNovaSenha = function( usuario ) {
+	    	$scope.sucesso = false;
+		    $scope.erro = false;
+		    var params = { 
+		    	email : usuario.email,
+		    	senha : usuario.senha,
+		    	token : $scope.token 
+		    };
+			var novaSenhaResource = $resource( $rootScope.urlNovaSenha );
+		    novaSenhaResource.save( {}, params, 
+		    	function() {
+		    		$scope.sucesso = true;
+		    	},
+		    	function() {
+		     		$scope.erro = true;
+		    	}
+		    );
+	    };
+}]);</code></pre>
         </article>
     </section>
 

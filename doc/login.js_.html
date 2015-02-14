@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: controllers/projetos-canvas/relatorio-texto.js</title>
+    <title>JSDoc: Source: services/login.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Source: controllers/projetos-canvas/relatorio-texto.js</h1>
+    <h1 class="page-title">Source: services/login.js</h1>
     
     
 
@@ -26,37 +26,67 @@
     <section>
         <article>
             <pre class="prettyprint source"><code>/**
- * Controller de geração de relatórios em modo texto de um projeto canvas.
+ * Serviço de gerenciamento de usuário e autenticação.
  * @author Marcio C. de Souza &lt;marcio@kazale.com>
  * @version 0.2.0
  * @since 0.2.0
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasRelatorioTextoCtrl', [ '$scope', '$location', '$routeParams', 
-		'$resource', '$rootScope', '$window', 'projetoCanvasService',
-	function( $scope, $location, $routeParams, $resource, $rootScope, $window, projetoCanvasService ) {
+angular.module( 'kzbmcMobileApp' ).factory( 'loginService', [ '$rootScope', '$window', '$resource',
+  function( $rootScope, $window, $resource ) {
 
-		/**
-		 * Carrega um projeto canvas.
-		 * @method ProjetosCanvasRelatorioTextoCtrl::carregarProjeto
-		 */
-		$scope.carregarProjeto = function() {
-			$scope.index = $routeParams.index;
-			projetoCanvasService.carregarProjeto( $scope.index,
-				function( response ) {
-					$scope.projeto = response.projeto || [];
-					$scope.projeto.itens = response.itens || [];
-				},
-				function() {
-				  	$location.path( '/' );
-				}
-			);
-		};
+	  var login = {};
 
-		$scope.carregarProjeto();
-	}
-]);</code></pre>
+	  /**
+	   * Efetua o login.
+	   * @method loginService::login
+	   * @param {object} usuario { email, senha }
+	   * @param {function} sucesso
+	   * @param {function} erro
+	   */
+	  login.login = function( usuario, sucesso, erro ) {
+	  	var params = { 
+	  		'email' : usuario.email, 
+	  		'senha' : usuario.senha 
+	  	};
+	  	var usuariosResource = $resource( $rootScope.urlUsuario );
+		usuariosResource.save( {}, params, 
+	      function( response ) {
+	        sucesso( response );
+	      },
+	      function( response ) {
+	        erro( response );
+	      }
+	    );
+	  };
+
+	  /**
+	   * Cadastra um novo usuário no sistema.
+	   * @method loginService::cadastrarUsuario
+	   * @param {object} usuario { email, senha }
+	   * @param {function} sucesso
+	   * @param {function} erro
+	   */
+	  login.cadastrarUsuario = function( usuario, sucesso, erro ) {
+	  	var params = { 
+	  		'email' : usuario.email, 
+	  		'senha' : usuario.senha,
+	  		'lingua' : $window.localStorage.lingua
+	  	};
+	  	var usuariosResource = $resource( $rootScope.urlUsuarios );
+		usuariosResource.save( {}, params, 
+	      function( response ) {
+	        sucesso( response );
+	      },
+	      function( response ) {
+	        erro( response );
+	      }
+	    );
+	  };
+
+	  return login;
+}]);</code></pre>
         </article>
     </section>
 
