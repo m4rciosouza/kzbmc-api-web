@@ -1,10 +1,10 @@
 <div class="container kz_right hidden-print">
     <button type="button" class="btn btn-primary" alt="{{ 'IMPRIMIR' | translate }}" 
-        title="{{ 'IMPRIMIR' | translate }}" onclick="window.print();">
+        title="{{ 'IMPRIMIR' | translate }}" onclick="window.print();" ng-hide="$root.local">
       &nbsp;<span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;{{ 'IMPRIMIR' | translate }}
     </button>
     <a ng-href="#/compartilhar/{{projeto.id}}" class="btn btn-primary" alt="{{ 'COMPARTILHAR_AMIGO' | translate }}" 
-        title="{{ 'COMPARTILHAR_AMIGO' | translate }}" ng-show="modoLeitura==false">
+        title="{{ 'COMPARTILHAR_AMIGO' | translate }}" ng-show="modoLeitura==false && !$root.local">
       	&nbsp;<span class="glyphicon glyphicon-share" aria-hidden="true"></span>&nbsp;{{ 'COMPARTILHAR_AMIGO' | translate }}
     </a>
     <a ng-href="#/relatorio-texto/{{projeto.id}}" class="btn btn-primary" alt="{{ 'GERAR_RELATORIO' | translate }}" 
@@ -12,7 +12,7 @@
       	&nbsp;<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;{{ 'GERAR_RELATORIO' | translate }}
     </a>
     <a ng-href="{{ urlSlideshow }}" target="_blank" class="btn btn-primary" alt="{{ 'SLIDESHOW' | translate }}" 
-        title="{{ 'SLIDESHOW' | translate }}">
+        title="{{ 'SLIDESHOW' | translate }}" ng-show="modoLeitura==false  && !$root.local">
       	&nbsp;<span class="glyphicon glyphicon-film" aria-hidden="true"></span>&nbsp;{{ 'SLIDESHOW' | translate }}
     </a>
 </div>

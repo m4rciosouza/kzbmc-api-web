@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: controllers/enviar-por-email.js</title>
+    <title>JSDoc: Source: services/canvas-local.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Source: controllers/enviar-por-email.js</h1>
+    <h1 class="page-title">Source: services/canvas-local.js</h1>
     
     
 
@@ -26,101 +26,149 @@
     <section>
         <article>
             <pre class="prettyprint source"><code>/**
- * Controller de envio de um canvas por email.
+ * Serviço de gerenciamento de um canvas armazenado localmente no LocalStorage.
  * @author Marcio C. de Souza &lt;marcio@kazale.com>
  * @version 0.2.0
  * @since 0.2.0
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller( 'EnviarPorEmailCtrl', [ '$scope', '$http', '$rootScope', '$window', '$resource', '$location',
-	function( $scope, $http, $rootScope, $window, $resource, $location ) {
-	  
-	/**
-	 * Modifica o estado dos controles de mensagens e botões da tela.
-	 * @method EnviarPorEmailCtrl::reset
-	 * @param {boolean} sucesso flag de indicando se a msg de sucesso deve ser exibida
-	 * @param {boolean} erro flag de indicando se a msg de erro deve ser exibida
-	 */
-	$scope.reset = function( sucesso, erro ) {
-		$scope.processando = false;
-		$scope.btnDesabilitado = false;
-		$scope.exibirMsgOk = sucesso;
-		$scope.exibirMsgErro = erro;
+angular.module( 'kzbmcMobileApp' ).factory( 'canvasLocalService', [ '$window', 'projetoCanvasLocalService',
+  	function( $window, projetoCanvasLocalService ) {
+
+  	var canvas = {};
+
+  	/**
+ 	 * Carrega um projeto canvas por id.
+ 	 * @method canvasLocalService::carregarProjeto
+ 	 * @param {integer} projetoId
+ 	 * @param {function} sucesso
+     * @param {function} erro
+ 	 * @return {object} projeto
+ 	 */
+	canvas.carregarProjeto = function( projetoId, sucesso, erro ) {
+		var response = { modoLeitura : false };
+	  	var projetos = projetoCanvasLocalService.obterProjetosJson();
+	  	for( var i = 0; i &lt; projetos.length; i ++ ) {
+	    	if( projetos[ i ].id === projetoId ) {
+	      		response.projeto = projetos[ i ];
+	      		response.itens = projetos[ i ].itens;
+	      		sucesso( response );
+	      		return;
+	    	}
+	  	}
+	  	erro( response );
 	};
 
 	/**
-	 * Grava o email que será utilizado para o envio de um modelo canvas.
-	 * @method EnviarPorEmailCtrl::gravarEmail
-	 */
-	$scope.gravarEmail = function() {
-		//localStorageService.add( 'email', $scope.email );
+     * Carrega um item canvas por id.
+     * @method canvasLocalService::carregarItem
+     * @param {integer} projetoId
+     * @param {string} tipo
+     * @param {integer} itemId
+     * @param {function} sucesso
+     * @param {function} erro
+     */
+    canvas.carregarItem = function( projetoId, tipo, itemId, sucesso, erro ) {
+    	var response = {};
+    	var projeto = projetoCanvasLocalService.carregarProjetoPorId( projetoId );
+    	if( projeto ) {
+    		for( var i = 0; i &lt; projeto.itens[ tipo ].length; i ++ ) {
+    			if( projeto.itens[ tipo ][ i ].id === itemId ) {
+    				response = projeto.itens[ tipo ][ i ];
+		      		response.projetoCanvas = projeto;
+		      		sucesso( response );
+		      		return;
+		      	}
+      		}
+    	}
+	  	erro();
 	};
 
 	/**
-	 * Retorna o email que será utilizado para o envio de um modelo canvas.
-	 * @method EnviarPorEmailCtrl::carregarEmail
+	 * Cadastra um novo item canvas.
+	 * @method canvasLocalService::cadastrar
+	 * @param {integer} projetoId
+	 * @param {object} itemCanvasObj { tipo, titulo, descricao, cor }
+	 * @param {function} sucesso
+	 * @param {function} erro
 	 */
-	$scope.carregarEmail = function() {
-		return $window.sessionStorage.email || '';
+	canvas.cadastrar = function( projetoId, itemCanvasObj, sucesso, erro ) {
+		var projetos = projetoCanvasLocalService.obterProjetosJson();
+		for( var i = 0; i &lt; projetos.length; i ++ ) {
+	    	if( projetos[ i ].id === projetoId ) {
+	    		var item = {
+	      			id : projetoCanvasLocalService.guid(),
+	      			titulo : itemCanvasObj.titulo,
+	      			descricao : itemCanvasObj.descricao,
+	      			cor : itemCanvasObj.cor
+	      		};
+	      		projetos[ i ].itens[ itemCanvasObj.tipo ].push( item );
+	      		$window.localStorage.projetos = angular.toJson( projetos );
+        		sucesso( item );
+        		return;
+	    	}
+	  	}
+	  	erro();
 	};
 
 	/**
-	 * Envia o email do modelo canvas selecionado para o email indicado.
-	 * @method EnviarPorEmailCtrl::gravarEmail
-	 */
-	$scope.enviarEmail = function( $canvasId ) {
-		$scope.reset( false, false );
-		$canvasId = parseInt( $canvasId, 10 );
+     * Atualiza os dados de um item canvas.
+     * @method canvasLocalService::atualizar
+     * @param {integer} projetoId
+     * @param {integer} itemId
+     * @param {object} itemCanvasObj { tipo, titulo, descricao, cor }
+     * @param {function} sucesso
+     * @param {function} erro
+     */
+  	canvas.atualizar = function( projetoId, itemId, itemCanvasObj, sucesso, erro ) {
+  		var tipo = itemCanvasObj.tipo;
+  		var projetos = projetoCanvasLocalService.obterProjetosJson();
+	    for( var i = 0; i &lt; projetos.length; i ++ ) {
+	        if( projetos[ i ].id === projetoId ) {
+	        	for( var j = 0; j &lt; projetos[ i ].itens[ tipo ].length; j ++ ) {
+	        		var item = projetos[ i ].itens[ tipo ][ j ];
+	        		if( item.id === itemId ) {
+	        			item.titulo = itemCanvasObj.titulo;
+	        			item.descricao = itemCanvasObj.descricao;
+	        			item.cor = itemCanvasObj.cor;
+	        			$window.localStorage.projetos = angular.toJson( projetos );
+	    				sucesso();
+	          			return;
+	          		}
+	          	}
+	        }
+	    }
+	  	erro();
+  	};
 
-		var projeto = false;
-		var projetoCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id' );
-	    var projetoCanvas = projetoCanvasResource.get( { id : $canvasId }, 
-	    	function() {
-	     		projeto = projetoCanvas || [];
-	     		if( projeto !== false && $scope.email !== '' ) {
-					$scope.btnHabilitado = false;
-					$scope.processando = true;
-					$http.post( 'http://kazale.com/kzbmcmail/email.php', 
-						{ 'projeto' : projeto, 'id' : $canvasId, 'lingua' : $window.localStorage.lingua, 'email' : $scope.email  } ).
-						success( function( data ) {
-					    	var sucesso = ( data === 'OK' );
-					    	$scope.reset( sucesso, ! sucesso );
-					    }).
-					    error( function() {
-					    	$scope.reset( false, true );
-					    });
-
-				} else {
-					$scope.reset( false, true );
-				}
-		    });
-
-		
-	};
-
-	/**
-	 * Carrega uma lista de projetos canvas.
-	 * @method ProjetosCanvasListarCtrl::carregarProjetos
-	 */
-    $scope.carregarProjetos = function() {
-    	var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas + '?email=:email' );
-	    var projetosCanvas = projetosCanvasResource.get( { email : $window.sessionStorage.email }, 
-	    	function() {
-		     	$scope.projetos = projetosCanvas.items || [];
-		     },
-		     function( response ) {
-		     	if( response.status === 401 ) {
-		     		$location.path( '/login' );
-		     	}
-		     	$scope.erro = true;
-		     });
+  	/**
+     * Remove um item canvas.
+     * @method canvasLocalService::remover
+     * @param {integer} projetoId
+     * @param {string} tipo
+     * @param {integer} itemId
+     * @param {function} sucesso
+     */
+    canvas.remover = function( projetoId, tipo, itemId, sucesso ) {
+  		var projetos = projetoCanvasLocalService.obterProjetosJson();
+  		var itensGravar = [];
+	    for( var i = 0; i &lt; projetos.length; i ++ ) {
+	        if( projetos[ i ].id === projetoId ) {
+	        	for( var j = 0; j &lt; projetos[ i ].itens[ tipo ].length; j ++ ) {
+	        		var item = projetos[ i ].itens[ tipo ][ j ];
+	        		if( item.id !== itemId ) {
+	        			itensGravar.push( item );
+	          		}
+	          	}
+	          	projetos[ i ].itens[ tipo ] = itensGravar;
+	        }
+	    }
+	    $window.localStorage.projetos = angular.toJson( projetos );
+	    sucesso();
     };
 
-	$scope.reset( false, false );
-
-	$scope.email = $scope.carregarEmail();
-	$scope.projetos = $scope.carregarProjetos();
+  	return canvas;
 }]);</code></pre>
         </article>
     </section>

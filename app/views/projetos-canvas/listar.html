@@ -7,7 +7,8 @@
       <a ng-href="#cadastrar-canvas" class="btn btn-primary btn-lg">
         <span class="glyphicon glyphicon-plus"></span> {{ 'CRIAR_NOVO_CANVAS' | translate }}
       </a>
-      <a ng-href="" class="btn btn-primary btn-lg" ng-click="alternarVisualizacao(true)" ng-show="mostrarCompartilhados==false">
+      <a ng-href="" class="btn btn-primary btn-lg" ng-click="alternarVisualizacao(true)" 
+        ng-show="mostrarCompartilhados==false && !$root.local">
         <span class="glyphicon glyphicon-eye-open"></span> {{ 'VER_CANVAS_COMPARTILHADOS' | translate }}
       </a>
       <a ng-href="" class="btn btn-primary btn-lg" ng-click="alternarVisualizacao(false)" ng-show="mostrarCompartilhados==true">

@@ -31,7 +31,7 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasWizardCtrl', [ '$scope', '$
 					'cor' : item.cor,
 					'email' : $window.sessionStorage.email
 				};
-			    canvasService.cadastrar( itemCanvasObj, 
+			    canvasService.cadastrar( $scope.projeto.id, itemCanvasObj, 
 			    	function( response ) {
 			    		item.titulo = '';
 			    		item.descricao = '';
@@ -58,7 +58,7 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasWizardCtrl', [ '$scope', '$
 		 * @param {integer} index
 		 */
 	    $scope.remover = function( itemId, index ) {
-			canvasService.remover( itemId,
+			canvasService.remover( $scope.projeto.id, $scope.tab, itemId,
 				function() {
 			    	$scope.projeto.itens[ $scope.tab ].splice( index, 1 );
 			    },

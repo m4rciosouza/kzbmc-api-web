@@ -7,8 +7,8 @@
 'use strict';
 
 angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasRelatorioTextoCtrl', [ '$scope', '$location', '$routeParams', 
-		'$resource', '$rootScope', '$window', 'projetoCanvasService',
-	function( $scope, $location, $routeParams, $resource, $rootScope, $window, projetoCanvasService ) {
+		'$resource', '$rootScope', '$window', 'canvasService',
+	function( $scope, $location, $routeParams, $resource, $rootScope, $window, canvasService ) {
 
 		/**
 		 * Carrega um projeto canvas.
@@ -16,7 +16,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasRelatorioTextoCtrl
 		 */
 		$scope.carregarProjeto = function() {
 			$scope.index = $routeParams.index;
-			projetoCanvasService.carregarProjeto( $scope.index,
+			canvasService.carregarProjeto( $scope.index,
 				function( response ) {
 					$scope.projeto = response.projeto || [];
 					$scope.projeto.itens = response.itens || [];

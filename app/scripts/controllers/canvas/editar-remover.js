@@ -25,7 +25,7 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$sco
 					'cor' : item.cor,
 					'email' : $window.sessionStorage.email
 				};
-			    canvasService.atualizar( $scope.itemId, itemCanvasObj, 
+			    canvasService.atualizar( $scope.projetoId, $scope.itemId, itemCanvasObj, 
 			    	function() {
 			    		$location.path( '/canvas/' + $scope.projetoId );
 			    	},
@@ -41,12 +41,12 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$sco
 		 * @method CanvasEditarRemoverCtrl::remover
 		 */
 	    $scope.remover = function() {
-			canvasService.remover( $scope.itemId,
+			canvasService.remover( $scope.projetoId, $scope.tipo, $scope.itemId,
 				function() {
 		    		$location.path( '/canvas/' + $scope.projetoId );
 		    	},
 		    	function() {
-		     		$scope.erro = true;
+		     		$scope.erroRemover = true;
 		    	}
 		    );
 		};
@@ -59,7 +59,7 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$sco
 			$scope.projetoId = $routeParams.projetoId;
 			$scope.itemId = $routeParams.itemId;
 			$scope.tipo = $routeParams.tipo;
-			canvasService.carregarItem( $scope.itemId, 
+			canvasService.carregarItem( $scope.projetoId, $scope.tipo, $scope.itemId, 
 				function( response ) {
 					$scope.item = response || [];
 					$scope.projeto = response.projetoCanvas || [];
@@ -77,22 +77,9 @@ angular.module( 'kzbmcMobileApp' ).controller('CanvasEditarRemoverCtrl', [ '$sco
 		 */
 		$scope.validarParametros = function() {
 			var tipos = [ 'pc', 'ac', 'rc', 'pv', 'rcl', 'ca', 'sc', 'ec', 'fr' ];
-			if( $scope.projeto === false || ! $scope.ehItemIdValido() || 
-				tipos.indexOf( $scope.tipo ) === -1 ) {
+			if( $scope.projeto === false || tipos.indexOf( $scope.tipo ) === -1 ) {
 				$location.path( '/' );
 			}
-		};
-
-		/**
-		 * Valida o valor do item de uma requisição de edição/remoção de um item.
-		 * @method CanvasEditarRemoverCtrl::ehItemIdValido
-		 * @return boolean
-		 */
-		$scope.ehItemIdValido = function() {
-			if( isNaN( $scope.itemId ) || $scope.itemId < 0 ) {
-				return false;
-			}
-			return true;
 		};
 
 		/**

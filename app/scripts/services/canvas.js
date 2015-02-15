@@ -6,8 +6,9 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', [ '$rootScope', '$window', '$resource',
-  function( $rootScope, $window, $resource ) {
+angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', [ '$rootScope', '$window', 
+    '$resource', 'canvasLocalService',
+  function( $rootScope, $window, $resource, canvasLocalService ) {
 
   var canvas = {};
 
@@ -19,6 +20,10 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', [ '$rootScope', '$w
    * @param {function} erro
    */
   canvas.carregarProjeto = function( projetoId, sucesso, erro ) {
+    if( $rootScope.local ) {
+      canvasLocalService.carregarProjeto( projetoId, sucesso, erro );
+      return;
+    }
     var params = { 
       id : projetoId, 
       email : $window.sessionStorage.email 
@@ -37,11 +42,17 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', [ '$rootScope', '$w
   /**
    * Carrega um item canvas por id.
    * @method canvasService::carregarItem
+   * @param {integer} projetoId
+   * @param {string} tipo
    * @param {integer} itemId
    * @param {function} sucesso
    * @param {function} erro
    */
-  canvas.carregarItem = function( itemId, sucesso, erro ) {
+  canvas.carregarItem = function( projetoId, tipo, itemId, sucesso, erro ) {
+    if( $rootScope.local ) {
+      canvasLocalService.carregarItem( projetoId, tipo, itemId, sucesso, erro );
+      return;
+    }
     var params = { 
       id : itemId, 
       email : $window.sessionStorage.email 
@@ -60,11 +71,16 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', [ '$rootScope', '$w
   /**
    * Cadastra um novo item canvas.
    * @method canvasService::cadastrar
+   * @param {integer} projetoId
    * @param {object} itemCanvasObj { id_projeto_canvas, tipo, titulo, descricao, cor, email }
    * @param {function} sucesso
    * @param {function} erro
    */
-  canvas.cadastrar = function( itemCanvasObj, sucesso, erro ) {
+  canvas.cadastrar = function( projetoId, itemCanvasObj, sucesso, erro ) {
+    if( $rootScope.local ) {
+      canvasLocalService.cadastrar( projetoId, itemCanvasObj, sucesso, erro );
+      return;
+    }
     var itemCanvasResource = $resource( $rootScope.urlItemCanvas );
     itemCanvasResource.save( {}, itemCanvasObj, 
       function( response ) {
@@ -79,17 +95,19 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', [ '$rootScope', '$w
   /**
    * Atualiza os dados de um item canvas.
    * @method canvasService::atualizar
+   * @param {integer} projetoId
    * @param {integer} itemId
    * @param {object} itemCanvasObj { id_projeto_canvas, tipo, titulo, descricao, cor, email }
    * @param {function} sucesso
    * @param {function} erro
    */
-  canvas.atualizar = function( itemId, itemCanvasObj, sucesso, erro ) {
+  canvas.atualizar = function( projetoId, itemId, itemCanvasObj, sucesso, erro ) {
+    if( $rootScope.local ) {
+      canvasLocalService.atualizar( projetoId, itemId, itemCanvasObj, sucesso, erro );
+      return;
+    }
     var itemCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id', null, 
-          { 
-            'update' : { method : 'PUT' } 
-          }
-        );
+          { 'update' : { method : 'PUT' } } );
     itemCanvasResource.update( { 'id' : itemId }, itemCanvasObj, 
       function( response ) {
         sucesso( response );
@@ -103,11 +121,17 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', [ '$rootScope', '$w
   /**
    * Remove um item canvas.
    * @method canvasService::remover
+   * @param {integer} projetoId
+   * @param {string} tipo
    * @param {integer} itemId
    * @param {function} sucesso
    * @param {function} erro
    */
-  canvas.remover = function( itemId, sucesso, erro ) {
+  canvas.remover = function( projetoId, tipo, itemId, sucesso, erro ) {
+    if( $rootScope.local ) {
+      canvasLocalService.remover( projetoId, tipo, itemId, sucesso );
+      return;
+    }
     var params = { 
       id : itemId, 
       email : $window.sessionStorage.email 

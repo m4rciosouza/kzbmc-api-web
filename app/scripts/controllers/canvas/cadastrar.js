@@ -25,7 +25,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'CanvasCadastrarCtrl', [ '$scope'
 					'cor' : item.cor,
 					'email' : $window.sessionStorage.email
 				};
-				canvasService.cadastrar( itemCanvasObj, 
+				canvasService.cadastrar( $scope.projetoId, itemCanvasObj, 
 					function() {
 			    		$location.path( '/canvas/' + $scope.projetoId );
 			    	},

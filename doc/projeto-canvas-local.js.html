@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: controllers/enviar-por-email.js</title>
+    <title>JSDoc: Source: services/projeto-canvas-local.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Source: controllers/enviar-por-email.js</h1>
+    <h1 class="page-title">Source: services/projeto-canvas-local.js</h1>
     
     
 
@@ -26,101 +26,157 @@
     <section>
         <article>
             <pre class="prettyprint source"><code>/**
- * Controller de envio de um canvas por email.
+ * Serviço de gerenciamento de um projeto canvas armazenado localmente no LocalStorage.
  * @author Marcio C. de Souza &lt;marcio@kazale.com>
  * @version 0.2.0
  * @since 0.2.0
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller( 'EnviarPorEmailCtrl', [ '$scope', '$http', '$rootScope', '$window', '$resource', '$location',
-	function( $scope, $http, $rootScope, $window, $resource, $location ) {
-	  
-	/**
-	 * Modifica o estado dos controles de mensagens e botões da tela.
-	 * @method EnviarPorEmailCtrl::reset
-	 * @param {boolean} sucesso flag de indicando se a msg de sucesso deve ser exibida
-	 * @param {boolean} erro flag de indicando se a msg de erro deve ser exibida
-	 */
-	$scope.reset = function( sucesso, erro ) {
-		$scope.processando = false;
-		$scope.btnDesabilitado = false;
-		$scope.exibirMsgOk = sucesso;
-		$scope.exibirMsgErro = erro;
-	};
+angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasLocalService', [ '$window',
+  function( $window ) {
 
-	/**
-	 * Grava o email que será utilizado para o envio de um modelo canvas.
-	 * @method EnviarPorEmailCtrl::gravarEmail
-	 */
-	$scope.gravarEmail = function() {
-		//localStorageService.add( 'email', $scope.email );
-	};
+    var projetoCanvas = {};
 
-	/**
-	 * Retorna o email que será utilizado para o envio de um modelo canvas.
-	 * @method EnviarPorEmailCtrl::carregarEmail
-	 */
-	$scope.carregarEmail = function() {
-		return $window.sessionStorage.email || '';
-	};
-
-	/**
-	 * Envia o email do modelo canvas selecionado para o email indicado.
-	 * @method EnviarPorEmailCtrl::gravarEmail
-	 */
-	$scope.enviarEmail = function( $canvasId ) {
-		$scope.reset( false, false );
-		$canvasId = parseInt( $canvasId, 10 );
-
-		var projeto = false;
-		var projetoCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id' );
-	    var projetoCanvas = projetoCanvasResource.get( { id : $canvasId }, 
-	    	function() {
-	     		projeto = projetoCanvas || [];
-	     		if( projeto !== false && $scope.email !== '' ) {
-					$scope.btnHabilitado = false;
-					$scope.processando = true;
-					$http.post( 'http://kazale.com/kzbmcmail/email.php', 
-						{ 'projeto' : projeto, 'id' : $canvasId, 'lingua' : $window.localStorage.lingua, 'email' : $scope.email  } ).
-						success( function( data ) {
-					    	var sucesso = ( data === 'OK' );
-					    	$scope.reset( sucesso, ! sucesso );
-					    }).
-					    error( function() {
-					    	$scope.reset( false, true );
-					    });
-
-				} else {
-					$scope.reset( false, true );
-				}
-		    });
-
-		
-	};
-
-	/**
-	 * Carrega uma lista de projetos canvas.
-	 * @method ProjetosCanvasListarCtrl::carregarProjetos
-	 */
-    $scope.carregarProjetos = function() {
-    	var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas + '?email=:email' );
-	    var projetosCanvas = projetosCanvasResource.get( { email : $window.sessionStorage.email }, 
-	    	function() {
-		     	$scope.projetos = projetosCanvas.items || [];
-		     },
-		     function( response ) {
-		     	if( response.status === 401 ) {
-		     		$location.path( '/login' );
-		     	}
-		     	$scope.erro = true;
-		     });
+    /**
+     * Carrega uma listagem paginada de projetos canvas e 
+     * popula o escopo.
+     * @method projetoCanvasLocalService::carregarProjetos
+     * @param {integer} pagina
+     * @param {function} sucesso
+     */
+    projetoCanvas.carregarProjetos = function( pagina, sucesso ) {
+      var projetos = this.obterProjetosJson();
+      var response = {};
+      var porPagina = 20;
+      response._meta = {};
+      response._meta.perPage = porPagina;
+      response._meta.totalCount = projetos.length;
+      response._meta.pageCount = Math.ceil( projetos.length / porPagina );
+      response._meta.currentPage = pagina - 1;
+      response.items = projetos.splice( ( porPagina * response._meta.currentPage ), porPagina );
+      sucesso( response );
     };
 
-	$scope.reset( false, false );
+    /**
+     * Carrega um projeto canvas por id.
+     * @method projetoCanvasLocalService::carregarProjeto
+     * @param {integer} projetoId
+     * @param {function} sucesso
+     * @param {function} erro
+     */
+    projetoCanvas.carregarProjeto = function( projetoId, sucesso, erro ) {
+      var projeto = this.carregarProjetoPorId( projetoId );
+      if( projeto ) {
+          sucesso( projeto );
+          return;
+      }
+      erro();
+    };
 
-	$scope.email = $scope.carregarEmail();
-	$scope.projetos = $scope.carregarProjetos();
+    /**
+     * Carrega um projeto canvas por id.
+     * @method projetoCanvasLocalService::carregarProjetoPorId
+     * @param {integer} projetoId
+     * @return {object} projeto
+     */
+    projetoCanvas.carregarProjetoPorId = function( projetoId ) {
+      var projetos = this.obterProjetosJson();
+      for( var i = 0; i &lt; projetos.length; i ++ ) {
+        if( projetos[ i ].id === projetoId ) {
+          return projetos[ i ];
+        }
+      }
+      return false;
+    };
+
+    /**
+     * Cadastra um novo projeto canvas.
+     * @method projetoCanvasLocalService::cadastrar
+     * @param {object} projetoCanvasObj { nome, descricao, email }
+     * @param {function} sucesso
+     */
+    projetoCanvas.cadastrar = function( projetoCanvasObj, sucesso ) {
+        var projetos = this.obterProjetos();
+        var projetoCanvasLocal = { 
+          'id' : this.guid(),
+          'nome' : projetoCanvasObj.nome, 
+          'descricao' : projetoCanvasObj.descricao, 
+          'itens' : { 
+            'pc' : [], 'ac' : [], 'rc' : [], 'pv' : [], 'rcl' : [], 
+            'ca' : [], 'sc' : [], 'ec' : [], 'fr' : [] 
+          }
+        };
+        projetos.push( projetoCanvasLocal );
+        $window.localStorage.projetos = angular.toJson( projetos );
+        sucesso();
+    };
+
+    /**
+     * Atualiza os dados de um projeto canvas.
+     * @method projetoCanvasLocalService::atualizar
+     * @param {integer} projetoId
+     * @param {object} projetoCanvasObj { nome, descricao }
+     * @param {function} sucesso
+     */
+    projetoCanvas.atualizar = function( projetoId, projetoCanvasObj, sucesso ) {
+      var projetos = this.obterProjetosJson();
+      for( var i = 0; i &lt; projetos.length; i ++ ) {
+        if( projetos[ i ].id === projetoId ) {
+          projetos[ i ].nome = projetoCanvasObj.nome;
+          projetos[ i ].descricao = projetoCanvasObj.descricao;
+          break;
+        }
+      }
+      $window.localStorage.projetos = angular.toJson( projetos );
+      sucesso();
+    };
+
+    /**
+     * Remove um projeto canvas.
+     * @method projetoCanvasLocalService::remover
+     * @param {integer} projetoId
+     * @param {function} sucesso
+     */
+    projetoCanvas.remover = function( projetoId, sucesso ) {
+      var projetos = this.obterProjetosJson();
+      var projetosGravar = [];
+      for( var i = 0; i &lt; projetos.length; i ++ ) {
+        if( projetos[ i ].id !== projetoId ) {
+          projetosGravar.push( projetos[ i ] );
+        }
+      }
+      $window.localStorage.projetos = angular.toJson( projetosGravar );
+      sucesso();
+    };
+
+    /**
+     * Retorna todos os projetos canvas cadastrados.
+     * @method projetoCanvasLocalService::obterProjetos
+     * @return Array
+     */
+    projetoCanvas.obterProjetos = function() {
+        var projetos = $window.localStorage.projetos;
+        return projetos ? angular.fromJson( projetos ) : [];
+    };
+
+    /**
+     * Retorna todos os projetos canvas cadastrados no formato json.
+     * @method projetoCanvasLocalService::obterProjetosJson
+     * @return Array de objetos json
+     */
+    projetoCanvas.obterProjetosJson = function() {
+      return angular.fromJson( this.obterProjetos() );
+    };
+
+    projetoCanvas.guid = function() {
+      function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+      }
+      return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+    };
+
+    return projetoCanvas;
 }]);</code></pre>
         </article>
     </section>

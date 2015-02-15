@@ -1,6 +1,15 @@
 <div class="page-header kz_center">
 	<h1>{{projeto.nome}}</h1>
 	<h2>{{ 'EDITAR_REMOVER_EM' | translate }} : {{ obterNomeItemPorTipo() | translate }}</h2>
+
+	<div class="alert alert-danger" role="alert" ng-show="erro">
+	    {{ 'ERRO_ATUALIZANDO_ITEM_CANVAS' | translate }}
+	</div>
+
+	<div class="alert alert-danger" role="alert" ng-show="erroRemover">
+	    {{ 'ERRO_REMOVENDO_ITEM_CANVAS' | translate }}
+	</div>
+
 	<form role="form" name="form" ng-submit="atualizar(item)" novalidate>
 		<div class="form-group">
 			<label for="titulo">{{ 'TITULO' | translate }}</label>

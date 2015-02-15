@@ -19,14 +19,48 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasLocalService', [ '$win
      * @param {function} sucesso
      */
     projetoCanvas.carregarProjetos = function( pagina, sucesso ) {
+      var projetos = this.obterProjetosJson();
       var response = {};
+      var porPagina = 20;
       response._meta = {};
-      response.items = this.obterProjetosJson();
-      response._meta.totalCount = 1;
-      response._meta.pageCount = 1;
+      response._meta.perPage = porPagina;
+      response._meta.totalCount = projetos.length;
+      response._meta.pageCount = Math.ceil( projetos.length / porPagina );
       response._meta.currentPage = pagina - 1;
-      response._meta.perPage = 20;
+      response.items = projetos.splice( ( porPagina * response._meta.currentPage ), porPagina );
       sucesso( response );
+    };
+
+    /**
+     * Carrega um projeto canvas por id.
+     * @method projetoCanvasLocalService::carregarProjeto
+     * @param {integer} projetoId
+     * @param {function} sucesso
+     * @param {function} erro
+     */
+    projetoCanvas.carregarProjeto = function( projetoId, sucesso, erro ) {
+      var projeto = this.carregarProjetoPorId( projetoId );
+      if( projeto ) {
+          sucesso( projeto );
+          return;
+      }
+      erro();
+    };
+
+    /**
+     * Carrega um projeto canvas por id.
+     * @method projetoCanvasLocalService::carregarProjetoPorId
+     * @param {integer} projetoId
+     * @return {object} projeto
+     */
+    projetoCanvas.carregarProjetoPorId = function( projetoId ) {
+      var projetos = this.obterProjetosJson();
+      for( var i = 0; i < projetos.length; i ++ ) {
+        if( projetos[ i ].id === projetoId ) {
+          return projetos[ i ];
+        }
+      }
+      return false;
     };
 
     /**
@@ -38,7 +72,7 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasLocalService', [ '$win
     projetoCanvas.cadastrar = function( projetoCanvasObj, sucesso ) {
         var projetos = this.obterProjetos();
         var projetoCanvasLocal = { 
-          'id' : 'L' + projetos.length,
+          'id' : this.guid(),
           'nome' : projetoCanvasObj.nome, 
           'descricao' : projetoCanvasObj.descricao, 
           'itens' : { 
@@ -49,7 +83,44 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasLocalService', [ '$win
         projetos.push( projetoCanvasLocal );
         $window.localStorage.projetos = angular.toJson( projetos );
         sucesso();
-        return;
+    };
+
+    /**
+     * Atualiza os dados de um projeto canvas.
+     * @method projetoCanvasLocalService::atualizar
+     * @param {integer} projetoId
+     * @param {object} projetoCanvasObj { nome, descricao }
+     * @param {function} sucesso
+     */
+    projetoCanvas.atualizar = function( projetoId, projetoCanvasObj, sucesso ) {
+      var projetos = this.obterProjetosJson();
+      for( var i = 0; i < projetos.length; i ++ ) {
+        if( projetos[ i ].id === projetoId ) {
+          projetos[ i ].nome = projetoCanvasObj.nome;
+          projetos[ i ].descricao = projetoCanvasObj.descricao;
+          break;
+        }
+      }
+      $window.localStorage.projetos = angular.toJson( projetos );
+      sucesso();
+    };
+
+    /**
+     * Remove um projeto canvas.
+     * @method projetoCanvasLocalService::remover
+     * @param {integer} projetoId
+     * @param {function} sucesso
+     */
+    projetoCanvas.remover = function( projetoId, sucesso ) {
+      var projetos = this.obterProjetosJson();
+      var projetosGravar = [];
+      for( var i = 0; i < projetos.length; i ++ ) {
+        if( projetos[ i ].id !== projetoId ) {
+          projetosGravar.push( projetos[ i ] );
+        }
+      }
+      $window.localStorage.projetos = angular.toJson( projetosGravar );
+      sucesso();
     };
 
     /**
@@ -69,6 +140,13 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasLocalService', [ '$win
      */
     projetoCanvas.obterProjetosJson = function() {
       return angular.fromJson( this.obterProjetos() );
+    };
+
+    projetoCanvas.guid = function() {
+      function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+      }
+      return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
     };
 
     return projetoCanvas;

@@ -21,12 +21,10 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window',
      * @param {function} erro
      */
     projetoCanvas.carregarProjetos = function( pagina, sucesso, erro ) {
-
       if( $rootScope.local ) {
         projetoCanvasLocalService.carregarProjetos( pagina, sucesso );
         return;
       }
-
       var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas + '?email=:email&page=:pagina' );
       projetosCanvasResource.get( { email : $window.sessionStorage.email, page : pagina }, 
             function( response ) {
@@ -66,6 +64,10 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window',
      * @param {function} erro
      */
     projetoCanvas.carregarProjeto = function( projetoId, sucesso, erro ) {
+      if( $rootScope.local ) {
+        projetoCanvasLocalService.carregarProjeto( projetoId, sucesso, erro );
+        return;
+      }
       var params = { 
         id : projetoId, 
         email : $window.sessionStorage.email 
@@ -89,12 +91,10 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window',
      * @param {function} erro
      */
     projetoCanvas.cadastrar = function( projetoCanvasObj, sucesso, erro ) {
-
       if( $rootScope.local ) {
         projetoCanvasLocalService.cadastrar( projetoCanvasObj, sucesso );
         return;
       }
-
       var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas );
       projetosCanvasResource.save( {}, projetoCanvasObj, 
         function( response ) {
@@ -115,11 +115,12 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window',
      * @param {function} erro
      */
     projetoCanvas.atualizar = function( projetoId, projetoCanvasObj, sucesso, erro ) {
+      if( $rootScope.local ) {
+        projetoCanvasLocalService.atualizar( projetoId, projetoCanvasObj, sucesso );
+        return;
+      }
       var projetoCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id', null,
-          { 
-            'update' : { method : 'PUT' } 
-          }
-        );
+          { 'update' : { method : 'PUT' } });
       projetoCanvasResource.update( { id : projetoId }, projetoCanvasObj, 
         function( response ) {
           sucesso( response );
@@ -138,6 +139,10 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window',
      * @param {function} erro
      */
     projetoCanvas.remover = function( projetoId, sucesso, erro ) {
+      if( $rootScope.local ) {
+        projetoCanvasLocalService.remover( projetoId, sucesso );
+        return;
+      }
       var params = { 
         id : projetoId, 
         email : $window.sessionStorage.email 

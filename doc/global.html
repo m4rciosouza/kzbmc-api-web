@@ -601,85 +601,6 @@
         
             
 <dt>
-    <h4 class="name" id="CanvasEditarRemoverCtrl::ehItemIdValido"><span class="type-signature"></span>CanvasEditarRemoverCtrl::ehItemIdValido<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        Valida o valor do item de uma requisição de edição/remoção de um item.
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="editar-remover.js.html">controllers/canvas/editar-remover.js</a>, <a href="editar-remover.js.html#line86">line 86</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    boolean
-</div>
-
-
-
-        
-    
-    
-</dd>
-
-        
-            
-<dt>
     <h4 class="name" id="CanvasEditarRemoverCtrl::obterNomeItemPorTipo"><span class="type-signature"></span>CanvasEditarRemoverCtrl::obterNomeItemPorTipo<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
@@ -721,7 +642,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="editar-remover.js.html">controllers/canvas/editar-remover.js</a>, <a href="editar-remover.js.html#line98">line 98</a>
+        <a href="editar-remover.js.html">controllers/canvas/editar-remover.js</a>, <a href="editar-remover.js.html#line85">line 85</a>
     </li></ul></dd>
     
     
@@ -887,7 +808,7 @@
         
             
 <dt>
-    <h4 class="name" id="canvasService::atualizar"><span class="type-signature"></span>canvasService::atualizar<span class="signature">(itemId, itemCanvasObj, sucesso, erro)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="canvasLocalService::atualizar"><span class="type-signature"></span>canvasLocalService::atualizar<span class="signature">(projetoId, itemId, itemCanvasObj, sucesso, erro)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -929,6 +850,29 @@
 	
         <tr>
             
+                <td class="name"><code>projetoId</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
                 <td class="name"><code>itemId</code></td>
             
             
@@ -968,7 +912,7 @@
             
             
             
-            <td class="description last">{ id_projeto_canvas, tipo, titulo, descricao, cor, email }</td>
+            <td class="description last">{ tipo, titulo, descricao, cor }</td>
         </tr>
 	
 	
@@ -1045,7 +989,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="canvas.js.html">services/canvas.js</a>, <a href="canvas.js.html#line79">line 79</a>
+        <a href="canvas-local.js.html">services/canvas-local.js</a>, <a href="canvas-local.js.html#line88">line 88</a>
     </li></ul></dd>
     
     
@@ -1073,7 +1017,7 @@
         
             
 <dt>
-    <h4 class="name" id="canvasService::cadastrar"><span class="type-signature"></span>canvasService::cadastrar<span class="signature">(itemCanvasObj, sucesso, erro)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="canvasLocalService::cadastrar"><span class="type-signature"></span>canvasLocalService::cadastrar<span class="signature">(projetoId, itemCanvasObj, sucesso, erro)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -1115,6 +1059,29 @@
 	
         <tr>
             
+                <td class="name"><code>projetoId</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
                 <td class="name"><code>itemCanvasObj</code></td>
             
             
@@ -1131,7 +1098,7 @@
             
             
             
-            <td class="description last">{ id_projeto_canvas, tipo, titulo, descricao, cor, email }</td>
+            <td class="description last">{ tipo, titulo, descricao, cor }</td>
         </tr>
 	
 	
@@ -1208,7 +1175,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="canvas.js.html">services/canvas.js</a>, <a href="canvas.js.html#line60">line 60</a>
+        <a href="canvas-local.js.html">services/canvas-local.js</a>, <a href="canvas-local.js.html#line61">line 61</a>
     </li></ul></dd>
     
     
@@ -1236,7 +1203,7 @@
         
             
 <dt>
-    <h4 class="name" id="canvasService::carregarItem"><span class="type-signature"></span>canvasService::carregarItem<span class="signature">(itemId, sucesso, erro)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="canvasLocalService::carregarItem"><span class="type-signature"></span>canvasLocalService::carregarItem<span class="signature">(projetoId, tipo, itemId, sucesso, erro)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -1274,6 +1241,52 @@
 	</thead>
 	
 	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>projetoId</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>tipo</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
 	
 	
         <tr>
@@ -1371,7 +1384,982 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="canvas.js.html">services/canvas.js</a>, <a href="canvas.js.html#line37">line 37</a>
+        <a href="canvas-local.js.html">services/canvas-local.js</a>, <a href="canvas-local.js.html#line36">line 36</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="canvasLocalService::carregarProjeto"><span class="type-signature"></span>canvasLocalService::carregarProjeto<span class="signature">(projetoId, sucesso, erro)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Carrega um projeto canvas por id.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>projetoId</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>sucesso</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>erro</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="canvas-local.js.html">services/canvas-local.js</a>, <a href="canvas-local.js.html#line14">line 14</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    projeto
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">object</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="canvasLocalService::remover"><span class="type-signature"></span>canvasLocalService::remover<span class="signature">(projetoId, tipo, itemId, sucesso)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Remove um item canvas.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>projetoId</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>tipo</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>itemId</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>sucesso</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="canvas-local.js.html">services/canvas-local.js</a>, <a href="canvas-local.js.html#line118">line 118</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="canvasService::atualizar"><span class="type-signature"></span>canvasService::atualizar<span class="signature">(projetoId, itemId, itemCanvasObj, sucesso, erro)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Atualiza os dados de um item canvas.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>projetoId</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>itemId</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>itemCanvasObj</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">{ id_projeto_canvas, tipo, titulo, descricao, cor, email }</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>sucesso</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>erro</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="canvas.js.html">services/canvas.js</a>, <a href="canvas.js.html#line95">line 95</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="canvasService::cadastrar"><span class="type-signature"></span>canvasService::cadastrar<span class="signature">(projetoId, itemCanvasObj, sucesso, erro)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Cadastra um novo item canvas.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>projetoId</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>itemCanvasObj</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">{ id_projeto_canvas, tipo, titulo, descricao, cor, email }</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>sucesso</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>erro</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="canvas.js.html">services/canvas.js</a>, <a href="canvas.js.html#line71">line 71</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="canvasService::carregarItem"><span class="type-signature"></span>canvasService::carregarItem<span class="signature">(projetoId, tipo, itemId, sucesso, erro)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Carrega um item canvas por id.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>projetoId</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>tipo</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>itemId</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>sucesso</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>erro</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="canvas.js.html">services/canvas.js</a>, <a href="canvas.js.html#line42">line 42</a>
     </li></ul></dd>
     
     
@@ -1534,7 +2522,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="canvas.js.html">services/canvas.js</a>, <a href="canvas.js.html#line14">line 14</a>
+        <a href="canvas.js.html">services/canvas.js</a>, <a href="canvas.js.html#line15">line 15</a>
     </li></ul></dd>
     
     
@@ -1651,7 +2639,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="canvas.js.html">services/canvas.js</a>, <a href="canvas.js.html#line126">line 126</a>
+        <a href="canvas.js.html">services/canvas.js</a>, <a href="canvas.js.html#line150">line 150</a>
     </li></ul></dd>
     
     
@@ -1679,7 +2667,7 @@
         
             
 <dt>
-    <h4 class="name" id="canvasService::remover"><span class="type-signature"></span>canvasService::remover<span class="signature">(itemId, sucesso, erro)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="canvasService::remover"><span class="type-signature"></span>canvasService::remover<span class="signature">(projetoId, tipo, itemId, sucesso, erro)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -1717,6 +2705,52 @@
 	</thead>
 	
 	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>projetoId</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>tipo</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
 	
 	
         <tr>
@@ -1814,7 +2848,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="canvas.js.html">services/canvas.js</a>, <a href="canvas.js.html#line103">line 103</a>
+        <a href="canvas.js.html">services/canvas.js</a>, <a href="canvas.js.html#line121">line 121</a>
     </li></ul></dd>
     
     
@@ -4233,6 +5267,1050 @@
         
             
 <dt>
+    <h4 class="name" id="projetoCanvasLocalService::atualizar"><span class="type-signature"></span>projetoCanvasLocalService::atualizar<span class="signature">(projetoId, projetoCanvasObj, sucesso)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Atualiza os dados de um projeto canvas.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>projetoId</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>projetoCanvasObj</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">{ nome, descricao }</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>sucesso</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="projeto-canvas-local.js.html">services/projeto-canvas-local.js</a>, <a href="projeto-canvas-local.js.html#line88">line 88</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="projetoCanvasLocalService::cadastrar"><span class="type-signature"></span>projetoCanvasLocalService::cadastrar<span class="signature">(projetoCanvasObj, sucesso)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Cadastra um novo projeto canvas.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>projetoCanvasObj</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">{ nome, descricao, email }</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>sucesso</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="projeto-canvas-local.js.html">services/projeto-canvas-local.js</a>, <a href="projeto-canvas-local.js.html#line66">line 66</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="projetoCanvasLocalService::carregarProjeto"><span class="type-signature"></span>projetoCanvasLocalService::carregarProjeto<span class="signature">(projetoId, sucesso, erro)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Carrega um projeto canvas por id.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>projetoId</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>sucesso</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>erro</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="projeto-canvas-local.js.html">services/projeto-canvas-local.js</a>, <a href="projeto-canvas-local.js.html#line34">line 34</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="projetoCanvasLocalService::carregarProjetoPorId"><span class="type-signature"></span>projetoCanvasLocalService::carregarProjetoPorId<span class="signature">(projetoId)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Carrega um projeto canvas por id.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>projetoId</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="projeto-canvas-local.js.html">services/projeto-canvas-local.js</a>, <a href="projeto-canvas-local.js.html#line50">line 50</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    projeto
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">object</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="projetoCanvasLocalService::carregarProjetos"><span class="type-signature"></span>projetoCanvasLocalService::carregarProjetos<span class="signature">(pagina, sucesso)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Carrega uma listagem paginada de projetos canvas e 
+popula o escopo.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>pagina</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>sucesso</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="projeto-canvas-local.js.html">services/projeto-canvas-local.js</a>, <a href="projeto-canvas-local.js.html#line14">line 14</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="projetoCanvasLocalService::obterProjetos"><span class="type-signature"></span>projetoCanvasLocalService::obterProjetos<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Retorna todos os projetos canvas cadastrados.
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="projeto-canvas-local.js.html">services/projeto-canvas-local.js</a>, <a href="projeto-canvas-local.js.html#line126">line 126</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    Array
+</div>
+
+
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="projetoCanvasLocalService::obterProjetosJson"><span class="type-signature"></span>projetoCanvasLocalService::obterProjetosJson<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Retorna todos os projetos canvas cadastrados no formato json.
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="projeto-canvas-local.js.html">services/projeto-canvas-local.js</a>, <a href="projeto-canvas-local.js.html#line136">line 136</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    Array de objetos json
+</div>
+
+
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="projetoCanvasLocalService::remover"><span class="type-signature"></span>projetoCanvasLocalService::remover<span class="signature">(projetoId, sucesso)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Remove um projeto canvas.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>projetoId</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>sucesso</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="projeto-canvas-local.js.html">services/projeto-canvas-local.js</a>, <a href="projeto-canvas-local.js.html#line108">line 108</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
     <h4 class="name" id="projetoCanvasService::atualizar"><span class="type-signature"></span>projetoCanvasService::atualizar<span class="signature">(projetoId, projetoCanvasObj, sucesso, erro)</span><span class="type-signature"></span></h4>
     
     
@@ -4391,7 +6469,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="projeto-canvas.js.html">services/projeto-canvas.js</a>, <a href="projeto-canvas.js.html#line96">line 96</a>
+        <a href="projeto-canvas.js.html">services/projeto-canvas.js</a>, <a href="projeto-canvas.js.html#line109">line 109</a>
     </li></ul></dd>
     
     
@@ -4554,7 +6632,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="projeto-canvas.js.html">services/projeto-canvas.js</a>, <a href="projeto-canvas.js.html#line77">line 77</a>
+        <a href="projeto-canvas.js.html">services/projeto-canvas.js</a>, <a href="projeto-canvas.js.html#line86">line 86</a>
     </li></ul></dd>
     
     
@@ -4717,7 +6795,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="projeto-canvas.js.html">services/projeto-canvas.js</a>, <a href="projeto-canvas.js.html#line54">line 54</a>
+        <a href="projeto-canvas.js.html">services/projeto-canvas.js</a>, <a href="projeto-canvas.js.html#line59">line 59</a>
     </li></ul></dd>
     
     
@@ -4881,7 +6959,7 @@ popula o escopo.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="projeto-canvas.js.html">services/projeto-canvas.js</a>, <a href="projeto-canvas.js.html#line14">line 14</a>
+        <a href="projeto-canvas.js.html">services/projeto-canvas.js</a>, <a href="projeto-canvas.js.html#line15">line 15</a>
     </li></ul></dd>
     
     
@@ -5045,7 +7123,7 @@ compartilhados e popula o escopo.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="projeto-canvas.js.html">services/projeto-canvas.js</a>, <a href="projeto-canvas.js.html#line34">line 34</a>
+        <a href="projeto-canvas.js.html">services/projeto-canvas.js</a>, <a href="projeto-canvas.js.html#line39">line 39</a>
     </li></ul></dd>
     
     
@@ -5208,7 +7286,7 @@ compartilhados e popula o escopo.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="projeto-canvas.js.html">services/projeto-canvas.js</a>, <a href="projeto-canvas.js.html#line143">line 143</a>
+        <a href="projeto-canvas.js.html">services/projeto-canvas.js</a>, <a href="projeto-canvas.js.html#line161">line 161</a>
     </li></ul></dd>
     
     
@@ -5229,6 +7307,164 @@ compartilhados e popula o escopo.
     
     
     
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="ProjetoCanvasService::obterProjetos"><span class="type-signature"></span>ProjetoCanvasService::obterProjetos<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Retorna todos os projetos canvas cadastrados.
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="projeto-canvas.js.html">services/projeto-canvas.js</a>, <a href="projeto-canvas.js.html#line180">line 180</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    Array
+</div>
+
+
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="ProjetoCanvasService::obterProjetosJson"><span class="type-signature"></span>ProjetoCanvasService::obterProjetosJson<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Retorna todos os projetos canvas cadastrados no formato json.
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="projeto-canvas.js.html">services/projeto-canvas.js</a>, <a href="projeto-canvas.js.html#line190">line 190</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    Array de objetos json
+</div>
+
+
+
+        
     
     
 </dd>
@@ -5371,7 +7607,7 @@ compartilhados e popula o escopo.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="projeto-canvas.js.html">services/projeto-canvas.js</a>, <a href="projeto-canvas.js.html#line120">line 120</a>
+        <a href="projeto-canvas.js.html">services/projeto-canvas.js</a>, <a href="projeto-canvas.js.html#line134">line 134</a>
     </li></ul></dd>
     
     
@@ -6646,13 +8882,13 @@ entre as do usuário e as compartilhadas.
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#CanvasCadastrarCtrl::cadastrar">CanvasCadastrarCtrl::cadastrar</a></li><li><a href="global.html#CanvasCadastrarCtrl::carregarProjeto">CanvasCadastrarCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasCadastrarCtrl::obterNomeItemPorTipo">CanvasCadastrarCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasCadastrarCtrl::validarParametros">CanvasCadastrarCtrl::validarParametros</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::atualizar">CanvasEditarRemoverCtrl::atualizar</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::carregarProjeto">CanvasEditarRemoverCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::ehItemIdValido">CanvasEditarRemoverCtrl::ehItemIdValido</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::obterNomeItemPorTipo">CanvasEditarRemoverCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::remover">CanvasEditarRemoverCtrl::remover</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::validarParametros">CanvasEditarRemoverCtrl::validarParametros</a></li><li><a href="global.html#canvasService::atualizar">canvasService::atualizar</a></li><li><a href="global.html#canvasService::cadastrar">canvasService::cadastrar</a></li><li><a href="global.html#canvasService::carregarItem">canvasService::carregarItem</a></li><li><a href="global.html#canvasService::carregarProjeto">canvasService::carregarProjeto</a></li><li><a href="global.html#CanvasService::obterNomeItemPorTipo">CanvasService::obterNomeItemPorTipo</a></li><li><a href="global.html#canvasService::remover">canvasService::remover</a></li><li><a href="global.html#CanvasVisualizarCtrl::carregarProjeto">CanvasVisualizarCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasWizardCtrl::anterior">CanvasWizardCtrl::anterior</a></li><li><a href="global.html#CanvasWizardCtrl::avancar">CanvasWizardCtrl::avancar</a></li><li><a href="global.html#CanvasWizardCtrl::cadastrar">CanvasWizardCtrl::cadastrar</a></li><li><a href="global.html#CanvasWizardCtrl::carregarProjeto">CanvasWizardCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasWizardCtrl::mudarAba">CanvasWizardCtrl::mudarAba</a></li><li><a href="global.html#CanvasWizardCtrl::obterNomeItemPorTipo">CanvasWizardCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasWizardCtrl::obterPorcentagem">CanvasWizardCtrl::obterPorcentagem</a></li><li><a href="global.html#CanvasWizardCtrl::remover">CanvasWizardCtrl::remover</a></li><li><a href="global.html#CriarUsuarioCtrl::cadastrar">CriarUsuarioCtrl::cadastrar</a></li><li><a href="global.html#EnviarPorEmailCtrl::carregarEmail">EnviarPorEmailCtrl::carregarEmail</a></li><li><a href="global.html#EnviarPorEmailCtrl::gravarEmail">EnviarPorEmailCtrl::gravarEmail</a></li><li><a href="global.html#EnviarPorEmailCtrl::reset">EnviarPorEmailCtrl::reset</a></li><li><a href="global.html#EsqueciSenhaCtrl::recuperarSenha">EsqueciSenhaCtrl::recuperarSenha</a></li><li><a href="global.html#I18nCtrl::espanhol">I18nCtrl::espanhol</a></li><li><a href="global.html#I18nCtrl::inglês">I18nCtrl::inglês</a></li><li><a href="global.html#I18nCtrl::lingua">I18nCtrl::lingua</a></li><li><a href="global.html#I18nCtrl::portugues">I18nCtrl::portugues</a></li><li><a href="global.html#I18nCtrl::selecionarLingua">I18nCtrl::selecionarLingua</a></li><li><a href="global.html#LoginCtrl::login">LoginCtrl::login</a></li><li><a href="global.html#loginService::cadastrarUsuario">loginService::cadastrarUsuario</a></li><li><a href="global.html#loginService::login">loginService::login</a></li><li><a href="global.html#LogoutCtrl::logout">LogoutCtrl::logout</a></li><li><a href="global.html#NovaSenhaCtrl::definirNovaSenha">NovaSenhaCtrl::definirNovaSenha</a></li><li><a href="global.html#projetoCanvasService::atualizar">projetoCanvasService::atualizar</a></li><li><a href="global.html#projetoCanvasService::cadastrar">projetoCanvasService::cadastrar</a></li><li><a href="global.html#projetoCanvasService::carregarProjeto">projetoCanvasService::carregarProjeto</a></li><li><a href="global.html#projetoCanvasService::carregarProjetos">projetoCanvasService::carregarProjetos</a></li><li><a href="global.html#projetoCanvasService::carregarProjetosCompartilhados">projetoCanvasService::carregarProjetosCompartilhados</a></li><li><a href="global.html#projetoCanvasService::compartilhar">projetoCanvasService::compartilhar</a></li><li><a href="global.html#projetoCanvasService::remover">projetoCanvasService::remover</a></li><li><a href="global.html#ProjetosCanvasCadastrarCtrl::cadastrar">ProjetosCanvasCadastrarCtrl::cadastrar</a></li><li><a href="global.html#ProjetosCanvasCompartilharCtrl::carregarProjeto">ProjetosCanvasCompartilharCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasCompartilharCtrl::compartilhar">ProjetosCanvasCompartilharCtrl::compartilhar</a></li><li><a href="global.html#ProjetosCanvasEditarCtrl::atualizar">ProjetosCanvasEditarCtrl::atualizar</a></li><li><a href="global.html#ProjetosCanvasEditarCtrl::carregarProjeto">ProjetosCanvasEditarCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::alternarVisualizacao">ProjetosCanvasListarCtrl::alternarVisualizacao</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::carregarProjetos">ProjetosCanvasListarCtrl::carregarProjetos</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::carregarProjetosCompartilhados">ProjetosCanvasListarCtrl::carregarProjetosCompartilhados</a></li><li><a href="global.html#ProjetosCanvasRelatorioTextoCtrl::carregarProjeto">ProjetosCanvasRelatorioTextoCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasRemoverCtrl::carregarProjeto">ProjetosCanvasRemoverCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasRemoverCtrl::remover">ProjetosCanvasRemoverCtrl::remover</a></li><li><a href="global.html#TrocarSenhaCtrl::trocarSenha">TrocarSenhaCtrl::trocarSenha</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#CanvasCadastrarCtrl::cadastrar">CanvasCadastrarCtrl::cadastrar</a></li><li><a href="global.html#CanvasCadastrarCtrl::carregarProjeto">CanvasCadastrarCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasCadastrarCtrl::obterNomeItemPorTipo">CanvasCadastrarCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasCadastrarCtrl::validarParametros">CanvasCadastrarCtrl::validarParametros</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::atualizar">CanvasEditarRemoverCtrl::atualizar</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::carregarProjeto">CanvasEditarRemoverCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::obterNomeItemPorTipo">CanvasEditarRemoverCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::remover">CanvasEditarRemoverCtrl::remover</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::validarParametros">CanvasEditarRemoverCtrl::validarParametros</a></li><li><a href="global.html#canvasLocalService::atualizar">canvasLocalService::atualizar</a></li><li><a href="global.html#canvasLocalService::cadastrar">canvasLocalService::cadastrar</a></li><li><a href="global.html#canvasLocalService::carregarItem">canvasLocalService::carregarItem</a></li><li><a href="global.html#canvasLocalService::carregarProjeto">canvasLocalService::carregarProjeto</a></li><li><a href="global.html#canvasLocalService::remover">canvasLocalService::remover</a></li><li><a href="global.html#canvasService::atualizar">canvasService::atualizar</a></li><li><a href="global.html#canvasService::cadastrar">canvasService::cadastrar</a></li><li><a href="global.html#canvasService::carregarItem">canvasService::carregarItem</a></li><li><a href="global.html#canvasService::carregarProjeto">canvasService::carregarProjeto</a></li><li><a href="global.html#CanvasService::obterNomeItemPorTipo">CanvasService::obterNomeItemPorTipo</a></li><li><a href="global.html#canvasService::remover">canvasService::remover</a></li><li><a href="global.html#CanvasVisualizarCtrl::carregarProjeto">CanvasVisualizarCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasWizardCtrl::anterior">CanvasWizardCtrl::anterior</a></li><li><a href="global.html#CanvasWizardCtrl::avancar">CanvasWizardCtrl::avancar</a></li><li><a href="global.html#CanvasWizardCtrl::cadastrar">CanvasWizardCtrl::cadastrar</a></li><li><a href="global.html#CanvasWizardCtrl::carregarProjeto">CanvasWizardCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasWizardCtrl::mudarAba">CanvasWizardCtrl::mudarAba</a></li><li><a href="global.html#CanvasWizardCtrl::obterNomeItemPorTipo">CanvasWizardCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasWizardCtrl::obterPorcentagem">CanvasWizardCtrl::obterPorcentagem</a></li><li><a href="global.html#CanvasWizardCtrl::remover">CanvasWizardCtrl::remover</a></li><li><a href="global.html#CriarUsuarioCtrl::cadastrar">CriarUsuarioCtrl::cadastrar</a></li><li><a href="global.html#EnviarPorEmailCtrl::carregarEmail">EnviarPorEmailCtrl::carregarEmail</a></li><li><a href="global.html#EnviarPorEmailCtrl::gravarEmail">EnviarPorEmailCtrl::gravarEmail</a></li><li><a href="global.html#EnviarPorEmailCtrl::reset">EnviarPorEmailCtrl::reset</a></li><li><a href="global.html#EsqueciSenhaCtrl::recuperarSenha">EsqueciSenhaCtrl::recuperarSenha</a></li><li><a href="global.html#I18nCtrl::espanhol">I18nCtrl::espanhol</a></li><li><a href="global.html#I18nCtrl::inglês">I18nCtrl::inglês</a></li><li><a href="global.html#I18nCtrl::lingua">I18nCtrl::lingua</a></li><li><a href="global.html#I18nCtrl::portugues">I18nCtrl::portugues</a></li><li><a href="global.html#I18nCtrl::selecionarLingua">I18nCtrl::selecionarLingua</a></li><li><a href="global.html#LoginCtrl::login">LoginCtrl::login</a></li><li><a href="global.html#loginService::cadastrarUsuario">loginService::cadastrarUsuario</a></li><li><a href="global.html#loginService::login">loginService::login</a></li><li><a href="global.html#LogoutCtrl::logout">LogoutCtrl::logout</a></li><li><a href="global.html#NovaSenhaCtrl::definirNovaSenha">NovaSenhaCtrl::definirNovaSenha</a></li><li><a href="global.html#projetoCanvasLocalService::atualizar">projetoCanvasLocalService::atualizar</a></li><li><a href="global.html#projetoCanvasLocalService::cadastrar">projetoCanvasLocalService::cadastrar</a></li><li><a href="global.html#projetoCanvasLocalService::carregarProjeto">projetoCanvasLocalService::carregarProjeto</a></li><li><a href="global.html#projetoCanvasLocalService::carregarProjetoPorId">projetoCanvasLocalService::carregarProjetoPorId</a></li><li><a href="global.html#projetoCanvasLocalService::carregarProjetos">projetoCanvasLocalService::carregarProjetos</a></li><li><a href="global.html#projetoCanvasLocalService::obterProjetos">projetoCanvasLocalService::obterProjetos</a></li><li><a href="global.html#projetoCanvasLocalService::obterProjetosJson">projetoCanvasLocalService::obterProjetosJson</a></li><li><a href="global.html#projetoCanvasLocalService::remover">projetoCanvasLocalService::remover</a></li><li><a href="global.html#projetoCanvasService::atualizar">projetoCanvasService::atualizar</a></li><li><a href="global.html#projetoCanvasService::cadastrar">projetoCanvasService::cadastrar</a></li><li><a href="global.html#projetoCanvasService::carregarProjeto">projetoCanvasService::carregarProjeto</a></li><li><a href="global.html#projetoCanvasService::carregarProjetos">projetoCanvasService::carregarProjetos</a></li><li><a href="global.html#projetoCanvasService::carregarProjetosCompartilhados">projetoCanvasService::carregarProjetosCompartilhados</a></li><li><a href="global.html#projetoCanvasService::compartilhar">projetoCanvasService::compartilhar</a></li><li><a href="global.html#ProjetoCanvasService::obterProjetos">ProjetoCanvasService::obterProjetos</a></li><li><a href="global.html#ProjetoCanvasService::obterProjetosJson">ProjetoCanvasService::obterProjetosJson</a></li><li><a href="global.html#projetoCanvasService::remover">projetoCanvasService::remover</a></li><li><a href="global.html#ProjetosCanvasCadastrarCtrl::cadastrar">ProjetosCanvasCadastrarCtrl::cadastrar</a></li><li><a href="global.html#ProjetosCanvasCompartilharCtrl::carregarProjeto">ProjetosCanvasCompartilharCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasCompartilharCtrl::compartilhar">ProjetosCanvasCompartilharCtrl::compartilhar</a></li><li><a href="global.html#ProjetosCanvasEditarCtrl::atualizar">ProjetosCanvasEditarCtrl::atualizar</a></li><li><a href="global.html#ProjetosCanvasEditarCtrl::carregarProjeto">ProjetosCanvasEditarCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::alternarVisualizacao">ProjetosCanvasListarCtrl::alternarVisualizacao</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::carregarProjetos">ProjetosCanvasListarCtrl::carregarProjetos</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::carregarProjetosCompartilhados">ProjetosCanvasListarCtrl::carregarProjetosCompartilhados</a></li><li><a href="global.html#ProjetosCanvasRelatorioTextoCtrl::carregarProjeto">ProjetosCanvasRelatorioTextoCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasRemoverCtrl::carregarProjeto">ProjetosCanvasRemoverCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasRemoverCtrl::remover">ProjetosCanvasRemoverCtrl::remover</a></li><li><a href="global.html#TrocarSenhaCtrl::trocarSenha">TrocarSenhaCtrl::trocarSenha</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sat Feb 14 2015 09:55:36 GMT-0200 (BRST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sun Feb 15 2015 20:19:17 GMT-0200 (BRST)
 </footer>
 
 <script> prettyPrint(); </script>
