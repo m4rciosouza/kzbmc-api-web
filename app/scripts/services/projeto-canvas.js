@@ -6,8 +6,9 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window', '$resource', '$rootScope',
-  function( $window, $resource, $rootScope ) {
+angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window', '$resource', 
+    '$rootScope', 'projetoCanvasLocalService',
+  function( $window, $resource, $rootScope, projetoCanvasLocalService ) {
 
     var projetoCanvas = {};
 
@@ -20,6 +21,12 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window',
      * @param {function} erro
      */
     projetoCanvas.carregarProjetos = function( pagina, sucesso, erro ) {
+
+      if( $rootScope.local ) {
+        projetoCanvasLocalService.carregarProjetos( pagina, sucesso );
+        return;
+      }
+
       var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas + '?email=:email&page=:pagina' );
       projetosCanvasResource.get( { email : $window.sessionStorage.email, page : pagina }, 
             function( response ) {
@@ -82,6 +89,12 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window',
      * @param {function} erro
      */
     projetoCanvas.cadastrar = function( projetoCanvasObj, sucesso, erro ) {
+
+      if( $rootScope.local ) {
+        projetoCanvasLocalService.cadastrar( projetoCanvasObj, sucesso );
+        return;
+      }
+
       var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas );
       projetosCanvasResource.save( {}, projetoCanvasObj, 
         function( response ) {
@@ -157,6 +170,25 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window',
           erro( response );
         }
       );
+    };
+
+    /**
+     * Retorna todos os projetos canvas cadastrados.
+     * @method ProjetoCanvasService::obterProjetos
+     * @return Array
+     */
+    projetoCanvas.obterProjetos = function() {
+        var projetos = $window.localStorage.projetos;
+        return projetos ? angular.fromJson( projetos ) : [];
+    };
+
+    /**
+     * Retorna todos os projetos canvas cadastrados no formato json.
+     * @method ProjetoCanvasService::obterProjetosJson
+     * @return Array de objetos json
+     */
+    projetoCanvas.obterProjetosJson = function() {
+      return angular.fromJson( this.obterProjetos() );
     };
 
     return projetoCanvas;
