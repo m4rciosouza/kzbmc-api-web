@@ -938,6 +938,8 @@ kzbmcMobileApp.config( function( $translateProvider ) {
   $translateProvider.preferredLanguage( 'en' );
 });
 
+kzbmcMobileApp.constant( '_', window._ );
+
 kzbmcMobileApp.run([ '$rootScope', '$window', '$translate', function( $rootScope, $window, $translate ) {
   $rootScope.liteVersion = false;
   $rootScope.urlProjetoCanvas = 'http://localhost:8888/kzbmc-api/web/index.php/v1/projeto-canvas';
@@ -953,4 +955,5 @@ kzbmcMobileApp.run([ '$rootScope', '$window', '$translate', function( $rootScope
   $rootScope.urlAssinarPlano = 'http://kazale.com';
   $rootScope.local = true;
   $translate.use( $window.localStorage.lingua || 'en' );
+  $rootScope._ = window._;
 }]);

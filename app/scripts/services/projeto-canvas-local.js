@@ -6,8 +6,8 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasLocalService', [ '$window',
-  function( $window ) {
+angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasLocalService', [ '$window', '_',
+  function( $window, _ ) {
 
     var projetoCanvas = {};
 
@@ -39,9 +39,9 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasLocalService', [ '$win
      * @param {function} erro
      */
     projetoCanvas.carregarProjeto = function( projetoId, sucesso, erro ) {
-      var projeto = this.carregarProjetoPorId( projetoId );
-      if( projeto ) {
-          sucesso( projeto );
+      var projetos = this.carregarProjetoPorId( projetoId );
+      if( projetos.length > 0 ) {
+          sucesso( projetos[ 0 ] );
           return;
       }
       erro();
@@ -51,16 +51,13 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasLocalService', [ '$win
      * Carrega um projeto canvas por id.
      * @method projetoCanvasLocalService::carregarProjetoPorId
      * @param {integer} projetoId
-     * @return {object} projeto
+     * @return {array} projetos
      */
     projetoCanvas.carregarProjetoPorId = function( projetoId ) {
       var projetos = this.obterProjetosJson();
-      for( var i = 0; i < projetos.length; i ++ ) {
-        if( projetos[ i ].id === projetoId ) {
-          return projetos[ i ];
-        }
-      }
-      return false;
+      return _.filter( projetos, function( projeto ) {
+                  return projeto.id === projetoId;
+              });
     };
 
     /**
@@ -89,20 +86,24 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasLocalService', [ '$win
      * Atualiza os dados de um projeto canvas.
      * @method projetoCanvasLocalService::atualizar
      * @param {integer} projetoId
-     * @param {object} projetoCanvasObj { nome, descricao }
+     * @param {object} projetoCanvasObj { nome, descricao, itens }
      * @param {function} sucesso
      */
     projetoCanvas.atualizar = function( projetoId, projetoCanvasObj, sucesso ) {
-      var projetos = this.obterProjetosJson();
-      for( var i = 0; i < projetos.length; i ++ ) {
-        if( projetos[ i ].id === projetoId ) {
-          projetos[ i ].nome = projetoCanvasObj.nome;
-          projetos[ i ].descricao = projetoCanvasObj.descricao;
-          break;
-        }
-      }
+      var projetos = _.map( this.obterProjetosJson(), function( projeto ) {
+            if( projeto.id === projetoId ) {
+              projeto.nome = projetoCanvasObj.nome;
+              projeto.descricao = projetoCanvasObj.descricao;
+              if( projetoCanvasObj.itens ) {
+                projeto.itens = projetoCanvasObj.itens;
+              }
+            }
+            return projeto;
+          });
       $window.localStorage.projetos = angular.toJson( projetos );
-      sucesso();
+      if( typeof sucesso === 'function' ) {
+        sucesso();
+      }
     };
 
     /**
@@ -112,14 +113,10 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasLocalService', [ '$win
      * @param {function} sucesso
      */
     projetoCanvas.remover = function( projetoId, sucesso ) {
-      var projetos = this.obterProjetosJson();
-      var projetosGravar = [];
-      for( var i = 0; i < projetos.length; i ++ ) {
-        if( projetos[ i ].id !== projetoId ) {
-          projetosGravar.push( projetos[ i ] );
-        }
-      }
-      $window.localStorage.projetos = angular.toJson( projetosGravar );
+      var projetos = _.filter( this.obterProjetosJson(), function( projeto ) {
+            return projeto.id !== projetoId;
+          });
+      $window.localStorage.projetos = angular.toJson( projetos );
       sucesso();
     };
 

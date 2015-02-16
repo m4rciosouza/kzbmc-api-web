@@ -6,8 +6,8 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).factory( 'canvasLocalService', [ '$window', 'projetoCanvasLocalService',
-  	function( $window, projetoCanvasLocalService ) {
+angular.module( 'kzbmcMobileApp' ).factory( 'canvasLocalService', [ '$window', 'projetoCanvasLocalService', '_', 
+  	function( $window, projetoCanvasLocalService, _ ) {
 
   	var canvas = {};
 
@@ -17,21 +17,31 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasLocalService', [ '$window', '
  	 * @param {integer} projetoId
  	 * @param {function} sucesso
      * @param {function} erro
- 	 * @return {object} projeto
  	 */
 	canvas.carregarProjeto = function( projetoId, sucesso, erro ) {
 		var response = { modoLeitura : false };
-	  	var projetos = projetoCanvasLocalService.obterProjetosJson();
-	  	for( var i = 0; i < projetos.length; i ++ ) {
-	    	if( projetos[ i ].id === projetoId ) {
-	      		response.projeto = projetos[ i ];
-	      		response.itens = projetos[ i ].itens;
-	      		sucesso( response );
-	      		return;
-	    	}
-	  	}
-	  	erro( response );
+		var projetos = projetoCanvasLocalService.carregarProjetoPorId( projetoId );
+		if( projetos.length > 0 ) {
+	      	response.projeto = projetos[ 0 ];
+	      	response.itens = projetos[ 0 ].itens;
+	      	sucesso( response );
+	      	return;
+		}
+		erro( response );
 	};
+
+	/**
+     * Carrega um item canvas por id.
+     * @method canvasLocalService::carregarItemPorId
+     * @param {integer} itemId
+     * @param {array} itens
+     * @return {array} itens
+     */
+    canvas.carregarItemPorId = function( itemId, itens ) {
+		return _.filter( itens, function( item ) {
+				return item.id === itemId;
+			});
+    };
 
 	/**
      * Carrega um item canvas por id.
@@ -43,18 +53,17 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasLocalService', [ '$window', '
      * @param {function} erro
      */
     canvas.carregarItem = function( projetoId, tipo, itemId, sucesso, erro ) {
-    	var response = {};
-    	var projeto = projetoCanvasLocalService.carregarProjetoPorId( projetoId );
-    	if( projeto ) {
-    		for( var i = 0; i < projeto.itens[ tipo ].length; i ++ ) {
-    			if( projeto.itens[ tipo ][ i ].id === itemId ) {
-    				response = projeto.itens[ tipo ][ i ];
-		      		response.projetoCanvas = projeto;
-		      		sucesso( response );
-		      		return;
-		      	}
-      		}
-    	}
+		var response = {};
+		var projetos = projetoCanvasLocalService.carregarProjetoPorId( projetoId );
+		if( projetos.length > 0 ) {
+			var itens = this.carregarItemPorId( itemId, projetos[ 0 ].itens[ tipo ] );
+			if( itens.length > 0 ) {
+				response = itens[ 0 ];
+				response.projetoCanvas = projetos[ 0 ];
+		    	sucesso( response );
+		    	return;
+			}
+		}
 	  	erro();
 	};
 
@@ -67,22 +76,20 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasLocalService', [ '$window', '
 	 * @param {function} erro
 	 */
 	canvas.cadastrar = function( projetoId, itemCanvasObj, sucesso, erro ) {
-		var projetos = projetoCanvasLocalService.obterProjetosJson();
-		for( var i = 0; i < projetos.length; i ++ ) {
-	    	if( projetos[ i ].id === projetoId ) {
-	    		var item = {
-	      			id : projetoCanvasLocalService.guid(),
-	      			titulo : itemCanvasObj.titulo,
-	      			descricao : itemCanvasObj.descricao,
-	      			cor : itemCanvasObj.cor
-	      		};
-	      		projetos[ i ].itens[ itemCanvasObj.tipo ].push( item );
-	      		$window.localStorage.projetos = angular.toJson( projetos );
-        		sucesso( item );
-        		return;
-	    	}
-	  	}
-	  	erro();
+		var projetos = projetoCanvasLocalService.carregarProjetoPorId( projetoId );
+		if( projetos.length > 0 ) {
+			var item = {
+	      		id : projetoCanvasLocalService.guid(),
+	      		titulo : itemCanvasObj.titulo,
+	      		descricao : itemCanvasObj.descricao,
+	      		cor : itemCanvasObj.cor
+	      	};
+	      	projetos[ 0 ].itens[ itemCanvasObj.tipo ].push( item );
+	      	projetoCanvasLocalService.atualizar( projetoId, projetos[ 0 ] );
+        	sucesso( item );
+        	return;
+		}
+		erro();
 	};
 
 	/**
@@ -96,22 +103,19 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasLocalService', [ '$window', '
      */
   	canvas.atualizar = function( projetoId, itemId, itemCanvasObj, sucesso, erro ) {
   		var tipo = itemCanvasObj.tipo;
-  		var projetos = projetoCanvasLocalService.obterProjetosJson();
-	    for( var i = 0; i < projetos.length; i ++ ) {
-	        if( projetos[ i ].id === projetoId ) {
-	        	for( var j = 0; j < projetos[ i ].itens[ tipo ].length; j ++ ) {
-	        		var item = projetos[ i ].itens[ tipo ][ j ];
-	        		if( item.id === itemId ) {
-	        			item.titulo = itemCanvasObj.titulo;
-	        			item.descricao = itemCanvasObj.descricao;
-	        			item.cor = itemCanvasObj.cor;
-	        			$window.localStorage.projetos = angular.toJson( projetos );
-	    				sucesso();
-	          			return;
-	          		}
-	          	}
-	        }
-	    }
+  		var projetos = projetoCanvasLocalService.carregarProjetoPorId( projetoId );
+		if( projetos.length > 0 ) {
+			projetos[ 0 ].itens[ tipo ] = _.map( projetos[ 0 ].itens[ tipo ], function( item ) {
+				if( item.id === itemId ) {
+					item.titulo = itemCanvasObj.titulo;
+        			item.descricao = itemCanvasObj.descricao;
+        			item.cor = itemCanvasObj.cor;
+				}
+				return item;
+			});
+			projetoCanvasLocalService.atualizar( projetoId, projetos[ 0 ], sucesso );
+			return;
+		}
 	  	erro();
   	};
 
@@ -124,21 +128,13 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasLocalService', [ '$window', '
      * @param {function} sucesso
      */
     canvas.remover = function( projetoId, tipo, itemId, sucesso ) {
-  		var projetos = projetoCanvasLocalService.obterProjetosJson();
-  		var itensGravar = [];
-	    for( var i = 0; i < projetos.length; i ++ ) {
-	        if( projetos[ i ].id === projetoId ) {
-	        	for( var j = 0; j < projetos[ i ].itens[ tipo ].length; j ++ ) {
-	        		var item = projetos[ i ].itens[ tipo ][ j ];
-	        		if( item.id !== itemId ) {
-	        			itensGravar.push( item );
-	          		}
-	          	}
-	          	projetos[ i ].itens[ tipo ] = itensGravar;
-	        }
-	    }
-	    $window.localStorage.projetos = angular.toJson( projetos );
-	    sucesso();
+  		var projetos = projetoCanvasLocalService.carregarProjetoPorId( projetoId );
+		if( projetos.length > 0 ) {
+			projetos[ 0 ].itens[ tipo ] = _.filter( projetos[ 0 ].itens[ tipo ], function( item ) {
+				return item.id !== itemId;
+			});
+			projetoCanvasLocalService.atualizar( projetoId, projetos[ 0 ], sucesso );
+		}
     };
 
   	return canvas;

@@ -989,7 +989,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="canvas-local.js.html">services/canvas-local.js</a>, <a href="canvas-local.js.html#line88">line 88</a>
+        <a href="canvas-local.js.html">services/canvas-local.js</a>, <a href="canvas-local.js.html#line95">line 95</a>
     </li></ul></dd>
     
     
@@ -1175,7 +1175,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="canvas-local.js.html">services/canvas-local.js</a>, <a href="canvas-local.js.html#line61">line 61</a>
+        <a href="canvas-local.js.html">services/canvas-local.js</a>, <a href="canvas-local.js.html#line70">line 70</a>
     </li></ul></dd>
     
     
@@ -1384,7 +1384,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="canvas-local.js.html">services/canvas-local.js</a>, <a href="canvas-local.js.html#line36">line 36</a>
+        <a href="canvas-local.js.html">services/canvas-local.js</a>, <a href="canvas-local.js.html#line46">line 46</a>
     </li></ul></dd>
     
     
@@ -1412,7 +1412,169 @@
         
             
 <dt>
-    <h4 class="name" id="canvasLocalService::carregarProjeto"><span class="type-signature"></span>canvasLocalService::carregarProjeto<span class="signature">(projetoId, sucesso, erro)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    <h4 class="name" id="canvasLocalService::carregarItemPorId"><span class="type-signature"></span>canvasLocalService::carregarItemPorId<span class="signature">(itemId, itens)</span><span class="type-signature"> &rarr; {array}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Carrega um item canvas por id.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>itemId</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">integer</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>itens</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="canvas-local.js.html">services/canvas-local.js</a>, <a href="canvas-local.js.html#line33">line 33</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    itens
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">array</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="canvasLocalService::carregarProjeto"><span class="type-signature"></span>canvasLocalService::carregarProjeto<span class="signature">(projetoId, sucesso, erro)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -1568,28 +1730,6 @@
     
     
     
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    projeto
-</div>
-
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type">object</span>
-
-
-	</dd>
-</dl>
-
-        
     
     
 </dd>
@@ -1755,7 +1895,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="canvas-local.js.html">services/canvas-local.js</a>, <a href="canvas-local.js.html#line118">line 118</a>
+        <a href="canvas-local.js.html">services/canvas-local.js</a>, <a href="canvas-local.js.html#line122">line 122</a>
     </li></ul></dd>
     
     
@@ -5348,7 +5488,7 @@
             
             
             
-            <td class="description last">{ nome, descricao }</td>
+            <td class="description last">{ nome, descricao, itens }</td>
         </tr>
 	
 	
@@ -5402,7 +5542,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="projeto-canvas-local.js.html">services/projeto-canvas-local.js</a>, <a href="projeto-canvas-local.js.html#line88">line 88</a>
+        <a href="projeto-canvas-local.js.html">services/projeto-canvas-local.js</a>, <a href="projeto-canvas-local.js.html#line85">line 85</a>
     </li></ul></dd>
     
     
@@ -5542,7 +5682,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="projeto-canvas-local.js.html">services/projeto-canvas-local.js</a>, <a href="projeto-canvas-local.js.html#line66">line 66</a>
+        <a href="projeto-canvas-local.js.html">services/projeto-canvas-local.js</a>, <a href="projeto-canvas-local.js.html#line63">line 63</a>
     </li></ul></dd>
     
     
@@ -5733,7 +5873,7 @@
         
             
 <dt>
-    <h4 class="name" id="projetoCanvasLocalService::carregarProjetoPorId"><span class="type-signature"></span>projetoCanvasLocalService::carregarProjetoPorId<span class="signature">(projetoId)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    <h4 class="name" id="projetoCanvasLocalService::carregarProjetoPorId"><span class="type-signature"></span>projetoCanvasLocalService::carregarProjetoPorId<span class="signature">(projetoId)</span><span class="type-signature"> &rarr; {array}</span></h4>
     
     
 </dt>
@@ -5847,7 +5987,7 @@
     
             
 <div class="param-desc">
-    projeto
+    projetos
 </div>
 
 
@@ -5858,7 +5998,7 @@
 	</dt>
 	<dd>
 		
-<span class="param-type">object</span>
+<span class="param-type">array</span>
 
 
 	</dd>
@@ -6054,7 +6194,7 @@ popula o escopo.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="projeto-canvas-local.js.html">services/projeto-canvas-local.js</a>, <a href="projeto-canvas-local.js.html#line126">line 126</a>
+        <a href="projeto-canvas-local.js.html">services/projeto-canvas-local.js</a>, <a href="projeto-canvas-local.js.html#line123">line 123</a>
     </li></ul></dd>
     
     
@@ -6133,7 +6273,7 @@ popula o escopo.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="projeto-canvas-local.js.html">services/projeto-canvas-local.js</a>, <a href="projeto-canvas-local.js.html#line136">line 136</a>
+        <a href="projeto-canvas-local.js.html">services/projeto-canvas-local.js</a>, <a href="projeto-canvas-local.js.html#line133">line 133</a>
     </li></ul></dd>
     
     
@@ -6283,7 +6423,7 @@ popula o escopo.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="projeto-canvas-local.js.html">services/projeto-canvas-local.js</a>, <a href="projeto-canvas-local.js.html#line108">line 108</a>
+        <a href="projeto-canvas-local.js.html">services/projeto-canvas-local.js</a>, <a href="projeto-canvas-local.js.html#line109">line 109</a>
     </li></ul></dd>
     
     
@@ -8882,13 +9022,13 @@ entre as do usuário e as compartilhadas.
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#CanvasCadastrarCtrl::cadastrar">CanvasCadastrarCtrl::cadastrar</a></li><li><a href="global.html#CanvasCadastrarCtrl::carregarProjeto">CanvasCadastrarCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasCadastrarCtrl::obterNomeItemPorTipo">CanvasCadastrarCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasCadastrarCtrl::validarParametros">CanvasCadastrarCtrl::validarParametros</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::atualizar">CanvasEditarRemoverCtrl::atualizar</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::carregarProjeto">CanvasEditarRemoverCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::obterNomeItemPorTipo">CanvasEditarRemoverCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::remover">CanvasEditarRemoverCtrl::remover</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::validarParametros">CanvasEditarRemoverCtrl::validarParametros</a></li><li><a href="global.html#canvasLocalService::atualizar">canvasLocalService::atualizar</a></li><li><a href="global.html#canvasLocalService::cadastrar">canvasLocalService::cadastrar</a></li><li><a href="global.html#canvasLocalService::carregarItem">canvasLocalService::carregarItem</a></li><li><a href="global.html#canvasLocalService::carregarProjeto">canvasLocalService::carregarProjeto</a></li><li><a href="global.html#canvasLocalService::remover">canvasLocalService::remover</a></li><li><a href="global.html#canvasService::atualizar">canvasService::atualizar</a></li><li><a href="global.html#canvasService::cadastrar">canvasService::cadastrar</a></li><li><a href="global.html#canvasService::carregarItem">canvasService::carregarItem</a></li><li><a href="global.html#canvasService::carregarProjeto">canvasService::carregarProjeto</a></li><li><a href="global.html#CanvasService::obterNomeItemPorTipo">CanvasService::obterNomeItemPorTipo</a></li><li><a href="global.html#canvasService::remover">canvasService::remover</a></li><li><a href="global.html#CanvasVisualizarCtrl::carregarProjeto">CanvasVisualizarCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasWizardCtrl::anterior">CanvasWizardCtrl::anterior</a></li><li><a href="global.html#CanvasWizardCtrl::avancar">CanvasWizardCtrl::avancar</a></li><li><a href="global.html#CanvasWizardCtrl::cadastrar">CanvasWizardCtrl::cadastrar</a></li><li><a href="global.html#CanvasWizardCtrl::carregarProjeto">CanvasWizardCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasWizardCtrl::mudarAba">CanvasWizardCtrl::mudarAba</a></li><li><a href="global.html#CanvasWizardCtrl::obterNomeItemPorTipo">CanvasWizardCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasWizardCtrl::obterPorcentagem">CanvasWizardCtrl::obterPorcentagem</a></li><li><a href="global.html#CanvasWizardCtrl::remover">CanvasWizardCtrl::remover</a></li><li><a href="global.html#CriarUsuarioCtrl::cadastrar">CriarUsuarioCtrl::cadastrar</a></li><li><a href="global.html#EnviarPorEmailCtrl::carregarEmail">EnviarPorEmailCtrl::carregarEmail</a></li><li><a href="global.html#EnviarPorEmailCtrl::gravarEmail">EnviarPorEmailCtrl::gravarEmail</a></li><li><a href="global.html#EnviarPorEmailCtrl::reset">EnviarPorEmailCtrl::reset</a></li><li><a href="global.html#EsqueciSenhaCtrl::recuperarSenha">EsqueciSenhaCtrl::recuperarSenha</a></li><li><a href="global.html#I18nCtrl::espanhol">I18nCtrl::espanhol</a></li><li><a href="global.html#I18nCtrl::inglês">I18nCtrl::inglês</a></li><li><a href="global.html#I18nCtrl::lingua">I18nCtrl::lingua</a></li><li><a href="global.html#I18nCtrl::portugues">I18nCtrl::portugues</a></li><li><a href="global.html#I18nCtrl::selecionarLingua">I18nCtrl::selecionarLingua</a></li><li><a href="global.html#LoginCtrl::login">LoginCtrl::login</a></li><li><a href="global.html#loginService::cadastrarUsuario">loginService::cadastrarUsuario</a></li><li><a href="global.html#loginService::login">loginService::login</a></li><li><a href="global.html#LogoutCtrl::logout">LogoutCtrl::logout</a></li><li><a href="global.html#NovaSenhaCtrl::definirNovaSenha">NovaSenhaCtrl::definirNovaSenha</a></li><li><a href="global.html#projetoCanvasLocalService::atualizar">projetoCanvasLocalService::atualizar</a></li><li><a href="global.html#projetoCanvasLocalService::cadastrar">projetoCanvasLocalService::cadastrar</a></li><li><a href="global.html#projetoCanvasLocalService::carregarProjeto">projetoCanvasLocalService::carregarProjeto</a></li><li><a href="global.html#projetoCanvasLocalService::carregarProjetoPorId">projetoCanvasLocalService::carregarProjetoPorId</a></li><li><a href="global.html#projetoCanvasLocalService::carregarProjetos">projetoCanvasLocalService::carregarProjetos</a></li><li><a href="global.html#projetoCanvasLocalService::obterProjetos">projetoCanvasLocalService::obterProjetos</a></li><li><a href="global.html#projetoCanvasLocalService::obterProjetosJson">projetoCanvasLocalService::obterProjetosJson</a></li><li><a href="global.html#projetoCanvasLocalService::remover">projetoCanvasLocalService::remover</a></li><li><a href="global.html#projetoCanvasService::atualizar">projetoCanvasService::atualizar</a></li><li><a href="global.html#projetoCanvasService::cadastrar">projetoCanvasService::cadastrar</a></li><li><a href="global.html#projetoCanvasService::carregarProjeto">projetoCanvasService::carregarProjeto</a></li><li><a href="global.html#projetoCanvasService::carregarProjetos">projetoCanvasService::carregarProjetos</a></li><li><a href="global.html#projetoCanvasService::carregarProjetosCompartilhados">projetoCanvasService::carregarProjetosCompartilhados</a></li><li><a href="global.html#projetoCanvasService::compartilhar">projetoCanvasService::compartilhar</a></li><li><a href="global.html#ProjetoCanvasService::obterProjetos">ProjetoCanvasService::obterProjetos</a></li><li><a href="global.html#ProjetoCanvasService::obterProjetosJson">ProjetoCanvasService::obterProjetosJson</a></li><li><a href="global.html#projetoCanvasService::remover">projetoCanvasService::remover</a></li><li><a href="global.html#ProjetosCanvasCadastrarCtrl::cadastrar">ProjetosCanvasCadastrarCtrl::cadastrar</a></li><li><a href="global.html#ProjetosCanvasCompartilharCtrl::carregarProjeto">ProjetosCanvasCompartilharCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasCompartilharCtrl::compartilhar">ProjetosCanvasCompartilharCtrl::compartilhar</a></li><li><a href="global.html#ProjetosCanvasEditarCtrl::atualizar">ProjetosCanvasEditarCtrl::atualizar</a></li><li><a href="global.html#ProjetosCanvasEditarCtrl::carregarProjeto">ProjetosCanvasEditarCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::alternarVisualizacao">ProjetosCanvasListarCtrl::alternarVisualizacao</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::carregarProjetos">ProjetosCanvasListarCtrl::carregarProjetos</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::carregarProjetosCompartilhados">ProjetosCanvasListarCtrl::carregarProjetosCompartilhados</a></li><li><a href="global.html#ProjetosCanvasRelatorioTextoCtrl::carregarProjeto">ProjetosCanvasRelatorioTextoCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasRemoverCtrl::carregarProjeto">ProjetosCanvasRemoverCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasRemoverCtrl::remover">ProjetosCanvasRemoverCtrl::remover</a></li><li><a href="global.html#TrocarSenhaCtrl::trocarSenha">TrocarSenhaCtrl::trocarSenha</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#CanvasCadastrarCtrl::cadastrar">CanvasCadastrarCtrl::cadastrar</a></li><li><a href="global.html#CanvasCadastrarCtrl::carregarProjeto">CanvasCadastrarCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasCadastrarCtrl::obterNomeItemPorTipo">CanvasCadastrarCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasCadastrarCtrl::validarParametros">CanvasCadastrarCtrl::validarParametros</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::atualizar">CanvasEditarRemoverCtrl::atualizar</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::carregarProjeto">CanvasEditarRemoverCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::obterNomeItemPorTipo">CanvasEditarRemoverCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::remover">CanvasEditarRemoverCtrl::remover</a></li><li><a href="global.html#CanvasEditarRemoverCtrl::validarParametros">CanvasEditarRemoverCtrl::validarParametros</a></li><li><a href="global.html#canvasLocalService::atualizar">canvasLocalService::atualizar</a></li><li><a href="global.html#canvasLocalService::cadastrar">canvasLocalService::cadastrar</a></li><li><a href="global.html#canvasLocalService::carregarItem">canvasLocalService::carregarItem</a></li><li><a href="global.html#canvasLocalService::carregarItemPorId">canvasLocalService::carregarItemPorId</a></li><li><a href="global.html#canvasLocalService::carregarProjeto">canvasLocalService::carregarProjeto</a></li><li><a href="global.html#canvasLocalService::remover">canvasLocalService::remover</a></li><li><a href="global.html#canvasService::atualizar">canvasService::atualizar</a></li><li><a href="global.html#canvasService::cadastrar">canvasService::cadastrar</a></li><li><a href="global.html#canvasService::carregarItem">canvasService::carregarItem</a></li><li><a href="global.html#canvasService::carregarProjeto">canvasService::carregarProjeto</a></li><li><a href="global.html#CanvasService::obterNomeItemPorTipo">CanvasService::obterNomeItemPorTipo</a></li><li><a href="global.html#canvasService::remover">canvasService::remover</a></li><li><a href="global.html#CanvasVisualizarCtrl::carregarProjeto">CanvasVisualizarCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasWizardCtrl::anterior">CanvasWizardCtrl::anterior</a></li><li><a href="global.html#CanvasWizardCtrl::avancar">CanvasWizardCtrl::avancar</a></li><li><a href="global.html#CanvasWizardCtrl::cadastrar">CanvasWizardCtrl::cadastrar</a></li><li><a href="global.html#CanvasWizardCtrl::carregarProjeto">CanvasWizardCtrl::carregarProjeto</a></li><li><a href="global.html#CanvasWizardCtrl::mudarAba">CanvasWizardCtrl::mudarAba</a></li><li><a href="global.html#CanvasWizardCtrl::obterNomeItemPorTipo">CanvasWizardCtrl::obterNomeItemPorTipo</a></li><li><a href="global.html#CanvasWizardCtrl::obterPorcentagem">CanvasWizardCtrl::obterPorcentagem</a></li><li><a href="global.html#CanvasWizardCtrl::remover">CanvasWizardCtrl::remover</a></li><li><a href="global.html#CriarUsuarioCtrl::cadastrar">CriarUsuarioCtrl::cadastrar</a></li><li><a href="global.html#EnviarPorEmailCtrl::carregarEmail">EnviarPorEmailCtrl::carregarEmail</a></li><li><a href="global.html#EnviarPorEmailCtrl::gravarEmail">EnviarPorEmailCtrl::gravarEmail</a></li><li><a href="global.html#EnviarPorEmailCtrl::reset">EnviarPorEmailCtrl::reset</a></li><li><a href="global.html#EsqueciSenhaCtrl::recuperarSenha">EsqueciSenhaCtrl::recuperarSenha</a></li><li><a href="global.html#I18nCtrl::espanhol">I18nCtrl::espanhol</a></li><li><a href="global.html#I18nCtrl::inglês">I18nCtrl::inglês</a></li><li><a href="global.html#I18nCtrl::lingua">I18nCtrl::lingua</a></li><li><a href="global.html#I18nCtrl::portugues">I18nCtrl::portugues</a></li><li><a href="global.html#I18nCtrl::selecionarLingua">I18nCtrl::selecionarLingua</a></li><li><a href="global.html#LoginCtrl::login">LoginCtrl::login</a></li><li><a href="global.html#loginService::cadastrarUsuario">loginService::cadastrarUsuario</a></li><li><a href="global.html#loginService::login">loginService::login</a></li><li><a href="global.html#LogoutCtrl::logout">LogoutCtrl::logout</a></li><li><a href="global.html#NovaSenhaCtrl::definirNovaSenha">NovaSenhaCtrl::definirNovaSenha</a></li><li><a href="global.html#projetoCanvasLocalService::atualizar">projetoCanvasLocalService::atualizar</a></li><li><a href="global.html#projetoCanvasLocalService::cadastrar">projetoCanvasLocalService::cadastrar</a></li><li><a href="global.html#projetoCanvasLocalService::carregarProjeto">projetoCanvasLocalService::carregarProjeto</a></li><li><a href="global.html#projetoCanvasLocalService::carregarProjetoPorId">projetoCanvasLocalService::carregarProjetoPorId</a></li><li><a href="global.html#projetoCanvasLocalService::carregarProjetos">projetoCanvasLocalService::carregarProjetos</a></li><li><a href="global.html#projetoCanvasLocalService::obterProjetos">projetoCanvasLocalService::obterProjetos</a></li><li><a href="global.html#projetoCanvasLocalService::obterProjetosJson">projetoCanvasLocalService::obterProjetosJson</a></li><li><a href="global.html#projetoCanvasLocalService::remover">projetoCanvasLocalService::remover</a></li><li><a href="global.html#projetoCanvasService::atualizar">projetoCanvasService::atualizar</a></li><li><a href="global.html#projetoCanvasService::cadastrar">projetoCanvasService::cadastrar</a></li><li><a href="global.html#projetoCanvasService::carregarProjeto">projetoCanvasService::carregarProjeto</a></li><li><a href="global.html#projetoCanvasService::carregarProjetos">projetoCanvasService::carregarProjetos</a></li><li><a href="global.html#projetoCanvasService::carregarProjetosCompartilhados">projetoCanvasService::carregarProjetosCompartilhados</a></li><li><a href="global.html#projetoCanvasService::compartilhar">projetoCanvasService::compartilhar</a></li><li><a href="global.html#ProjetoCanvasService::obterProjetos">ProjetoCanvasService::obterProjetos</a></li><li><a href="global.html#ProjetoCanvasService::obterProjetosJson">ProjetoCanvasService::obterProjetosJson</a></li><li><a href="global.html#projetoCanvasService::remover">projetoCanvasService::remover</a></li><li><a href="global.html#ProjetosCanvasCadastrarCtrl::cadastrar">ProjetosCanvasCadastrarCtrl::cadastrar</a></li><li><a href="global.html#ProjetosCanvasCompartilharCtrl::carregarProjeto">ProjetosCanvasCompartilharCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasCompartilharCtrl::compartilhar">ProjetosCanvasCompartilharCtrl::compartilhar</a></li><li><a href="global.html#ProjetosCanvasEditarCtrl::atualizar">ProjetosCanvasEditarCtrl::atualizar</a></li><li><a href="global.html#ProjetosCanvasEditarCtrl::carregarProjeto">ProjetosCanvasEditarCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::alternarVisualizacao">ProjetosCanvasListarCtrl::alternarVisualizacao</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::carregarProjetos">ProjetosCanvasListarCtrl::carregarProjetos</a></li><li><a href="global.html#ProjetosCanvasListarCtrl::carregarProjetosCompartilhados">ProjetosCanvasListarCtrl::carregarProjetosCompartilhados</a></li><li><a href="global.html#ProjetosCanvasRelatorioTextoCtrl::carregarProjeto">ProjetosCanvasRelatorioTextoCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasRemoverCtrl::carregarProjeto">ProjetosCanvasRemoverCtrl::carregarProjeto</a></li><li><a href="global.html#ProjetosCanvasRemoverCtrl::remover">ProjetosCanvasRemoverCtrl::remover</a></li><li><a href="global.html#TrocarSenhaCtrl::trocarSenha">TrocarSenhaCtrl::trocarSenha</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sun Feb 15 2015 20:19:17 GMT-0200 (BRST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Mon Feb 16 2015 15:58:01 GMT-0200 (BRST)
 </footer>
 
 <script> prettyPrint(); </script>
