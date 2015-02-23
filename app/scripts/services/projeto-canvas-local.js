@@ -6,7 +6,7 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasLocalService', [ '$window', '_',
+angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasLocalService', [ '$window', '_', 
   function( $window, _ ) {
 
     var projetoCanvas = {};
@@ -139,6 +139,11 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasLocalService', [ '$win
       return angular.fromJson( this.obterProjetos() );
     };
 
+    /**
+     * Gera um id único.
+     * @method projetoCanvasLocalService::guid
+     * @return {string} guid
+     */
     projetoCanvas.guid = function() {
       function s4() {
         return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);

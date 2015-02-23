@@ -16,6 +16,8 @@ angular.module( 'kzbmcMobileApp' ).controller( 'CriarUsuarioCtrl', [ '$scope', '
 	 */
 	$scope.cadastrar = function( usuario ) {
 		if( $scope.form.$valid ) {
+			$scope.sucesso = false;
+			$scope.erro = false;
 		    loginService.cadastrarUsuario( usuario, 
 		    	function() {
 		    		$scope.sucesso = true;
