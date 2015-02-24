@@ -8,11 +8,11 @@
       	&nbsp;<span class="glyphicon glyphicon-share" aria-hidden="true"></span>&nbsp;{{ 'COMPARTILHAR_AMIGO' | translate }}
     </a>
     <a ng-href="#/relatorio-texto/{{projeto.id}}" class="btn btn-primary" alt="{{ 'GERAR_RELATORIO' | translate }}" 
-        title="{{ 'GERAR_RELATORIO' | translate }}">
+        title="{{ 'GERAR_RELATORIO' | translate }}" ng-if="$root.bmc">
       	&nbsp;<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;{{ 'GERAR_RELATORIO' | translate }}
     </a>
     <a ng-href="{{ urlSlideshow }}" target="_blank" class="btn btn-primary" alt="{{ 'SLIDESHOW' | translate }}" 
-        title="{{ 'SLIDESHOW' | translate }}" ng-show="modoLeitura==false  && !$root.local">
+        title="{{ 'SLIDESHOW' | translate }}" ng-show="modoLeitura==false  && !$root.local" ng-if="$root.bmc">
       	&nbsp;<span class="glyphicon glyphicon-film" aria-hidden="true"></span>&nbsp;{{ 'SLIDESHOW' | translate }}
     </a>
 </div>
@@ -31,8 +31,11 @@
 				<td rowspan="2" class="kz_td kz_width_20">
 					<img ng-src="images/parceiros_chave.png" alt="{{ 'PARCEIROS_CHAVE' | translate }}" 
 						title="{{ 'PARCEIROS_CHAVE' | translate }}" class="kz_img_position" />
-					<h5>
+					<h5 ng-if="$root.bmc">
 						{{ 'PARCEIROS' | translate }}<br />{{ 'CHAVE_PARCEIROS' | translate }}
+					</h5>
+					<h5 ng-if="!$root.bmc">
+						{{ 'PROBLEMA' | translate }}
 					</h5>
 					<a ng-href="#/cadastrar-item-canvas/{{index}}/pc" class="btn btn-primary hidden-print"
 						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}"
@@ -41,7 +44,7 @@
               		</a>
 
 					<a href="" data-toggle="modal" data-target="#parceirosChave" class="btn btn-primary hidden-print"
-						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}">
+						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}" ng-if="$root.bmc">
 						&nbsp;&nbsp;<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;
 					</a>
 					
@@ -61,8 +64,11 @@
 				<td class="kz_td kz_width_20 kz_border">
 					<img ng-src="images/atividades_chave.png" alt="{{ 'ATIVIDADES_CHAVE' | translate }}" 
 						title="{{ 'ATIVIDADES_CHAVE' | translate }}" class="kz_img_position" />
-					<h5>
+					<h5 ng-if="$root.bmc">
 						{{ 'ATIVIDADES' | translate }}<br />{{ 'CHAVE_ATIVIDADES' | translate }}
+					</h5>
+					<h5 ng-if="!$root.bmc">
+						{{ 'SOLUCAO' | translate }}
 					</h5>
 					<a ng-href="#/cadastrar-item-canvas/{{index}}/ac" class="btn btn-primary hidden-print"
 						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}"
@@ -71,7 +77,7 @@
               		</a>
 
 					<a href="" data-toggle="modal" data-target="#atividadesChave" class="btn btn-primary hidden-print"
-						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}"> 
+						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}" ng-if="$root.bmc"> 
 						&nbsp;&nbsp;<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;
 					</a>
 					
@@ -100,7 +106,7 @@
                			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
               		</a>
 					<a href="" data-toggle="modal" data-target="#propostasValor" class="btn btn-primary hidden-print"
-						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}"> 
+						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}" ng-if="$root.bmc"> 
 						&nbsp;&nbsp;<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;
 					</a>
 					<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.pv" style="margin-top: 10px;">
@@ -127,7 +133,7 @@
                			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
               		</a>
 					<a href="" data-toggle="modal" data-target="#relacionamentoClientes" class="btn btn-primary hidden-print"
-						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}"> 
+						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}" ng-if="$root.bmc"> 
 						&nbsp;&nbsp;<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;
 					</a>
 					<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.rcl" style="margin-top: 10px;">
@@ -156,7 +162,7 @@
               		</a>
 
 					<a href="" data-toggle="modal" data-target="#segmentosClientes" class="btn btn-primary hidden-print"
-						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}"> 
+						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}" ng-if="$root.bmc"> 
 						&nbsp;&nbsp;<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;
 					</a>
 					
@@ -188,7 +194,7 @@
               		</a>
 
 					<a href="" data-toggle="modal" data-target="#recursosChave" class="btn btn-primary hidden-print"
-						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}"> 
+						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}" ng-if="$root.bmc"> 
 						&nbsp;&nbsp;<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;
 					</a>
 					
@@ -215,7 +221,7 @@
                			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
               		</a>
 					<a href="" data-toggle="modal" data-target="#canais" class="btn btn-primary hidden-print"
-						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}"> 
+						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}" ng-if="$root.bmc"> 
 						&nbsp;&nbsp;<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;
 					</a>
 					<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.ca" style="margin-top: 10px;">
@@ -248,7 +254,7 @@
                			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
               		</a>
 					<a href="" data-toggle="modal" data-target="#estruturaCusto" class="btn btn-primary hidden-print"
-						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}"> 
+						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}" ng-if="$root.bmc"> 
 						&nbsp;&nbsp;<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;
 					</a>
 					<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.ec" style="margin-top: 10px;">
@@ -274,7 +280,7 @@
                			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
               		</a>
 					<a href="" data-toggle="modal" data-target="#fluxoReceita" class="btn btn-primary hidden-print"
-						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}"> 
+						alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}" ng-if="$root.bmc"> 
 						&nbsp;&nbsp;<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;
 					</a>
 					<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.fr" style="margin-top: 10px;">

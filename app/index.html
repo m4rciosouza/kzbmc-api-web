@@ -39,7 +39,7 @@
     		<ul class="nav navbar-nav mainmenu">
     			<li><a ng-href="#/">{{ 'INICIAL' | translate }}</a></li>
           <li ng-show="$root.loggedIn"><a ng-href="#/trocar-senha">{{ 'TROCAR_SENHA' | translate }}</a></li>
-          <li><a ng-href="#/ajuda" title="{{ 'AJUDA' | translate }}">{{ 'AJUDA' | translate }}</a></li>
+          <li ng-if="$root.bmc"><a ng-href="#/ajuda" title="{{ 'AJUDA' | translate }}">{{ 'AJUDA' | translate }}</a></li>
           <li><a ng-href="#/logout">{{ 'SAIR' | translate }}</a></li>
       	</ul>
         <ul class="nav navbar-nav navbar-right" ng-controller="I18nCtrl">

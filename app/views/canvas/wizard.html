@@ -76,7 +76,7 @@
 					<h4>
 						{{ obterNomeItemPorTipo() | translate }} 
 						<a href="" data-toggle="modal" data-target="#{{tab}}"
-							alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}">
+							alt="{{ 'AJUDA' | translate }}" title="{{ 'AJUDA' | translate }}" ng-if="$root.bmc">
 							<span class="glyphicon glyphicon-question-sign"></span>
 						</a>
 					</h4>

@@ -25,15 +25,10 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window',
         projetoCanvasLocalService.carregarProjetos( pagina, sucesso );
         return;
       }
-      var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas + '?email=:email&page=:pagina' );
-      projetosCanvasResource.get( { email : $window.sessionStorage.email, page : pagina }, 
-            function( response ) {
-              sucesso( response );
-            },
-            function( response ) {
-              erro( response );
-            }
-      );
+      var projetosCanvasResource = $resource( 
+        $rootScope.urlProjetoCanvas[ $rootScope.mode ] + '?email=:email&page=:pagina' );
+      projetosCanvasResource.get( 
+        { email : $window.sessionStorage.email, page : pagina }, sucesso, erro );
     };
 
     /**
@@ -45,15 +40,10 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window',
      * @param {function} erro
      */
     projetoCanvas.carregarProjetosCompartilhados = function( pagina, sucesso, erro ) {
-      var projetosCanvasCompResource = $resource( $rootScope.urlProjetoCanvasListarComp + '?email=:email&page=:pagina' );
-      projetosCanvasCompResource.get( { email : $window.sessionStorage.email, page : pagina }, 
-          function( response ) {
-            sucesso( response );
-          },
-          function( response ) {
-            erro( response );
-          }
-      );
+      var projetosCanvasCompResource = $resource( 
+        $rootScope.urlProjetoCanvasListarComp[ $rootScope.mode ] + '?email=:email&page=:pagina' );
+      projetosCanvasCompResource.get( 
+        { email : $window.sessionStorage.email, page : pagina }, sucesso, erro );
     };
 
     /**
@@ -72,15 +62,9 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window',
         id : projetoId, 
         email : $window.sessionStorage.email 
       };
-      var projetoCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id?email=:email' );
-      projetoCanvasResource.get( params, 
-        function( response ) {
-          sucesso( response );
-        },
-        function( response ) {
-          erro( response );
-        }
-      );
+      var projetoCanvasResource = $resource( 
+        $rootScope.urlProjetoCanvas[ $rootScope.mode ] + '/:id?email=:email' );
+      projetoCanvasResource.get( params, sucesso, erro );
     };   
 
     /**
@@ -95,15 +79,8 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window',
         projetoCanvasLocalService.cadastrar( projetoCanvasObj, sucesso );
         return;
       }
-      var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas );
-      projetosCanvasResource.save( {}, projetoCanvasObj, 
-        function( response ) {
-          sucesso( response );
-        },
-        function( response ) {
-          erro( response );
-        }
-      );
+      var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas[ $rootScope.mode ] );
+      projetosCanvasResource.save( {}, projetoCanvasObj, sucesso, erro );
     };
 
     /**
@@ -119,16 +96,9 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window',
         projetoCanvasLocalService.atualizar( projetoId, projetoCanvasObj, sucesso );
         return;
       }
-      var projetoCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id', null,
+      var projetoCanvasResource = $resource( $rootScope.urlProjetoCanvas[ $rootScope.mode ] + '/:id', null,
           { 'update' : { method : 'PUT' } });
-      projetoCanvasResource.update( { id : projetoId }, projetoCanvasObj, 
-        function( response ) {
-          sucesso( response );
-        },
-        function( response ) {
-          erro( response );
-        }
-      );
+      projetoCanvasResource.update( { id : projetoId }, projetoCanvasObj, sucesso, erro );
     };
 
     /**
@@ -147,15 +117,8 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window',
         id : projetoId, 
         email : $window.sessionStorage.email 
       };
-      var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas + '/:id?email=:email' );
-      projetosCanvasResource.remove( params, 
-        function( response ) {
-          sucesso( response );
-        },
-        function( response ) {
-          erro( response );
-        }
-      );
+      var projetosCanvasResource = $resource( $rootScope.urlProjetoCanvas[ $rootScope.mode ] + '/:id?email=:email' );
+      projetosCanvasResource.remove( params, sucesso, erro );
     };
 
     /**
@@ -166,15 +129,8 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasService', [ '$window',
      * @param {function} erro
      */
     projetoCanvas.compartilhar = function( projetoCanvasCompObj, sucesso, erro ) {
-      var projetosCanvasCompResource = $resource( $rootScope.urlProjetoCanvasComp );
-      projetosCanvasCompResource.save( {}, projetoCanvasCompObj, 
-        function( response ) {
-          sucesso( response );
-        },
-        function( response ) {
-          erro( response );
-        }
-      );
+      var projetosCanvasCompResource = $resource( $rootScope.urlProjetoCanvasComp[ $rootScope.mode ] );
+      projetosCanvasCompResource.save( {}, projetoCanvasCompObj, sucesso, erro );
     };
 
     /**

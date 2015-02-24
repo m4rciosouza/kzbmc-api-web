@@ -422,6 +422,9 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     PARCEIROS_CHAVE : 'Key Partners',    
     ESTRUTURA_CUSTO : 'Cost Structure',
     FLUXO_RECEITA : 'Revenue Streams',
+    //lean 
+    PROBLEMA : 'Problem',
+    SOLUCAO : 'Solution',
     // index.html
     KZ_CANVAS : 'KZ-Canvas',
     INICIAL : 'Home',
@@ -942,18 +945,32 @@ kzbmcMobileApp.constant( '_', window._ );
 
 kzbmcMobileApp.run([ '$rootScope', '$window', '$translate', function( $rootScope, $window, $translate ) {
   $rootScope.liteVersion = false;
-  $rootScope.urlProjetoCanvas = 'http://localhost:8888/kzbmc-api/web/index.php/v1/projeto-canvas';
-  $rootScope.urlItemCanvas = 'http://localhost:8888/kzbmc-api/web/index.php/v1/item-canvas';
+  $rootScope.urlProjetoCanvas = {
+    'bmc' : 'http://localhost:8888/kzbmc-api/web/index.php/v1/projeto-canvas',
+    'lean' : 'http://localhost:8888/kzbmc-api/web/index.php/v1/projeto-canvas-leans',
+  };
+  $rootScope.urlItemCanvas = {
+    'bmc' : 'http://localhost:8888/kzbmc-api/web/index.php/v1/item-canvas',
+    'lean' : 'http://localhost:8888/kzbmc-api/web/index.php/v1/item-canvas-leans'
+  };
+  $rootScope.urlProjetoCanvasComp = {
+    'bmc' : 'http://localhost:8888/kzbmc-api/web/index.php/v1/compartilhados/compartilhar',
+    'lean' : 'http://localhost:8888/kzbmc-api/web/index.php/v1/compartilhado-leans/compartilhar'
+  };
+  $rootScope.urlProjetoCanvasListarComp = {
+    'bmc' : 'http://localhost:8888/kzbmc-api/web/index.php/v1/compartilhados',
+    'lean' : 'http://localhost:8888/kzbmc-api/web/index.php/v1/compartilhado-leans'
+  };
   $rootScope.urlUsuario = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios/auth';
   $rootScope.urlEsqueciSenha = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios/esqueci-senha';
   $rootScope.urlNovaSenha = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios/nova-senha';
   $rootScope.urlTrocarSenha = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios/trocar-senha';
   $rootScope.urlUsuarios = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios';
-  $rootScope.urlProjetoCanvasComp = 'http://localhost:8888/kzbmc-api/web/index.php/v1/compartilhados/compartilhar';
-  $rootScope.urlProjetoCanvasListarComp = 'http://localhost:8888/kzbmc-api/web/index.php/v1/compartilhados';
   $rootScope.urlSlideshow = 'http://localhost:8888/kzbmc-api/web/index.php/v1/slideshow';
   $rootScope.urlAssinarPlano = 'http://kazale.com';
   $rootScope.local = false;
+  $rootScope.bmc = true;
+  $rootScope.mode = 'bmc'; // lean or bmc
   $translate.use( $window.localStorage.lingua || 'en' );
   $rootScope._ = window._;
 }]);

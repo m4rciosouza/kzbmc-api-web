@@ -28,7 +28,7 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', [ '$rootScope', '$w
       id : projetoId, 
       email : $window.sessionStorage.email 
     };
-    var itensCanvasResource = $resource( $rootScope.urlItemCanvas + '/projeto-canvas/:id?email=:email' );
+    var itensCanvasResource = $resource( $rootScope.urlItemCanvas[ $rootScope.mode ] + '/projeto-canvas/:id?email=:email' );
     itensCanvasResource.get( params, 
       function( response ) {
         sucesso( response );
@@ -57,7 +57,7 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', [ '$rootScope', '$w
       id : itemId, 
       email : $window.sessionStorage.email 
     };
-    var itensCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id?email=:email' );
+    var itensCanvasResource = $resource( $rootScope.urlItemCanvas[ $rootScope.mode ] + '/:id?email=:email' );
     itensCanvasResource.get( params, 
       function( response ) {
         sucesso( response );
@@ -81,7 +81,7 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', [ '$rootScope', '$w
       canvasLocalService.cadastrar( projetoId, itemCanvasObj, sucesso, erro );
       return;
     }
-    var itemCanvasResource = $resource( $rootScope.urlItemCanvas );
+    var itemCanvasResource = $resource( $rootScope.urlItemCanvas[ $rootScope.mode ] );
     itemCanvasResource.save( {}, itemCanvasObj, 
       function( response ) {
         sucesso( response );
@@ -106,7 +106,7 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', [ '$rootScope', '$w
       canvasLocalService.atualizar( projetoId, itemId, itemCanvasObj, sucesso, erro );
       return;
     }
-    var itemCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id', null, 
+    var itemCanvasResource = $resource( $rootScope.urlItemCanvas[ $rootScope.mode ] + '/:id', null, 
           { 'update' : { method : 'PUT' } } );
     itemCanvasResource.update( { 'id' : itemId }, itemCanvasObj, 
       function( response ) {
@@ -136,7 +136,7 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', [ '$rootScope', '$w
       id : itemId, 
       email : $window.sessionStorage.email 
     };
-    var itemCanvasResource = $resource( $rootScope.urlItemCanvas + '/:id?email=:email' );
+    var itemCanvasResource = $resource( $rootScope.urlItemCanvas[ $rootScope.mode ] + '/:id?email=:email' );
     itemCanvasResource.remove( params, 
       function( response ) {
         sucesso( response );

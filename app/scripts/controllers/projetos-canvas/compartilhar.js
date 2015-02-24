@@ -28,7 +28,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasCompartilharCtrl',
 					lingua : $window.localStorage.lingua, 
 					email : $window.sessionStorage.email 
 				};
-			    projetoCanvasService.compartilhar( projetoCanvasCompObj,
+			    projetoCanvasService.compartilhar( projetoCanvasCompObj[ $rootScope.mode ],
 			    	function() {
 			    		$scope.erro = false;
 			    		$scope.sucesso = true;
