@@ -160,6 +160,19 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     PARCEIROS_CHAVE : 'Parceiros Chave',    
     ESTRUTURA_CUSTO : 'Estrutura de Custo',
     FLUXO_RECEITA : 'Fluxo de Receita',
+    //lean 
+    PROBLEMA : 'Problema', // key partners
+    SOLUCAO : 'Solução', // key activities
+    METRICAS_CHAVE: 'Métricas Chave', //  key resouces
+    PROPOSTAS_VALOR_UNICAS: 'Propostas de Valor Única', // Value Proposition
+    VANTAGEM_INJUISTA: 'Vantagem Injusta', // Customer Relationships
+    MC_METRICAS: 'Métricas',
+    MC_CHAVE: 'Chave',
+    PVU_PROPOSTAS: 'Propostas',
+    PVU_VALOR: 'de Valor',
+    PVU_UNICAS: 'Única',
+    VI_VANTAGEM: 'Vantagem',
+    VI_INJUSTA: 'Injusta',
     // index.html
     KZ_CANVAS : 'KZ-Canvas',
     INICIAL : 'Inicial',
@@ -423,8 +436,18 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     ESTRUTURA_CUSTO : 'Cost Structure',
     FLUXO_RECEITA : 'Revenue Streams',
     //lean 
-    PROBLEMA : 'Problem',
-    SOLUCAO : 'Solution',
+    PROBLEMA : 'Problem', // key partners
+    SOLUCAO : 'Solution', // key activities
+    METRICAS_CHAVE: 'Key Metrics', //  key resouces
+    PROPOSTAS_VALOR_UNICAS: 'Unique Value Proposition', // Value Proposition
+    VANTAGEM_INJUISTA: 'Unfair Advantage', // Customer Relationships
+    MC_METRICAS: 'Key',
+    MC_CHAVE: 'Metrics',
+    PVU_PROPOSTAS: 'Unique',
+    PVU_VALOR: 'Value',
+    PVU_UNICAS: 'Proposition',
+    VI_VANTAGEM: 'Unfair',
+    VI_INJUSTA: 'Advantage',
     // index.html
     KZ_CANVAS : 'KZ-Canvas',
     INICIAL : 'Home',
@@ -687,6 +710,19 @@ kzbmcMobileApp.config( function( $translateProvider ) {
     PARCEIROS_CHAVE : 'Socios Clave',    
     ESTRUTURA_CUSTO : 'Estructura de Costos',
     FLUXO_RECEITA : 'Fuente de Ingresos',
+    //lean 
+    PROBLEMA : 'Problema', // key partners
+    SOLUCAO : 'Solución', // key activities
+    METRICAS_CHAVE: 'Métricas clave', //  key resouces
+    PROPOSTAS_VALOR_UNICAS: 'Propuesta de Valor Solo', // Value Proposition
+    VANTAGEM_INJUISTA: 'Ventaja Injusta', // Customer Relationships
+    MC_METRICAS: 'Métricas',
+    MC_CHAVE: 'Clave',
+    PVU_PROPOSTAS: 'Propuesta',
+    PVU_VALOR: 'de Valor',
+    PVU_UNICAS: 'Solo',
+    VI_VANTAGEM: 'Ventaja',
+    VI_INJUSTA: 'Injusta',
     // index.html
     KZ_CANVAS : 'KZ-Canvas',
     INICIAL : 'Inicial',
@@ -969,8 +1005,8 @@ kzbmcMobileApp.run([ '$rootScope', '$window', '$translate', function( $rootScope
   $rootScope.urlSlideshow = 'http://localhost:8888/kzbmc-api/web/index.php/v1/slideshow';
   $rootScope.urlAssinarPlano = 'http://kazale.com';
   $rootScope.local = false;
-  $rootScope.bmc = true;
-  $rootScope.mode = 'bmc'; // lean or bmc
+  $rootScope.bmc = false;
+  $rootScope.mode = 'lean'; // lean or bmc
   $translate.use( $window.localStorage.lingua || 'en' );
   $rootScope._ = window._;
 }]);

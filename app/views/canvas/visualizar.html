@@ -25,12 +25,12 @@
 
 <!-- Big Screens -->
 <div class="hidden-xs">
-	<table class="kz_width_100 kz_border">
+	<table class="kz_width_100" ng-class="{'kz_border' : $root.bmc, 'kz_border_lean' : !$root.bmc}">
 		<tbody>
 			<tr>
 				<td rowspan="2" class="kz_td kz_width_20">
 					<img ng-src="images/parceiros_chave.png" alt="{{ 'PARCEIROS_CHAVE' | translate }}" 
-						title="{{ 'PARCEIROS_CHAVE' | translate }}" class="kz_img_position" />
+						title="{{ 'PARCEIROS_CHAVE' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
 					<h5 ng-if="$root.bmc">
 						{{ 'PARCEIROS' | translate }}<br />{{ 'CHAVE_PARCEIROS' | translate }}
 					</h5>
@@ -61,9 +61,9 @@
 		    			</div>
 		    		</div>
 				</td>
-				<td class="kz_td kz_width_20 kz_border">
+				<td class="kz_td kz_width_20" ng-class="{'kz_border' : $root.bmc, 'kz_border_lean' : !$root.bmc}">
 					<img ng-src="images/atividades_chave.png" alt="{{ 'ATIVIDADES_CHAVE' | translate }}" 
-						title="{{ 'ATIVIDADES_CHAVE' | translate }}" class="kz_img_position" />
+						title="{{ 'ATIVIDADES_CHAVE' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
 					<h5 ng-if="$root.bmc">
 						{{ 'ATIVIDADES' | translate }}<br />{{ 'CHAVE_ATIVIDADES' | translate }}
 					</h5>
@@ -94,11 +94,15 @@
 		    			</div>
 		    		</div>
 				</td>
-				<td rowspan="2" class="kz_td kz_width_20 kz_border">
+				<td rowspan="2" class="kz_td kz_width_20" ng-class="{'kz_border' : $root.bmc, 'kz_border_lean' : !$root.bmc}">
 					<img ng-src="images/propostas_valor.png" alt="{{ 'PROPOSTAS_VALOR' | translate }}" 
-						title="{{ 'PROPOSTAS_VALOR' | translate }}" class="kz_img_position" />
-					<h5>
+						title="{{ 'PROPOSTAS_VALOR' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
+					<h5 ng-if="$root.bmc">
 						{{ 'PROPOSTAS' | translate }}<br />{{ 'DE_VALOR' | translate }}
+					</h5>
+					<h5 ng-if="!$root.bmc">
+						{{ 'PVU_PROPOSTAS' | translate }} {{ 'PVU_VALOR' | translate }}
+						<br />{{ 'PVU_UNICAS' | translate }}
 					</h5>
 					<a ng-href="#/cadastrar-item-canvas/{{index}}/pv" class="btn btn-primary hidden-print"
 						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}"
@@ -122,12 +126,16 @@
 		    			</div>
 		    		</div>
 				</td>
-				<td class="kz_td kz_width_20 kz_border">
+				<td class="kz_td kz_width_20" ng-class="{'kz_border' : $root.bmc, 'kz_border_lean' : !$root.bmc}">
 					<img ng-src="images/relacionamento_clientes.png" alt="{{ 'RELACIONAMENTO_CLIENTES' | translate }}" 
-						title="{{ 'RELACIONAMENTO_CLIENTES' | translate }}" class="kz_img_position" />
-					<h5>
+						title="{{ 'RELACIONAMENTO_CLIENTES' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
+					<h5 ng-if="$root.bmc">
 						{{ 'RELACIONAMENTO' | translate }}<br />{{ 'COM_CLIENTES' | translate }}
-					</h5><a ng-href="#/cadastrar-item-canvas/{{index}}/rcl" class="btn btn-primary hidden-print"
+					</h5>
+					<h5 ng-if="!$root.bmc">
+						{{ 'VI_VANTAGEM' | translate }}<br />{{ 'VI_INJUSTA' | translate }}
+					</h5>
+					<a ng-href="#/cadastrar-item-canvas/{{index}}/rcl" class="btn btn-primary hidden-print"
 						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}"
 						ng-show="modoLeitura==false">
                			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
@@ -149,9 +157,9 @@
 		    			</div>
     				</div>
 				</td>
-				<td rowspan="2" class="kz_td kz_width_20 kz_border">
+				<td rowspan="2" class="kz_td kz_width_20" ng-class="{'kz_border' : $root.bmc, 'kz_border_lean' : !$root.bmc}">
 					<img ng-src="images/segmentos_clientes.png" alt="{{ 'SEGMENTOS_CLIENTES' | translate }}" 
-						title="{{ 'SEGMENTOS_CLIENTES' | translate }}" class="kz_img_position" />
+						title="{{ 'SEGMENTOS_CLIENTES' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
 					<h5>
 						{{ 'SEGMENTOS' | translate }}<br />{{ 'DE_CLIENTES' | translate }}
 					</h5>
@@ -181,11 +189,14 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="kz_td kz_width_20 kz_border">
+				<td class="kz_td kz_width_20" ng-class="{'kz_border' : $root.bmc, 'kz_border_lean' : !$root.bmc}">
 					<img ng-src="images/recursos_chave.png" alt="{{ 'RECURSOS_CHAVE' | translate }}" 
-						title="{{ 'RECURSOS_CHAVE' | translate }}" class="kz_img_position" />
-					<h5>
+						title="{{ 'RECURSOS_CHAVE' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
+					<h5 ng-if="$root.bmc">
 						{{ 'RECURSOS' | translate }}<br />{{ 'CHAVE_RECURSOS' | translate }}
+					</h5>
+					<h5 ng-if="!$root.bmc">
+						{{ 'MC_METRICAS' | translate }}<br />{{ 'MC_CHAVE' | translate }}
 					</h5>
 					<a ng-href="#/cadastrar-item-canvas/{{index}}/rc" class="btn btn-primary hidden-print"
 						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}"
@@ -211,9 +222,9 @@
 		    			</div>
 		    		</div>
 				</td>
-				<td class="kz_td kz_width_20 kz_border">
+				<td class="kz_td kz_width_20" ng-class="{'kz_border' : $root.bmc, 'kz_border_lean' : !$root.bmc}">
 					<img ng-src="images/canais.png" alt="{{ 'CANAIS' | translate }}" 
-						title="{{ 'CANAIS' | translate }}" class="kz_img_position" />
+						title="{{ 'CANAIS' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
 					<h5>{{ 'CANAIS' | translate }}</h5>
 					<a ng-href="#/cadastrar-item-canvas/{{index}}/ca" class="btn btn-primary hidden-print"
 						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}"
@@ -241,12 +252,14 @@
 		</tbody>
 	</table>
 	
-	<table  class="kz_width_100 kz_border_left kz_border_right kz_border_bottom">
+	<table class="kz_width_100"
+		 ng-class="{'kz_border_left': $root.bmc, 'kz_border_right': $root.bmc, 'kz_border_bottom' : $root.bmc, 'kz_border_left_lean': !$root.bmc, 'kz_border_right_lean': !$root.bmc, 'kz_border_bottom_lean' : !$root.bmc}">
 		<tbody>
 			<tr>
-				<td class="kz_td kz_width_50 kz_border_right">
+				<td class="kz_td kz_width_50" 
+					ng-class="{'kz_border_right' : $root.bmc, 'kz_border_right_lean' : !$root.bmc}">
 					<img ng-src="images/estrutura_custo.png" alt="{{ 'ESTRUTURA_CUSTO' | translate }}" 
-						title="{{ 'ESTRUTURA_CUSTO' | translate }}" class="kz_img_position" />
+						title="{{ 'ESTRUTURA_CUSTO' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
 					<h5>{{ 'ESTRUTURA_CUSTO' | translate }}</h5>
 					<a ng-href="#/cadastrar-item-canvas/{{index}}/ec" class="btn btn-primary hidden-print"
 						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}"
@@ -272,7 +285,7 @@
 				</td>
 				<td class="kz_td kz_width_50">
 					<img ng-src="images/fluxo_receita.png" alt="{{ 'FLUXO_RECEITA' | translate }}" 
-						title="{{ 'FLUXO_RECEITA' | translate }}" class="kz_img_position" />
+						title="{{ 'FLUXO_RECEITA' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
 					<h5>{{ 'FLUXO_RECEITA' | translate }}</h5>
 					<a ng-href="#/cadastrar-item-canvas/{{index}}/fr" class="btn btn-primary hidden-print"
 						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}"
@@ -305,11 +318,14 @@
 <div class="visible-xs">
 	<div class="row">
 		<!-- Parceiros Chave -->
-		<div class="col-xs-12 kz_border_top">
+		<div class="col-xs-12" ng-class="{'kz_border_top' : $root.bmc, 'kz_border_top_lean' : !$root.bmc}">
 			<img ng-src="images/parceiros_chave.png" alt="{{ 'PARCEIROS_CHAVE' | translate }}" 
-				title="{{ 'PARCEIROS_CHAVE' | translate }}" class="kz_img_position" />
-			<h5>
+				title="{{ 'PARCEIROS_CHAVE' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
+			<h5 ng-if="$root.bmc">
 				{{ 'PARCEIROS' | translate }}<br />{{ 'CHAVE_PARCEIROS' | translate }}
+			</h5>
+			<h5 ng-if="!$root.bmc">
+				{{ 'PROBLEMA' | translate }}
 			</h5>
 			<a ng-href="#/cadastrar-item-canvas/{{index}}/pc" class="btn btn-primary hidden-print" ng-show="modoLeitura==false">
                	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
@@ -331,11 +347,14 @@
 
 	<div class="row">
 		<!-- Atividades Chave -->
-		<div class="col-xs-12 kz_border_top">
+		<div class="col-xs-12" ng-class="{'kz_border_top' : $root.bmc, 'kz_border_top_lean' : !$root.bmc}">
 			<img ng-src="images/atividades_chave.png" alt="{{ 'ATIVIDADES_CHAVE' | translate }}" 
-				title="{{ 'ATIVIDADES_CHAVE' | translate }}" class="kz_img_position" />
-			<h5>
+				title="{{ 'ATIVIDADES_CHAVE' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
+			<h5 ng-if="$root.bmc">
 				{{ 'ATIVIDADES' | translate }}<br />{{ 'CHAVE_ATIVIDADES' | translate }}
+			</h5>
+			<h5 ng-if="!$root.bmc">
+				{{ 'SOLUCAO' | translate }}
 			</h5>
 			<a ng-href="#/cadastrar-item-canvas/{{index}}/ac" class="btn btn-primary hidden-print" ng-show="modoLeitura==false">
                	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
@@ -357,11 +376,14 @@
 
 	<div class="row">
 		<!-- Recursos Chave -->
-		<div class="col-xs-12 kz_border_top">
+		<div class="col-xs-12" ng-class="{'kz_border_top' : $root.bmc, 'kz_border_top_lean' : !$root.bmc}">
 			<img ng-src="images/recursos_chave.png" alt="{{ 'RECURSOS_CHAVE' | translate }}" 
-				title="{{ 'RECURSOS_CHAVE' | translate }}" class="kz_img_position" />
-			<h5>
+				title="{{ 'RECURSOS_CHAVE' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
+			<h5 ng-if="$root.bmc">
 				{{ 'RECURSOS' | translate }}<br />{{ 'CHAVE_RECURSOS' | translate }}
+			</h5>
+			<h5 ng-if="!$root.bmc">
+				{{ 'MC_METRICAS' | translate }}<br />{{ 'MC_CHAVE' | translate }}
 			</h5>
 			<a ng-href="#/cadastrar-item-canvas/{{index}}/rc" class="btn btn-primary hidden-print" ng-show="modoLeitura==false">
                	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
@@ -383,11 +405,15 @@
 
 	<div class="row">
 		<!-- Propostas de Valor -->
-		<div class="col-xs-12 kz_border_top">
+		<div class="col-xs-12" ng-class="{'kz_border_top' : $root.bmc, 'kz_border_top_lean' : !$root.bmc}">
 			<img ng-src="images/propostas_valor.png" alt="{{ 'PROPOSTAS_VALOR' | translate }}" 
-				title="{{ 'PROPOSTAS_VALOR' | translate }}" class="kz_img_position" />
-			<h5>
+				title="{{ 'PROPOSTAS_VALOR' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
+			<h5 ng-if="$root.bmc">
 				{{ 'PROPOSTAS' | translate }}<br />{{ 'DE_VALOR' | translate }}
+			</h5>
+			<h5 ng-if="!$root.bmc">
+				{{ 'PVU_PROPOSTAS' | translate }} {{ 'PVU_VALOR' | translate }}
+				<br />{{ 'PVU_UNICAS' | translate }}
 			</h5>
 			<a ng-href="#/cadastrar-item-canvas/{{index}}/pv" class="btn btn-primary hidden-print" ng-show="modoLeitura==false">
                	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
@@ -409,11 +435,14 @@
 
 	<div class="row">
 		<!-- Relacionamento com os Clientes -->
-		<div class="col-xs-12 kz_border_top">
+		<div class="col-xs-12" ng-class="{'kz_border_top' : $root.bmc, 'kz_border_top_lean' : !$root.bmc}">
 			<img ng-src="images/relacionamento_clientes.png" alt="{{ 'RELACIONAMENTO_CLIENTES' | translate }}" 
-				title="{{ 'RELACIONAMENTO_CLIENTES' | translate }}" class="kz_img_position" />
-			<h5>
+				title="{{ 'RELACIONAMENTO_CLIENTES' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
+			<h5 ng-if="$root.bmc">
 				{{ 'RELACIONAMENTO' | translate }}<br />{{ 'COM_CLIENTES' | translate }}
+			</h5>
+			<h5 ng-if="!$root.bmc">
+				{{ 'VI_VANTAGEM' | translate }}<br />{{ 'VI_INJUSTA' | translate }}
 			</h5>
 			<a ng-href="#/cadastrar-item-canvas/{{index}}/rcl" class="btn btn-primary hidden-print" ng-show="modoLeitura==false">
                	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
@@ -435,9 +464,9 @@
 	
 	<div class="row">
 		<!-- Canais -->
-		<div class="col-xs-12 kz_border_top">
+		<div class="col-xs-12" ng-class="{'kz_border_top' : $root.bmc, 'kz_border_top_lean' : !$root.bmc}">
 			<img ng-src="images/canais.png" alt="{{ 'CANAIS' | translate }}" 
-				title="{{ 'CANAIS' | translate }}" class="kz_img_position" />
+				title="{{ 'CANAIS' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
 			<h5>{{ 'CANAIS' | translate }}</h5>
 			<a ng-href="#/cadastrar-item-canvas/{{index}}/ca" class="btn btn-primary hidden-print" ng-show="modoLeitura==false">
                	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
@@ -459,9 +488,9 @@
 
 	<div class="row">
 		<!-- Segmentos de Clientes -->
-		<div class="col-xs-12 kz_border_top">
+		<div class="col-xs-12" ng-class="{'kz_border_top' : $root.bmc, 'kz_border_top_lean' : !$root.bmc}">
 			<img ng-src="images/segmentos_clientes.png" alt="{{ 'SEGMENTOS_CLIENTES' | translate }}" 
-				title="{{ 'SEGMENTOS_CLIENTES' | translate }}" class="kz_img_position" />
+				title="{{ 'SEGMENTOS_CLIENTES' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
 			<h5>
 				{{ 'SEGMENTOS' | translate }}<br />{{ 'DE_CLIENTES' | translate }}
 			</h5>
@@ -485,9 +514,9 @@
 
 	<div class="row">
 		<!-- Estrutura de Custo -->
-		<div class="col-xs-12 kz_border_top">
+		<div class="col-xs-12" ng-class="{'kz_border_top' : $root.bmc, 'kz_border_top_lean' : !$root.bmc}">
 			<img ng-src="images/estrutura_custo.png" alt="{{ 'ESTRUTURA_CUSTO' | translate }}" 
-				title="{{ 'ESTRUTURA_CUSTO' | translate }}" class="kz_img_position" />
+				title="{{ 'ESTRUTURA_CUSTO' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
 			<h5>{{ 'ESTRUTURA_CUSTO' | translate }}</h5>
 			<a ng-href="#/cadastrar-item-canvas/{{index}}/ec" class="btn btn-primary hidden-print" ng-show="modoLeitura==false">
                	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
@@ -509,9 +538,9 @@
 	
 	<div class="row">
 		<!-- Fluxo de Receita -->
-		<div class="col-xs-12 kz_border_top">
+		<div class="col-xs-12" ng-class="{'kz_border_top' : $root.bmc, 'kz_border_bottom' : $root.bmc, 'kz_border_top_lean' : !$root.bmc, 'kz_border_bottom_lean' : !$root.bmc}">
 			<img ng-src="images/fluxo_receita.png" alt="{{ 'FLUXO_RECEITA' | translate }}" 
-				title="{{ 'FLUXO_RECEITA' | translate }}" class="kz_img_position" />
+				title="{{ 'FLUXO_RECEITA' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
 			<h5>{{ 'FLUXO_RECEITA' | translate }}</h5>
 			<a ng-href="#/cadastrar-item-canvas/{{index}}/fr" class="btn btn-primary hidden-print" ng-show="modoLeitura==false">
                	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}

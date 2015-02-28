@@ -29,6 +29,21 @@ body {
 .kz_border_bottom { 
 	border-bottom : 2px dashed #666; 
 }
+.kz_border_lean { 
+	border : 2px solid #666; 
+}
+.kz_border_top_lean { 
+	border-top : 2px solid #666; 
+}
+.kz_border_left_lean { 
+	border-left : 2px solid #666; 
+}
+.kz_border_right_lean { 
+	border-right : 2px solid #666; 
+}
+.kz_border_bottom_lean { 
+	border-bottom : 2px solid #666; 
+}
 .kz_img_position { 
 	position : absolute; top : 0px; right : -2px; 
 }

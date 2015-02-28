@@ -164,7 +164,18 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', [ '$rootScope', '$w
       'ec' : 'ESTRUTURA_CUSTO', 
       'fr' : 'FLUXO_RECEITA' 
     };
-    return tipos[ tipo ];
+    var tiposLean = { 
+      'pc' : 'PROBLEMA', 
+      'ac' : 'SOLUCAO', 
+      'rc' : 'METRICAS_CHAVE', 
+      'pv' : 'PROPOSTAS_VALOR_UNICAS', 
+      'rcl' : 'VANTAGEM_INJUISTA', 
+      'ca' : 'CANAIS', 
+      'sc' : 'SEGMENTOS_CLIENTES', 
+      'ec' : 'ESTRUTURA_CUSTO', 
+      'fr' : 'FLUXO_RECEITA' 
+    };
+    return $rootScope.bmc ? tipos[ tipo ] : tiposLean[ tipo ];
   };
 
   return canvas;
