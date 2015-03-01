@@ -96,48 +96,49 @@
 
     				<hr />
 
-    				<h4>{{ 'ADICIONAR_ITEM' | translate }}</h4>
-    				<br />
+    				<div class="jumbotron">
+	    				<h3>{{ 'ADICIONAR_ITEM' | translate }}</h3>
 
-    				<div class="alert alert-danger" role="alert" ng-show="erro">
-					    {{ 'ERRO_CADASTRANDO_ITEM_CANVAS' | translate }}
+	    				<div class="alert alert-danger" role="alert" ng-show="erro">
+						    {{ 'ERRO_CADASTRANDO_ITEM_CANVAS' | translate }}
+						</div>
+
+	    				<form role="form" name="form" ng-submit="cadastrar(item)" novalidate>
+							<div class="form-group">
+								<input type="text" class="form-control" id="titulo" name="titulo" 
+									placeholder="{{ 'DIGITE_TITULO_ITEM' | translate }}"
+									ng-model="item.titulo" maxlength="50" required />
+							</div>
+							<div class="form-group">
+								<textarea class="form-control" id="descricao" name="descricao"
+									placeholder="{{ 'DIGITE_DESCRICAO_ITEM' | translate }}" 
+									rows="4" ng-model="item.descricao" required></textarea>
+							</div>
+							<div class="form-group">
+								<label class="radio-inline">
+									<input type="radio" name="cor" id="corWarning" value="warning" ng-model="item.cor" required />
+									<span class="label label-warning">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="cor" id="corSuccess" value="success" ng-model="item.cor" />
+									<span class="label label-success">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="cor" id="corInfo" value="info" ng-model="item.cor" />
+									<span class="label label-info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="cor" id="corDanger" value="danger" ng-model="item.cor" />
+									<span class="label label-danger">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								</label>
+							</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">
+					      				{{ 'ADICIONAR' | translate }}
+					      		</button>
+					     	</div>
+						</form>
 					</div>
-
-    				<form role="form" name="form" ng-submit="cadastrar(item)" novalidate>
-						<div class="form-group">
-							<input type="text" class="form-control" id="titulo" name="titulo" 
-								placeholder="{{ 'DIGITE_TITULO_ITEM' | translate }}"
-								ng-model="item.titulo" maxlength="50" required />
-						</div>
-						<div class="form-group">
-							<textarea class="form-control" id="descricao" name="descricao"
-								placeholder="{{ 'DIGITE_DESCRICAO_ITEM' | translate }}" 
-								rows="4" ng-model="item.descricao" required></textarea>
-						</div>
-						<div class="form-group">
-							<label class="radio-inline">
-								<input type="radio" name="cor" id="corWarning" value="warning" ng-model="item.cor" required />
-								<span class="label label-warning">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="cor" id="corSuccess" value="success" ng-model="item.cor" />
-								<span class="label label-success">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="cor" id="corInfo" value="info" ng-model="item.cor" />
-								<span class="label label-info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="cor" id="corDanger" value="danger" ng-model="item.cor" />
-								<span class="label label-danger">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-							</label>
-						</div>
-						<div class="form-group">
-							<button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">
-				      				{{ 'ADICIONAR' | translate }}
-				      		</button>
-				     	</div>
-					</form>
 
     				<hr />
 
@@ -152,12 +153,12 @@
 						{{ 'FINALIZAR' | translate }} <span class="glyphicon glyphicon-chevron-right"></span>
 					</a>
 				</div>
+				<div class="form-group kz_center" ng-hide="selAtual==8">
+					<a ng-href="#/canvas/{{ index }}" class="btn btn-default">
+						{{ 'FINALIZAR' | translate }}
+					</a>
+			 	</div>
 			</div>
-			<div class="form-group kz_center">
-				<a ng-href="#/canvas/{{ index }}" class="btn btn-default">
-					{{ 'SAIR' | translate }}
-				</a>
-		 	</div>
 		</div>
 	</div>
 

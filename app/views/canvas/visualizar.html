@@ -1,20 +1,34 @@
-<div class="container kz_right hidden-print">
-    <button type="button" class="btn btn-primary" alt="{{ 'IMPRIMIR' | translate }}" 
-        title="{{ 'IMPRIMIR' | translate }}" onclick="window.print();" ng-hide="$root.local">
-      &nbsp;<span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;{{ 'IMPRIMIR' | translate }}
-    </button>
-    <a ng-href="#/compartilhar/{{projeto.id}}" class="btn btn-primary" alt="{{ 'COMPARTILHAR_AMIGO' | translate }}" 
-        title="{{ 'COMPARTILHAR_AMIGO' | translate }}" ng-show="modoLeitura==false && !$root.local">
-      	&nbsp;<span class="glyphicon glyphicon-share" aria-hidden="true"></span>&nbsp;{{ 'COMPARTILHAR_AMIGO' | translate }}
-    </a>
-    <a ng-href="#/relatorio-texto/{{projeto.id}}" class="btn btn-primary" alt="{{ 'GERAR_RELATORIO' | translate }}" 
-        title="{{ 'GERAR_RELATORIO' | translate }}" ng-if="$root.bmc">
-      	&nbsp;<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;{{ 'GERAR_RELATORIO' | translate }}
-    </a>
-    <a ng-href="{{ urlSlideshow }}" target="_blank" class="btn btn-primary" alt="{{ 'SLIDESHOW' | translate }}" 
-        title="{{ 'SLIDESHOW' | translate }}" ng-show="modoLeitura==false  && !$root.local" ng-if="$root.bmc">
-      	&nbsp;<span class="glyphicon glyphicon-film" aria-hidden="true"></span>&nbsp;{{ 'SLIDESHOW' | translate }}
-    </a>
+<div class="btn-group hidden-print">
+	<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+    	&nbsp;<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;
+    	{{ 'ACOES' | translate }} <span class="caret"></span>
+  	</button>
+  	<ul class="dropdown-menu" role="menu">
+    	<li>
+    		<a href="" onclick="window.print();" ng-hide="$root.local" 
+    			alt="{{ 'IMPRIMIR' | translate }}" title="{{ 'IMPRIMIR' | translate }}">
+   				&nbsp;<span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;{{ 'IMPRIMIR' | translate }}
+   			</a>
+   		</li>
+	    <li>
+	    	<a ng-href="#/compartilhar/{{projeto.id}}" alt="{{ 'COMPARTILHAR_AMIGO' | translate }}" 
+		        title="{{ 'COMPARTILHAR_AMIGO' | translate }}" ng-show="modoLeitura==false && !$root.local">
+		      	&nbsp;<span class="glyphicon glyphicon-share" aria-hidden="true"></span>&nbsp;{{ 'COMPARTILHAR_AMIGO' | translate }}
+		    </a>
+	    </li>
+	    <li>
+	    	<a ng-href="#/relatorio-texto/{{projeto.id}}" alt="{{ 'GERAR_RELATORIO' | translate }}" 
+		        title="{{ 'GERAR_RELATORIO' | translate }}" ng-if="$root.bmc">
+		      	&nbsp;<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;{{ 'GERAR_RELATORIO' | translate }}
+		    </a>
+	    </li>
+	    <li>
+	    	<a ng-href="{{ urlSlideshow }}" target="_blank" alt="{{ 'SLIDESHOW' | translate }}" 
+		        title="{{ 'SLIDESHOW' | translate }}" ng-show="modoLeitura==false  && !$root.local" ng-if="$root.bmc">
+		      	&nbsp;<span class="glyphicon glyphicon-film" aria-hidden="true"></span>&nbsp;{{ 'SLIDESHOW' | translate }}
+		    </a>
+	    </li>
+	</ul>
 </div>
 
 <div class="page-header kz_center hidden-print">

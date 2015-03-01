@@ -29,14 +29,7 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', [ '$rootScope', '$w
       email : $window.sessionStorage.email 
     };
     var itensCanvasResource = $resource( $rootScope.urlItemCanvas[ $rootScope.mode ] + '/projeto-canvas/:id?email=:email' );
-    itensCanvasResource.get( params, 
-      function( response ) {
-        sucesso( response );
-      },
-      function( response ) {
-        erro( response );
-      }
-    );
+    itensCanvasResource.get( params, sucesso, erro );
   };
 
   /**
@@ -58,14 +51,7 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', [ '$rootScope', '$w
       email : $window.sessionStorage.email 
     };
     var itensCanvasResource = $resource( $rootScope.urlItemCanvas[ $rootScope.mode ] + '/:id?email=:email' );
-    itensCanvasResource.get( params, 
-      function( response ) {
-        sucesso( response );
-      },
-      function( response ) {
-        erro( response );
-      }
-    );
+    itensCanvasResource.get( params, sucesso, erro );
   };
 
   /**
@@ -82,14 +68,7 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', [ '$rootScope', '$w
       return;
     }
     var itemCanvasResource = $resource( $rootScope.urlItemCanvas[ $rootScope.mode ] );
-    itemCanvasResource.save( {}, itemCanvasObj, 
-      function( response ) {
-        sucesso( response );
-      },
-      function( response ) {
-        erro( response );
-      }
-    );
+    itemCanvasResource.save( {}, itemCanvasObj, sucesso, erro );
   };
 
   /**
@@ -108,14 +87,7 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', [ '$rootScope', '$w
     }
     var itemCanvasResource = $resource( $rootScope.urlItemCanvas[ $rootScope.mode ] + '/:id', null, 
           { 'update' : { method : 'PUT' } } );
-    itemCanvasResource.update( { 'id' : itemId }, itemCanvasObj, 
-      function( response ) {
-        sucesso( response );
-      },
-      function( response ) {
-        erro( response );
-      }
-    );
+    itemCanvasResource.update( { 'id' : itemId }, itemCanvasObj, sucesso, erro );
   };
 
   /**
@@ -137,14 +109,7 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', [ '$rootScope', '$w
       email : $window.sessionStorage.email 
     };
     var itemCanvasResource = $resource( $rootScope.urlItemCanvas[ $rootScope.mode ] + '/:id?email=:email' );
-    itemCanvasResource.remove( params, 
-      function( response ) {
-        sucesso( response );
-      },
-      function( response ) {
-        erro( response );
-      }
-    );
+    itemCanvasResource.remove( params, sucesso, erro );
   };
 
   /**
