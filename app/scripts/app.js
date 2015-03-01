@@ -1,9 +1,7 @@
 'use strict';
 
-//TODO remover angular.module( 'LocalStorageModule' ).value( 'prefix', 'kzbmc' );
 var kzbmcMobileApp = angular.module('kzbmcMobileApp', [
       'ngRoute',
-      //TODO remover 'LocalStorageModule',
       //'ui.sortable',
       'pascalprecht.translate',
       'ngResource'
@@ -136,6 +134,7 @@ kzbmcMobileApp.factory( 'authInterceptor', [ '$rootScope', '$q', '$window', '$lo
           $rootScope.loading = false;
           if( rejection.status === 401 ) {
             delete $window.sessionStorage.token;
+            $rootScope.loggedIn = false;
             $location.path( '/login' );
           }
           return $q.reject( rejection );
@@ -155,29 +154,30 @@ kzbmcMobileApp.constant( '_', window._ );
 
 kzbmcMobileApp.run([ '$rootScope', '$window', '$translate', function( $rootScope, $window, $translate ) {
   $rootScope.liteVersion = false;
+  $rootScope.baseUrl = 'http://localhost:8888/kzbmc-api/web/v1/';
   $rootScope.urlProjetoCanvas = {
-    'projetos' : 'http://localhost:8888/kzbmc-api/web/index.php/v1/projeto-canvas',
-    'projetosLean' : 'http://localhost:8888/kzbmc-api/web/index.php/v1/projeto-canvas-leans',
+    'projetos' : $rootScope.baseUrl + 'projeto-canvas',
+    'projetosLean' : $rootScope.baseUrl + 'projeto-canvas-leans',
   };
   $rootScope.urlItemCanvas = {
-    'projetos' : 'http://localhost:8888/kzbmc-api/web/index.php/v1/item-canvas',
-    'projetosLean' : 'http://localhost:8888/kzbmc-api/web/index.php/v1/item-canvas-leans'
+    'projetos' : $rootScope.baseUrl + 'item-canvas',
+    'projetosLean' : $rootScope.baseUrl + 'item-canvas-leans'
   };
   $rootScope.urlProjetoCanvasComp = {
-    'projetos' : 'http://localhost:8888/kzbmc-api/web/index.php/v1/compartilhados/compartilhar',
-    'projetosLean' : 'http://localhost:8888/kzbmc-api/web/index.php/v1/compartilhado-leans/compartilhar'
+    'projetos' : $rootScope.baseUrl + 'compartilhados/compartilhar',
+    'projetosLean' : $rootScope.baseUrl + 'compartilhado-leans/compartilhar'
   };
   $rootScope.urlProjetoCanvasListarComp = {
-    'projetos' : 'http://localhost:8888/kzbmc-api/web/index.php/v1/compartilhados',
-    'projetosLean' : 'http://localhost:8888/kzbmc-api/web/index.php/v1/compartilhado-leans'
+    'projetos' : $rootScope.baseUrl + 'compartilhados',
+    'projetosLean' : $rootScope.baseUrl + 'compartilhado-leans'
   };
-  $rootScope.urlUsuario = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios/auth';
-  $rootScope.urlEsqueciSenha = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios/esqueci-senha';
-  $rootScope.urlNovaSenha = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios/nova-senha';
-  $rootScope.urlTrocarSenha = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios/trocar-senha';
-  $rootScope.urlUsuarios = 'http://localhost:8888/kzbmc-api/web/index.php/v1/usuarios';
-  $rootScope.urlSlideshow = 'http://localhost:8888/kzbmc-api/web/index.php/v1/slideshow';
-  $rootScope.urlAssinarPlano = 'http://kazale.com';
+  $rootScope.urlUsuario = $rootScope.baseUrl + 'usuarios/auth';
+  $rootScope.urlEsqueciSenha = $rootScope.baseUrl + 'usuarios/esqueci-senha';
+  $rootScope.urlNovaSenha = $rootScope.baseUrl + 'usuarios/nova-senha';
+  $rootScope.urlTrocarSenha = $rootScope.baseUrl + 'usuarios/trocar-senha';
+  $rootScope.urlUsuarios = $rootScope.baseUrl + 'usuarios';
+  $rootScope.urlSlideshow = $rootScope.baseUrl + 'slideshow';
+  $rootScope.urlAssinarPlano = 'http://kazcanvas.com';
   $rootScope.local = false;
   $rootScope.bmc = true;
   $rootScope.mode = 'projetos'; // projetos ou projetosLean

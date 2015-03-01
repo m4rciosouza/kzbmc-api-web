@@ -32,7 +32,7 @@ angular.module( 'kzbmcMobileApp' ).config( function( $translateProvider ) {
     VI_VANTAGEM: 'Ventaja',
     VI_INJUSTA: 'Injusta',
     // index.html
-    KZ_CANVAS : 'KZ-Canvas',
+    KZ_CANVAS : 'KAZ-Canvas',
     INICIAL : 'Inicial',
     ENVIAR_POR_EMAIL : 'Enviar Por Email',
     AJUDA : 'Ayudar',
@@ -283,6 +283,7 @@ angular.module( 'kzbmcMobileApp' ).config( function( $translateProvider ) {
     ASSINAR_PLANO : 'Suscríbete ahora',
     NENHUM_MODELO_CADASTRADO : 'Ningún modelo encontró.',
     LEAN_MODEL_CANVAS : 'Lean Model Canvas',
-    ACOES : 'Acciones'
+    ACOES : 'Acciones',
+    META_DESCRIPTION : 'Build your Business Model Canvas from your computer or mobile, share with friends and much more...'
   });
 });
