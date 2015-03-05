@@ -75,10 +75,13 @@
       </div><!-- /.navbar-collapse -->
   	</nav>
 
-	<!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>	
-    <img src="images/loader.gif" class="loader-position" alt="Loading..." title="Loading..." ng-show="$root.loading" />
-		
+    <div class="kz_overlay" ng-show="$root.loading">
+      <img src="images/loader.gif" class="loader-position" alt="Loading..." title="Loading..." />
+    </div>
+	  
+    <!-- Add your site or application content here -->
+    <div class="container" ng-view=""></div>
+    		
 	<!-- Page Footer -->
 	<div class="kz_page_footer kz_center">
 		<p>&copy; <a href="http://kazale.com" title="{{ 'KAZALE' | translate }}" alt="{{ 'KAZALE' | translate }}" target="_blank">
