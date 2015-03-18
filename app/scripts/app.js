@@ -132,7 +132,7 @@ kzbmcMobileApp.factory( 'authInterceptor', [ '$rootScope', '$q', '$window', '$lo
         },
         responseError: function( rejection ) {
           $rootScope.loading = false;
-          if( rejection.status === 401 ) {
+          if( rejection.status === 401 && !$rootScope.local ) {
             delete $window.sessionStorage.token;
             $rootScope.loggedIn = false;
             $location.path( '/login' );
@@ -177,8 +177,9 @@ kzbmcMobileApp.run([ '$rootScope', '$window', '$translate', function( $rootScope
   $rootScope.urlTrocarSenha = $rootScope.baseUrl + 'usuarios/trocar-senha';
   $rootScope.urlUsuarios = $rootScope.baseUrl + 'usuarios';
   $rootScope.urlSlideshow = $rootScope.baseUrl + 'slideshow';
+  $rootScope.sincronizarServidor = $rootScope.baseUrl + 'mobiles/sincronizar-servidor';
   $rootScope.urlAssinarPlano = 'http://kazcanvas.com';
-  $rootScope.local = false;
+  $rootScope.local = true;
   $rootScope.bmc = true;
   $rootScope.mode = 'projetos'; // projetos ou projetosLean
   $translate.use( $window.localStorage.lingua || 'en' );

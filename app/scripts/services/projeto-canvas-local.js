@@ -69,7 +69,7 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasLocalService', [ '$win
     projetoCanvas.cadastrar = function( projetoCanvasObj, sucesso ) {
         var projetos = this.obterProjetos();
         var projetoCanvasLocal = { 
-          'id' : this.guid(),
+          'id' : projetoCanvasObj.id || this.guid(),
           'nome' : projetoCanvasObj.nome, 
           'descricao' : projetoCanvasObj.descricao, 
           'itens' : { 
@@ -79,7 +79,9 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasLocalService', [ '$win
         };
         projetos.push( projetoCanvasLocal );
         $window.localStorage[ $rootScope.mode ] = angular.toJson( projetos );
-        sucesso( { id : projetoCanvasLocal.id } );
+        if( typeof sucesso === 'function' ) {
+          sucesso(  { id : projetoCanvasLocal.id }  );
+        }
     };
 
     /**
@@ -117,7 +119,9 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasLocalService', [ '$win
             return projeto.id !== projetoId;
           });
       $window.localStorage[ $rootScope.mode ] = angular.toJson( projetos );
-      sucesso();
+      if( typeof( sucesso ) === 'function' ) {
+        sucesso();
+      }
     };
 
     /**

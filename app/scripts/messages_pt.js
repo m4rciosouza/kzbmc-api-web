@@ -284,6 +284,8 @@ angular.module( 'kzbmcMobileApp' ).config( function( $translateProvider ) {
     NENHUM_MODELO_CADASTRADO : 'Nenhum modelo cadastrado.',
     LEAN_MODEL_CANVAS : 'Lean Model Canvas',
     ACOES : 'Ações',
-    META_DESCRIPTION : 'Crie seu próprio Canvas de Modelo de Negócios ( Business Model Canvas ) de seu computador ou celular, compartilhe com amigos e muito mais...'
+    META_DESCRIPTION : 'Crie seu próprio Canvas de Modelo de Negócios ( Business Model Canvas ) de seu computador ou celular, compartilhe com amigos e muito mais...',
+  
+    UPLOAD_CANVAS : 'Upload Canvas'
   });
 });
