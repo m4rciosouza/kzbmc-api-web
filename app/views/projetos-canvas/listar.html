@@ -39,6 +39,10 @@
     		<tbody>
     			<tr ng-repeat="projeto in projetos">
     				<td class="kz_mouse_cursor">
+              <a ng-href="#/canvas/{{projeto.id}}" class="btn btn-primary"
+                alt="{{ 'VISUALIZAR_CANVAS' | translate }}" title="{{ 'VISUALIZAR_CANVAS' | translate }}">
+                &nbsp;<span class="glyphicon glyphicon-picture"></span>&nbsp;
+              </a>
               <div class="dropup btn-group hidden-print">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                   &nbsp;<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;

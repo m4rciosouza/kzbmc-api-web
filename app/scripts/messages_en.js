@@ -284,6 +284,8 @@ angular.module( 'kzbmcMobileApp' ).config( function( $translateProvider ) {
     NENHUM_MODELO_CADASTRADO : 'No model found.',
     LEAN_MODEL_CANVAS : 'Lean Model Canvas',
     ACOES : 'Actions',
-    META_DESCRIPTION : 'Build your Business Model Canvas from your computer or mobile, share with friends and much more...'
+    META_DESCRIPTION : 'Build your Business Model Canvas from your computer or mobile, share with friends and much more...',
+    UPLOAD_CANVAS : 'Upload Canvas',
+    UPLOAD_CANVAS_SOBRESCREVER : 'Upload Canvas (Overwrite)'
   });
 });

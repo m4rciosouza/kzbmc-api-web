@@ -89,6 +89,11 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 	    	return isNaN( projetoId );
 	    };
 
+	    /**
+		 * Cadastra/atualiza um projeto no servidor remoto.
+		 * @method ProjetosCanvasListarCtrl::upload
+		 * @param {integer} projetoId
+		 */
 	    $scope.upload = function( projetoId ) {
 	    	projetoCanvasService.carregarProjeto( projetoId, 
 	    		function( response ) {
@@ -97,18 +102,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 	    			projeto.senha = '123456';
 	    			sincronizacaoService.cadastrar( projeto,  
 	    				function( response ) {
-	    					response.id = response.id.toString();
-	    					if( isNaN( projetoId ) ) {
-	    						console.log('cadastrar');
-		    					projetoCanvasService.remover( projetoId, 
-		    						function() {
-		    							projetoCanvasService.cadastrar( response );
-		    						} 
-		    					);
-		    				} else {
-		    					console.log('atualizar');
-		    					projetoCanvasService.atualizar( projetoId, response, function() {} );
-		    				}
+	    					$scope.sincronizarLocal( projetoId, response );
 	    				}
 	    			);
 	    		},
@@ -118,6 +112,27 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 	    	);
 	    };
 		  
+		/**
+		 * Atualiza localmente os dados do projeto sincronizado remotamente.
+		 * @method ProjetosCanvasListarCtrl::sincronizarLocal
+		 * @param {integer} projetoId
+		 * @param {object} data {projeto, itens}
+		 */
+	    $scope.sincronizarLocal = function( projetoId, data ) {
+	    	var projeto = data.projeto;
+	    	projeto.id = projeto.id.toString();
+	    	projeto.itens = data.itens;
+			if( isNaN( projetoId ) ) {
+				projetoCanvasService.remover( projetoId, function() {
+						projetoCanvasService.cadastrar( projeto );
+						$scope.carregarProjetos( 1 );
+					} 
+				);
+			} else {
+				projetoCanvasService.atualizar( projetoId, projeto );
+			}
+	    };
+
 		$scope.carregarProjetos( 1 );
 		$scope.carregarProjetosCompartilhados( 1 );
 	}
