@@ -84,7 +84,8 @@
 
 					<div class="alert alert-{{item.cor}}" role="alert" ng-repeat="item in projeto.itens[tab]">
 						<p style="text-align : right;">
-		              		<a ng-href="" class="btn btn-primary" ng-click="remover(item.id, $index)"
+		              		<a ng-href="" ng-click="remover(item.id, $index)"
+		              			class="btn" ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
 	      						alt="{{ 'REMOVER_ITEM' | translate }}" title="{{ 'REMOVER_ITEM' | translate }}">
 		               			&nbsp;&nbsp;<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;
 		              		</a>
@@ -133,8 +134,9 @@
 								</label>
 							</div>
 							<div class="form-group">
-								<button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">
-					      				{{ 'ADICIONAR' | translate }}
+								<button type="submit" ng-disabled="form.$invalid" class="btn" 
+									ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
+					      			{{ 'ADICIONAR' | translate }}
 					      		</button>
 					     	</div>
 						</form>
@@ -146,10 +148,12 @@
 					<a ng-href="" class="btn btn-default" ng-click="anterior()" ng-hide="selAtual==0">
 						<span class="glyphicon glyphicon-chevron-left"></span> {{ 'ANTERIOR' | translate }}
 					</a>
-			 		<a ng-href="" class="btn btn-primary" ng-click="avancar()" ng-hide="selAtual==8">
+			 		<a ng-href="" ng-click="avancar()" ng-hide="selAtual==8" class="btn" 
+			 			ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
 						{{ 'AVANCAR' | translate }} <span class="glyphicon glyphicon-chevron-right"></span>
 					</a>
-					<a ng-href="#/canvas/{{ index }}" class="btn btn-primary" ng-show="selAtual==8">
+					<a ng-href="#/canvas/{{ index }}" ng-show="selAtual==8" class="btn" 
+						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
 						{{ 'FINALIZAR' | translate }} <span class="glyphicon glyphicon-chevron-right"></span>
 					</a>
 				</div>

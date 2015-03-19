@@ -29,7 +29,8 @@
     					placeholder="{{ 'DIGITE_EMAIL_COMPARTILHAR' | translate }}" required />
   				</div>
   				<div class="form-group">
-  					<button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">
+  					<button type="submit" ng-disabled="form.$invalid" class="btn" 
+              ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
       					{{ 'COMPARTILHAR' | translate }}
       				</button>
   					<a ng-href="#/canvas/{{projetoCanvas.id}}" class="btn btn-default">

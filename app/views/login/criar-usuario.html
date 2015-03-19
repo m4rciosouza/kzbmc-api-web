@@ -29,7 +29,8 @@
     					placeholder="{{ 'DIGITE_SENHA' | translate }}" required />
   				</div>
           <div class="form-group">
-            <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">
+            <button type="submit" class="btn" ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }" 
+              ng-disabled="form.$invalid">
                 {{ 'CRIAR' | translate }}
             </button>
             <a ng-href="#/login" class="btn btn-default">

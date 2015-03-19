@@ -45,10 +45,12 @@
 		</div>
 		<div class="form-group">
 			<br />
-      		<button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">
+      		<button type="submit" ng-disabled="form.$invalid" class="btn" 
+      			ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
       			{{ 'ATUALIZAR' | translate }}
       		</button>
-      		<button type="button" class="btn btn-primary" ng-click="remover()">
+      		<button type="button" ng-click="remover()" class="btn" 
+      			ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
   				{{ 'REMOVER' | translate }}
   			</button>
      		<a ng-href="#/canvas/{{projetoId}}" class="btn btn-default">

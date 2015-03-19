@@ -6,7 +6,8 @@
     <div class="col-xs-12 kz_center">
       <h3>{{ 'VERSAO_LITE_LIMITADA' | translate }}</h3>
       <br />
-      <a ng-href="https://play.google.com/store/apps/details?id=com.kazale.kzbmcee" target="_blank" class="btn btn-primary">
+      <a ng-href="https://play.google.com/store/apps/details?id=com.kazale.kzbmcee" target="_blank" class="btn" 
+        ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
         {{ 'ATUALIZAR_VERSAO' | translate }}
       </a>
     </div>
@@ -49,7 +50,9 @@
             </label>
           </div>
   				<div class="form-group">
-  					<button type="submit" class="btn btn-primary" data-dismiss="modal" ng-disabled="form.$invalid">
+  					<button type="submit" class="btn" 
+                ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }" 
+                data-dismiss="modal" ng-disabled="form.$invalid">
       					{{ 'CRIAR' | translate }}
       			</button>
   					<a ng-href="#/" class="btn btn-default">

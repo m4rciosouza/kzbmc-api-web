@@ -1,5 +1,6 @@
 <div class="btn-group hidden-print">
-	<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+	<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
+		ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
     	&nbsp;<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;
     	{{ 'ACOES' | translate }} <span class="caret"></span>
   	</button>
@@ -51,7 +52,8 @@
 					<h5 ng-if="!$root.bmc">
 						{{ 'PROBLEMA' | translate }}
 					</h5>
-					<a ng-href="#/cadastrar-item-canvas/{{index}}/pc" class="btn btn-primary hidden-print"
+					<a ng-href="#/cadastrar-item-canvas/{{index}}/pc" class="btn hidden-print"
+						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
 						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}"
 						ng-show="modoLeitura==false">
                			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
@@ -65,7 +67,8 @@
 					<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.pc" style="margin-top: 10px;">
 						<div ng-repeat="item in projeto.itens.pc" class="alert alert-{{item.cor}} _kz_mouse_cursor">
 							<p style="text-align : right;">
-		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/pc/{{item.id}}" class="btn btn-primary hidden-print"
+		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/pc/{{item.id}}" class="btn hidden-print"
+		      						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
 		      						alt="{{ 'EDITAR_REMOVER_ITEM' | translate }}" title="{{ 'EDITAR_REMOVER_ITEM' | translate }}"
 		      						ng-show="modoLeitura==false">
 			               			&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;
@@ -84,7 +87,8 @@
 					<h5 ng-if="!$root.bmc">
 						{{ 'SOLUCAO' | translate }}
 					</h5>
-					<a ng-href="#/cadastrar-item-canvas/{{index}}/ac" class="btn btn-primary hidden-print"
+					<a ng-href="#/cadastrar-item-canvas/{{index}}/ac" class="btn hidden-print"
+						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
 						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}"
 						ng-show="modoLeitura==false">
                			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
@@ -98,7 +102,8 @@
 					<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.ac" style="margin-top: 10px;">
 						<div ng-repeat="item in projeto.itens.ac" class="alert alert-{{item.cor}} _kz_mouse_cursor">
 							<p style="text-align : right;">
-		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/ac/{{item.id}}" class="btn btn-primary hidden-print"
+		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/ac/{{item.id}}" class="btn hidden-print"
+		      						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
 		      						alt="{{ 'EDITAR_REMOVER_ITEM' | translate }}" title="{{ 'EDITAR_REMOVER_ITEM' | translate }}"
 		      						ng-show="modoLeitura==false">
 			               			&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;
@@ -118,7 +123,8 @@
 						{{ 'PVU_PROPOSTAS' | translate }} {{ 'PVU_VALOR' | translate }}
 						<br />{{ 'PVU_UNICAS' | translate }}
 					</h5>
-					<a ng-href="#/cadastrar-item-canvas/{{index}}/pv" class="btn btn-primary hidden-print"
+					<a ng-href="#/cadastrar-item-canvas/{{index}}/pv" class="btn hidden-print"
+						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
 						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}"
 						ng-show="modoLeitura==false">
                			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
@@ -130,7 +136,8 @@
 					<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.pv" style="margin-top: 10px;">
 						<div ng-repeat="item in projeto.itens.pv" class="alert alert-{{item.cor}} _kz_mouse_cursor">
 							<p style="text-align : right;">
-		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/pv/{{item.id}}" class="btn btn-primary hidden-print"
+		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/pv/{{item.id}}" class="btn hidden-print"
+		      						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
 		      						alt="{{ 'EDITAR_REMOVER_ITEM' | translate }}" title="{{ 'EDITAR_REMOVER_ITEM' | translate }}"
 		      						ng-show="modoLeitura==false">
 			               			&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;
@@ -149,7 +156,8 @@
 					<h5 ng-if="!$root.bmc">
 						{{ 'VI_VANTAGEM' | translate }}<br />{{ 'VI_INJUSTA' | translate }}
 					</h5>
-					<a ng-href="#/cadastrar-item-canvas/{{index}}/rcl" class="btn btn-primary hidden-print"
+					<a ng-href="#/cadastrar-item-canvas/{{index}}/rcl" class="btn hidden-print"
+						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
 						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}"
 						ng-show="modoLeitura==false">
                			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
@@ -161,7 +169,8 @@
 					<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.rcl" style="margin-top: 10px;">
 						<div ng-repeat="item in projeto.itens.rcl" class="alert alert-{{item.cor}} _kz_mouse_cursor">
 							<p style="text-align : right;">
-		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/rcl/{{item.id}}" class="btn btn-primary hidden-print"
+		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/rcl/{{item.id}}" class="btn hidden-print"
+		      						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
 		      						alt="{{ 'EDITAR_REMOVER_ITEM' | translate }}" title="{{ 'EDITAR_REMOVER_ITEM' | translate }}"
 		      						ng-show="modoLeitura==false">
 			               			&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;
@@ -177,7 +186,8 @@
 					<h5>
 						{{ 'SEGMENTOS' | translate }}<br />{{ 'DE_CLIENTES' | translate }}
 					</h5>
-					<a ng-href="#/cadastrar-item-canvas/{{index}}/sc" class="btn btn-primary hidden-print"
+					<a ng-href="#/cadastrar-item-canvas/{{index}}/sc" class="btn hidden-print"
+						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
 						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}"
 						ng-show="modoLeitura==false">
                			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
@@ -191,7 +201,8 @@
 					<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.sc" style="margin-top: 10px;">
 						<div ng-repeat="item in projeto.itens.sc" class="alert alert-{{item.cor}} _kz_mouse_cursor">
 							<p style="text-align : right;">
-		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/sc/{{item.id}}" class="btn btn-primary hidden-print"
+		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/sc/{{item.id}}" class="btn hidden-print"
+		      						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
 		      						alt="{{ 'EDITAR_REMOVER_ITEM' | translate }}" title="{{ 'EDITAR_REMOVER_ITEM' | translate }}"
 		      						ng-show="modoLeitura==false">
 			               			&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;
@@ -212,7 +223,8 @@
 					<h5 ng-if="!$root.bmc">
 						{{ 'MC_METRICAS' | translate }}<br />{{ 'MC_CHAVE' | translate }}
 					</h5>
-					<a ng-href="#/cadastrar-item-canvas/{{index}}/rc" class="btn btn-primary hidden-print"
+					<a ng-href="#/cadastrar-item-canvas/{{index}}/rc" class="btn hidden-print"
+						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
 						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}"
 						ng-show="modoLeitura==false">
                			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
@@ -226,7 +238,8 @@
 					<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.rc" style="margin-top: 10px;">
 						<div ng-repeat="item in projeto.itens.rc" class="alert alert-{{item.cor}} _kz_mouse_cursor">
 							<p style="text-align : right;">
-		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/rc/{{item.id}}" class="btn btn-primary hidden-print"
+		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/rc/{{item.id}}" class="btn hidden-print"
+		      						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
 		      						alt="{{ 'EDITAR_REMOVER_ITEM' | translate }}" title="{{ 'EDITAR_REMOVER_ITEM' | translate }}"
 		      						ng-show="modoLeitura==false">
 			               			&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;
@@ -240,7 +253,8 @@
 					<img ng-src="images/canais.png" alt="{{ 'CANAIS' | translate }}" 
 						title="{{ 'CANAIS' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
 					<h5>{{ 'CANAIS' | translate }}</h5>
-					<a ng-href="#/cadastrar-item-canvas/{{index}}/ca" class="btn btn-primary hidden-print"
+					<a ng-href="#/cadastrar-item-canvas/{{index}}/ca" class="btn hidden-print"
+						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
 						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}"
 						ng-show="modoLeitura==false">
                			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
@@ -252,7 +266,8 @@
 					<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.ca" style="margin-top: 10px;">
 						<div ng-repeat="item in projeto.itens.ca" class="alert alert-{{item.cor}} _kz_mouse_cursor">
 							<p style="text-align : right;">
-		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/ca/{{item.id}}" class="btn btn-primary hidden-print"
+		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/ca/{{item.id}}" class="btn hidden-print"
+		      						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
 		      						alt="{{ 'EDITAR_REMOVER_ITEM' | translate }}" title="{{ 'EDITAR_REMOVER_ITEM' | translate }}"
 		      						ng-show="modoLeitura==false">
 			               			&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;
@@ -275,7 +290,8 @@
 					<img ng-src="images/estrutura_custo.png" alt="{{ 'ESTRUTURA_CUSTO' | translate }}" 
 						title="{{ 'ESTRUTURA_CUSTO' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
 					<h5>{{ 'ESTRUTURA_CUSTO' | translate }}</h5>
-					<a ng-href="#/cadastrar-item-canvas/{{index}}/ec" class="btn btn-primary hidden-print"
+					<a ng-href="#/cadastrar-item-canvas/{{index}}/ec" class="btn hidden-print"
+						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
 						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}"
 						ng-show="modoLeitura==false">
                			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
@@ -287,7 +303,8 @@
 					<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.ec" style="margin-top: 10px;">
 						<div ng-repeat="item in projeto.itens.ec" class="alert alert-{{item.cor}} _kz_mouse_cursor">
 							<p style="text-align : right;">
-		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/ec/{{item.id}}" class="btn btn-primary hidden-print"
+		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/ec/{{item.id}}" class="btn hidden-print"
+		      						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
 		      						alt="{{ 'EDITAR_REMOVER_ITEM' | translate }}" title="{{ 'EDITAR_REMOVER_ITEM' | translate }}"
 		      						ng-show="modoLeitura==false">
 			               			&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;
@@ -301,7 +318,8 @@
 					<img ng-src="images/fluxo_receita.png" alt="{{ 'FLUXO_RECEITA' | translate }}" 
 						title="{{ 'FLUXO_RECEITA' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
 					<h5>{{ 'FLUXO_RECEITA' | translate }}</h5>
-					<a ng-href="#/cadastrar-item-canvas/{{index}}/fr" class="btn btn-primary hidden-print"
+					<a ng-href="#/cadastrar-item-canvas/{{index}}/fr" class="btn hidden-print"
+						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
 						alt="{{ 'ADICIONAR_ITEM' | translate }}" title="{{ 'ADICIONAR_ITEM' | translate }}"
 						ng-show="modoLeitura==false">
                			&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;
@@ -313,7 +331,8 @@
 					<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.fr" style="margin-top: 10px;">
 						<div ng-repeat="item in projeto.itens.fr" class="alert alert-{{item.cor}} _kz_mouse_cursor">
 							<p style="text-align : right;">
-		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/fr/{{item.id}}" class="btn btn-primary hidden-print"
+		      					<a ng-href="#/editar-remover-item-canvas/{{index}}/fr/{{item.id}}" class="btn hidden-print"
+		      						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
 		      						alt="{{ 'EDITAR_REMOVER_ITEM' | translate }}" title="{{ 'EDITAR_REMOVER_ITEM' | translate }}"
 		      						ng-show="modoLeitura==false">
 			               			&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;
@@ -341,14 +360,16 @@
 			<h5 ng-if="!$root.bmc">
 				{{ 'PROBLEMA' | translate }}
 			</h5>
-			<a ng-href="#/cadastrar-item-canvas/{{index}}/pc" class="btn btn-primary hidden-print" ng-show="modoLeitura==false">
+			<a ng-href="#/cadastrar-item-canvas/{{index}}/pc" class="btn hidden-print" ng-show="modoLeitura==false"
+				ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
                	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
             </a>
 			<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.pc" style="margin-top: 10px;">
 				<div ng-repeat="item in projeto.itens.pc" class="alert alert-{{item.cor}} _kz_mouse_cursor">
 					<p style="text-align : right;">
-      					<a ng-href="#/editar-remover-item-canvas/{{index}}/pc/{{item.id}}" class="btn btn-primary hidden-print"
-      						ng-show="modoLeitura==false">
+      					<a ng-href="#/editar-remover-item-canvas/{{index}}/pc/{{item.id}}" class="btn hidden-print"
+      						ng-show="modoLeitura==false"
+      						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
 			               	<span class="glyphicon glyphicon-pencil"></span> {{ 'EDITAR' | translate }} | 
 			               	<span class="glyphicon glyphicon-trash"></span> {{ 'REMOVER' | translate }}
 			            </a>
@@ -370,14 +391,16 @@
 			<h5 ng-if="!$root.bmc">
 				{{ 'SOLUCAO' | translate }}
 			</h5>
-			<a ng-href="#/cadastrar-item-canvas/{{index}}/ac" class="btn btn-primary hidden-print" ng-show="modoLeitura==false">
+			<a ng-href="#/cadastrar-item-canvas/{{index}}/ac" class="btn hidden-print" ng-show="modoLeitura==false"
+				ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
                	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
             </a>
 			<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.ac" style="margin-top: 10px;">
 				<div ng-repeat="item in projeto.itens.ac" class="alert alert-{{item.cor}} _kz_mouse_cursor">
 					<p style="text-align : right;">
-      					<a ng-href="#/editar-remover-item-canvas/{{index}}/ac/{{item.id}}" class="btn btn-primary hidden-print"
-      						ng-show="modoLeitura==false">
+      					<a ng-href="#/editar-remover-item-canvas/{{index}}/ac/{{item.id}}" class="btn hidden-print"
+      						ng-show="modoLeitura==false"
+      						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
 			               	<span class="glyphicon glyphicon-pencil"></span> {{ 'EDITAR' | translate }} | 
 			               	<span class="glyphicon glyphicon-trash"></span> {{ 'REMOVER' | translate }}
 			            </a>
@@ -399,14 +422,16 @@
 			<h5 ng-if="!$root.bmc">
 				{{ 'MC_METRICAS' | translate }}<br />{{ 'MC_CHAVE' | translate }}
 			</h5>
-			<a ng-href="#/cadastrar-item-canvas/{{index}}/rc" class="btn btn-primary hidden-print" ng-show="modoLeitura==false">
+			<a ng-href="#/cadastrar-item-canvas/{{index}}/rc" class="btn hidden-print" ng-show="modoLeitura==false"
+				ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
                	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
             </a>
 			<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.rc" style="margin-top: 10px;">
 				<div ng-repeat="item in projeto.itens.rc" class="alert alert-{{item.cor}} _kz_mouse_cursor">
 					<p style="text-align : right;">
-      					<a ng-href="#/editar-remover-item-canvas/{{index}}/rc/{{item.id}}" class="btn btn-primary hidden-print"
-      						ng-show="modoLeitura==false">
+      					<a ng-href="#/editar-remover-item-canvas/{{index}}/rc/{{item.id}}" class="btn hidden-print"
+      						ng-show="modoLeitura==false"
+      						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
 			               	<span class="glyphicon glyphicon-pencil"></span> {{ 'EDITAR' | translate }} | 
 			               	<span class="glyphicon glyphicon-trash"></span> {{ 'REMOVER' | translate }}
 			            </a>
@@ -429,14 +454,16 @@
 				{{ 'PVU_PROPOSTAS' | translate }} {{ 'PVU_VALOR' | translate }}
 				<br />{{ 'PVU_UNICAS' | translate }}
 			</h5>
-			<a ng-href="#/cadastrar-item-canvas/{{index}}/pv" class="btn btn-primary hidden-print" ng-show="modoLeitura==false">
+			<a ng-href="#/cadastrar-item-canvas/{{index}}/pv" class="btn hidden-print" ng-show="modoLeitura==false"
+				ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
                	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
             </a>
 			<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.pv" style="margin-top: 10px;">
 				<div ng-repeat="item in projeto.itens.pv" class="alert alert-{{item.cor}} _kz_mouse_cursor">
 					<p style="text-align : right;">
-      					<a ng-href="#/editar-remover-item-canvas/{{index}}/pv/{{item.id}}" class="btn btn-primary hidden-print"
-      						ng-show="modoLeitura==false">
+      					<a ng-href="#/editar-remover-item-canvas/{{index}}/pv/{{item.id}}" class="btn hidden-print"
+      						ng-show="modoLeitura==false"
+      						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
 			               	<span class="glyphicon glyphicon-pencil"></span> {{ 'EDITAR' | translate }} | 
 			               	<span class="glyphicon glyphicon-trash"></span> {{ 'REMOVER' | translate }}
 			            </a>
@@ -458,14 +485,16 @@
 			<h5 ng-if="!$root.bmc">
 				{{ 'VI_VANTAGEM' | translate }}<br />{{ 'VI_INJUSTA' | translate }}
 			</h5>
-			<a ng-href="#/cadastrar-item-canvas/{{index}}/rcl" class="btn btn-primary hidden-print" ng-show="modoLeitura==false">
+			<a ng-href="#/cadastrar-item-canvas/{{index}}/rcl" class="btn hidden-print" ng-show="modoLeitura==false"
+				ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
                	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
             </a>
 			<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.rcl" style="margin-top: 10px;">
 				<div ng-repeat="item in projeto.itens.rcl" class="alert alert-{{item.cor}} _kz_mouse_cursor">
 					<p style="text-align : right;">
-      					<a ng-href="#/editar-remover-item-canvas/{{index}}/rcl/{{item.id}}" class="btn btn-primary hidden-print"
-      						ng-show="modoLeitura==false">
+      					<a ng-href="#/editar-remover-item-canvas/{{index}}/rcl/{{item.id}}" class="btn hidden-print"
+      						ng-show="modoLeitura==false"
+      						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
 			               	<span class="glyphicon glyphicon-pencil"></span> {{ 'EDITAR' | translate }} | 
 			               	<span class="glyphicon glyphicon-trash"></span> {{ 'REMOVER' | translate }}
 			            </a>
@@ -482,14 +511,16 @@
 			<img ng-src="images/canais.png" alt="{{ 'CANAIS' | translate }}" 
 				title="{{ 'CANAIS' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
 			<h5>{{ 'CANAIS' | translate }}</h5>
-			<a ng-href="#/cadastrar-item-canvas/{{index}}/ca" class="btn btn-primary hidden-print" ng-show="modoLeitura==false">
+			<a ng-href="#/cadastrar-item-canvas/{{index}}/ca" class="btn hidden-print" ng-show="modoLeitura==false"
+				ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
                	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
             </a>
 			<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.ca" style="margin-top: 10px;">
 				<div ng-repeat="item in projeto.itens.ca" class="alert alert-{{item.cor}} _kz_mouse_cursor">
 					<p style="text-align : right;">
-      					<a ng-href="#/editar-remover-item-canvas/{{index}}/ca/{{item.id}}" class="btn btn-primary hidden-print"
-      						ng-show="modoLeitura==false">
+      					<a ng-href="#/editar-remover-item-canvas/{{index}}/ca/{{item.id}}" class="btn hidden-print"
+      						ng-show="modoLeitura==false"
+      						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
 			               	<span class="glyphicon glyphicon-pencil"></span> {{ 'EDITAR' | translate }} | 
 			               	<span class="glyphicon glyphicon-trash"></span> {{ 'REMOVER' | translate }}
 			            </a>
@@ -508,14 +539,16 @@
 			<h5>
 				{{ 'SEGMENTOS' | translate }}<br />{{ 'DE_CLIENTES' | translate }}
 			</h5>
-			<a ng-href="#/cadastrar-item-canvas/{{index}}/sc" class="btn btn-primary hidden-print" ng-show="modoLeitura==false">
+			<a ng-href="#/cadastrar-item-canvas/{{index}}/sc" class="btn hidden-print" ng-show="modoLeitura==false"
+				ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
                	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
             </a>
 			<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.sc" style="margin-top: 10px;">
 				<div ng-repeat="item in projeto.itens.sc" class="alert alert-{{item.cor}} _kz_mouse_cursor">
 					<p style="text-align : right;">
-      					<a ng-href="#/editar-remover-item-canvas/{{index}}/sc/{{item.id}}" class="btn btn-primary hidden-print"
-      						ng-show="modoLeitura==false">
+      					<a ng-href="#/editar-remover-item-canvas/{{index}}/sc/{{item.id}}" class="btn hidden-print"
+      						ng-show="modoLeitura==false"
+      						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
 			               	<span class="glyphicon glyphicon-pencil"></span> {{ 'EDITAR' | translate }} | 
 			               	<span class="glyphicon glyphicon-trash"></span> {{ 'REMOVER' | translate }}
 			            </a>
@@ -532,14 +565,16 @@
 			<img ng-src="images/estrutura_custo.png" alt="{{ 'ESTRUTURA_CUSTO' | translate }}" 
 				title="{{ 'ESTRUTURA_CUSTO' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
 			<h5>{{ 'ESTRUTURA_CUSTO' | translate }}</h5>
-			<a ng-href="#/cadastrar-item-canvas/{{index}}/ec" class="btn btn-primary hidden-print" ng-show="modoLeitura==false">
+			<a ng-href="#/cadastrar-item-canvas/{{index}}/ec" class="btn hidden-print" ng-show="modoLeitura==false"
+				ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
                	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
             </a>
 			<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.ec" style="margin-top: 10px;">
 				<div ng-repeat="item in projeto.itens.ec" class="alert alert-{{item.cor}} _kz_mouse_cursor">
 					<p style="text-align : right;">
-      					<a ng-href="#/editar-remover-item-canvas/{{index}}/ec/{{item.id}}" class="btn btn-primary hidden-print"
-      						ng-show="modoLeitura==false">
+      					<a ng-href="#/editar-remover-item-canvas/{{index}}/ec/{{item.id}}" class="btn hidden-print"
+      						ng-show="modoLeitura==false"
+      						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
 			               	<span class="glyphicon glyphicon-pencil"></span> {{ 'EDITAR' | translate }} | 
 			               	<span class="glyphicon glyphicon-trash"></span> {{ 'REMOVER' | translate }}
 			            </a>
@@ -556,14 +591,16 @@
 			<img ng-src="images/fluxo_receita.png" alt="{{ 'FLUXO_RECEITA' | translate }}" 
 				title="{{ 'FLUXO_RECEITA' | translate }}" class="kz_img_position" ng-if="$root.bmc" />
 			<h5>{{ 'FLUXO_RECEITA' | translate }}</h5>
-			<a ng-href="#/cadastrar-item-canvas/{{index}}/fr" class="btn btn-primary hidden-print" ng-show="modoLeitura==false">
+			<a ng-href="#/cadastrar-item-canvas/{{index}}/fr" class="btn hidden-print" ng-show="modoLeitura==false"
+				ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
                	<span class="glyphicon glyphicon-plus"></span> {{ 'ADICIONAR' | translate }}
             </a>
 			<div disabled-ui-sortable="sortableOptions" ng-model="projeto.itens.fr" style="margin-top: 10px;">
 				<div ng-repeat="item in projeto.itens.fr" class="alert alert-{{item.cor}} _kz_mouse_cursor">
 					<p style="text-align : right;">
-      					<a ng-href="#/editar-remover-item-canvas/{{index}}/fr/{{item.id}}" class="btn btn-primary hidden-print"
-      						ng-show="modoLeitura==false">
+      					<a ng-href="#/editar-remover-item-canvas/{{index}}/fr/{{item.id}}" class="btn hidden-print"
+      						ng-show="modoLeitura==false"
+      						ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
 			               	<span class="glyphicon glyphicon-pencil"></span> {{ 'EDITAR' | translate }} | 
 			               	<span class="glyphicon glyphicon-trash"></span> {{ 'REMOVER' | translate }}
 			            </a>

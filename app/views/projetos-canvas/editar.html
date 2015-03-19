@@ -18,7 +18,8 @@
                 placeholder="{{ 'DIGITE_BREVE_DESCRICAO_PROJETO' | translate }}" required />
   				</div>
   				<div class="form-group">
-  					<button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">
+  					<button type="submit" ng-disabled="form.$invalid" class="btn" 
+              ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
       					{{ 'ATUALIZAR' | translate }}
       				</button>
   					<a ng-href="#/" class="btn btn-default">

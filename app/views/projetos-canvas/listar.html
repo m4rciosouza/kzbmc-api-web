@@ -5,14 +5,18 @@
 <div class="kz_content">
 	<div class="row">
 		<div class="col-xs-12 kz_center">
-      <a ng-href="#cadastrar-canvas" class="btn btn-primary btn-lg">
+      <a ng-href="#cadastrar-canvas" class="btn btn-lg" 
+        ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
         <span class="glyphicon glyphicon-plus"></span> {{ 'CRIAR_NOVO_CANVAS' | translate }}
       </a>
-      <a ng-href="" class="btn btn-primary btn-lg" ng-click="alternarVisualizacao(true)" 
+      <a ng-href="" class="btn btn-lg" ng-click="alternarVisualizacao(true)" 
+        ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
         ng-show="mostrarCompartilhados==false && !$root.local">
         <span class="glyphicon glyphicon-eye-open"></span> {{ 'VER_CANVAS_COMPARTILHADOS' | translate }}
       </a>
-      <a ng-href="" class="btn btn-primary btn-lg" ng-click="alternarVisualizacao(false)" ng-show="mostrarCompartilhados==true">
+      <a ng-href="" class="btn btn-lg" ng-click="alternarVisualizacao(false)" 
+        ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
+        ng-show="mostrarCompartilhados==true">
         <span class="glyphicon glyphicon-eye-open"></span> {{ 'VER_MEUS_CANVAS' | translate }}
       </a>
 		</div>
@@ -39,12 +43,14 @@
     		<tbody>
     			<tr ng-repeat="projeto in projetos">
     				<td class="kz_mouse_cursor">
-              <a ng-href="#/canvas/{{projeto.id}}" class="btn btn-primary"
+              <a ng-href="#/canvas/{{projeto.id}}" class="btn" 
+                ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
                 alt="{{ 'VISUALIZAR_CANVAS' | translate }}" title="{{ 'VISUALIZAR_CANVAS' | translate }}">
                 &nbsp;<span class="glyphicon glyphicon-picture"></span>&nbsp;
               </a>
               <div class="dropup btn-group hidden-print">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
+                  ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
                   &nbsp;<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;
                   <span class="caret"></span>
                 </button>
@@ -141,7 +147,8 @@
         <tbody>
           <tr ng-repeat="projetoComp in projetosComp">
             <td class="kz_mouse_cursor">
-              <a ng-href="#/canvas/{{projetoComp.projetoCanvas.id}}" class="btn btn-primary"
+              <a ng-href="#/canvas/{{projetoComp.projetoCanvas.id}}" class="btn" 
+                ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
                 alt="{{ 'VISUALIZAR_CANVAS' | translate }}" title="{{ 'VISUALIZAR_CANVAS' | translate }}">
                 &nbsp;&nbsp;<span class="glyphicon glyphicon-picture"></span>&nbsp;&nbsp;
               </a>
