@@ -12,6 +12,25 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasLocalService', [ '$win
     var projetoCanvas = {};
 
     /**
+     * Retorna listagem de ids existentes no servidor remoto.
+     * @method projetoCanvasLocalService::carregarIdsProjetos
+     * @return {array} idsProjetos
+     */
+    projetoCanvas.carregarIdsProjetos = function() {
+      var idsProjetos = [];
+      var projetos = _.filter( this.obterProjetosJson(), function( projeto ) {
+            return !isNaN( projeto.id );
+          });
+
+      _.each( projetos, function( projeto ) {
+          this.push( projeto.id );
+        }, idsProjetos
+      );
+
+      return idsProjetos;
+    };
+
+    /**
      * Carrega uma listagem paginada de projetos canvas e 
      * popula o escopo.
      * @method projetoCanvasLocalService::carregarProjetos

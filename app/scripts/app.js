@@ -178,6 +178,8 @@ kzbmcMobileApp.run([ '$rootScope', '$window', '$translate', function( $rootScope
   $rootScope.urlUsuarios = $rootScope.baseUrl + 'usuarios';
   $rootScope.urlSlideshow = $rootScope.baseUrl + 'slideshow';
   $rootScope.sincronizarServidor = $rootScope.baseUrl + 'mobiles/sincronizar-servidor';
+  $rootScope.sincronizarCliente = $rootScope.baseUrl + 'mobiles/sincronizar-cliente';
+  $rootScope.sincronizarListarProjeto = $rootScope.baseUrl + 'mobiles/projeto/:id';
   $rootScope.urlAssinarPlano = 'http://kazcanvas.com';
   $rootScope.local = true;
   $rootScope.bmc = true;

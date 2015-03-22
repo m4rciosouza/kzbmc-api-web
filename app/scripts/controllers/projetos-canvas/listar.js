@@ -7,8 +7,10 @@
 'use strict';
 
 angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$scope', '$resource', 
-		'$rootScope', '$location', '$window', 'projetoCanvasService', 'sincronizacaoService',
-	function( $scope, $resource, $rootScope, $location, $window, projetoCanvasService, sincronizacaoService ) {
+		'$rootScope', '$location', '$window', 'projetoCanvasService', 
+		'sincronizacaoService', 'projetoCanvasLocalService', '_',
+	function( $scope, $resource, $rootScope, $location, $window, projetoCanvasService, 
+		sincronizacaoService, projetoCanvasLocalService, _ ) {
 	  
 		$scope.mostrarCompartilhados = false;
 
@@ -82,10 +84,10 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 	    /**
 		 * Verifica se o projeto foi criado localmente e deve
 		 * ser enviado para o servidor remoto.
-		 * @method ProjetosCanvasListarCtrl::efetuarUpload
+		 * @method ProjetosCanvasListarCtrl::projetoLocal
 		 * @param {integer} projetoId
 		 */
-	    $scope.efetuarUpload = function( projetoId ) {
+	    $scope.projetoLocal = function( projetoId ) {
 	    	return isNaN( projetoId );
 	    };
 
@@ -97,9 +99,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 	    $scope.upload = function( projetoId ) {
 	    	projetoCanvasService.carregarProjeto( projetoId, 
 	    		function( response ) {
-	    			var projeto = response || [];
-	    			projeto.email = 'm4rcio.souza@gmail.com';
-	    			projeto.senha = '123456';
+	    			var projeto = response || {};
 	    			sincronizacaoService.cadastrar( projeto,  
 	    				function( response ) {
 	    					$scope.sincronizarLocal( projetoId, response );
@@ -110,6 +110,53 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 
 	    		}
 	    	);
+	    };
+
+	    /**
+		 * Atualiza os dados de um projeto do servidor remoto, 
+		 * sobrescrevendo os valores locais.
+		 * @method ProjetosCanvasListarCtrl::download
+		 * @param {integer} projetoId
+		 */
+	    $scope.download = function( projetoId ) {
+	    	sincronizacaoService.atualizarDoServidorRemoto( projetoId,  
+				function( response ) {
+					$scope.sincronizarLocal( projetoId, response );
+				},
+				function() {
+
+	    		}
+			);
+	    };
+
+	    /**
+		 * Baixa projetos remotos não cadastrados localmente. Remove projetos remotos
+     	 * que foram excluídos localmente.
+		 * @method ProjetosCanvasListarCtrl::baixarProjetosServidor
+		 */
+	    $scope.baixarProjetosServidor = function() {
+	    	var idsExistentes = projetoCanvasLocalService.carregarIdsProjetos();
+	    	var idsExcluir = $window.localStorage.idsExcluir || '';
+
+	    	console.log( 'idsExistentes: ' + idsExistentes );
+	    	console.log( 'idsExcluir: ' + idsExcluir );
+
+	    	sincronizacaoService.baixarProjetosServidor( idsExistentes.join(), idsExcluir,
+				function( response ) {
+					_.each( response, function( projeto ) {
+							projeto.id = projeto.id.toString();
+							console.log( projeto.id );
+							projetoCanvasService.cadastrar( projeto, function() {
+								projetoCanvasService.atualizar( projeto.id, projeto );
+							});
+			        	}
+			      	);
+			      	$scope.carregarProjetos( 1 );
+				},
+				function() {
+
+	    		}
+			);
 	    };
 		  
 		/**
@@ -125,12 +172,12 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 			if( isNaN( projetoId ) ) {
 				projetoCanvasService.remover( projetoId, function() {
 						projetoCanvasService.cadastrar( projeto );
-						$scope.carregarProjetos( 1 );
 					} 
 				);
 			} else {
 				projetoCanvasService.atualizar( projetoId, projeto );
 			}
+			$scope.carregarProjetos( 1 );
 	    };
 
 		$scope.carregarProjetos( 1 );

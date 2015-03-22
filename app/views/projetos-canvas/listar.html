@@ -19,6 +19,13 @@
         ng-show="mostrarCompartilhados==true">
         <span class="glyphicon glyphicon-eye-open"></span> {{ 'VER_MEUS_CANVAS' | translate }}
       </a>
+      <a ng-href="" class="btn btn-lg" ng-click="baixarProjetosServidor()" ng-show="$root.local"
+        ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
+        alt="{{ 'SINCRONIZAR_SERVIDOR_REMOTO' | translate }}" 
+        title="{{ 'SINCRONIZAR_SERVIDOR_REMOTO' | translate }}">
+        &nbsp;<span class="glyphicon glyphicon-refresh"></span>&nbsp;
+        {{ 'SINCRONIZAR_SERVIDOR_REMOTO' | translate }}
+      </a>
 		</div>
 	</div>
 	<br />
@@ -79,16 +86,28 @@
                       &nbsp;<span class="glyphicon glyphicon-picture"></span>&nbsp;{{ 'VISUALIZAR_CANVAS' | translate }}
                     </a>
                   </li>
-                  <li ng-if="efetuarUpload(projeto.id)">
+                  <li ng-if="projetoLocal(projeto.id)">
                     <a ng-href="" ng-click="upload(projeto.id)"
-                      alt="{{ 'UPLOAD_CANVAS' | translate }}" title="{{ 'UPLOAD_CANVAS' | translate }}">
-                      &nbsp;<span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;{{ 'UPLOAD_CANVAS' | translate }}
+                      alt="{{ 'ENVIAR_SERVIDOR_REMOTO' | translate }}" 
+                      title="{{ 'ENVIAR_SERVIDOR_REMOTO' | translate }}">
+                      &nbsp;<span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;
+                      {{ 'ENVIAR_SERVIDOR_REMOTO' | translate }}
                     </a>
                   </li>
-                  <li ng-if="!efetuarUpload(projeto.id)">
+                  <li ng-if="!projetoLocal(projeto.id)">
                     <a ng-href="" ng-click="upload(projeto.id)"
-                      alt="{{ 'UPLOAD_CANVAS_SOBESCREVER' | translate }}" title="{{ 'UPLOAD_CANVAS_SOBESCREVER' | translate }}">
-                      &nbsp;<span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;{{ 'UPLOAD_CANVAS_SOBRESCREVER' | translate }}
+                      alt="{{ 'ENVIAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}" 
+                      title="{{ 'ENVIAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}">
+                      &nbsp;<span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;
+                      {{ 'ENVIAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}
+                    </a>
+                  </li>
+                  <li ng-if="!projetoLocal(projeto.id)">
+                    <a ng-href="" ng-click="download(projeto.id)"
+                      alt="{{ 'BAIXAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}" 
+                      title="{{ 'BAIXAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}">
+                      &nbsp;<span class="glyphicon glyphicon-cloud-download"></span>&nbsp;
+                      {{ 'BAIXAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}
                     </a>
                   </li>
                 </ul>
