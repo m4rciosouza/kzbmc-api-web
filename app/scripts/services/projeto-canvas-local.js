@@ -139,6 +139,9 @@ angular.module( 'kzbmcMobileApp' ).factory( 'projetoCanvasLocalService', [ '$win
           });
       $window.localStorage[ $rootScope.mode ] = angular.toJson( projetos );
       if( typeof( sucesso ) === 'function' ) {
+        if( ! isNaN( projetoId ) ) {
+          $window.localStorage.idsExcluir += projetoId + ',';
+        }
         sucesso();
       }
     };

@@ -38,6 +38,24 @@
     <div class="alert alert-danger" role="alert" ng-show="erro">
       <p>{{ 'ERRO_OBTENDO_DADOS' | translate }}</p>
     </div>
+    <div class="alert alert-success" role="alert" ng-show="sucessoUpload">
+      <p>{{ 'SUCESSO_UPLOAD' | translate }}</p>
+    </div>
+    <div class="alert alert-danger" role="alert" ng-show="erroUpload">
+      <p>{{ 'ERRO_UPLOAD' | translate }}</p>
+    </div>
+    <div class="alert alert-success" role="alert" ng-show="sucessoDownload">
+      <p>{{ 'SUCESSO_DOWNLOAD' | translate }}</p>
+    </div>
+    <div class="alert alert-danger" role="alert" ng-show="erroDownload">
+      <p>{{ 'ERRO_DOWNLOAD' | translate }}</p>
+    </div>
+    <div class="alert alert-success" role="alert" ng-show="sucessoSincronizar">
+      <p>{{ 'SUCESSO_SINCRONIZAR' | translate }}</p>
+    </div>
+    <div class="alert alert-danger" role="alert" ng-show="erroSincronizar">
+      <p>{{ 'ERRO_SINCRONIZAR' | translate }}</p>
+    </div>
   </div>
   <!-- MEUS CANVAS -->
 	<div class="table-responsive" ng-show="projetos.length>0 && mostrarCompartilhados==false">

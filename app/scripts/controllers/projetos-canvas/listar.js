@@ -97,17 +97,19 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 		 * @param {integer} projetoId
 		 */
 	    $scope.upload = function( projetoId ) {
+	    	$scope.resetMensagens();
 	    	projetoCanvasService.carregarProjeto( projetoId, 
 	    		function( response ) {
 	    			var projeto = response || {};
 	    			sincronizacaoService.cadastrar( projeto,  
 	    				function( response ) {
 	    					$scope.sincronizarLocal( projetoId, response );
+	    					$scope.sucessoUpload = true;
 	    				}
 	    			);
 	    		},
 	    		function() {
-
+	    			$scope.erroUpload = true;
 	    		}
 	    	);
 	    };
@@ -119,12 +121,14 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 		 * @param {integer} projetoId
 		 */
 	    $scope.download = function( projetoId ) {
+	    	$scope.resetMensagens();
 	    	sincronizacaoService.atualizarDoServidorRemoto( projetoId,  
 				function( response ) {
 					$scope.sincronizarLocal( projetoId, response );
+					$scope.sucessoDownload = true;
 				},
 				function() {
-
+					$scope.erroDownload = true;
 	    		}
 			);
 	    };
@@ -135,12 +139,10 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 		 * @method ProjetosCanvasListarCtrl::baixarProjetosServidor
 		 */
 	    $scope.baixarProjetosServidor = function() {
+	    	$scope.resetMensagens();
 	    	var idsExistentes = projetoCanvasLocalService.carregarIdsProjetos();
 	    	var idsExcluir = $window.localStorage.idsExcluir || '';
-
-	    	console.log( 'idsExistentes: ' + idsExistentes );
-	    	console.log( 'idsExcluir: ' + idsExcluir );
-
+	    	idsExcluir = idsExcluir.substr( 0, idsExcluir.length - 1 );
 	    	sincronizacaoService.baixarProjetosServidor( idsExistentes.join(), idsExcluir,
 				function( response ) {
 					_.each( response, function( projeto ) {
@@ -151,10 +153,12 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 							});
 			        	}
 			      	);
+			      	$window.localStorage.idsExcluir = '';
 			      	$scope.carregarProjetos( 1 );
+			      	$scope.sucessoSincronizar = true;
 				},
 				function() {
-
+					$scope.erroSincronizar = true;
 	    		}
 			);
 	    };
@@ -178,6 +182,20 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 				projetoCanvasService.atualizar( projetoId, projeto );
 			}
 			$scope.carregarProjetos( 1 );
+	    };
+
+	    /**
+		 * Reinicia o status de todas as mensagens de sucesso e 
+		 * erros de sincronização com o servidor remoto.
+		 * @method ProjetosCanvasListarCtrl::resetMensagens
+		 */
+	    $scope.resetMensagens = function() {
+	    	$scope.sucessoUpload = false;
+	    	$scope.erroUpload = false;
+	    	$scope.sucessoDownload = false;
+	    	$scope.erroDownload = false;
+	    	$scope.sucessoSincronizar = false;
+	    	$scope.erroSincronizar = false;
 	    };
 
 		$scope.carregarProjetos( 1 );

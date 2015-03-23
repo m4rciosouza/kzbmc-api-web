@@ -286,6 +286,16 @@ angular.module( 'kzbmcMobileApp' ).config( function( $translateProvider ) {
     ACOES : 'Acciones',
     META_DESCRIPTION : 'Build your Business Model Canvas from your computer or mobile, share with friends and much more...',
     UPLOAD_CANVAS : 'Subir Lienzo',
-    UPLOAD_CANVAS_SOBRESCREVER : 'Subir Lienzo (Sobrescribir)'
+    UPLOAD_CANVAS_SOBRESCREVER : 'Subir Lienzo (Sobrescribir)',
+    SINCRONIZAR_SERVIDOR_REMOTO : 'Sincronizar con el servidor',
+    ENVIAR_SERVIDOR_REMOTO : 'Enviar al servidor',
+    ENVIAR_SERVIDOR_REMOTO_SOBRESCREVER : 'Enviar al servidor (sobrescribir)',
+    BAIXAR_SERVIDOR_REMOTO_SOBRESCREVER : 'Descargar al servidor (sobrescribir)',
+    SUCESSO_UPLOAD : 'El lienzo canvas se envió con éxito al servidor remoto! Ahora se puede sincronizar desde otro dispositivo.',
+    ERRO_UPLOAD : 'Error al enviar el lienzo canvas con el servidor remoto. Asegúrese de tener conexión a Internet y vuelve a intentarlo.',
+    SUCESSO_DOWNLOAD : 'El lienzo canvas se actualizó correctamente con los datos del servidor remoto!',
+    ERRO_DOWNLOAD : 'Error al descargar el lienzo canvas con el servidor remoto. Asegúrese de tener conexión a Internet y vuelve a intentarlo.',
+    SUCESSO_SINCRONIZAR : 'Los datos de proyectos se han sincronizado correctamente con el servidor remoto!',
+    ERRO_SINCRONIZAR : 'Error al sincronizar los datos de el lienzo canvas con los datos del servidor remoto. Asegúrese de tener conexión a Internet y vuelve a intentarlo.'
   });
 });

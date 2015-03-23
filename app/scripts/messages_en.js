@@ -286,6 +286,16 @@ angular.module( 'kzbmcMobileApp' ).config( function( $translateProvider ) {
     ACOES : 'Actions',
     META_DESCRIPTION : 'Build your Business Model Canvas from your computer or mobile, share with friends and much more...',
     UPLOAD_CANVAS : 'Upload Canvas',
-    UPLOAD_CANVAS_SOBRESCREVER : 'Upload Canvas (Overwrite)'
+    UPLOAD_CANVAS_SOBRESCREVER : 'Upload Canvas (Overwrite)',
+    SINCRONIZAR_SERVIDOR_REMOTO : 'Synchronize with the server',
+    ENVIAR_SERVIDOR_REMOTO : 'Upload to the server',
+    ENVIAR_SERVIDOR_REMOTO_SOBRESCREVER : 'Upload to the server (overwrite)',
+    BAIXAR_SERVIDOR_REMOTO_SOBRESCREVER : 'Download from server (overwrite)',
+    SUCESSO_UPLOAD : 'The project canvas has been uploaded successfully to the remote server! Now it can be synchronized from another device.',
+    ERRO_UPLOAD : 'Error uploading the project canvas to the remote server. Make sure you have Internet connection and try again.',
+    SUCESSO_DOWNLOAD : 'The project canvas has been updated successfully to the remote server!',
+    ERRO_DOWNLOAD : 'Error updating the project canvas to the remote server. Make sure you have Internet connection and try again.',
+    SUCESSO_SINCRONIZAR : 'The new/removed projects data have been synchronized successfully with the remote server!',
+    ERRO_SINCRONIZAR : 'Error synchronizing the projects canvas data with the remote server data. Make sure you have Internet connection and try again.'
   });
 });

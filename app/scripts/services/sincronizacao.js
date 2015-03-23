@@ -7,8 +7,8 @@
 'use strict';
 
 angular.module( 'kzbmcMobileApp' ).factory( 'sincronizacaoService', [ '$window', '$resource', 
-    '$rootScope',
-  function( $window, $resource, $rootScope ) {
+    '$rootScope', 'md5Service',
+  function( $window, $resource, $rootScope, md5Service ) {
 
     var sincronizar = {};
 
@@ -20,8 +20,8 @@ angular.module( 'kzbmcMobileApp' ).factory( 'sincronizacaoService', [ '$window',
      * @param {function} erro
      */
     sincronizar.cadastrar = function( projetoCanvasObj, sucesso, erro ) {
-      projetoCanvasObj.email = 'm4rcio.souza@gmail.com';
-      projetoCanvasObj.senha = '123456';
+      projetoCanvasObj.email = sincronizar.obterUsuario();
+      projetoCanvasObj.senha = sincronizar.obterToken();
       var sincronizarServidorResource = $resource( $rootScope.sincronizarServidor );
       sincronizarServidorResource.save( {}, projetoCanvasObj, sucesso, erro );
     };
@@ -35,8 +35,8 @@ angular.module( 'kzbmcMobileApp' ).factory( 'sincronizacaoService', [ '$window',
      */
     sincronizar.atualizarDoServidorRemoto = function( projetoId, sucesso, erro ) {
       var usuario = {};
-      usuario.email = 'm4rcio.souza@gmail.com';
-      usuario.senha = '123456';
+      usuario.email = sincronizar.obterUsuario();
+      usuario.senha = sincronizar.obterToken();
       var sincronizarListarProjeto = $resource( $rootScope.sincronizarListarProjeto );
       sincronizarListarProjeto.save( { id : projetoId }, usuario, sucesso, erro );
     };
@@ -52,10 +52,29 @@ angular.module( 'kzbmcMobileApp' ).factory( 'sincronizacaoService', [ '$window',
      */
     sincronizar.baixarProjetosServidor = function( idsExistentes, idsExcluir, sucesso, erro ) {
       var params = { 'idsExistentes' : idsExistentes, 'idsExcluir' : idsExcluir };
-      params.email = 'm4rcio.souza@gmail.com';
-      params.senha = '123456';
+      params.email = sincronizar.obterUsuario();
+      params.senha = sincronizar.obterToken();
       var sincronizarCliente = $resource( $rootScope.sincronizarCliente );
       sincronizarCliente.query( params, sucesso, erro );
+    };
+
+    /**
+     * Retorna o email do usuário utilizado para autenticar no servidor remoto.
+     * @method sincronizacaoService::obterUsuario
+     * @return {string} usuario
+     */
+    sincronizar.obterUsuario = function() {
+      return $window.localStorage.usuario || '';
+    };
+
+    /**
+     * Retorna o token md5 do usuário utilizado para autenticar no servidor remoto.
+     * @method sincronizacaoService::obterToken
+     * @return {string} token
+     */
+    sincronizar.obterToken = function() {
+      var token = $window.localStorage.token || '';
+      return token === '' ? token : md5Service.md5( token );
     };
 
     return sincronizar;

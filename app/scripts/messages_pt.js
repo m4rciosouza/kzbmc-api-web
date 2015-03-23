@@ -286,6 +286,16 @@ angular.module( 'kzbmcMobileApp' ).config( function( $translateProvider ) {
     ACOES : 'Ações',
     META_DESCRIPTION : 'Crie seu próprio Canvas de Modelo de Negócios ( Business Model Canvas ) de seu computador ou celular, compartilhe com amigos e muito mais...',
     UPLOAD_CANVAS : 'Upload Canvas',
-    UPLOAD_CANVAS_SOBRESCREVER : 'Upload Canvas (Sobrescrever)'
+    UPLOAD_CANVAS_SOBRESCREVER : 'Upload Canvas (Sobrescrever)',
+    SINCRONIZAR_SERVIDOR_REMOTO : 'Sincronizar com o servidor',
+    ENVIAR_SERVIDOR_REMOTO : 'Enviar para o servidor',
+    ENVIAR_SERVIDOR_REMOTO_SOBRESCREVER : 'Enviar para o servidor (sobrescrever)',
+    BAIXAR_SERVIDOR_REMOTO_SOBRESCREVER : 'Baixar do servidor (sobrescrever)',
+    SUCESSO_UPLOAD : 'O projeto canvas foi enviado com sucesso para o servidor remoto! Agora ele pode ser sincronizado de outro dispositivo.',
+    ERRO_UPLOAD : 'Erro ao enviar o projeto canvas para o servidor remoto. Certifique-se que você tenha conexão com a Internet e tente novamente.',
+    SUCESSO_DOWNLOAD : 'O projeto canvas foi atualizado com sucesso com os dados do servidor remoto!',
+    ERRO_DOWNLOAD : 'Erro ao atualizar o projeto canvas com os dados do servidor remoto. Certifique-se que você tenha conexão com a Internet e tente novamente.',
+    SUCESSO_SINCRONIZAR : 'Os dados de novos projetos e projetos removidos foram sincronizados com o servidor remoto!',
+    ERRO_SINCRONIZAR : 'Erro ao sincronizar os dados dos projeto canvas com os dados do servidor remoto. Certifique-se que você tenha conexão com a Internet e tente novamente.'
   });
 });
