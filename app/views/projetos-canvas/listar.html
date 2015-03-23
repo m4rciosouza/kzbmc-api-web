@@ -68,68 +68,115 @@
     		<tbody>
     			<tr ng-repeat="projeto in projetos">
     				<td class="kz_mouse_cursor">
-              <a ng-href="#/canvas/{{projeto.id}}" class="btn" 
-                ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
-                alt="{{ 'VISUALIZAR_CANVAS' | translate }}" title="{{ 'VISUALIZAR_CANVAS' | translate }}">
-                &nbsp;<span class="glyphicon glyphicon-picture"></span>&nbsp;
-              </a>
-              <div class="dropup btn-group hidden-print">
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
-                  ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
-                  &nbsp;<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                  <li>
-                    <a ng-href="#/wizard-canvas/{{projeto.id}}"
-                      alt="{{ 'WIZARD' | translate }}" title="{{ 'WIZARD' | translate }}">
-                      &nbsp;<span class="glyphicon glyphicon-wrench"></span>&nbsp;{{ 'WIZARD' | translate }}
-                    </a>
-                  </li>
-                  <li>
-                    <a ng-href="#/editar-canvas/{{projeto.id}}"
-                      alt="{{ 'EDITAR_CANVAS' | translate }}" title="{{ 'EDITAR_CANVAS' | translate }}">
-                      &nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;{{ 'EDITAR_CANVAS' | translate }}
-                    </a>
-                  </li>
-                  <li>
-                    <a ng-href="#/remover-canvas/{{projeto.id}}"
-                      alt="{{ 'REMOVER_CANVAS' | translate }}" title="{{ 'REMOVER_CANVAS' | translate }}">
-                      &nbsp;<span class="glyphicon glyphicon-trash"></span>&nbsp;{{ 'REMOVER_CANVAS' | translate }}
-                    </a>
-                  </li>
-                  <li>
-                    <a ng-href="#/canvas/{{projeto.id}}"
-                      alt="{{ 'VISUALIZAR_CANVAS' | translate }}" title="{{ 'VISUALIZAR_CANVAS' | translate }}">
-                      &nbsp;<span class="glyphicon glyphicon-picture"></span>&nbsp;{{ 'VISUALIZAR_CANVAS' | translate }}
-                    </a>
-                  </li>
-                  <li ng-if="projetoLocal(projeto.id)">
-                    <a ng-href="" ng-click="upload(projeto.id)"
-                      alt="{{ 'ENVIAR_SERVIDOR_REMOTO' | translate }}" 
-                      title="{{ 'ENVIAR_SERVIDOR_REMOTO' | translate }}">
-                      &nbsp;<span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;
-                      {{ 'ENVIAR_SERVIDOR_REMOTO' | translate }}
-                    </a>
-                  </li>
-                  <li ng-if="!projetoLocal(projeto.id)">
-                    <a ng-href="" ng-click="upload(projeto.id)"
-                      alt="{{ 'ENVIAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}" 
-                      title="{{ 'ENVIAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}">
-                      &nbsp;<span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;
-                      {{ 'ENVIAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}
-                    </a>
-                  </li>
-                  <li ng-if="!projetoLocal(projeto.id)">
-                    <a ng-href="" ng-click="download(projeto.id)"
-                      alt="{{ 'BAIXAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}" 
-                      title="{{ 'BAIXAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}">
-                      &nbsp;<span class="glyphicon glyphicon-cloud-download"></span>&nbsp;
-                      {{ 'BAIXAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}
-                    </a>
-                  </li>
-                </ul>
+              <!-- MENU SMALL SCREENS : BEGIN -->   
+              <div class="hidden-md hidden-lg">
+                <a ng-href="#/wizard-canvas/{{projeto.id}}"
+                  class="btn" ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
+                  alt="{{ 'WIZARD' | translate }}" title="{{ 'WIZARD' | translate }}">
+                  &nbsp;<span class="glyphicon glyphicon-wrench"></span>&nbsp;
+                </a>
+                <a ng-href="#/editar-canvas/{{projeto.id}}"
+                  class="btn" ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
+                  alt="{{ 'EDITAR_CANVAS' | translate }}" title="{{ 'EDITAR_CANVAS' | translate }}">
+                  &nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;
+                </a>
+                <a ng-href="#/remover-canvas/{{projeto.id}}"
+                  class="btn" ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
+                  alt="{{ 'REMOVER_CANVAS' | translate }}" title="{{ 'REMOVER_CANVAS' | translate }}">
+                  &nbsp;<span class="glyphicon glyphicon-trash"></span>&nbsp;
+                </a>
+                <a ng-href="#/canvas/{{projeto.id}}"
+                  class="btn" ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
+                  alt="{{ 'VISUALIZAR_CANVAS' | translate }}" title="{{ 'VISUALIZAR_CANVAS' | translate }}">
+                  &nbsp;<span class="glyphicon glyphicon-picture"></span>&nbsp;
+                </a>
+                <a ng-href="" ng-click="upload(projeto.id)" ng-if="projetoLocal(projeto.id)"
+                  class="btn" ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
+                  alt="{{ 'ENVIAR_SERVIDOR_REMOTO' | translate }}" 
+                  title="{{ 'ENVIAR_SERVIDOR_REMOTO' | translate }}">
+                  &nbsp;<span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;
+                </a>
+                <a ng-href="" ng-click="upload(projeto.id)" ng-if="!projetoLocal(projeto.id)"
+                  class="btn" ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
+                  alt="{{ 'ENVIAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}" 
+                  title="{{ 'ENVIAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}">
+                  &nbsp;<span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;
+                </a>
+                <a ng-href="" ng-click="download(projeto.id)" ng-if="!projetoLocal(projeto.id)"
+                  class="btn" ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
+                  alt="{{ 'BAIXAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}" 
+                  title="{{ 'BAIXAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}">
+                  &nbsp;<span class="glyphicon glyphicon-cloud-download"></span>&nbsp;
+                </a>
               </div>
+              <!-- MENU SMALL SCREENS : END -->
+
+              <!-- MENU BIG SCREENS : BEGIN -->
+              <div class="hidden-xs hidden-sm pull-left kz_margin_right_5">
+                <a ng-href="#/canvas/{{projeto.id}}" class="btn" 
+                  ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
+                  alt="{{ 'VISUALIZAR_CANVAS' | translate }}" title="{{ 'VISUALIZAR_CANVAS' | translate }}">
+                  &nbsp;<span class="glyphicon glyphicon-picture"></span>&nbsp;
+                </a>
+                <div class="dropup btn-group hidden-print">
+                  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
+                    ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
+                    &nbsp;<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li>
+                      <a ng-href="#/wizard-canvas/{{projeto.id}}"
+                        alt="{{ 'WIZARD' | translate }}" title="{{ 'WIZARD' | translate }}">
+                        &nbsp;<span class="glyphicon glyphicon-wrench"></span>&nbsp;{{ 'WIZARD' | translate }}
+                      </a>
+                    </li>
+                    <li>
+                      <a ng-href="#/editar-canvas/{{projeto.id}}"
+                        alt="{{ 'EDITAR_CANVAS' | translate }}" title="{{ 'EDITAR_CANVAS' | translate }}">
+                        &nbsp;<span class="glyphicon glyphicon-pencil"></span>&nbsp;{{ 'EDITAR_CANVAS' | translate }}
+                      </a>
+                    </li>
+                    <li>
+                      <a ng-href="#/remover-canvas/{{projeto.id}}"
+                        alt="{{ 'REMOVER_CANVAS' | translate }}" title="{{ 'REMOVER_CANVAS' | translate }}">
+                        &nbsp;<span class="glyphicon glyphicon-trash"></span>&nbsp;{{ 'REMOVER_CANVAS' | translate }}
+                      </a>
+                    </li>
+                    <li>
+                      <a ng-href="#/canvas/{{projeto.id}}"
+                        alt="{{ 'VISUALIZAR_CANVAS' | translate }}" title="{{ 'VISUALIZAR_CANVAS' | translate }}">
+                        &nbsp;<span class="glyphicon glyphicon-picture"></span>&nbsp;{{ 'VISUALIZAR_CANVAS' | translate }}
+                      </a>
+                    </li>
+                    <li ng-if="projetoLocal(projeto.id)">
+                      <a ng-href="" ng-click="upload(projeto.id)"
+                        alt="{{ 'ENVIAR_SERVIDOR_REMOTO' | translate }}" 
+                        title="{{ 'ENVIAR_SERVIDOR_REMOTO' | translate }}">
+                        &nbsp;<span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;
+                        {{ 'ENVIAR_SERVIDOR_REMOTO' | translate }}
+                      </a>
+                    </li>
+                    <li ng-if="!projetoLocal(projeto.id)">
+                      <a ng-href="" ng-click="upload(projeto.id)"
+                        alt="{{ 'ENVIAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}" 
+                        title="{{ 'ENVIAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}">
+                        &nbsp;<span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;
+                        {{ 'ENVIAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}
+                      </a>
+                    </li>
+                    <li ng-if="!projetoLocal(projeto.id)">
+                      <a ng-href="" ng-click="download(projeto.id)"
+                        alt="{{ 'BAIXAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}" 
+                        title="{{ 'BAIXAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}">
+                        &nbsp;<span class="glyphicon glyphicon-cloud-download"></span>&nbsp;
+                        {{ 'BAIXAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- MENU BIG SCREENS : END -->
               <a ng-href="#/canvas/{{projeto.id}}">
                 {{projeto.nome}}<br />
                 <small><em>{{projeto.descricao}}</em></small>
@@ -218,4 +265,43 @@
       </li>
     </ul>
   </nav>
+
+  <!-- HELP MENU : BEGIN -->
+  <div class="hidden-md hidden-lg">
+    <table class="table table-striped">
+      <tr>
+        <th colspan="2">{{ 'AJUDA' | translate }}</th>
+      </tr>
+      <tr>
+        <td><span class="glyphicon glyphicon-wrench"></span></td>
+        <td>{{ 'WIZARD' | translate }}</td>
+      </tr>
+      <tr>
+        <td><span class="glyphicon glyphicon-pencil"></span></td>
+        <td>{{ 'EDITAR_CANVAS' | translate }}</td>
+      </tr>
+      <tr>
+        <td><span class="glyphicon glyphicon-trash"></span></td>
+        <td>{{ 'REMOVER_CANVAS' | translate }}</td>
+      </tr>
+      <tr>
+        <td><span class="glyphicon glyphicon-picture"></span></td>
+        <td>{{ 'VISUALIZAR_CANVAS' | translate }}</td>
+      </tr>
+      <tr>
+        <td><span class="glyphicon glyphicon-cloud-upload"></span></td>
+        <td>{{ 'ENVIAR_SERVIDOR_REMOTO' | translate }}</td>
+      </tr>
+      <tr>
+        <td><span class="glyphicon glyphicon-cloud-upload"></span></td>
+        <td>{{ 'ENVIAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}</td>
+      </tr>
+      <tr>
+        <td><span class="glyphicon glyphicon-cloud-download"></span></td>
+        <td>{{ 'BAIXAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}</td>
+      </tr>
+    </table>
+  </div>
+  <!-- HELP MENU : END -->
+
 </div>
