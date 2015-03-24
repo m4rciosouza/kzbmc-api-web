@@ -7,8 +7,8 @@
 'use strict';
 
 angular.module( 'kzbmcMobileApp' ).factory( 'sincronizacaoService', [ '$window', '$resource', 
-    '$rootScope', 'md5Service',
-  function( $window, $resource, $rootScope, md5Service ) {
+    '$rootScope', 'md5Service', '$location', 
+  function( $window, $resource, $rootScope, md5Service, $location ) {
 
     var sincronizar = {};
 
@@ -64,7 +64,11 @@ angular.module( 'kzbmcMobileApp' ).factory( 'sincronizacaoService', [ '$window',
      * @return {string} usuario
      */
     sincronizar.obterUsuario = function() {
-      return $window.localStorage.usuario || '';
+      var usuario = $window.localStorage.usuario || '';
+      if( usuario === '' ) {
+        $location.path( '/dados-sincronizar' );
+      }
+      return usuario;
     };
 
     /**

@@ -107,6 +107,10 @@ kzbmcMobileApp.config( function( $routeProvider ) {
         templateUrl: 'views/login/criar-usuario.html',
         controller: 'CriarUsuarioCtrl'
       })
+      .when('/dados-sincronizar', {
+        templateUrl: 'views/projetos-canvas/dados-sincronizar.html',
+        controller: 'DadosSincronizarCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
