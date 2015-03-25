@@ -5,21 +5,21 @@
 <div class="kz_content">
 	<div class="row">
 		<div class="col-xs-12 kz_center">
-      <a ng-href="#cadastrar-canvas" class="btn btn-lg" 
+      <a ng-href="#cadastrar-canvas" class="kz_margin_top_5 btn btn-lg" 
         ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
         <span class="glyphicon glyphicon-plus"></span> {{ 'CRIAR_NOVO_CANVAS' | translate }}
       </a>
-      <a ng-href="" class="btn btn-lg" ng-click="alternarVisualizacao(true)" 
+      <a ng-href="" class="kz_margin_top_5 btn btn-lg" ng-click="alternarVisualizacao(true)" 
         ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
         ng-show="mostrarCompartilhados==false && !$root.local">
         <span class="glyphicon glyphicon-eye-open"></span> {{ 'VER_CANVAS_COMPARTILHADOS' | translate }}
       </a>
-      <a ng-href="" class="btn btn-lg" ng-click="alternarVisualizacao(false)" 
+      <a ng-href="" class="kz_margin_top_5 btn btn-lg" ng-click="alternarVisualizacao(false)" 
         ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
         ng-show="mostrarCompartilhados==true">
         <span class="glyphicon glyphicon-eye-open"></span> {{ 'VER_MEUS_CANVAS' | translate }}
       </a>
-      <a ng-href="" class="btn btn-lg" ng-click="baixarProjetosServidor()" ng-show="$root.local"
+      <a ng-href="" class="kz_margin_top_5 btn btn-lg" ng-click="baixarProjetosServidor()" ng-show="$root.local"
         ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
         alt="{{ 'SINCRONIZAR_SERVIDOR_REMOTO' | translate }}" 
         title="{{ 'SINCRONIZAR_SERVIDOR_REMOTO' | translate }}">

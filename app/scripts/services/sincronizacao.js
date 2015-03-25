@@ -22,7 +22,7 @@ angular.module( 'kzbmcMobileApp' ).factory( 'sincronizacaoService', [ '$window',
     sincronizar.cadastrar = function( projetoCanvasObj, sucesso, erro ) {
       projetoCanvasObj.email = sincronizar.obterUsuario();
       projetoCanvasObj.senha = sincronizar.obterToken();
-      var sincronizarServidorResource = $resource( $rootScope.sincronizarServidor );
+      var sincronizarServidorResource = $resource( $rootScope.sincronizarServidor[ $rootScope.mode ] );
       sincronizarServidorResource.save( {}, projetoCanvasObj, sucesso, erro );
     };
 
@@ -37,7 +37,7 @@ angular.module( 'kzbmcMobileApp' ).factory( 'sincronizacaoService', [ '$window',
       var usuario = {};
       usuario.email = sincronizar.obterUsuario();
       usuario.senha = sincronizar.obterToken();
-      var sincronizarListarProjeto = $resource( $rootScope.sincronizarListarProjeto );
+      var sincronizarListarProjeto = $resource( $rootScope.sincronizarListarProjeto[ $rootScope.mode ] );
       sincronizarListarProjeto.save( { id : projetoId }, usuario, sucesso, erro );
     };
 
@@ -54,7 +54,7 @@ angular.module( 'kzbmcMobileApp' ).factory( 'sincronizacaoService', [ '$window',
       var params = { 'idsExistentes' : idsExistentes, 'idsExcluir' : idsExcluir };
       params.email = sincronizar.obterUsuario();
       params.senha = sincronizar.obterToken();
-      var sincronizarCliente = $resource( $rootScope.sincronizarCliente );
+      var sincronizarCliente = $resource( $rootScope.sincronizarCliente[ $rootScope.mode ] );
       sincronizarCliente.query( params, sucesso, erro );
     };
 
@@ -64,7 +64,12 @@ angular.module( 'kzbmcMobileApp' ).factory( 'sincronizacaoService', [ '$window',
      * @return {string} usuario
      */
     sincronizar.obterUsuario = function() {
-      var usuario = $window.localStorage.usuario || '';
+      var usuario = '';
+      if( $rootScope.bmc ) {
+        usuario = $window.localStorage.usuario || '';
+      } else {
+        usuario = $window.localStorage.usuarioLean || '';
+      }
       if( usuario === '' ) {
         $location.path( '/dados-sincronizar' );
       }
@@ -77,7 +82,12 @@ angular.module( 'kzbmcMobileApp' ).factory( 'sincronizacaoService', [ '$window',
      * @return {string} token
      */
     sincronizar.obterToken = function() {
-      var token = $window.localStorage.token || '';
+      var token = '';
+      if( $rootScope.bmc ) {
+        token = $window.localStorage.token || '';
+      } else {
+        token = $window.localStorage.tokenLean || '';
+      }
       return token === '' ? token : md5Service.md5( token );
     };
 

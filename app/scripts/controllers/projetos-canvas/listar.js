@@ -175,7 +175,9 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 	    	projeto.itens = data.itens;
 			if( isNaN( projetoId ) ) {
 				projetoCanvasService.remover( projetoId, function() {
-						projetoCanvasService.cadastrar( projeto );
+						projetoCanvasService.cadastrar( projeto, function() {
+							projetoCanvasService.atualizar( projeto.id, projeto );
+						});
 					} 
 				);
 			} else {

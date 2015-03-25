@@ -7,8 +7,9 @@
  */
 'use strict';
 
-angular.module( 'kzbmcMobileApp' ).controller( 'DadosSincronizarCtrl', [ '$scope', '$window', 
-	function( $scope, $window ) {
+angular.module( 'kzbmcMobileApp' ).controller( 'DadosSincronizarCtrl', [ 
+		'$scope', '$window', '$rootScope',
+	function( $scope, $window, $rootScope ) {
 	  
 	  	/**
 		 * Grava os dados de acesso ao servidor remoto no localStorage do navegador.
@@ -16,8 +17,30 @@ angular.module( 'kzbmcMobileApp' ).controller( 'DadosSincronizarCtrl', [ '$scope
 		 * @param {object} usuario
 		 */
 	    $scope.cadastrar = function( usuario ) {
-	    	$window.localStorage.usuario = usuario.email;
-	    	$window.localStorage.token = usuario.token;
+	    	if( $rootScope.bmc ) {
+		    	$window.localStorage.usuario = usuario.email;
+		    	$window.localStorage.token = usuario.token;
+		    } else {
+		    	$window.localStorage.usuarioLean = usuario.email;
+		    	$window.localStorage.tokenLean = usuario.token;
+		    }
 		    $scope.sucesso = true;
 	    };
+
+	    /**
+		 * Carrega os dados de acesso do servidor remoto.
+		 * @method DadosSincronizarCtrl::carregarValores
+		 */
+	    $scope.carregarValores = function() {
+	    	$scope.usuario = {};
+	    	if( $rootScope.bmc ) {
+	    		$scope.usuario.email = $window.localStorage.usuario || '';
+	    		$scope.usuario.token = $window.localStorage.token || '';
+	    	} else {
+	    		$scope.usuario.email = $window.localStorage.usuarioLean || '';
+	    		$scope.usuario.token = $window.localStorage.tokenLean || '';
+	    	}
+	    };
+
+	    $scope.carregarValores();
 }]);

@@ -175,19 +175,30 @@ kzbmcMobileApp.run([ '$rootScope', '$window', '$translate', function( $rootScope
     'projetos' : $rootScope.baseUrl + 'compartilhados',
     'projetosLean' : $rootScope.baseUrl + 'compartilhado-leans'
   };
+  $rootScope.sincronizarServidor = {
+    'projetos' : $rootScope.baseUrl + 'mobiles/sincronizar-servidor',
+    'projetosLean' : $rootScope.baseUrl + 'mobile-leans/sincronizar-servidor'
+  };
+  $rootScope.sincronizarCliente = {
+    'projetos' : $rootScope.baseUrl + 'mobiles/sincronizar-cliente',
+    'projetosLean' : $rootScope.baseUrl + 'mobile-leans/sincronizar-cliente'
+  };
+  $rootScope.sincronizarListarProjeto = {
+    'projetos' : $rootScope.baseUrl + 'mobiles/projeto/:id',
+    'projetosLean' : $rootScope.baseUrl + 'mobile-leans/projeto/:id'
+  };
   $rootScope.urlUsuario = $rootScope.baseUrl + 'usuarios/auth';
   $rootScope.urlEsqueciSenha = $rootScope.baseUrl + 'usuarios/esqueci-senha';
   $rootScope.urlNovaSenha = $rootScope.baseUrl + 'usuarios/nova-senha';
   $rootScope.urlTrocarSenha = $rootScope.baseUrl + 'usuarios/trocar-senha';
   $rootScope.urlUsuarios = $rootScope.baseUrl + 'usuarios';
   $rootScope.urlSlideshow = $rootScope.baseUrl + 'slideshow';
-  $rootScope.sincronizarServidor = $rootScope.baseUrl + 'mobiles/sincronizar-servidor';
-  $rootScope.sincronizarCliente = $rootScope.baseUrl + 'mobiles/sincronizar-cliente';
-  $rootScope.sincronizarListarProjeto = $rootScope.baseUrl + 'mobiles/projeto/:id';
   $rootScope.urlAssinarPlano = 'http://kazcanvas.com';
-  $rootScope.local = true;
+  // BMC / LMC : BEGIN
+  $rootScope.local = false;
   $rootScope.bmc = true;
-  $rootScope.mode = 'projetos'; // projetos ou projetosLean
+  $rootScope.mode = $rootScope.bmc ? 'projetos' : 'projetosLean';
+  // BMC / LMC : END
   $translate.use( $window.localStorage.lingua || 'en' );
   $rootScope._ = window._;
 }]);
