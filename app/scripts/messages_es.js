@@ -297,11 +297,11 @@ angular.module( 'kzbmcMobileApp' ).config( function( $translateProvider ) {
     ERRO_DOWNLOAD : 'Error al descargar el lienzo canvas con el servidor remoto. Asegúrese de tener conexión a Internet y vuelve a intentarlo.',
     SUCESSO_SINCRONIZAR : 'Los datos de proyectos se han sincronizado correctamente con el servidor remoto!',
     ERRO_SINCRONIZAR : 'Error al sincronizar los datos de el lienzo canvas con los datos del servidor remoto. Asegúrese de tener conexión a Internet y vuelve a intentarlo.',
-
     DADOS_SINCRONIZAR : 'Datos Sincronizar',
     DADOS_SINCRONIZAR_SERVIDOR_REMOTO : 'Datos de acceso para sincronizar con el servidor remoto',
     INSTRUCOES_DADOS_SINCRONIZACAO : 'Ingrese su correo electrónico y contraseña registrada en http://kazcanvas.com a sincronizar sus proyectos con el servidor remoto.',
     DADOS_GRAVADOS_SUCESSO : 'Datos registrados con éxito! Haga clic en "Inicial" en el menú principal para sincronizar sus lienzos canvas.',
-    GRAVAR : 'Guardar'
+    GRAVAR : 'Guardar',
+    CADASTRAR : 'Registrarse'
   });
 });

@@ -8,6 +8,21 @@
 	<div class="alert alert-success" role="alert" ng-show="sucesso">
   	{{ 'DADOS_GRAVADOS_SUCESSO' | translate }}
 	</div>
+  <div class="row" ng-hide="possuiUsuario">
+    <div class="col-xs-12 col-md-4 col-md-offset-4 kz_center">
+      <a href="http://businessmodel.kazcanvas.com" target="_blank" class="btn btn-warning btn-lg" 
+        style="width: 100%" ng-if="$root.bmc">
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;
+        {{ 'CADASTRAR' | translate }}
+      </a>
+      <a href="http://leanmodel.kazcanvas.com" target="_blank" class="btn btn-warning btn-lg" 
+        style="width: 100%" ng-if="!$root.bmc">
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;
+        {{ 'CADASTRAR' | translate }}
+      </a>
+    </div>
+  </div>
+  <br />
 	<div class="row">
 		<div class="col-xs-12 col-md-4 col-md-offset-4 kz_center">
       		<form role="form" name="form" ng-submit="cadastrar(usuario)" novalidate>

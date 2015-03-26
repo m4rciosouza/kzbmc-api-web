@@ -25,6 +25,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'DadosSincronizarCtrl', [
 		    	$window.localStorage.tokenLean = usuario.token;
 		    }
 		    $scope.sucesso = true;
+		    $scope.possuiUsuario = true;
 	    };
 
 	    /**
@@ -40,6 +41,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'DadosSincronizarCtrl', [
 	    		$scope.usuario.email = $window.localStorage.usuarioLean || '';
 	    		$scope.usuario.token = $window.localStorage.tokenLean || '';
 	    	}
+	    	$scope.possuiUsuario = $scope.usuario.email !== '';
 	    };
 
 	    $scope.carregarValores();

@@ -177,7 +177,7 @@
                 </div>
               </div>
               <!-- MENU BIG SCREENS : END -->
-              <a ng-href="#/canvas/{{projeto.id}}">
+              <a ng-href="#/canvas/{{projeto.id}}" ng-class="{'kz_text_lean' : !$root.bmc}">
                 {{projeto.nome}}<br />
                 <small><em>{{projeto.descricao}}</em></small>
               </a>
@@ -190,17 +190,20 @@
   <nav class="kz_center" ng-show="mostrarCompartilhados==false && projetos.length>0">
     <ul class="pagination">
       <li>
-        <a ng-href="" ng-click="carregarProjetos(1)" aria-label="Previous" class="kz_mouse_cursor">
+        <a ng-href="" ng-click="carregarProjetos(1)" aria-label="Previous" class="kz_mouse_cursor"
+          ng-class="{'kz_text_lean' : !$root.bmc}">
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
       <li ng-repeat="page in pages" ng-class="{'active' : page==currentPage}">
-        <a ng-href="" ng-click="carregarProjetos(page)" class="kz_mouse_cursor">
+        <a ng-href="" ng-click="carregarProjetos(page)" class="kz_mouse_cursor"
+          ng-class="{'kz_btn_lean' : page==currentPage && !$root.bmc, 'kz_text_lean' : !$root.bmc && page!=currentPage}">
           {{page}}
         </a>
       </li>
       <li>
-        <a ng-href="" ng-click="carregarProjetos(pageCount)" aria-label="Next" class="kz_mouse_cursor">
+        <a ng-href="" ng-click="carregarProjetos(pageCount)" aria-label="Next" class="kz_mouse_cursor"
+          ng-class="{'kz_text_lean' : !$root.bmc}">
           <span aria-hidden="true">&raquo;</span>
         </a>
       </li>
@@ -249,17 +252,20 @@
   <nav class="kz_center" ng-show="mostrarCompartilhados==true">
     <ul class="pagination">
       <li>
-        <a ng-href="" ng-click="carregarProjetosCompartilhados(1)" aria-label="Previous" class="kz_mouse_cursor">
+        <a ng-href="" ng-click="carregarProjetosCompartilhados(1)" aria-label="Previous" class="kz_mouse_cursor"
+          ng-class="{'kz_text_lean' : !$root.bmc}">
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
       <li ng-repeat="pageComp in pagesComp" ng-class="{'active' : pageComp==currentPageComp}">
-        <a ng-href="" ng-click="carregarProjetosCompartilhados(pageComp)" class="kz_mouse_cursor">
+        <a ng-href="" ng-click="carregarProjetosCompartilhados(pageComp)" class="kz_mouse_cursor"
+          ng-class="{'kz_btn_lean' : pageComp==currentPageComp && !$root.bmc, 'kz_text_lean' : !$root.bmc && pageComp==currentPageComp}">>
           {{pageComp}}
         </a>
       </li>
       <li>
-        <a ng-href="" ng-click="carregarProjetosCompartilhados(pageCountComp)" aria-label="Next" class="kz_mouse_cursor">
+        <a ng-href="" ng-click="carregarProjetosCompartilhados(pageCountComp)" aria-label="Next" class="kz_mouse_cursor"
+          ng-class="{'kz_text_lean' : !$root.bmc}">
           <span aria-hidden="true">&raquo;</span>
         </a>
       </li>

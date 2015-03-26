@@ -138,6 +138,7 @@ kzbmcMobileApp.factory( 'authInterceptor', [ '$rootScope', '$q', '$window', '$lo
           $rootScope.loading = false;
           if( rejection.status === 401 && !$rootScope.local ) {
             delete $window.sessionStorage.token;
+            delete $window.sessionStorage.loggedIn;
             $rootScope.loggedIn = false;
             $location.path( '/login' );
           }
@@ -196,9 +197,10 @@ kzbmcMobileApp.run([ '$rootScope', '$window', '$translate', function( $rootScope
   $rootScope.urlAssinarPlano = 'http://kazcanvas.com';
   // BMC / LMC : BEGIN
   $rootScope.local = false;
-  $rootScope.bmc = true;
+  $rootScope.bmc = false;
   $rootScope.mode = $rootScope.bmc ? 'projetos' : 'projetosLean';
   // BMC / LMC : END
   $translate.use( $window.localStorage.lingua || 'en' );
   $rootScope._ = window._;
+  $rootScope.loggedIn = $window.sessionStorage.loggedIn;
 }]);

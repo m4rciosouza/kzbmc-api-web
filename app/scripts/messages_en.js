@@ -297,11 +297,11 @@ angular.module( 'kzbmcMobileApp' ).config( function( $translateProvider ) {
     ERRO_DOWNLOAD : 'Error updating the project canvas to the remote server. Make sure you have Internet connection and try again.',
     SUCESSO_SINCRONIZAR : 'The new/removed projects data have been synchronized successfully with the remote server!',
     ERRO_SINCRONIZAR : 'Error synchronizing the projects canvas data with the remote server data. Make sure you have Internet connection and try again.',
-
     DADOS_SINCRONIZAR : 'Data Sync',
     DADOS_SINCRONIZAR_SERVIDOR_REMOTO : 'Access data to sync with the remote server',
     INSTRUCOES_DADOS_SINCRONIZACAO : 'Enter your registered http://kazcanvas.com email and password to synchronize your projects with the remote server.',
     DADOS_GRAVADOS_SUCESSO : 'Data saved successfully! Click in "HOME" at the main menu to synchronize your canvas models.',
-    GRAVAR : 'Save'
+    GRAVAR : 'Save',
+    CADASTRAR : 'Sign Up'
   });
 });

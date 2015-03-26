@@ -20,12 +20,14 @@ angular.module( 'kzbmcMobileApp' ).controller( 'LoginCtrl', [ '$scope', '$locati
 		    	function( response ) {
 		    		$window.sessionStorage.token = response.token;
 		    		$window.sessionStorage.email = usuario.email;
+		    		$window.sessionStorage.loggedIn = true;
 		    		$rootScope.loggedIn = true;
 					$location.path( '/' );
 		    	},
 		    	function() {
 		    		delete $window.sessionStorage.token;
 		    		delete $window.sessionStorage.email;
+		    		delete $window.sessionStorage.loggedIn;
 		    		$rootScope.loggedIn = false;
 		     		$scope.erro = true;
 		    	}
@@ -34,4 +36,5 @@ angular.module( 'kzbmcMobileApp' ).controller( 'LoginCtrl', [ '$scope', '$locati
 
 	    delete $window.sessionStorage.token;
 	    delete $window.sessionStorage.email;
+	    delete $window.sessionStorage.loggedIn;
 }]);
