@@ -196,8 +196,8 @@ kzbmcMobileApp.run([ '$rootScope', '$window', '$translate', function( $rootScope
   $rootScope.urlSlideshow = $rootScope.baseUrl + 'slideshow';
   $rootScope.urlAssinarPlano = 'http://kazcanvas.com';
   // BMC / LMC : BEGIN
-  $rootScope.local = false;
-  $rootScope.bmc = false;
+  $rootScope.local = true;
+  $rootScope.bmc = true;
   $rootScope.mode = $rootScope.bmc ? 'projetos' : 'projetosLean';
   // BMC / LMC : END
   $translate.use( $window.localStorage.lingua || 'en' );

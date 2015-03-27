@@ -3,25 +3,25 @@
 </div>
 <div class="kz_content">
 	<div class="row">
-		<div class="col-xs-12 kz_center visible-xs">
+		<div class="col-xs-12 kz_center visible-xs" ng-init="btnClass = $root.bmc ? 'btn-primary' : 'btn-success'">
 			<div class="btn-group" role="group" aria-label="{{ 'WIZARD' | translate }}">
-		      	<button type="button" class="btn" ng-class="{true:'btn-primary',false:'btn-default'}[selAtual==0]" 
+		      	<button type="button" class="btn" ng-class="{true: btnClass,false:'btn-default'}[selAtual==0]" 
 		      		ng-click="mudarAba(0)">1</button>
-		      	<button type="button" class="btn" ng-class="{true:'btn-primary',false:'btn-default'}[selAtual==1]"
+		      	<button type="button" class="btn" ng-class="{true: btnClass,false:'btn-default'}[selAtual==1]"
 		      		ng-click="mudarAba(1)">2</button>
-		      	<button type="button" class="btn" ng-class="{true:'btn-primary',false:'btn-default'}[selAtual==2]" 
+		      	<button type="button" class="btn" ng-class="{true: btnClass,false:'btn-default'}[selAtual==2]" 
 		      		ng-click="mudarAba(2)">3</button>
-		      	<button type="button" class="btn" ng-class="{true:'btn-primary',false:'btn-default'}[selAtual==3]" 
+		      	<button type="button" class="btn" ng-class="{true: btnClass,false:'btn-default'}[selAtual==3]" 
 		      		ng-click="mudarAba(3)">4</button>
-		      	<button type="button" class="btn" ng-class="{true:'btn-primary',false:'btn-default'}[selAtual==4]" 
+		      	<button type="button" class="btn" ng-class="{true: btnClass,false:'btn-default'}[selAtual==4]" 
 		      		ng-click="mudarAba(4)">5</button>
-		      	<button type="button" class="btn" ng-class="{true:'btn-primary',false:'btn-default'}[selAtual==5]" 
+		      	<button type="button" class="btn" ng-class="{true: btnClass,false:'btn-default'}[selAtual==5]" 
 		      		ng-click="mudarAba(5)">6</button>
-		      	<button type="button" class="btn" ng-class="{true:'btn-primary',false:'btn-default'}[selAtual==6]" 
+		      	<button type="button" class="btn" ng-class="{true: btnClass,false:'btn-default'}[selAtual==6]" 
 		      		ng-click="mudarAba(6)">7</button>
-		      	<button type="button" class="btn" ng-class="{true:'btn-primary',false:'btn-default'}[selAtual==7]" 
+		      	<button type="button" class="btn" ng-class="{true: btnClass,false:'btn-default'}[selAtual==7]" 
 		      		ng-click="mudarAba(7)">8</button>
-		      	<button type="button" class="btn" ng-class="{true:'btn-primary',false:'btn-default'}[selAtual==8]" 
+		      	<button type="button" class="btn" ng-class="{true: btnClass,false:'btn-default'}[selAtual==8]" 
 		      		ng-click="mudarAba(8)">9</button>
 		    </div>
 		</div>
@@ -30,32 +30,41 @@
 
 	<div class="row">
 		<div class="col-sm-3 hidden-xs">
-			<div class="list-group">
-		      	<a href="" ng-click="mudarAba(0)" class="list-group-item" ng-class="{true:'active'}[selAtual==0]">
+			<div class="list-group" ng-init="btnClassLg = $root.bmc ? '' : 'kz_btn_lean'">
+		      	<a href="" ng-click="mudarAba(0)" class="list-group-item" 
+		      		ng-class="{true: 'active ' + btnClassLg}[selAtual==0]">
 		      		1. {{'SEGMENTOS_CLIENTES' | translate }}
 		      	</a>
-		      	<a href="" ng-click="mudarAba(1)" class="list-group-item" ng-class="{true:'active'}[selAtual==1]">
+		      	<a href="" ng-click="mudarAba(1)" class="list-group-item" 
+		      		ng-class="{true: 'active ' + btnClassLg}[selAtual==1]">
 		      		2. {{'PROPOSTAS_VALOR' | translate }}
 		      	</a>
-		      	<a href="" ng-click="mudarAba(2)" class="list-group-item" ng-class="{true:'active'}[selAtual==2]">
+		      	<a href="" ng-click="mudarAba(2)" class="list-group-item" 
+		      		ng-class="{true: 'active ' + btnClassLg}[selAtual==2]">
 		      		3. {{'CANAIS' | translate }}
 		      	</a>
-		      	<a href="" ng-click="mudarAba(3)" class="list-group-item" ng-class="{true:'active'}[selAtual==3]">
+		      	<a href="" ng-click="mudarAba(3)" class="list-group-item" 
+		      		ng-class="{true: 'active ' + btnClassLg}[selAtual==3]">
 		      		4. {{'RELACIONAMENTO_CLIENTES' | translate }}
 		      	</a>
-		      	<a href="" ng-click="mudarAba(4)" class="list-group-item" ng-class="{true:'active'}[selAtual==4]">
+		      	<a href="" ng-click="mudarAba(4)" class="list-group-item" 
+		      		ng-class="{true: 'active ' + btnClassLg}[selAtual==4]">
 		      		5. {{'RECURSOS_CHAVE' | translate }}
 		      	</a>
-		      	<a href="" ng-click="mudarAba(5)" class="list-group-item" ng-class="{true:'active'}[selAtual==5]">
+		      	<a href="" ng-click="mudarAba(5)" class="list-group-item" 
+		      		ng-class="{true: 'active ' + btnClassLg}[selAtual==5]">
 		      		6. {{'ATIVIDADES_CHAVE' | translate }}
 		      	</a>
-		      	<a href="" ng-click="mudarAba(6)" class="list-group-item" ng-class="{true:'active'}[selAtual==6]">
+		      	<a href="" ng-click="mudarAba(6)" class="list-group-item" 
+		      		ng-class="{true: 'active ' + btnClassLg}[selAtual==6]">
 		      		7. {{'PARCEIROS_CHAVE' | translate }}
 		      	</a>
-		      	<a href="" ng-click="mudarAba(7)" class="list-group-item" ng-class="{true:'active'}[selAtual==7]">
+		      	<a href="" ng-click="mudarAba(7)" class="list-group-item" 
+		      		ng-class="{true: 'active ' + btnClassLg}[selAtual==7]">
 		      		8. {{'ESTRUTURA_CUSTO' | translate }}
 		      	</a>
-		      	<a href="" ng-click="mudarAba(8)" class="list-group-item" ng-class="{true:'active'}[selAtual==8]">
+		      	<a href="" ng-click="mudarAba(8)" class="list-group-item" 
+		      		ng-class="{true: 'active ' + btnClassLg}[selAtual==8]">
 		      		9. {{'FLUXO_RECEITA' | translate }}
 		      	</a>
 		    </div>
