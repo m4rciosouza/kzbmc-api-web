@@ -13,6 +13,10 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasCadastrarCtrl', [ 
 		$scope.liteVersion = $rootScope.liteVersion;
 		$scope.qtdProjetos = 1; //TODO tornar dinamico
 
+		$scope.emailUsuario = $window.sessionStorage.email || '';
+		$scope.lingua = $window.localStorage.lingua || 'en';
+		console.log($scope.lingua);
+
 		/**
 		 * Cadastra um novo projeto canvas.
 		 * @method ProjetosCanvasCadastrarCtrl::cadastrar
