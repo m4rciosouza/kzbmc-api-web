@@ -12,6 +12,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 	function( $scope, $resource, $rootScope, $location, $window, projetoCanvasService, 
 		sincronizacaoService, projetoCanvasLocalService, _ ) {
 	  
+	  	$scope.lingua = $window.localStorage.lingua || 'en';
 		$scope.mostrarCompartilhados = false;
 
 		/**
@@ -105,7 +106,14 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 	    				function( response ) {
 	    					$scope.sincronizarLocal( projetoId, response );
 	    					$scope.sucessoUpload = true;
-	    				}
+	    				}, 
+	    				function( response ) {
+			    			if( response.status === 400 && response.data.code === 1001 ) {
+								$scope.erroPlano = true;
+							} else {
+			    				$scope.erroUpload = true;
+			    			}
+			    		}
 	    			);
 	    		},
 	    		function() {
@@ -127,8 +135,12 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 					$scope.sincronizarLocal( projetoId, response );
 					$scope.sucessoDownload = true;
 				},
-				function() {
-					$scope.erroDownload = true;
+				function( response ) {
+					if( response.status === 400 && response.data.code === 1001 ) {
+						$scope.erroPlano = true;
+					} else {
+						$scope.erroDownload = true;
+					}
 	    		}
 			);
 	    };
@@ -147,7 +159,6 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 				function( response ) {
 					_.each( response, function( projeto ) {
 							projeto.id = projeto.id.toString();
-							console.log( projeto.id );
 							projetoCanvasService.cadastrar( projeto, function() {
 								projetoCanvasService.atualizar( projeto.id, projeto );
 							});
@@ -157,8 +168,12 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 			      	$scope.carregarProjetos( 1 );
 			      	$scope.sucessoSincronizar = true;
 				},
-				function() {
-					$scope.erroSincronizar = true;
+				function( response ) {
+					if( response.status === 400 && response.data.code === 1001 ) {
+						$scope.erroPlano = true;
+					} else {
+						$scope.erroSincronizar = true;
+					}
 	    		}
 			);
 	    };

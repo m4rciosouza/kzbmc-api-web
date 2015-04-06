@@ -302,6 +302,8 @@ angular.module( 'kzbmcMobileApp' ).config( function( $translateProvider ) {
     INSTRUCOES_DADOS_SINCRONIZACAO : 'Enter your registered http://kazcanvas.com email and password to synchronize your projects with the remote server.',
     DADOS_GRAVADOS_SUCESSO : 'Data saved successfully! Click in "HOME" at the main menu to synchronize your canvas models.',
     GRAVAR : 'Save',
-    CADASTRAR : 'Sign Up'
+    CADASTRAR : 'Sign Up',
+    ERRO_LIMITACAO_PLANO_SINCRONIZAR : 'To synchronize your models Canvas you need to be a Premium user.',
+    PRECO_PLANO : 'US$ 9.99 (12 months subscription)'
   });
 });

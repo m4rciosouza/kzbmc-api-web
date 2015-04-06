@@ -302,6 +302,8 @@ angular.module( 'kzbmcMobileApp' ).config( function( $translateProvider ) {
     INSTRUCOES_DADOS_SINCRONIZACAO : 'Ingrese su correo electrónico y contraseña registrada en http://kazcanvas.com a sincronizar sus proyectos con el servidor remoto.',
     DADOS_GRAVADOS_SUCESSO : 'Datos registrados con éxito! Haga clic en "Inicial" en el menú principal para sincronizar sus lienzos canvas.',
     GRAVAR : 'Guardar',
-    CADASTRAR : 'Registrarse'
+    CADASTRAR : 'Registrarse',
+    ERRO_LIMITACAO_PLANO_SINCRONIZAR : 'Para sincronizar los Lienzos usted debe ser un suscriptor Premium.',
+    PRECO_PLANO : 'US$ 9.99 (Validez de 12 meses)'
   });
 });

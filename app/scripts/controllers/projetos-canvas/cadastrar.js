@@ -15,7 +15,6 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasCadastrarCtrl', [ 
 
 		$scope.emailUsuario = $window.sessionStorage.email || '';
 		$scope.lingua = $window.localStorage.lingua || 'en';
-		console.log($scope.lingua);
 
 		/**
 		 * Cadastra um novo projeto canvas.
