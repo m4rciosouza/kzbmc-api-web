@@ -8,9 +8,9 @@
 
 angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$scope', '$resource', 
 		'$rootScope', '$location', '$window', 'projetoCanvasService', 
-		'sincronizacaoService', 'projetoCanvasLocalService', '_',
+		'sincronizacaoService', 'projetoCanvasLocalService', '_', 'canvasService',
 	function( $scope, $resource, $rootScope, $location, $window, projetoCanvasService, 
-		sincronizacaoService, projetoCanvasLocalService, _ ) {
+		sincronizacaoService, projetoCanvasLocalService, _, canvasService ) {
 	  
 	  	$scope.lingua = $window.localStorage.lingua || 'en';
 		$scope.mostrarCompartilhados = false;
@@ -37,6 +37,7 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 		 */
 	    $scope.carregarProjetos = function( pagina ) {
 	    	if( ! $scope.mostrarCompartilhados ) {
+	    		$scope.ajustarProjetosLegados();
 	    		projetoCanvasService.carregarProjetos( pagina, 
 	    			function( response ) { 
 	    				$scope.projetos = response.items || [];
@@ -54,6 +55,60 @@ angular.module( 'kzbmcMobileApp' ).controller( 'ProjetosCanvasListarCtrl', [ '$s
 	    			}
 	    		);
 			}
+	    };
+
+	    /**
+		 * Gera os ids para os projetos cadastrados na versão mobile legada 0.1.0.
+		 * @method ProjetosCanvasListarCtrl::ajustarProjetosLegados
+		 */
+	    $scope.ajustarProjetosLegados = function() {
+	    	if( $rootScope.bmc && $rootScope.local && !$window.localStorage.ajustado ) {
+	    		var projetos = $window.localStorage.projetos || false;
+	    		if( projetos ) {
+	    			delete $window.localStorage.projetos;
+	    			projetos = angular.fromJson( projetos );
+	    			for( var i = 0; i < projetos.length; i ++ ) {
+	    				$scope.cadastrarProjetosAjustados( projetos[ i ] );
+	    			}
+	    		}
+	    	}
+	    };
+
+	    /**
+		 * Persiste os projetos da versão mobile legada 0.1.0.
+		 * @method ProjetosCanvasListarCtrl::cadastrarProjetosAjustados
+		 * @param {object} projeto objeto a ser persistido
+		 */
+	    $scope.cadastrarProjetosAjustados = function( projeto ) {
+	    	projeto = angular.fromJson( projeto );
+	    	projeto.itens = $scope.cadastrarItensProjetosAjustados( projeto.itens );
+			projetoCanvasService.cadastrar( projeto, 
+				function( response ) {
+					projetoCanvasService.atualizar( response.id, projeto, 
+						function() {
+							$window.localStorage.ajustado = true;
+						}
+					);
+				}
+			);
+	    };
+
+	    /**
+		 * Define os ids dos itens de um projeto da versão mobile legada 0.1.0.
+		 * @method ProjetosCanvasListarCtrl::cadastrarItensProjetosAjustados
+		 * @param {object} objItens
+		 * @return {object} objItens
+		 */
+	    $scope.cadastrarItensProjetosAjustados = function( objItens ) {
+	    	var tipos = canvasService.obterTipos();
+	    	for( var i = 0; i < tipos.length; i ++ ) {
+	    		if( objItens[ tipos[ i ] ] ) {
+	    			for( var j = 0; j < objItens[ tipos[ i ] ].length; j ++ ) {
+	    				objItens[ tipos[ i ] ][ j ].id = projetoCanvasLocalService.guid();
+	    			}
+	    		}
+	    	}
+	    	return objItens;
 	    };
 
 	    /**

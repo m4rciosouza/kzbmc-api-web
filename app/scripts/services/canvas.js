@@ -143,5 +143,14 @@ angular.module( 'kzbmcMobileApp' ).factory( 'canvasService', [ '$rootScope', '$w
     return $rootScope.bmc ? tipos[ tipo ] : tiposLean[ tipo ];
   };
 
+  /**
+   * Retorna os tipos de itens canvas.
+   * @method CanvasService::obterTipos
+   * @return {array} tipos
+   */
+  canvas.obterTipos = function() {
+    return [ 'pc', 'ac', 'rc', 'pv', 'rcl', 'ca', 'sc', 'ec', 'fr' ];
+  };
+
   return canvas;
 }]);
