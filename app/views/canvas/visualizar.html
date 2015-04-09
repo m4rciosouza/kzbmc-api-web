@@ -1,4 +1,4 @@
-<div class="btn-group hidden-print">
+<div class="btn-group hidden-print" ng-hide="!$root.bmc && $root.local">
 	<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
 		ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
     	&nbsp;<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;
