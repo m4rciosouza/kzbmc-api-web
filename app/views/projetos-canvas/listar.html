@@ -5,16 +5,16 @@
 <div class="kz_content">
 	<div class="row">
 		<div class="col-xs-12 kz_center">
-      <a ng-href="#cadastrar-canvas" class="kz_margin_top_5 btn btn-lg" 
+      <a ng-href="#cadastrar-canvas" class="kz_margin_top_5 btn btn-lg kz_width_300" 
         ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }">
         <span class="glyphicon glyphicon-plus"></span> {{ 'CRIAR_NOVO_CANVAS' | translate }}
       </a>
-      <a ng-href="" class="kz_margin_top_5 btn btn-lg" ng-click="alternarVisualizacao(true)" 
+      <a ng-href="" class="kz_margin_top_5 btn btn-lg kz_width_300" ng-click="alternarVisualizacao(true)" 
         ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
         ng-show="mostrarCompartilhados==false && !$root.local">
         <span class="glyphicon glyphicon-eye-open"></span> {{ 'VER_CANVAS_COMPARTILHADOS' | translate }}
       </a>
-      <a ng-href="" class="kz_margin_top_5 btn btn-lg" ng-click="alternarVisualizacao(false)" 
+      <a ng-href="" class="kz_margin_top_5 btn btn-lg kz_width_300" ng-click="alternarVisualizacao(false)" 
         ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
         ng-show="mostrarCompartilhados==true">
         <span class="glyphicon glyphicon-eye-open"></span> {{ 'VER_MEUS_CANVAS' | translate }}
@@ -94,7 +94,7 @@
     				<td class="kz_mouse_cursor">
               <!-- MENU SMALL SCREENS : BEGIN -->   
               <div class="hidden-md hidden-lg">
-                <a ng-href="#/wizard-canvas/{{projeto.id}}"
+                <a ng-href="#/wizard-canvas/{{projeto.id}}" ng-if="$root.bmc"
                   class="btn" ng-class="{ 'btn-primary' : $root.bmc, 'btn-success' : !$root.bmc }"
                   alt="{{ 'WIZARD' | translate }}" title="{{ 'WIZARD' | translate }}">
                   &nbsp;<span class="glyphicon glyphicon-wrench"></span>&nbsp;
@@ -150,7 +150,7 @@
                   </button>
                   <ul class="dropdown-menu" role="menu">
                     <li>
-                      <a ng-href="#/wizard-canvas/{{projeto.id}}"
+                      <a ng-href="#/wizard-canvas/{{projeto.id}}" ng-if="$root.bmc"
                         alt="{{ 'WIZARD' | translate }}" title="{{ 'WIZARD' | translate }}">
                         &nbsp;<span class="glyphicon glyphicon-wrench"></span>&nbsp;{{ 'WIZARD' | translate }}
                       </a>
@@ -173,7 +173,7 @@
                         &nbsp;<span class="glyphicon glyphicon-picture"></span>&nbsp;{{ 'VISUALIZAR_CANVAS' | translate }}
                       </a>
                     </li>
-                    <li ng-if="projetoLocal(projeto.id)">
+                    <li ng-if="projetoLocal(projeto.id) && $root.local">
                       <a ng-href="" ng-click="upload(projeto.id)"
                         alt="{{ 'ENVIAR_SERVIDOR_REMOTO' | translate }}" 
                         title="{{ 'ENVIAR_SERVIDOR_REMOTO' | translate }}">
@@ -181,7 +181,7 @@
                         {{ 'ENVIAR_SERVIDOR_REMOTO' | translate }}
                       </a>
                     </li>
-                    <li ng-if="!projetoLocal(projeto.id)">
+                    <li ng-if="!projetoLocal(projeto.id) && $root.local">
                       <a ng-href="" ng-click="upload(projeto.id)"
                         alt="{{ 'ENVIAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}" 
                         title="{{ 'ENVIAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}">
@@ -189,7 +189,7 @@
                         {{ 'ENVIAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}
                       </a>
                     </li>
-                    <li ng-if="!projetoLocal(projeto.id)">
+                    <li ng-if="!projetoLocal(projeto.id) && $root.local">
                       <a ng-href="" ng-click="download(projeto.id)"
                         alt="{{ 'BAIXAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}" 
                         title="{{ 'BAIXAR_SERVIDOR_REMOTO_SOBRESCREVER' | translate }}">

@@ -41,7 +41,7 @@
           <li ng-if="$root.loggedIn"><a ng-href="#/trocar-senha">{{ 'TROCAR_SENHA' | translate }}</a></li>
           <li ng-if="$root.local"><a ng-href="#/dados-sincronizar">{{ 'DADOS_SINCRONIZAR' | translate }}</a></li>
           <li ng-if="$root.bmc"><a ng-href="#/ajuda" title="{{ 'AJUDA' | translate }}">{{ 'AJUDA' | translate }}</a></li>
-          <li ng-if="!$root.local"><a ng-href="#/logout">{{ 'SAIR' | translate }}</a></li>
+          <li ng-if="!$root.local && $root.loggedIn"><a ng-href="#/logout">{{ 'SAIR' | translate }}</a></li>
       	</ul>
         <ul class="nav navbar-nav navbar-right" ng-controller="I18nCtrl">
           <li class="dropdown">
