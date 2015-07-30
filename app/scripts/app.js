@@ -159,7 +159,8 @@ kzbmcMobileApp.constant( '_', window._ );
 
 kzbmcMobileApp.run([ '$rootScope', '$window', '$translate', function( $rootScope, $window, $translate ) {
   $rootScope.liteVersion = false;
-  $rootScope.baseUrl = 'http://localhost:8888/kzbmc-api/web/v1/';
+  //$rootScope.baseUrl = 'http://localhost:8888/kzbmc-api/web/v1/';
+  $rootScope.baseUrl = 'https://kazcanvas.com/v1/';
   $rootScope.urlProjetoCanvas = {
     'projetos' : $rootScope.baseUrl + 'projeto-canvas',
     'projetosLean' : $rootScope.baseUrl + 'projeto-canvas-leans',
@@ -197,7 +198,7 @@ kzbmcMobileApp.run([ '$rootScope', '$window', '$translate', function( $rootScope
   $rootScope.urlAssinarPlano = 'http://kazcanvas.com';
   // BMC / LMC : BEGIN
   $rootScope.local = false;
-  $rootScope.bmc = true;
+  $rootScope.bmc = false;
   $rootScope.mode = $rootScope.bmc ? 'projetos' : 'projetosLean';
   // BMC / LMC : END
   $translate.use( $window.localStorage.lingua || 'en' );
